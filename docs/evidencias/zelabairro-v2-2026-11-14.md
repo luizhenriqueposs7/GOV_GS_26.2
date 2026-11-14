@@ -38,9 +38,9 @@ O redimensionamento do mapa também foi corrigido para preservar o centro ao rea
 ## Arquivos e limites
 
 - [Evidência dos registros pela API local](zelabairro-v2-2026-11-14.json).
-- [Central com mapa](../../output/screenshots/zelabairro-central-v2.png).
-- [Interface móvel](../../output/screenshots/zelabairro-mobile-v2.png).
-- [Revisão e contestação](../../output/screenshots/zelabairro-revisao-v2.png).
+- [Central com mapa](../../output/screenshots/zelabairro-central-v2.jpg).
+- [Interface móvel](../../output/screenshots/zelabairro-mobile-v2.jpg).
+- [Revisão e contestação](../../output/screenshots/zelabairro-revisao-v2.jpg).
 
 Leaflet e Archivo foram incorporados com licença em `web/vendor`. Os mapas usam tiles visíveis do OpenStreetMap, com atribuição e cache normal do navegador. O service worker conserva apenas o conjunto estático local: não guarda tiles, fotos, dados da API ou chave de revisão. A área visualizada é recebida pelo provedor de mapas; os relatos e as fotos ficam na central.
 
