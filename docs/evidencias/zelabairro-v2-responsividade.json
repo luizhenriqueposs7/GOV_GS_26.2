@@ -1,0 +1,32 @@
+[
+  {
+    "view": "Registrar",
+    "content": 305,
+    "overflow": false,
+    "viewport": 320
+  },
+  {
+    "view": "Mapa",
+    "content": 305,
+    "overflow": false,
+    "viewport": 320
+  },
+  {
+    "view": "Meus pedidos",
+    "content": 305,
+    "overflow": false,
+    "viewport": 320
+  },
+  {
+    "view": "Revisão",
+    "content": 305,
+    "overflow": false,
+    "viewport": 320
+  },
+  {
+    "view": "Materiais e fontes",
+    "content": 305,
+    "overflow": false,
+    "viewport": 320
+  }
+]

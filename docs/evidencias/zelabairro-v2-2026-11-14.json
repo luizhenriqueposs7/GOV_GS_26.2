@@ -1,0 +1,87 @@
+{
+  "data": "2026-11-14T23:10:12.533944+00:00",
+  "dados_ficticios": true,
+  "validacao_em_campo": false,
+  "testes": {
+    "python": 57,
+    "javascript": 12
+  },
+  "fluxos": {
+    "desktop": {
+      "id": "546171b8-cf41-481e-9866-2800d6e47531",
+      "etapas": [
+        "Atendimento registrado",
+        "Decisão revisada",
+        "Registro confirmado no ZelaBairro",
+        "Nova análise solicitada"
+      ],
+      "foto": {
+        "sha256": "4f3450f8661518a1ef517c5df8d924f33dcad8fc149eebf6e287327ce20ea6e9",
+        "tipo": "image/jpeg",
+        "bytes": 5963,
+        "largura": 227,
+        "altura": 227
+      },
+      "localizacao": {
+        "latitude": -23.544288,
+        "longitude": -46.643208,
+        "precisao_m": null,
+        "origem": "manual",
+        "confirmado": true
+      },
+      "situacao": "Nova revisão solicitada",
+      "confirmacao_bloqueada_apos_contestar": true
+    },
+    "mobile": {
+      "id": "a9fe61fb-048f-47a7-9427-a4161b91321a",
+      "etapas": [
+        "Atendimento registrado",
+        "Decisão revisada",
+        "Registro confirmado no ZelaBairro",
+        "Nova análise solicitada"
+      ],
+      "foto": {
+        "sha256": "4f3450f8661518a1ef517c5df8d924f33dcad8fc149eebf6e287327ce20ea6e9",
+        "tipo": "image/jpeg",
+        "bytes": 5963,
+        "largura": 227,
+        "altura": 227
+      },
+      "localizacao": {
+        "latitude": -23.544,
+        "longitude": -46.6432,
+        "precisao_m": null,
+        "origem": "manual",
+        "confirmado": true
+      },
+      "situacao": "Nova revisão solicitada",
+      "confirmacao_bloqueada_apos_contestar": true
+    }
+  },
+  "registros_anteriores": {
+    "77bdab73-2852-44c1-9dcb-27832e4eb292": {
+      "eventos": 7,
+      "preservado": true
+    },
+    "697af04a-29dc-4e88-a028-23fd31417308": {
+      "eventos": 5,
+      "preservado": true
+    }
+  },
+  "quantidade_de_pedidos": 4,
+  "interface": {
+    "desktop": "navegador local",
+    "mobile": "viewport 390 x 844",
+    "tela_estreita": "viewport 320 x 844",
+    "rascunho_com_foto_apos_reload": true,
+    "confirmacao_do_local_exigida": true,
+    "edicao_reinicia_na_primeira_etapa": true,
+    "camada_video_acima_da_foto": true,
+    "hardware_camera_gps_testado": false,
+    "instalacao_em_smartphone_testada": false,
+    "arraste_retira_confirmacao": true,
+    "marcador_visivel_apos_trocar_tela": true,
+    "atalho_pular_navegacao_preserva_area": true,
+    "justificativa_nao_reaproveitada_entre_pedidos": true
+  }
+}

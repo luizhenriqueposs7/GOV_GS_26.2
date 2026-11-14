@@ -34,3 +34,9 @@ test('fotos, APIs e escrita passam direto para a rede sem cache',async()=>{
     assert.equal(interceptado,false);
   }
 });
+
+test('tiles externos não são armazenados pelo service worker',async()=>{
+  const eventos=await ambiente();let interceptado=false;
+  eventos.fetch({request:new Request('https://tile.openstreetmap.org/16/24278/37179.png'),respondWith:()=>{interceptado=true;}});
+  assert.equal(interceptado,false);
+});

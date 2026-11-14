@@ -117,11 +117,11 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             return JSONResponse(status_code=413, content={"erro": "O envio excede o limite de tamanho."})
         resposta = await call_next(request)
         resposta.headers["X-Content-Type-Options"] = "nosniff"
-        resposta.headers["Referrer-Policy"] = "no-referrer"
+        resposta.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
         resposta.headers["Cache-Control"] = "no-store"
         resposta.headers["Content-Security-Policy"] = (
-            "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; "
-            "media-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+            "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://tile.openstreetmap.org; "
+            "media-src 'self' blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
         )
         return resposta
 

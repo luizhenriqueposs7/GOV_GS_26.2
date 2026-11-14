@@ -1,81 +1,60 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
+<html lang="pt-BR"><head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CitizenTech | Atendimento urbano</title>
-  <meta name="theme-color" content="#203c55">
-  <link rel="manifest" href="/web/manifest.webmanifest">
-  <link rel="apple-touch-icon" href="/web/icon-192.png">
-  <link rel="stylesheet" href="/web/style.css"><script src="/web/app.js" type="module"></script>
-</head>
-<body>
+  <title>ZelaBairro | Do registro à decisão</title><meta name="theme-color" content="#20282a">
+  <link rel="manifest" href="/web/manifest.webmanifest"><link rel="apple-touch-icon" href="/web/icon-192.png"><link rel="icon" type="image/svg+xml" href="/web/brand.svg">
+  <link rel="stylesheet" href="/web/vendor/leaflet.css"><link rel="stylesheet" href="/web/style.css">
+  <script src="/web/vendor/leaflet.js" defer></script><script src="/web/app.js" type="module"></script>
+</head><body>
   <a class="skip" href="#principal">Pular para o conteúdo</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="#pedido" aria-label="CitizenTech, início"><span class="brand-mark" aria-hidden="true">c<span>t</span></span><span class="brand-name">CitizenTech<small>Central de atendimento urbano</small></span></a>
-      <div class="header-context"><span>Global Solution 2026</span><small>Demonstração acadêmica</small></div>
-    </div>
-    <nav class="main-nav" aria-label="Navegação principal"><div>
-      <button data-view="pedido" class="active" aria-current="page">Novo pedido</button>
-      <button data-view="acompanhar">Acompanhamento</button>
-      <button data-view="revisao">Revisão</button>
-      <button data-view="evidencias">Materiais e fontes</button>
-    </div></nav>
+  <header class="site-header"><div class="header-inner"><a class="brand" href="#mapa" aria-label="ZelaBairro, mapa"><img src="/web/brand.svg" width="49" height="45" alt=""><span class="brand-name">ZelaBairro</span></a><span class="demo-pill">Ambiente de demonstração</span></div>
+    <nav class="main-nav" aria-label="Navegação principal"><div><button data-view="mapa">Mapa</button><button data-view="pedido">Registrar</button><button data-view="acompanhar">Meus pedidos</button><button data-view="revisao">Revisão</button><button data-view="evidencias">Materiais e fontes</button></div></nav>
   </header>
-  <div class="workspace">
-    <header class="topbar"><span id="breadcrumb">Novo pedido</span><span class="tag">São Paulo, SP</span></header>
-    <main id="principal" tabindex="-1">
-      <div id="aviso" class="notice" role="status" aria-live="polite" hidden></div>
-      <p id="conexao" class="notice" role="status" hidden>Você está sem conexão. Pode preencher o pedido e salvar um rascunho neste aparelho. O envio depende da central estar disponível.</p>
-      <section data-panel="pedido">
-        <div class="page-heading entry-heading"><div><h1>Registrar uma ocorrência</h1><p>Calçadas, buracos no asfalto e iluminação em São Paulo.</p></div><p class="demo-note">Use dados fictícios.<br> Este registro não é um chamado da prefeitura.</p></div>
-        <div class="columns entry-layout">
-          <article class="panel request-panel"><div class="form-heading"><h2>Informações do pedido</h2><p>Descreva uma situação por registro. Não inclua dados pessoais.</p></div>
-            <form id="pedido-form">
-              <fieldset class="photo-field"><legend>Foto da ocorrência <span>opcional</span></legend>
-                <p id="ajuda-foto" class="fine">Use uma imagem de demonstração, sem pessoas ou placas. A foto acompanha o relato; não identifica buracos automaticamente.</p>
-                <div class="actions"><label for="foto-camera" class="secondary file-action">Tirar uma foto<input id="foto-camera" class="sr-only" type="file" accept="image/jpeg,image/png" capture="environment" aria-describedby="ajuda-foto"></label><label for="foto-galeria" class="secondary file-action">Escolher imagem<input id="foto-galeria" class="sr-only" type="file" accept="image/jpeg,image/png" aria-describedby="ajuda-foto"></label></div>
-                <div id="foto-previa" hidden><img id="foto-preview" alt="Prévia da foto que acompanhará o pedido"><div class="actions"><span id="foto-status" class="fine" role="status"></span><button id="remover-foto" type="button" class="quiet">Remover foto</button></div></div>
-              </fieldset>
-              <label for="descricao">Descreva a ocorrência <span>obrigatório</span></label><textarea id="descricao" name="descricao" minlength="10" maxlength="1500" rows="4" required placeholder="Ex.: o passeio de uma praça está danificado e dificulta a passagem."></textarea>
+  <div class="workspace"><header class="topbar"><span id="breadcrumb">Mapa</span><span class="tag">CitizenTech · São Paulo</span></header>
+    <main id="principal" tabindex="-1"><div id="aviso" class="notice" role="status" aria-live="polite" hidden></div><p id="conexao" class="notice" role="status" hidden>Sem conexão. Você pode preencher e salvar um rascunho. O envio depende da central estar disponível.</p>
+      <section data-panel="mapa" hidden>
+        <div class="map-toolbar"><div class="map-search"><label class="sr-only" for="mapa-busca">Buscar rua, bairro ou registro</label><input id="mapa-busca" type="search" placeholder="Buscar rua, bairro ou registro"><label class="sr-only" for="mapa-filtro">Filtrar situação</label><select id="mapa-filtro"><option value="todos">Todos os pedidos</option><option value="pendente">Aguardando revisão</option><option value="revisado">Revisados</option><option value="confirmado">Confirmados localmente</option></select></div><button id="enquadrar-mapa" class="secondary" type="button">Ver todos no mapa</button></div>
+        <div class="map-layout"><div class="map-pane"><div id="mapa-central" class="city-map" aria-label="Mapa dos pedidos. A mesma informação está na lista ao lado."></div><div class="map-title"><h1>O bairro,<br>em contexto.</h1><p>Selecione um ponto para ver o pedido.</p></div><button data-view="pedido" class="primary map-create" type="button"><span aria-hidden="true">＋</span> Registrar problema</button><div class="map-legend"><span class="legend-pending">Aguardando revisão</span><span class="legend-reviewed">Revisado</span><span class="legend-confirmed">Confirmado localmente</span></div></div>
+          <aside class="map-sidebar" aria-label="Pedidos no mapa"><div id="mapa-selecao"></div><div class="map-list-heading"><h2>Registros desta central</h2><span id="mapa-contagem" class="fine"></span></div><p id="mapa-status" class="fine" role="status">Carregando o mapa…</p><div id="mapa-lista"></div></aside></div>
+        <p class="map-disclosure fine">Mapa: OpenStreetMap, com conexão. O provedor recebe a área visualizada; fotos e relatos permanecem nesta central. <a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Informar erro no mapa</a>. Registros de demonstração, sem envio à prefeitura.</p>
+      </section>
+      <section data-panel="pedido" hidden>
+        <div class="page-heading entry-heading"><div><h1>Mostre onde a cidade<br> precisa de cuidado.</h1><p>Foto, relato e local confirmado. Você acompanha cada decisão.</p></div><p class="demo-note">Demonstração com dados fictícios.<br> Não abre chamado na prefeitura.</p></div>
+        <nav id="request-progress" class="request-progress" aria-label="Etapas do pedido"><button type="button" data-step="0" aria-current="step"><span>1</span> Foto e relato</button><button type="button" data-step="1"><span>2</span> Localização</button><button type="button" data-step="2"><span>3</span> Conferência</button></nav>
+        <article class="request-panel"><form id="pedido-form">
+          <div data-request-step="0" class="capture-layout">
+            <fieldset class="photo-field"><legend class="sr-only">Foto da ocorrência, opcional</legend>
+              <div class="camera-surface"><div id="camera-vazia"><span class="focus-corner" aria-hidden="true"></span><h2>Mostre o problema<br>e o entorno.</h2><p>A foto ajuda a entender o pedido.</p></div><video id="camera-video" autoplay muted playsinline hidden aria-label="Prévia da câmera"></video><div id="foto-previa" hidden><img id="foto-preview" alt="Prévia da foto que acompanhará o pedido"></div><span class="camera-caption">Foto da ocorrência · opcional</span></div>
+              <div class="capture-controls"><label for="foto-galeria" class="secondary file-action">Escolher imagem<input id="foto-galeria" class="sr-only" type="file" accept="image/jpeg,image/png" aria-describedby="ajuda-foto"></label><button id="ativar-camera" type="button" class="shutter" aria-label="Ativar câmera"><span aria-hidden="true"></span></button><label for="foto-camera" class="file-action camera-native">Câmera do aparelho<input id="foto-camera" class="sr-only" type="file" accept="image/jpeg,image/png" capture="environment" aria-describedby="ajuda-foto"></label><button id="capturar-camera" class="primary" type="button" hidden>Capturar foto</button><button id="fechar-camera" class="quiet" type="button" hidden>Fechar câmera</button></div>
+              <p id="camera-status" class="fine" role="status">Você também pode continuar só com texto.</p><div class="actions photo-tools"><span id="foto-status" class="fine" role="status"></span><button id="remover-foto" type="button" class="quiet" hidden>Remover foto</button></div><p id="ajuda-foto" class="fine">Use uma imagem de demonstração, sem pessoas ou placas. A foto não detecta buracos automaticamente.</p>
+            </fieldset>
+            <div class="capture-story"><h2>O que aconteceu?</h2><p class="muted">Descreva o problema e como ele afeta a passagem ou o uso do espaço.</p><label for="descricao">Descreva a ocorrência <span>obrigatório</span></label><textarea id="descricao" name="descricao" minlength="10" maxlength="1500" rows="5" required placeholder="Ex.: a calçada está quebrada e dificulta a passagem com cadeira de rodas."></textarea><p class="fine">Uma situação por pedido. Não inclua nomes, documentos ou contatos.</p><button type="button" data-next="1" class="primary">Continuar para localização <span aria-hidden="true">↗</span></button><button id="seguir-texto" type="button" class="quiet">Continuar sem foto</button></div>
+          </div>
+          <div data-request-step="1" hidden><div class="location-layout"><div class="location-map-wrap"><div id="mapa-local" class="location-map" aria-label="Escolha o local no mapa ou use os campos de coordenadas."></div><p id="mapa-local-status" class="fine" role="status">Toque no mapa para escolher o ponto.</p></div><div class="location-fields"><h2>É aqui que aconteceu?</h2><p class="muted">Marque no mapa ou use sua posição. Confira o ponto e complete a referência.</p>
               <div class="field-row"><div><label for="bairro">Bairro fictício <span>obrigatório</span></label><input id="bairro" name="bairro" minlength="2" maxlength="100" required autocomplete="off" placeholder="Bairro de demonstração"></div><div><label for="local">Local e ponto de referência</label><input id="local" name="local" maxlength="250" autocomplete="off" placeholder="Praça Exemplo, junto à entrada"></div></div>
               <label for="contexto">Qual é o contexto da ocorrência?</label><select id="contexto" name="contexto"><option value="nao_informado">Ainda não sei — preciso conferir</option><option value="asfalto_comum">Buraco no asfalto de uma via comum</option><option value="corredor_onibus">Buraco em faixa exclusiva ou corredor de ônibus</option><option value="area_publica">Calçada danificada em praça ou área pública</option><option value="frente_imovel">Calçada danificada em frente a um imóvel</option><option value="obstaculo">Objeto bloqueando a passagem na calçada</option><option value="iluminacao_existente">Iluminação existente com defeito</option><option value="nova_iluminacao">Local sem iluminação ou pedido de melhoria</option></select>
               <fieldset class="location-field"><legend>Localização do problema <span>opcional</span></legend>
-                <p class="fine">O GPS informa a posição do aparelho. Confira se ela corresponde ao problema e mantenha o endereço ou referência acima. Nenhuma consulta a mapas é feita automaticamente.</p>
+                <p class="fine">O GPS informa a posição do aparelho. Confira se ela corresponde ao problema e mantenha o endereço ou referência acima. O mapa usa OpenStreetMap. O endereço não é preenchido automaticamente.</p>
                 <div class="actions"><button id="obter-localizacao" type="button" class="secondary">Usar posição do aparelho</button><button id="limpar-localizacao" type="button" class="quiet">Limpar coordenadas</button></div>
                 <p id="localizacao-status" class="fine" role="status">Você também pode digitar coordenadas de demonstração ou continuar sem GPS.</p>
                 <div class="field-row"><div><label for="latitude">Latitude</label><input id="latitude" name="latitude" inputmode="decimal" maxlength="22" placeholder="Ex.: -23,5500"></div><div><label for="longitude">Longitude</label><input id="longitude" name="longitude" inputmode="decimal" maxlength="22" placeholder="Ex.: -46,6300"></div></div>
                 <label class="check"><input id="confirmar-localizacao" type="checkbox"><span>Conferi as coordenadas e confirmo que representam o local do problema.</span></label>
               </fieldset>
-              <label class="check"><input type="checkbox" name="confirmado" required><span>Estou usando dados fictícios e confirmo o registro nesta demonstração local.</span></label>
-              <div class="actions"><button type="submit" class="primary">Preparar pedido</button><button type="button" id="cancelar-edicao" class="quiet" hidden>Cancelar edição</button></div>
+</div></div><div class="step-actions"><button type="button" data-back="0" class="secondary">Voltar ao relato</button><button type="button" data-next="2" class="primary">Conferir pedido <span aria-hidden="true">↗</span></button></div></div>
+          <div data-request-step="2" hidden><h2>Confira antes de registrar.</h2><div id="pedido-conferencia" class="request-summary"></div><label class="check"><input type="checkbox" name="confirmado" required><span>Estou usando dados fictícios e confirmo o registro nesta demonstração local.</span></label><div class="step-actions"><button type="button" data-back="1" class="secondary">Ajustar localização</button><button type="submit" class="primary">Registrar pedido</button></div><p class="fine">O pedido ficará nesta central. O envio à prefeitura deve ser feito pelo canal oficial indicado.</p></div>
+          <button type="button" id="cancelar-edicao" class="quiet" hidden>Cancelar edição</button>
               <div class="draft-tools"><p class="fine">Quer continuar depois? O rascunho fica apenas neste navegador, com a foto e as coordenadas preenchidas. Use dados fictícios em aparelhos compartilhados.</p><div class="actions"><button id="salvar-rascunho" type="button" class="quiet">Salvar rascunho no aparelho</button><button id="restaurar-rascunho" type="button" class="quiet">Recuperar rascunho</button><button id="apagar-rascunho" type="button" class="quiet">Apagar rascunho salvo</button></div><p id="rascunho-status" class="fine" role="status"></p></div>
-              <p class="fine">O registro local não abre chamado na prefeitura. O envio deve ser feito pelo canal oficial indicado.</p>
-            </form>
-          </article>
-          <aside class="support service-reference" aria-label="Referência dos serviços">
-            <div class="place-sign"><span>Referência de atendimento</span><strong>São Paulo</strong><small>Serviços urbanos</small></div>
-            <div class="catalogue-index"><section><h2>Calçadas</h2><p>Área pública, frente de imóvel ou objeto que impede a passagem.</p></section><section><h2>Buracos no asfalto</h2><p>Via comum e corredor de ônibus têm serviços distintos.</p></section><section><h2>Iluminação</h2><p>Defeito no equipamento existente ou pedido de instalação e melhoria.</p></section><section><h2>Rampas e acessibilidade</h2><p>O serviço precisa ser confirmado com o atendimento oficial.</p></section></div>
-            <p class="reference-note">A orientação considera o contexto informado e as cartas de serviços da Prefeitura de São Paulo.</p><p class="fine">Catálogo consultado em 14/11/2026. Confira as informações no canal oficial antes de enviar.</p>
-          </aside>
-        </div>
-        <div id="preparacao-resultado" hidden></div>
+</form></article><div id="preparacao-resultado" hidden></div>
       </section>
-      <section data-panel="acompanhar" hidden>
-        <div class="page-heading"><h1>Acompanhamento dos pedidos</h1><p>Consulte o registro, complete informações e acompanhe as decisões.</p></div>
-        <div class="section-title"><h2>Registros locais</h2><button id="atualizar-casos" class="quiet">Atualizar lista</button></div><div id="lista-casos"></div><div id="detalhe-caso"></div>
-      </section>
-      <section data-panel="revisao" hidden>
-        <div class="page-heading"><h1>Revisão dos pedidos</h1><p>Confira o relato e registre uma decisão justificada. A análise original permanece no histórico.</p></div>
-        <div id="indicadores" class="metrics"></div>
-        <div class="columns"><article class="panel"><h2>Revisar um pedido</h2><form id="revisao-form">
-          <label for="revisao-caso">Pedido</label><select id="revisao-caso" required></select><div id="resumo-revisao" class="inset"></div>
+      <section data-panel="acompanhar" hidden><div class="page-heading"><h1>Cada pedido tem uma história.</h1><p>Veja a evidência, a decisão e o que aconteceu depois.</p></div><div class="section-title"><h2>Registros locais</h2><button id="atualizar-casos" class="quiet">Atualizar lista</button></div><div id="lista-casos"></div><div id="detalhe-caso"></div></section>
+      <section data-panel="revisao" hidden><div class="page-heading"><h1>Uma decisão que pode ser explicada.</h1><p>Confira a evidência e registre o motivo. A análise original permanece no histórico.</p></div><details class="review-metrics"><summary>Indicadores desta instalação</summary><div id="indicadores" class="metrics"></div></details>
+        <div class="review-workspace"><article class="review-evidence"><h2>O pedido e a evidência</h2><label for="revisao-caso">Escolher pedido</label><select id="revisao-caso" required></select><div id="resumo-revisao"></div></article><article class="panel review-decision"><h2>O que foi decidido?</h2><div id="revisao-decisao"></div><form id="revisao-form">
           <div class="field-row"><div><label for="revisor">Identificação do revisor</label><input id="revisor" name="revisor" minlength="2" maxlength="80" required placeholder="Revisor da demonstração"></div><div><label for="prioridade">Prioridade revisada</label><select id="prioridade" name="prioridade"><option>Baixa</option><option>Média</option><option>Alta</option></select></div></div>
           <label for="justificativa">Por que essa é a decisão?</label><textarea id="justificativa" name="justificativa" minlength="10" maxlength="500" rows="3" required placeholder="Explique o contexto considerado e os limites da decisão."></textarea>
           <label for="chave">Chave local de revisão</label><input id="chave" type="password" required autocomplete="off" aria-describedby="ajuda-chave"><p id="ajuda-chave" class="fine">Acesso reservado ao responsável pela revisão nesta instalação.</p>
           <button class="primary" type="submit">Registrar decisão</button></form>
           <div class="divider"><h3>Confirmar no ZelaBairro</h3><p class="muted">O pedido revisado pode receber um registro local no ZelaBairro. Isso não gera protocolo municipal.</p><button id="confirmar-frontend" class="secondary" disabled>Confirmar registro local</button><p id="frontend-resultado" class="fine"></p></div>
-        </article><aside class="support review-reference"><h2>Antes de registrar a decisão</h2><ol><li>Confira a descrição e a localização.</li><li>Verifique a fonte e as informações pendentes.</li><li>Explique a prioridade escolhida.</li></ol><h3>Barreiras de acessibilidade</h3><p>A central exige revisão para essa categoria, mesmo quando a regra original a dispensa.</p><div class="source-label"><strong>O histórico conserva as versões.</strong><p>Uma contestação ou alteração do pedido exige nova análise.</p></div><p class="fine">Os indicadores descrevem os registros desta instalação. Não representam reparos ou demanda da cidade.</p></aside></div>
+</article><aside class="review-journal"><h2>Registro do caso</h2><div id="revisao-historico"></div><div class="inset warning"><h3>Barreiras de acessibilidade</h3><p>Exigem revisão humana, mesmo quando a regra original a dispensa.</p></div><p class="fine">Contestação ou alteração exige nova análise. O histórico conserva as versões.</p></aside></div>
         <article class="panel spaced"><h2>Importar lote do RPA</h2><p class="muted">CSV com case_id, description e neighborhood, de até 1 MB. O mesmo ID atualiza o pedido; mudanças anulam a revisão anterior.</p><form id="lote-form" class="inline-form"><label for="lote-arquivo" class="sr-only">Arquivo CSV</label><input id="lote-arquivo" type="file" accept=".csv,text/csv" required><button class="secondary" type="submit">Processar lote com a chave acima</button></form><pre id="lote-resultado" class="output" hidden></pre></article>
       </section>
       <section data-panel="evidencias" hidden>
@@ -88,8 +67,7 @@
         <article class="panel spaced"><p class="tool-kind">Prevenção de desastres</p><h2>Consultar o corpus de prevenção</h2><p class="muted">Busca textual no material de desastres, com fonte e página ou seção. Não informa a situação atual de um local.</p><form id="fontes-form" class="inline-form"><label for="busca" class="sr-only">O que deseja pesquisar?</label><input id="busca" minlength="3" maxlength="500" required placeholder="Ex.: prevenção de enchentes"><button class="secondary" type="submit">Buscar trechos</button></form><div id="fontes-resultado" aria-live="polite"></div></article>
         <div class="section-title spaced"><h2>Trabalhos integrados</h2><span class="collection-count">9 disciplinas</span></div><div id="ativos" class="asset-grid"></div>
       </section>
-      <details class="install-help"><summary>Usar a central como aplicativo</summary><p>Em uma conexão HTTPS, abra o menu do navegador e procure “Instalar aplicativo” ou “Adicionar à tela de início”. No iPhone, use Compartilhar no Safari. A instalação depende do navegador. O formulário pode abrir sem rede depois do primeiro acesso; para enviar e acompanhar, a central precisa estar disponível.</p><button id="instalar" type="button" class="secondary" hidden>Instalar neste aparelho</button></details>
-      <footer class="footer"><span>CitizenTech — Governança em IA e Business Analytics</span><span>Dados de demonstração. Sem validação em campo.</span></footer>
-    </main>
-  </div>
+<details class="install-help"><summary>Usar como aplicativo</summary><p>Em HTTPS, use “Instalar aplicativo” ou “Adicionar à tela de início” no navegador. No iPhone, use Compartilhar no Safari. O formulário pode abrir sem rede após o primeiro acesso; mapas, envio e acompanhamento precisam de conexão.</p><button id="instalar" type="button" class="secondary" hidden>Instalar neste aparelho</button></details>
+      <footer class="footer"><span>ZelaBairro · CitizenTech · Governança em IA</span><span>Demonstração local. Sem validação em campo.</span></footer>
+    </main></div>
 </body></html>

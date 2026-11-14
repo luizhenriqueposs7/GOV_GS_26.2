@@ -127,6 +127,36 @@ class MobileTest(unittest.TestCase):
         self.assertEqual(sw.status_code, 200)
         self.assertIn('application/javascript', sw.headers['content-type'])
 
+    def test_mapa_e_fontes_sao_locais_e_politica_so_libera_tiles_em_imagem(self):
+        for caminho in ('mapa.mjs', 'brand.svg', 'vendor/leaflet.js', 'vendor/leaflet.css', 'vendor/archivo-bold.ttf'):
+            self.assertEqual(self.client.get('/web/' + caminho).status_code, 200)
+        resposta = self.client.get('/')
+        csp = resposta.headers['content-security-policy']
+        self.assertIn("script-src 'self'", csp)
+        self.assertIn("img-src 'self' data: blob: https://tile.openstreetmap.org", csp)
+        self.assertNotIn('unsafe-inline', csp)
+        self.assertEqual(resposta.headers['referrer-policy'], 'strict-origin-when-cross-origin')
+
+    def test_fluxo_foto_ponto_revisao_confirmacao_contestacao_e_nova_revisao(self):
+        caso = self.enviar().json()
+        url = '/api/atendimentos/' + caso['id']
+        chave = {'X-Manager-Key': 'chave-teste'}
+        self.assertEqual(self.client.post(url+'/zelabairro', headers=chave).status_code, 409)
+        revisao = dict(prioridade='Alta', justificativa='Barreira de passagem no cenário fictício.', revisor='Teste técnico')
+        self.assertEqual(self.client.post(url+'/revisao', headers=chave, json=revisao).status_code, 200)
+        confirmado = self.client.post(url+'/zelabairro', headers=chave)
+        self.assertEqual(confirmado.status_code, 200, confirmado.text)
+        self.assertTrue(confirmado.json()['frontend']['id'])
+        contestado = self.client.post(url+'/contestacao', json={'motivo':'O registro fictício precisa de nova avaliação.'}).json()
+        self.assertIsNone(contestado['revisao'])
+        self.assertIsNone(contestado.get('frontend'))
+        self.assertEqual(self.client.post(url+'/zelabairro', headers=chave).status_code, 409)
+        self.assertEqual(self.client.post(url+'/revisao', headers=chave, json=revisao).status_code, 200)
+        atual = self.client.get(url).json()
+        self.assertEqual(atual['foto'], caso['foto'])
+        self.assertEqual(atual['localizacao'], caso['localizacao'])
+        self.assertEqual(len(atual['historico']), 5)
+
     def test_reenvio_apos_revisao_devolve_estado_atual_sem_novo_evento(self):
         caso = self.enviar().json()
         self.client.post('/api/atendimentos/' + caso['id'] + '/revisao', headers={'X-Manager-Key':'chave-teste'},

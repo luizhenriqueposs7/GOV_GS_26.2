@@ -1,4 +1,4 @@
-# Central CitizenTech
+# ZelaBairro · Central CitizenTech
 
 Preparação e acompanhamento local de pedidos sobre calçadas, buracos no asfalto e iluminação em São Paulo. A central recebe foto opcional e localização confirmada, pede contexto, mostra a fonte do encaminhamento, conserva a triagem original, registra uma revisão justificada e permite contestar a decisão. Depois da conferência, reutiliza a persistência do ZelaBairro.
 
@@ -30,17 +30,25 @@ $env:CITIZENTECH_GENAI_PYTHON = Join-Path $env:CITIZENTECH_GENAI_PROJECT '.runti
 .\INICIAR-IA.ps1
 ```
 
-As variáveis opcionais estão explicadas em `.env.example`. São variáveis do processo; não há carregamento automático de `.env`. As bases ficam em `data/central.sqlite` e `data/zelabairro.sqlite`. Fotos anexadas ao pedido são normalizadas em JPEG, têm metadados retirados e ficam em `data/fotos`, identificadas por hash. A remoção retira o anexo atual e preserva a referência anterior no histórico; o arquivo não é apagado automaticamente. A imagem enviada apenas à análise de Visão é temporária e descartada. Histórico, fotos e coordenadas não são enviados a mapas ou outros serviços externos pela central.
+As variáveis opcionais estão explicadas em `.env.example`. São variáveis do processo; não há carregamento automático de `.env`. As bases ficam em `data/central.sqlite` e `data/zelabairro.sqlite`. Fotos anexadas ao pedido são normalizadas em JPEG, têm metadados retirados e ficam em `data/fotos`, identificadas por hash. A remoção retira o anexo atual e preserva a referência anterior no histórico; o arquivo não é apagado automaticamente. A imagem enviada apenas à análise de Visão é temporária e descartada. Fotos, textos e histórico permanecem na central. Ao abrir o mapa, o navegador solicita imagens da área visualizada ao OpenStreetMap; essa área pode revelar a localização do ponto. Não há geocodificação ou envio do relato ao provedor.
 
 ## Jornada móvel
 
-O formulário oferece câmera e galeria, prévia, substituição e remoção da foto. No navegador, JPEG/PNG de até 32 MB são reduzidos a 2048 pixels no maior lado; o servidor aceita até 8 MB e 16,8 megapixels. HEIC precisa ser exportado em JPEG. A foto é evidência do relato, sem detecção automática de buracos. O modelo original de Visão permanece restrito a sinalização de fissuras em concreto.
+O registro tem três etapas: foto e relato, localização e conferência. Oferece câmera ao vivo em navegadores compatíveis, câmera do aparelho e galeria, com prévia, substituição e remoção da foto. Permissão negada mantém as outras opções e o envio somente por texto. No navegador, JPEG/PNG de até 32 MB são reduzidos a 2048 pixels no maior lado; o servidor aceita até 8 MB e 16,8 megapixels. HEIC precisa ser exportado em JPEG. A foto é evidência do relato, sem detecção automática de buracos. O modelo original de Visão permanece restrito a sinalização de fissuras em concreto.
 
-As coordenadas são opcionais. O botão de posição pede permissão ao navegador; a pessoa deve confirmar que o ponto corresponde à ocorrência. Também é possível digitar coordenadas ou seguir apenas com a referência. GPS não determina o endereço, o bairro ou a competência do serviço.
+As coordenadas são opcionais. É possível marcar ou arrastar o ponto no mapa, usar GPS, digitar coordenadas ou seguir apenas com a referência. O botão de posição pede permissão ao navegador. Mudar o ponto, editar ou recuperar um rascunho exige nova confirmação. GPS não determina o endereço, o bairro ou a competência do serviço.
 
 O rascunho é salvo explicitamente em IndexedDB neste navegador, com foto e coordenadas, sem chave de revisão. Recuperá-lo exige confirmar os dados novamente. Um rascunho salvo conserva a mesma tentativa de envio após perda de resposta. Registrar outro pedido não apaga esse rascunho. Nenhum envio é automático. Limpar os dados do navegador ou perder o aparelho pode eliminar o rascunho.
 
-Manifesto, ícones e service worker permitem instalar como PWA nos navegadores compatíveis. Só o conjunto estático do formulário entra no cache. APIs, fotos e respostas não são armazenadas pelo service worker. O envio e o acompanhamento dependem do servidor. Ao publicar uma nova versão, altere a versão de cache em `web/sw.js` e feche/reabra as abas para ativar a atualização.
+Manifesto, ícones e service worker permitem instalar como PWA nos navegadores compatíveis. Só o conjunto estático do formulário entra no cache. APIs, fotos, respostas e tiles do mapa não são armazenados pelo service worker. Mapas, envio e acompanhamento precisam de conexão. Ao publicar uma nova versão, altere a versão de cache em `web/sw.js` e feche/reabra as abas para ativar a atualização.
+
+## Mapa e revisão
+
+A central abre com mapa, busca por rua/bairro/registro e filtros de situação. Pedidos sem coordenadas continuam na lista acessível. Os marcadores abrem o pedido, o histórico e a revisão. Outros registros a até 100 m aparecem com distância em linha reta; isso não confirma duplicidade e não funde pedidos.
+
+Leaflet 1.9.4 e a fonte Archivo estão em `web/vendor`, com licenças. Os tiles visíveis vêm de [OpenStreetMap](https://operations.osmfoundation.org/policies/tiles/), com atribuição no mapa e cache normal do navegador. Não há download em lote ou mapa offline. O uso da biblioteca segue a [documentação do Leaflet](https://leafletjs.com/reference-1.9.4.html).
+
+Na revisão, a foto, o relato, a sugestão do RPA, a justificativa humana e o histórico ocupam áreas distintas. A chave continua obrigatória para decidir e confirmar no ZelaBairro. A contestação retira a decisão do estado atual e exige nova revisão, sem apagar as versões anteriores.
 
 A abertura sem servidor e a recuperação do rascunho foram verificadas no navegador desta máquina. Câmera, GPS reais e instalação em smartphone continuam sem teste em aparelho. Para usar no celular, é necessário preparar um acesso HTTPS protegido; o endereço 127.0.0.1 do computador não abre a central no telefone. Não existe acesso externo publicado nesta entrega de trabalho.
 
@@ -82,12 +90,14 @@ Os testes JavaScript usam Node.js 20 ou posterior; o uso da central no navegador
 
 ```powershell
 .\.venv\Scripts\python.exe -X utf8 -m unittest discover -v
-node --test tests/mobile.test.mjs tests/sw.test.mjs
+node --test tests/mobile.test.mjs tests/sw.test.mjs tests/mapa.test.mjs
 ```
 
 Os testes usam bancos temporários e entradas fictícias. Cobrem o controle da barreira, preservação das decisões, contestação, atualização, repetição de lote, fonte de PLN, imagens inválidas, chave de revisão e falha de serviço. Isso verifica comportamento técnico; não é teste com usuários. O registro do que efetivamente foi executado nesta máquina está em `docs/progresso.md`.
 
-Em 14/11/2026, os 55 testes Python e 7 testes JavaScript passaram, incluindo contratos móveis, reenvio e cache do formulário. O servidor foi iniciado e a página inicial abriu no navegador. Uma consulta real de Generative AI pela central retornou orientação com fonte oficial; a evidência está em docs/evidencias/execucao-http-genai-2026-11-14.json. Como verificação complementar, `python -X utf8 verificar_fluxo.py` executa as funções reais das rotas e a persistência em bancos temporários; esse percurso também passou. O fluxo de cadastro, revisão, confirmação no ZelaBairro e contestação foi executado e repetido pela interface. O teste também conferiu o histórico, o bloqueio de confirmação sem revisão, a preservação de rascunho e a repetição da confirmação sem duplicação por versão. Evidências: docs/evidencias/fluxo-browser-2026-11-14.json e docs/evidencias/fluxo-persistencia-2026-11-14.json.
+Em 14/11/2026, os 57 testes Python e 12 testes JavaScript passaram, incluindo contratos móveis, reenvio, mapa e cache do formulário. A interface ZelaBairro foi verificada no desktop e em larguras de 390 e 320 pixels, com foto, localização, revisão, confirmação e contestação. Os resultados e capturas estão em [evidências da interface](docs/evidencias/zelabairro-v2-2026-11-14.md). Isso não equivale a teste em smartphone físico.
+
+Uma consulta real anterior de Generative AI pela central retornou orientação com fonte oficial; a evidência está em docs/evidencias/execucao-http-genai-2026-11-14.json. Como verificação complementar, `python -X utf8 verificar_fluxo.py` executa as funções reais das rotas e a persistência em bancos temporários; esse percurso também passou. O fluxo de cadastro, revisão, confirmação no ZelaBairro e contestação foi executado e repetido pela interface. O teste também conferiu o histórico, o bloqueio de confirmação sem revisão, a preservação de rascunho e a repetição da confirmação sem duplicação por versão. Evidências anteriores: docs/evidencias/fluxo-browser-2026-11-14.json e docs/evidencias/fluxo-persistencia-2026-11-14.json.
 
 A ampliação móvel, o teste de resposta perdida e as verificações do formulário sem servidor estão em `docs/evidencias/mobile-2026-11-14.json`. A sonda de falha é `tests/tools/proxy-resposta-perdida.mjs`: aponta somente à prévia local em 8841 e usa 8842, sem interferir na instância principal.
 
