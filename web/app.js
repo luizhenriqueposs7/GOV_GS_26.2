@@ -51,6 +51,7 @@ function formulario(id, acao) {
 }
 async function navegar(view, foco = true) {
   if (!titulos[view]) view = "pedido";
+  $("aviso").hidden = true;
   document.querySelectorAll("[data-panel]").forEach(n => n.hidden = n.dataset.panel !== view);
   document.querySelectorAll("[data-view]").forEach(n => {n.classList.toggle("active", n.dataset.view === view); if(n.dataset.view === view) n.setAttribute("aria-current", "page"); else n.removeAttribute("aria-current");});
   $("breadcrumb").textContent = titulos[view];
@@ -74,6 +75,9 @@ async function atualizar() {
     if ([...select.options].some(n => n.value === valor)) select.value = valor;
   }
   resumoRevisao();
+  if (state.selecionado && !document.querySelector('[data-panel="acompanhar"]').hidden) {
+    await detalhe(state.selecionado.id, false);
+  }
 }
 function metricas(m) {
   const cards = [["Pedidos registrados", m.total, "Somente desta instalação"], ["Decisões revisadas", m.revisados, "Revisões atuais"], ["Revisões obrigatórias pendentes", m.revisoes_pendentes, "Controle de acessibilidade e RPA"], ["Prioridades alteradas", m.sugestoes_corrigidas + " / " + m.denominador_correcoes, "Entre as decisões revisadas"]];
@@ -118,8 +122,10 @@ async function editar(caso) {
   $("cancelar-edicao").hidden = false; $("preparacao-resultado").hidden = true;
   aviso("Editando o pedido " + caso.id.slice(0,8) + ". Alterações exigem nova revisão antes de confirmar no ZelaBairro."); $("descricao").focus();
 }
-async function detalhe(id) {
-  const caso = await api("/api/atendimentos/" + encodeURIComponent(id)); state.selecionado = id;
+async function detalhe(id, rolar = true) {
+  const caso = await api("/api/atendimentos/" + encodeURIComponent(id));
+  if (!rolar && state.selecionado?.id === id && state.selecionado.atualizado_em === caso.atualizado_em) return;
+  state.selecionado = caso;
   const box = el("article", null, "panel detail");
   box.append(badge(caso.situacao), el("h2", caso.descricao), el("p", "Registro local " + caso.id, "fine"));
   const grid = el("div", null, "details-grid"), principal = el("div"), decisao = el("div");
@@ -137,12 +143,13 @@ async function detalhe(id) {
   const forms = el("div",null,"details-grid divider"), contestar = el("form"), protocolo = el("form");
   contestar.append(el("h3","Pedir uma nova análise"));const motivo=el("textarea"); motivo.id="motivo-contestacao";motivo.minLength=10;motivo.maxLength=500;motivo.required=true;motivo.rows=3;const lm=el("label","Explique o que precisa ser reconsiderado");lm.htmlFor=motivo.id;
   const bc=el("button","Solicitar nova revisão","secondary");bc.type="submit";contestar.append(lm,motivo,bc);
-  contestar.addEventListener("submit",e=>{e.preventDefault();durante(bc,async()=>{await enviar("/api/atendimentos/"+id+"/contestacao",{motivo:motivo.value});await atualizar();await detalhe(id);aviso("Nova análise solicitada. A revisão anterior ficou preservada no histórico.");});});
+  contestar.addEventListener("submit",e=>{e.preventDefault();durante(bc,async()=>{await enviar("/api/atendimentos/"+id+"/contestacao",{motivo:motivo.value});await atualizar();aviso("Nova análise solicitada. A revisão anterior ficou preservada no histórico.");});});
   protocolo.append(el("h3","Anotar protocolo externo"),el("p","Somente se você já abriu o chamado pelo canal oficial. Aqui o número é uma informação fornecida, sem confirmação do órgão.","fine"));const numero=el("input");numero.id="numero-protocolo";numero.required=true;numero.maxLength=80;const ln=el("label","Número informado");ln.htmlFor=numero.id;const bp=el("button","Salvar número informado","secondary");bp.type="submit";protocolo.append(ln,numero,bp);
   protocolo.addEventListener("submit",e=>{e.preventDefault();durante(bp,async()=>{await enviar("/api/atendimentos/"+id+"/protocolo",{protocolo:numero.value});await detalhe(id);aviso("Número externo anotado como informação não verificada.");});});
   forms.append(contestar,protocolo);box.append(forms,el("h3","Histórico do pedido","spaced"));
   const timeline=el("ol",null,"timeline");caso.historico.forEach(evento=>{const li=el("li");li.append(el("strong",evento.acao),el("small",data(evento.data)+" · "+evento.autor));const details=el("details");details.append(el("summary","Ver registro da etapa"),json(evento.dados));li.append(details);timeline.append(li);});box.append(timeline);
-  $("detalhe-caso").replaceChildren(box);box.scrollIntoView({block:"start"});
+  $("detalhe-caso").replaceChildren(box);
+  if (rolar) box.scrollIntoView({block:"start"});
 }
 $("atualizar-casos").addEventListener("click",e=>durante(e.currentTarget,atualizar));
 function resumoRevisao() {

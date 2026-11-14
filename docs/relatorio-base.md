@@ -12,7 +12,7 @@ Felipe Stefani Honorato · RM563380
 
 São Paulo · 2026
 
-VERSÃO DE TRABALHO. Conclusão conjunta, links de publicação e conferência da navegação pendentes.
+VERSÃO DE TRABALHO. Conclusão conjunta e links de publicação pendentes.
 
 <!-- pagina -->
 # FOLHA DE ROSTO
@@ -146,7 +146,7 @@ A confirmação exige informações completas e uma revisão com justificativa. 
 
 O identificador retornado é local. Um número de protocolo municipal pode ser anotado pelo usuário, mas permanece identificado como informação não verificada no órgão. Nenhuma operação de abertura de chamado foi presumida a partir da documentação pública consultada.
 
-Foram verificadas as funções reais das rotas e a gravação pelo código do ZelaBairro em bancos temporários. A conferência completa da navegação e do transporte HTTP permaneceu pendente por uma limitação de comunicação local do ambiente de execução desta sessão.
+O fluxo foi executado pela interface: cadastro, revisão, confirmação e contestação. Repetir a confirmação da mesma revisão conservou o identificador do ZelaBairro. A contestação retirou a decisão e o vínculo atuais, mantendo o histórico. Os dois bancos foram conferidos em modo somente leitura.
 
 <!-- pagina -->
 # DESENVOLVIMENTO
@@ -161,7 +161,7 @@ O serviço pode pedir esclarecimento, indicar falta de evidência, reconhecer um
 
 As avaliações anteriores do projeto são mantidas nos materiais. A primeira aplicação ao conjunto reservado obteve 13 de 16 casos. A avaliação diagnóstica posterior obteve 16 de 16 em casos conhecidos. Esses dois resultados pertencem a momentos diferentes e não devem ser usados como uma única estimativa de generalização.
 
-O vídeo anterior da disciplina foi produzido com outra versão do modelo. Ele não demonstra automaticamente a execução do Qwen3 pela central. Nesta etapa, a chamada completa ao serviço de linguagem ainda precisa ser conferida no ambiente que permitirá a gravação integrada.
+O vídeo anterior da disciplina foi produzido com outra versão do modelo. Ele não demonstra automaticamente a execução do Qwen3 pela central. A chamada atual foi executada pela central e retornou a fonte ILU.1 para uma pergunta sobre manutenção de iluminação pública. Essa consulta verifica a execução, sem estimar acurácia geral.
 
 O inicializador e os códigos do projeto estão incluídos no pacote. O modelo de aproximadamente 2,5 GB e os caches são obtidos separadamente pelo inicializador, com conferência dos hashes previstos no trabalho original.
 
@@ -226,7 +226,7 @@ Quadro 1 - Participação dos materiais na central
 | Cluster | Modelos e relatório iSPD | Cluster de produção |
 | Quântica | Relatório conceitual | Algoritmo quântico executável |
 | Frontend | Validação e persistência do ZelaBairro | Protocolo municipal automático |
-| Generative AI | Código e adaptador do serviço local | Execução HTTP ainda pendente |
+| Generative AI | Consulta atual pelo serviço local | Abertura automática de chamado |
 | IoT | Documento e vídeos do OuviAí | Eventos automáticos do celular |
 | PLN | Consulta ao corpus e origem do trecho | Revisão humana concluída |
 | Visão | Inferência com checkpoint original | Laudo ou diagnóstico estrutural |
@@ -236,7 +236,7 @@ Fonte: implementação e materiais reunidos pelo grupo em 2026.
 
 Os indicadores são contagens do banco local. A razão de prioridades alteradas divide alterações pelas revisões atuais. Não mede qualidade do atendimento, benefício social ou reparos. Uma contestação retira a decisão atual do denominador até que ocorra nova revisão.
 
-As 30 verificações de catálogo, registros e módulos passaram. Um percurso direto pelas funções das rotas confirmou cadastro, complemento, revisão, persistência e contestação em bancos temporários. O teste HTTP e a navegação completa continuam pendentes.
+Os 44 testes automáticos passaram. O fluxo completo também foi repetido pelo navegador, com correção de dois problemas de atualização da interface. A leitura dos bancos confirmou histórico preservado, revisão reaberta pela contestação e confirmação sem duplicação por versão.
 
 <!-- pagina -->
 # 3 CONCLUSÃO
@@ -245,7 +245,7 @@ Seção reservada à elaboração conjunta com os integrantes, conforme combinad
 
 A redação final deverá distinguir o que a integração demonstrou tecnicamente do que permanece como hipótese de uso. Também deverá registrar os módulos externos, as limitações dos dados e a ausência de validação com pessoas.
 
-Antes de concluir, resta conferir a navegação completa e a chamada ao serviço de Generative AI no ambiente da gravação. Esses resultados deverão atualizar as seções anteriores, sem apagar os limites identificados.
+A execução técnica está registrada em docs/evidencias. A conclusão desta seção continua reservada à discussão conjunta com os integrantes.
 
 # 4 LINKS
 

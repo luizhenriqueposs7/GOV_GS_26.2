@@ -1,6 +1,6 @@
 # Roteiro de demonstração da Governança
 
-Alvo de 6min30s, dentro do intervalo obrigatório de 5 a 7 minutos. Planejamento de cenas para a central separada. As ações abaixo ainda não constituem uma execução gravada. Antes de gravar, conferir navegação HTTP e chamada ao serviço de Generative AI; essas verificações permaneceram pendentes no ambiente da sessão de implementação. Não haverá teste com pessoas ou piloto externo.
+Alvo de 6min30s, dentro do intervalo obrigatório de 5 a 7 minutos. Planejamento de cenas para a central separada. As ações abaixo ainda não constituem uma execução gravada. O fluxo principal pelo navegador e a chamada ao serviço de Generative AI foram conferidos tecnicamente em 14/11/2026. Antes de gravar, iniciar os serviços e preparar os arquivos de demonstração. Não haverá teste com pessoas ou piloto externo.
 
 | Início | Fim | Tempo | Cena | O que demonstrar |
 | --- | --- | --- | --- | --- |

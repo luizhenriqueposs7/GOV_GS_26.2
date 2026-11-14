@@ -1,0 +1,213 @@
+{
+  "data": "2026-11-14",
+  "resultado": "passou",
+  "modo": "Leitura dos dois bancos em modo somente leitura, após as ações pela interface",
+  "dados": "fictícios",
+  "registro": {
+    "descricao": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+    "bairro": "Bairro Exemplo (teste)",
+    "local": "Praça Exemplo, entrada norte - endereço fictício",
+    "contexto": "area_publica",
+    "triagem_original": {
+      "category": "Acessibilidade",
+      "priority": "Baixa",
+      "confidence": 0.5,
+      "review_required": true
+    },
+    "preparacao": {
+      "servico": {
+        "id": "931",
+        "nome": "Manutenção de calçada pública",
+        "responsavel": "Secretaria Municipal das Subprefeituras",
+        "url": "https://sp156.prefeitura.sp.gov.br/portal/servicos/informacao?servico=931",
+        "orientacao": "Para passeios de praças e áreas públicas abrangidas pela carta. Confirme o local e descreva a imperfeição e o ponto de referência.",
+        "canal": "Portal SP156, telefone 156 ou atendimento presencial"
+      },
+      "pergunta": null,
+      "faltantes": [],
+      "fonte": "https://sp156.prefeitura.sp.gov.br/portal/servicos/informacao?servico=931",
+      "data_consulta": "2026-11-14",
+      "situacao": "Preparado para conferência",
+      "observacao": "Esta preparação não abre um chamado oficial. Confira o serviço e suas informações antes de enviar pelo canal responsável."
+    },
+    "origem_id": null,
+    "id": "77bdab73-2852-44c1-9dcb-27832e4eb292",
+    "criado_em": "2026-11-14T19:22:18.700413+00:00",
+    "protocolo_oficial": null,
+    "exige_revisao": true,
+    "revisao": null,
+    "situacao": "Nova revisão solicitada",
+    "modo": "Demonstração local",
+    "atualizado_em": "2026-11-14T19:34:03.461123+00:00"
+  },
+  "historico": [
+    {
+      "acao": "Atendimento registrado",
+      "autor": "Sistema da demonstração",
+      "data": "2026-11-14T19:22:18.700452+00:00",
+      "dados": {
+        "triagem_original": {
+          "category": "Acessibilidade",
+          "priority": "Baixa",
+          "confidence": 0.5,
+          "review_required": true
+        },
+        "origem_id": null
+      }
+    },
+    {
+      "acao": "Decisão revisada",
+      "autor": "Revisor do teste técnico",
+      "data": "2026-11-14T19:24:04.309416+00:00",
+      "dados": {
+        "prioridade": "Média",
+        "justificativa": "Revisão técnica do cenário fictício: o piso danificado interrompe a passagem descrita.",
+        "revisor": "Revisor do teste técnico",
+        "data": "2026-11-14T19:24:04.309372+00:00",
+        "frontend_anterior": null
+      }
+    },
+    {
+      "acao": "Registro confirmado no ZelaBairro",
+      "autor": "Revisor do teste técnico",
+      "data": "2026-11-14T19:24:23.437616+00:00",
+      "dados": {
+        "id": "f1a33df0-8f4c-49f8-b2e7-1e8af7860781",
+        "cidadao_id": "77bdab73-2852-44c1-9dcb-27832e4eb292:2026-11-14T19:24:04.309372+00:00",
+        "descricao": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+        "bairro": "Bairro Exemplo (teste)",
+        "categoria": "Calçada",
+        "prioridade": "Média",
+        "resumo": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+        "status": "Recebido",
+        "observacao_gestor": "",
+        "criado_em": "2026-11-14T19:24:23.383055+00:00",
+        "atualizado_em": "2026-11-14T19:24:23.383055+00:00",
+        "origem": "Persistência do ZelaBairro; protocolo local"
+      }
+    },
+    {
+      "acao": "Nova análise solicitada",
+      "autor": "Solicitante da demonstração",
+      "data": "2026-11-14T19:26:35.993960+00:00",
+      "dados": {
+        "motivo": "Contestação de teste: falta avaliar o trecho lateral de passagem deste cenário fictício.",
+        "revisao_anterior": {
+          "prioridade": "Média",
+          "justificativa": "Revisão técnica do cenário fictício: o piso danificado interrompe a passagem descrita.",
+          "revisor": "Revisor do teste técnico",
+          "data": "2026-11-14T19:24:04.309372+00:00"
+        },
+        "frontend_anterior": {
+          "id": "f1a33df0-8f4c-49f8-b2e7-1e8af7860781",
+          "cidadao_id": "77bdab73-2852-44c1-9dcb-27832e4eb292:2026-11-14T19:24:04.309372+00:00",
+          "descricao": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+          "bairro": "Bairro Exemplo (teste)",
+          "categoria": "Calçada",
+          "prioridade": "Média",
+          "resumo": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+          "status": "Recebido",
+          "observacao_gestor": "",
+          "criado_em": "2026-11-14T19:24:23.383055+00:00",
+          "atualizado_em": "2026-11-14T19:24:23.383055+00:00",
+          "origem": "Persistência do ZelaBairro; protocolo local"
+        }
+      }
+    },
+    {
+      "acao": "Decisão revisada",
+      "autor": "Revisor do teste técnico",
+      "data": "2026-11-14T19:32:24.532075+00:00",
+      "dados": {
+        "prioridade": "Alta",
+        "justificativa": "Teste de regressão após contestação: prioridade alterada para conferir a atualização entre telas.",
+        "revisor": "Revisor do teste técnico",
+        "data": "2026-11-14T19:32:24.532060+00:00",
+        "frontend_anterior": null
+      }
+    },
+    {
+      "acao": "Registro confirmado no ZelaBairro",
+      "autor": "Revisor do teste técnico",
+      "data": "2026-11-14T19:33:00.482340+00:00",
+      "dados": {
+        "id": "1e1f74d8-6756-4a04-846f-8008b7ab1afd",
+        "cidadao_id": "77bdab73-2852-44c1-9dcb-27832e4eb292:2026-11-14T19:32:24.532060+00:00",
+        "descricao": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+        "bairro": "Bairro Exemplo (teste)",
+        "categoria": "Calçada",
+        "prioridade": "Alta",
+        "resumo": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+        "status": "Recebido",
+        "observacao_gestor": "",
+        "criado_em": "2026-11-14T19:33:00.439768+00:00",
+        "atualizado_em": "2026-11-14T19:33:00.439768+00:00",
+        "origem": "Persistência do ZelaBairro; protocolo local"
+      }
+    },
+    {
+      "acao": "Nova análise solicitada",
+      "autor": "Solicitante da demonstração",
+      "data": "2026-11-14T19:34:03.461123+00:00",
+      "dados": {
+        "motivo": "Contestação de regressão: reabrir a decisão do cenário fictício após conferir a passagem lateral.",
+        "revisao_anterior": {
+          "prioridade": "Alta",
+          "justificativa": "Teste de regressão após contestação: prioridade alterada para conferir a atualização entre telas.",
+          "revisor": "Revisor do teste técnico",
+          "data": "2026-11-14T19:32:24.532060+00:00"
+        },
+        "frontend_anterior": {
+          "id": "1e1f74d8-6756-4a04-846f-8008b7ab1afd",
+          "cidadao_id": "77bdab73-2852-44c1-9dcb-27832e4eb292:2026-11-14T19:32:24.532060+00:00",
+          "descricao": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+          "bairro": "Bairro Exemplo (teste)",
+          "categoria": "Calçada",
+          "prioridade": "Alta",
+          "resumo": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+          "status": "Recebido",
+          "observacao_gestor": "",
+          "criado_em": "2026-11-14T19:33:00.439768+00:00",
+          "atualizado_em": "2026-11-14T19:33:00.439768+00:00",
+          "origem": "Persistência do ZelaBairro; protocolo local"
+        }
+      }
+    }
+  ],
+  "registrosZelaBairro": [
+    {
+      "id": "f1a33df0-8f4c-49f8-b2e7-1e8af7860781",
+      "cidadao_id": "77bdab73-2852-44c1-9dcb-27832e4eb292:2026-11-14T19:24:04.309372+00:00",
+      "descricao": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+      "bairro": "Bairro Exemplo (teste)",
+      "categoria": "Calçada",
+      "prioridade": "Média",
+      "resumo": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+      "status": "Recebido",
+      "observacao_gestor": "",
+      "criado_em": "2026-11-14T19:24:23.383055+00:00",
+      "atualizado_em": "2026-11-14T19:24:23.383055+00:00"
+    },
+    {
+      "id": "1e1f74d8-6756-4a04-846f-8008b7ab1afd",
+      "cidadao_id": "77bdab73-2852-44c1-9dcb-27832e4eb292:2026-11-14T19:32:24.532060+00:00",
+      "descricao": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+      "bairro": "Bairro Exemplo (teste)",
+      "categoria": "Calçada",
+      "prioridade": "Alta",
+      "resumo": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).",
+      "status": "Recebido",
+      "observacao_gestor": "",
+      "criado_em": "2026-11-14T19:33:00.439768+00:00",
+      "atualizado_em": "2026-11-14T19:33:00.439768+00:00"
+    }
+  ],
+  "conferencias": {
+    "triagemOriginalPreservada": true,
+    "historicoCompleto": true,
+    "umaLinhaZelaBairroPorRevisaoConfirmada": true,
+    "contestacaoInvalidaDecisaoEVinculoAtual": true,
+    "nenhumProtocoloMunicipalCriado": true
+  },
+  "observacao": "Há duas versões de revisão confirmadas. Cada uma teve sua confirmação repetida pela interface, sem criar uma terceira ou quarta linha."
+}

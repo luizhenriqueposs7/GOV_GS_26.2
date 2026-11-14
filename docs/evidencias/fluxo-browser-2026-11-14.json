@@ -1,0 +1,95 @@
+{
+  "data": "2026-11-14",
+  "dados": "fictícios",
+  "registro": "77bdab73-2852-44c1-9dcb-27832e4eb292",
+  "registrosZelaBairroPorRevisao": [
+    "f1a33df0-8f4c-49f8-b2e7-1e8af7860781",
+    "1e1f74d8-6756-4a04-846f-8008b7ab1afd"
+  ],
+  "repetirMesmaConfirmacaoNaoDuplicou": true,
+  "etapas": [
+    {
+      "etapa": "Cadastro",
+      "registro": "77bdab73-2852-44c1-9dcb-27832e4eb292",
+      "servico": "931",
+      "situacao": "Aguardando revisão"
+    },
+    {
+      "etapa": "Revisão",
+      "prioridade": "Média",
+      "resumo": "Calçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).\n\nRPA original: Baixa · Acessibilidade\n\nSituação: Preparado para encaminhar\n\nPendências: informações preenchidas\n\nRevisão atual: Média · Revisão técnica do cenário fictício: o piso danificado interrompe a passagem descrita."
+    },
+    {
+      "etapa": "Confirmação no ZelaBairro",
+      "registroZelaBairro": "f1a33df0-8f4c-49f8-b2e7-1e8af7860781",
+      "mensagem": "Registro local confirmado: f1a33df0-8f4c-49f8-b2e7-1e8af7860781. Não é um protocolo municipal."
+    },
+    {
+      "etapa": "Falha reproduzida",
+      "descricao": "O detalhe manteve a versão anterior após revisão e confirmação; a lista já estava atualizada."
+    },
+    {
+      "etapa": "Contestação",
+      "situacao": "Nova revisão solicitada",
+      "historico": [
+        "Atendimento registrado",
+        "Decisão revisada",
+        "Registro confirmado no ZelaBairro",
+        "Nova análise solicitada"
+      ]
+    },
+    {
+      "etapa": "Revisão após correção",
+      "prioridade": "Alta",
+      "detalheAtualizadoAutomaticamente": true
+    },
+    {
+      "etapa": "Confirmação após correção",
+      "registroZelaBairro": "1e1f74d8-6756-4a04-846f-8008b7ab1afd",
+      "repeticaoConservouRegistro": true
+    },
+    {
+      "etapa": "Contestação após correção",
+      "situacao": "Nova revisão solicitada",
+      "historico": [
+        "Atendimento registrado",
+        "Decisão revisada",
+        "Registro confirmado no ZelaBairro",
+        "Nova análise solicitada",
+        "Decisão revisada",
+        "Registro confirmado no ZelaBairro",
+        "Nova análise solicitada"
+      ]
+    }
+  ],
+  "regressoesAntes": {
+    "avisoContextual": {
+      "passou": false,
+      "observado": "Pedido registrado nesta demonstração. Confira a preparação abaixo.",
+      "esperado": "Aviso oculto ao mudar de tela"
+    },
+    "detalheAtual": {
+      "passou": false,
+      "esperado": "Detalhe com decisão revisada e registro ZelaBairro",
+      "observado": "Aguardando revisão\nCalçada danificada no passeio de uma praça (teste técnico do fluxo GS, 14/11/2026).\n\nRegistro local 77bdab73-2852-44c1-9dcb-27832e4eb292\n\nBairro\nBairro Exemplo (teste)\nLocal\nPraça Exemplo, entrada norte - endereço fictício\nServiço\nManutenção de calçada pública\nPendências\nInformações disponíveis para conferência\nVer fonte do encaminhamentoCompletar ou corrigir informações\nAnálise original do RPA\n\nAcessibilidade · prioridade Baixa\n\nConfiança heurística: 0.5. Revisão indicada pelo RPA: sim.\n\nA central exige revisão deste caso.\n\nPedir uma nova análise\nExplique o que precisa ser reconsiderado\nSolicitar nova revisão\nAnotar protocolo externo\n\nSomente se você já abriu o chamado pelo canal oficial. Aqui o número é uma informação fornecida, sem confirmação do órgão.\n\nNúmero informado\nSalvar número informado\nHistórico do pedido\nAtendimento registrado\n14/11/2026, 16:22:18 · Sistema da demonstração\nVer registro da etapa"
+    }
+  },
+  "regressoesDepois": {
+    "avisoContextual": true,
+    "detalheAtual": true,
+    "rascunhoPreservado": true,
+    "confirmacaoBloqueadaAposContestacao": true
+  },
+  "situacaoFinal": "Nova revisão solicitada",
+  "historicoFinal": [
+    "Atendimento registrado",
+    "Decisão revisada",
+    "Registro confirmado no ZelaBairro",
+    "Nova análise solicitada",
+    "Decisão revisada",
+    "Registro confirmado no ZelaBairro",
+    "Nova análise solicitada"
+  ],
+  "confirmacaoBloqueadaSemRevisao": true,
+  "observacao": "Dois ciclos de revisão, confirmação e contestação no mesmo pedido. Cada revisão confirmada possui seu próprio registro local; repetições da mesma revisão conservaram o ID. Nenhum protocolo municipal foi criado."
+}
