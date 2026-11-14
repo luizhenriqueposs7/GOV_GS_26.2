@@ -1,0 +1,7 @@
+{
+  "data": "2026-11-14T16:38:35.016Z",
+  "comando": "python -X utf8 -m unittest tests.test_catalogo tests.test_registros tests.test_modulos -q",
+  "exit": 0,
+  "stdout": "",
+  "stderr": "----------------------------------------------------------------------\r\nRan 30 tests in 4.351s\r\n\r\nOK\r\n"
+}

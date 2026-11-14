@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<title>CitizenTech — arquivos e execução</title>
+<link rel="stylesheet" href="/estilo">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#1e1e1e;color:#d4d4d4;font:17px "Segoe UI",sans-serif;height:100vh;overflow:hidden}
+header{height:38px;background:#303030;display:flex;align-items:center;justify-content:center;font-size:14px;color:#ccc;border-bottom:1px solid #111}
+aside{position:absolute;top:38px;bottom:26px;width:248px;background:#252526;padding:17px 0;overflow:auto}
+aside strong{display:block;padding:0 16px 18px;font-size:13px;letter-spacing:.7px}aside button{display:block;background:none;border:0;color:#ccc;text-align:left;width:100%;padding:8px 16px;font:14px "Segoe UI",sans-serif;cursor:pointer;overflow-wrap:anywhere}
+aside button:hover{background:#333}aside button.ativo{background:#37373d;color:white}
+main{position:absolute;top:38px;left:248px;right:0;bottom:26px;display:flex;flex-direction:column}
+nav{display:flex;height:42px;flex-shrink:0;background:#252526;border-bottom:1px solid #111;align-items:center;gap:16px;padding-right:18px}
+#nome{height:42px;padding:10px 22px;background:#1e1e1e;color:#eee;border-top:2px solid #e29152;font:15px Consolas,monospace;flex:1}
+nav button{color:#ccc;background:#333;border:1px solid #555;border-radius:3px;padding:5px 10px;cursor:pointer}
+#conteudo{overflow:auto;flex:1;padding:16px 0 36px;scroll-behavior:smooth}
+.codigo{font:19px/29px Consolas,monospace;white-space:pre}
+.linha{display:flex;min-width:max-content}.numero{width:66px;text-align:right;padding-right:20px;color:#777;user-select:none;flex-shrink:0}.texto{padding-right:28px}
+.destaque{background:#303c48}.destaque .numero{color:#ddd}
+.prosa .texto{white-space:pre-wrap;max-width:1030px;overflow-wrap:anywhere;font:20px/1.7 "Segoe UI",sans-serif}
+.prosa .linha{min-width:0;padding-bottom:5px}
+footer{position:absolute;bottom:0;height:26px;left:0;right:0;background:#225b81;display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:0 16px;color:#fff}
+#terminal{display:none;flex-shrink:0;height:385px;border-top:1px solid #555;background:#151515}
+#terminal header{height:34px;background:#222;justify-content:space-between;padding:0 18px;color:#ddd;font-size:13px}
+#terminal pre{margin:0;height:calc(100% - 34px);overflow:auto;padding:15px 23px;font:20px/27px Consolas,monospace;white-space:pre-wrap}
+#terminal.grande{height:100%;flex:1}
+.documento{padding:8px 26px!important}.documento h2{font-size:22px;font-weight:500;color:#eee;margin:0 0 14px}
+.documento p{color:#aaa;line-height:1.5}
+table{border-collapse:collapse;width:100%;font-size:17px;line-height:1.4}th,td{border:1px solid #414141;padding:10px 12px;text-align:left;vertical-align:top}th{background:#2d2d30;color:#fff;position:sticky;top:-16px}td{font-family:Consolas,monospace}tbody tr:nth-child(even){background:#252526}
+.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+figure{margin:0}figure img{display:block;width:100%;max-height:270px;object-fit:contain;background:#151515}figcaption{font:16px/1.55 Consolas,monospace;margin-top:9px;overflow-wrap:anywhere;color:#ccc}
+.contexto{width:100%;max-height:590px;object-fit:contain}.nota{border-left:3px solid #d89a62;padding-left:15px;color:#ddd!important}
+</style>
+<header>CitizenTech_Visao_Computacional — arquivos do projeto</header>
+<aside><strong>EXPLORADOR</strong><div id="arquivos"></div></aside>
+<main>
+<nav><span id="nome">README.md</span><button onclick="alternarTerminal()">Terminal</button><button onclick="executar('dados')">Verificar dados</button><button onclick="executar('teste')">Avaliar modelo</button></nav>
+<div id="conteudo" class="codigo"></div>
+<section id="terminal"><header><span id="comando">TERMINAL · Python</span><span id="estado"></span></header><pre id="saida"></pre></section>
+</main>
+<footer><span>CitizenTech · arquivos locais</span><span id="local">UTF-8 · Python</span></footer>
+<script>
+const conteudo=document.querySelector("#conteudo"), terminal=document.querySelector("#terminal");
+window.execucoes={};
+const escapar=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+async function abrir(nome,linha=1,fim=linha){
+ const r=await fetch("/arquivo?nome="+encodeURIComponent(nome)); if(!r.ok)throw Error(nome);
+ const a=await r.json(); document.querySelector("#nome").textContent=nome;
+ conteudo.className="codigo"+(nome.endsWith(".md")?" prosa":""); conteudo.innerHTML=a.html; conteudo.style.display="block";
+ terminal.classList.remove("grande");terminal.style.display="none";
+ document.querySelectorAll("aside button").forEach(b=>b.classList.toggle("ativo",b.textContent===nome));
+ document.querySelectorAll(".linha").forEach(el=>el.classList.toggle("destaque",+el.dataset.linha>=linha&&+el.dataset.linha<=fim));
+ conteudo.scrollTop=Math.max(0,(conteudo.querySelector(`[data-linha="${linha}"]`)?.offsetTop||0)-conteudo.offsetTop-70);
+ document.querySelector("#local").textContent=`Ln ${linha} · UTF-8 · ${a.linhas} linhas`;
+}
+function quadro(titulo,html){
+ document.querySelector("#nome").textContent=titulo;conteudo.className="documento";conteudo.innerHTML=html;conteudo.style.display="block";conteudo.scrollTop=0;
+ terminal.style.display="none";terminal.classList.remove("grande");
+}
+function tabelaHTML(linhas,colunas){
+ return "<table><thead><tr>"+colunas.map(c=>"<th>"+escapar(c[1])+"</th>").join("")+"</tr></thead><tbody>"+linhas.map(l=>"<tr>"+colunas.map(c=>"<td>"+escapar(l[c[0]]??"")+"</td>").join("")+"</tr>").join("")+"</tbody></table>";
+}
+async function tabela(nome){
+ const linhas=await(await fetch("/tabela?nome="+encodeURIComponent(nome))).json();
+ let colunas=nome.includes("analise_erros")?[["arquivo","Recorte"],["tipo","Erro"],["pixels_mascara","Pixels BW"],["escore_160","Escore 160"],["fator_visual","Fator observado"]]:
+ [["arquivo","Recorte"],["origem","Foto"],["conjunto","Conjunto"],["classe","Rótulo"],["pixels_mascara","Pixels BW"]];
+ quadro(nome,tabelaHTML(linhas.slice(0,35),colunas));
+}
+async function galeria(tipo){
+ let nome=tipo==="sutis"?"data/sutis/manifesto.csv":tipo==="amostra"?"data/manifesto.csv":"artifacts/analise_erros.csv";
+ let linhas=await(await fetch("/tabela?nome="+encodeURIComponent(nome))).json();
+ if(tipo==="amostra"){
+   const t=linhas.filter(l=>l.conjunto==="teste");linhas=[...t.filter(l=>l.classe==="crack").slice(0,3),...t.filter(l=>l.classe==="no_crack").slice(0,3)];
+ }else if(tipo==="FN"||tipo==="FP")linhas=linhas.filter(l=>l.tipo===tipo).slice(0,3);
+ else linhas=linhas.slice(0,6);
+ let itens=linhas.map(l=>{
+   const caminho=(tipo==="sutis"?"data/sutis/":"data/")+l.arquivo;
+   const extra=tipo==="amostra"?`rótulo: ${l.classe} · teste`:tipo==="sutis"?`${l.pixels_mascara} pixels marcados`:`${l.tipo} · escore: ${l.escore_160}<br>${escapar(l.fator_visual)}`;
+   return `<figure><img src="/imagem?nome=${encodeURIComponent(caminho)}"><figcaption>${escapar(l.arquivo)}<br>${extra}</figcaption></figure>`;
+ }).join("");
+ quadro(tipo==="amostra"?"data/recortes · amostra do teste":tipo==="sutis"?"data/sutis · recortes complementares":`artifacts/analise_erros.csv · ${tipo}`,
+ `<h2>${tipo==="amostra"?"Recortes reais de 227 × 227 pixels":tipo==="sutis"?"Fragmentos com 1 a 31 pixels na máscara":tipo==="FN"?"Fissuras não sinalizadas":"Superfícies sinalizadas indevidamente"}</h2><div class="galeria">${itens}</div>`);
+ await Promise.all([...conteudo.querySelectorAll("img")].map(im=>im.decode()));
+}
+async function mascara(){
+ quadro("video/contexto_mascara.png",'<h2>Foto 291 · imagem original, máscara publicada e sobreposição</h2><img class="contexto" src="/imagem?nome=video/contexto_mascara.png"><p class="nota">Possível omissão na máscara: o rótulo publicado foi preservado no cálculo das métricas.</p>');
+ await conteudo.querySelector("img").decode();
+}
+async function resultados(tipo){
+ if(tipo==="sutis"){
+  const m=await(await fetch("/json?nome=artifacts/experimentos.json")).json();
+  quadro("artifacts/experimentos.json · sutis","<h2>Resultado registrado no conjunto complementar</h2>"+
+   tabelaHTML(Object.entries(m.sutis.modelos).map(([entrada,r])=>({entrada:entrada+" × "+entrada,limiar:r.limiar.toFixed(2),sinalizados:r.sinalizados+" / "+m.sutis.recortes})),[["entrada","Entrada"],["limiar","Limiar"],["sinalizados","Sinalizados"]])+
+   '<p>26 recortes de 13 fotografias reservadas para teste. Marcação de 1 a 31 pixels.</p><p>O terminal executa novamente a avaliação durante esta gravação.</p>');
+ }else if(tipo==="resolucoes"){
+  const nomes=["artifacts/metricas.json","artifacts/resolucao_224/metricas.json"];
+  const m=await Promise.all(nomes.map(n=>fetch("/json?nome="+encodeURIComponent(n)).then(r=>r.json())));
+  quadro("artifacts/metricas.json ↔ artifacts/resolucao_224/metricas.json",
+   "<h2>Comparação dos registros de avaliação</h2>"+tabelaHTML(m.map((r,i)=>({entrada:i? "224 × 224":"160 × 160",limiar:r.limiar.toFixed(2),epoca:r.epoca_selecionada,precisao:(100*r.teste.precision).toFixed(2)+"%",recall:(100*r.teste.recall).toFixed(2)+"%",f1:(100*r.teste.f1).toFixed(2)+"%",matriz:JSON.stringify(r.teste.matriz_confusao)})),[["entrada","Entrada"],["limiar","Limiar"],["epoca","Época"],["precisao","Precisão"],["recall","Recall"],["f1","F1"],["matriz","Matriz"]])+
+   '<p>Mesmos 352 recortes de teste; métricas e limiares lidos dos arquivos originais.</p>');
+ }else{
+  const m=await(await fetch("/json?nome=artifacts/experimentos.json")).json();
+  const linhas=[];for(const[clipe,modelos]of Object.entries(m.videos))for(const[entrada,r]of Object.entries(modelos))linhas.push({clipe,entrada:entrada+" × "+entrada,quadros:r.quadros,fps:r.fps_medio.toFixed(2),ms:r.latencia_media_ms.toFixed(2)});
+  quadro("artifacts/experimentos.json · vídeos",
+    "<h2>Desempenho contínuo · registro de cinco execuções após aquecimento</h2>"+
+    tabelaHTML(linhas,[["clipe","Clipe"],["entrada","Entrada"],["quadros","Quadros"],["fps","FPS médio"],["ms","Latência (ms)"]])+
+    '<p>CPU Intel Core i5-12450H · 4 threads. Registro anterior à gravação, lido diretamente de artifacts/experimentos.json.</p><p>Inclui leitura, decodificação, pré-processamento, inferência e preparação das prévias.</p>');
+ }
+}
+function alternarTerminal(){terminal.style.display=terminal.style.display==="none"?"block":"none"}
+function mostrarTerminal(grande=true){terminal.style.display="block";terminal.classList.toggle("grande",grande);conteudo.style.display=grande?"none":"block"}
+function executar(acao){
+ if(window.execucoes[acao]?.rodando)throw Error("Comando já está em execução");
+ const log=document.querySelector("#saida");log.textContent="";
+ document.querySelector("#comando").textContent=`python video/tecnico/conferir.py ${acao}`;
+ document.querySelector("#estado").textContent="Executando";
+ const registro={rodando:true,linhas:[],codigo:null};window.execucoes[acao]=registro;
+ mostrarTerminal(true);
+ const eventos=new EventSource("/executar/"+acao);
+ eventos.onmessage=e=>{const l=JSON.parse(e.data).linha;registro.linhas.push(l);log.textContent+=l;log.scrollTop=log.scrollHeight};
+ eventos.addEventListener("fim",e=>{
+   registro.codigo=JSON.parse(e.data).codigo;registro.rodando=false;
+   document.querySelector("#estado").textContent="Processo encerrado · código "+registro.codigo;
+   eventos.close();
+ });
+ eventos.onerror=()=>{if(registro.rodando){registro.codigo=-1;registro.rodando=false;document.querySelector("#estado").textContent="Falha de conexão";eventos.close()}};
+}
+window.pronto=(async()=>{const arquivos=await(await fetch("/lista")).json();document.querySelector("#arquivos").innerHTML=arquivos.map(n=>`<button>${escapar(n)}</button>`).join("");document.querySelectorAll("aside button").forEach(b=>b.onclick=()=>abrir(b.textContent));await abrir("README.md");})();
+</script>
+</html>

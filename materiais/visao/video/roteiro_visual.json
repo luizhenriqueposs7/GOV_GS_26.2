@@ -1,0 +1,115 @@
+{
+  "audio": "narracao_original.ogg",
+  "duracao_audio": 457.0935,
+  "canvas": [
+    1280,
+    800
+  ],
+  "fps": 25,
+  "eventos": [
+    {
+      "inicio": 0.0,
+      "tela": "abertura"
+    },
+    {
+      "inicio": 8.0,
+      "tela": "problema"
+    },
+    {
+      "inicio": 29.4,
+      "tela": "fluxo"
+    },
+    {
+      "inicio": 35.4,
+      "tela": "origem"
+    },
+    {
+      "inicio": 51.1,
+      "tela": "amostra"
+    },
+    {
+      "inicio": 67.6,
+      "tela": "divisao"
+    },
+    {
+      "inicio": 85.9,
+      "tela": "manifesto"
+    },
+    {
+      "inicio": 99.0,
+      "tela": "modelo"
+    },
+    {
+      "inicio": 120.6,
+      "tela": "treino"
+    },
+    {
+      "inicio": 135.7,
+      "tela": "preprocessamento"
+    },
+    {
+      "inicio": 151.5,
+      "tela": "validacao"
+    },
+    {
+      "inicio": 170.8,
+      "tela": "metricas"
+    },
+    {
+      "inicio": 187.9,
+      "tela": "matriz"
+    },
+    {
+      "inicio": 194.0,
+      "tela": "erros"
+    },
+    {
+      "inicio": 216.1,
+      "tela": "mascara"
+    },
+    {
+      "inicio": 225.4,
+      "tela": "resolucoes"
+    },
+    {
+      "inicio": 241.7,
+      "tela": "comparacao"
+    },
+    {
+      "inicio": 253.8,
+      "tela": "equipamento"
+    },
+    {
+      "inicio": 274.0,
+      "tela": "velocidade"
+    },
+    {
+      "inicio": 292.9,
+      "tela": "pipeline"
+    },
+    {
+      "inicio": 303.5,
+      "tela": "ao_vivo"
+    },
+    {
+      "inicio": 375.0,
+      "tela": "sutis"
+    },
+    {
+      "inicio": 390.3,
+      "tela": "sutis_resultado"
+    },
+    {
+      "inicio": 412.6,
+      "tela": "integracao"
+    },
+    {
+      "inicio": 427.1,
+      "tela": "limites"
+    },
+    {
+      "inicio": 448.6,
+      "tela": "encerramento"
+    }
+  ]
+}

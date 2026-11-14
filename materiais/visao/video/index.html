@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CitizenTech · Apresentação da solução</title>
+  <style>
+    html, body { margin: 0; width: 100%; height: 100%; background: #eef0f1; overflow: hidden; }
+    img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  </style>
+</head>
+<body>
+  <img id="tela" alt="Apresentação do módulo de visão computacional CitizenTech">
+  <script>
+    const tela = new URLSearchParams(location.search).get("tela") || "abertura";
+    if (/^[a-z_]+$/.test(tela)) document.querySelector("#tela").src = "assets/" + tela + ".png";
+  </script>
+</body>
+</html>

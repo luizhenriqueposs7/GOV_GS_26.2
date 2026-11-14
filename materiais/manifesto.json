@@ -1,0 +1,155 @@
+{
+  "incluido_em": "2026-11-14",
+  "itens": {
+    "rpa_notebook": {
+      "arquivo": "rpa/Global_Solution_CitizenTech_RPA_IA.ipynb",
+      "origem": "CitizenTech_Entrega/Global_Solution_CitizenTech_RPA_IA.ipynb",
+      "sha256": "6f5dd2da4bd33ecf27b99329dd35c348af46c893d1116df8ff50f5ab40c7723a"
+    },
+    "cluster_relatorio": {
+      "arquivo": "cluster/Relatorio_CitizenTech_Cluster.pdf",
+      "origem": "CitizenTech_Cluster/Relatorio_CitizenTech_Cluster.pdf",
+      "sha256": "f0b0811302b4839134438536232c2bc40ba1d5440567e867a249d46f1199707c"
+    },
+    "cluster_2": {
+      "arquivo": "cluster/CitizenTech-2-workers.imsx",
+      "origem": "CitizenTech_Cluster/CitizenTech-2-workers.imsx",
+      "sha256": "5a23eaf9b93f29224e429ea942707112b703a1fe2bb03d83bd2e3637f892d808"
+    },
+    "cluster_4": {
+      "arquivo": "cluster/CitizenTech-4-workers.imsx",
+      "origem": "CitizenTech_Cluster/CitizenTech-4-workers.imsx",
+      "sha256": "f5e0208d78b266c8a1e6b9c1239d66c67113dab0a4994bf1bbc3584e4363030c"
+    },
+    "quantica_relatorio": {
+      "arquivo": "quantica/CitizenTech_Computacao_Quantica_Revisado.pdf",
+      "origem": "output/pdf/CitizenTech_Computacao_Quantica_Revisado.pdf",
+      "sha256": "b83a99e0a02275777b997699e3b514bdfd45fea188046257ce51d3c97e8864a9"
+    },
+    "iot_relatorio": {
+      "arquivo": "iot/OuviAi_Assistente_Sonoro.docx",
+      "origem": "CitizenTech_IoT/OuviAi_Assistente_Sonoro.docx",
+      "sha256": "11b2da686ae26d153b471a5e0298ddb6d4296b3107e6c37b61b93a77fe5e1ddd"
+    },
+    "iot_videos": {
+      "arquivo": "iot/videos_IoT.txt",
+      "origem": "CitizenTech_IoT/videos_IoT.txt",
+      "sha256": "480001bbbb7df15424878eac9b0f9df99b321edfa22ec68feb1ec0b4f5baa7bf"
+    },
+    "iot_enunciado": {
+      "arquivo": "iot/Enunciado_GS_IoT_2026.2.pdf",
+      "origem": "CitizenTech_IoT/Enunciado_GS_IoT_2026.2.pdf",
+      "sha256": "ff678cbf88bad0e0d8b5d2e99320e689da977eef09626514dc39d8e5de02fecf"
+    },
+    "pln_relatorio": {
+      "arquivo": "pln/Relatorio_Fabrica_CitizenTech.pdf",
+      "origem": "CitizenTech_Fabrica_Corpus/Relatorio_Fabrica_CitizenTech.pdf",
+      "sha256": "84dcc2a7fc64c390e63892ab9ffff8983c5fe1e383ab62863d57349e06b53ad7"
+    },
+    "pln_revisao": {
+      "arquivo": "pln/revisao.csv",
+      "origem": "CitizenTech_Fabrica_Corpus/revisao.csv",
+      "sha256": "34e782f787a0687a662837d94e960120508cffcab108216e83867f73a8dadabb"
+    },
+    "visao_codigo": {
+      "arquivo": "visao/visao.py",
+      "origem": "CitizenTech_Visao_Computacional/visao.py",
+      "sha256": "2b5c7645fda17ec22b37a7b1d9ae4eac3d7ae92f341db89d2b969eff4895930c"
+    },
+    "visao_modelo": {
+      "arquivo": "visao/artifacts/crack_resnet18.pth",
+      "origem": "CitizenTech_Visao_Computacional/artifacts/crack_resnet18.pth",
+      "sha256": "67d0b015527c8f487aaa4f84354328cd4cf6f305cb0f038187f0261c18c316e8"
+    },
+    "visao_metricas": {
+      "arquivo": "visao/artifacts/metricas.json",
+      "origem": "CitizenTech_Visao_Computacional/artifacts/metricas.json",
+      "sha256": "79f61ebed1dcfc9069b3d541afc3289e714eabb50af7ead1dbcd25cd90e792fe"
+    },
+    "visao_relatorio": {
+      "arquivo": "visao/Relatorio_Visao_Computacional_CitizenTech.pdf",
+      "origem": "CitizenTech_Visao_Computacional/Relatorio_Visao_Computacional_CitizenTech.pdf",
+      "sha256": "7e0e1250803d96f52f0a65c9c0e1f19c32be85c7ad112d115d04a3839be126d6"
+    },
+    "pln_corpus_texto": {
+      "arquivo": "pln/corpus/corpus_texto.jsonl",
+      "origem": "CitizenTech_Fabrica_Corpus/corpus/corpus_texto.jsonl",
+      "sha256": "ea32141c29f84ab37aecfb2b21e4a2f33e60384df1244baf9c6dd45f5efdce75"
+    },
+    "pln_corpus_qa": {
+      "arquivo": "pln/corpus/corpus_qa.jsonl",
+      "origem": "CitizenTech_Fabrica_Corpus/corpus/corpus_qa.jsonl",
+      "sha256": "5f0f89422954fcb316e2a92b17a1bcd0e1cf5938cfe4518f762719c3352401dd"
+    },
+    "pln_corpus_chat": {
+      "arquivo": "pln/corpus/corpus_chat.jsonl",
+      "origem": "CitizenTech_Fabrica_Corpus/corpus/corpus_chat.jsonl",
+      "sha256": "5d054ff1100473ef485b6caebb31f7f932eb3dc958070ee2929b21f9c72c24af"
+    },
+    "pln_corpus_teste": {
+      "arquivo": "pln/corpus/corpus_teste.jsonl",
+      "origem": "CitizenTech_Fabrica_Corpus/corpus/corpus_teste.jsonl",
+      "sha256": "3fdfee1172e6e042a8bbe712e0113417676415f34b77307b1f51a3034c603403"
+    },
+    "pln_qualidade": {
+      "arquivo": "pln/corpus/qualidade.json",
+      "origem": "CitizenTech_Fabrica_Corpus/corpus/qualidade.json",
+      "sha256": "b3d0f1c9b8d2fa72cd9761da24420d1ddcbb21044cb9d20cb9e9d10891602cb6"
+    },
+    "genai_relatorio": {
+      "arquivo": "genai/Relatorio_CitizenTech_Generative_AI.pdf",
+      "origem": "CitizenTech_Generative_AI/Relatorio_CitizenTech_Generative_AI.pdf",
+      "sha256": "1c1363e803e630d2fe0c0376515c46f6c38e3d634400c507d3b74ef389e211b8"
+    },
+    "genai_resultados": {
+      "arquivo": "genai/resultados.json",
+      "origem": "CitizenTech_Generative_AI/resultados.json",
+      "sha256": "4c84c6d0edac050e3235d9ce3fbee7b75a286d245b91c8c0a89a19c873fb742d"
+    },
+    "genai_corpus": {
+      "arquivo": "genai/corpus.json",
+      "origem": "CitizenTech_Generative_AI/corpus.json",
+      "sha256": "0663e63dbd24c71e4e2ad4172a094a07bb9f74a0a303e8216fa753f51343b0a5"
+    },
+    "frontend_readme": {
+      "arquivo": "frontend/README.md",
+      "origem": "GS_Frontend_ZelaBairro_corrigido.zip/ZelaBairro/README.md",
+      "sha256": "5c6a7ed0a0c94a7589bac366e0096885a130d5e23e1b969137759d82f85043af"
+    },
+    "frontend_testes": {
+      "arquivo": "frontend/docs/evidencias/testes.xml",
+      "origem": "GS_Frontend_ZelaBairro_corrigido.zip/ZelaBairro/docs/evidencias/testes.xml",
+      "sha256": "06ca4895f6fa271e8045476f8dfaecca54d79f7d38cdf5e4364e20b36791ceb2"
+    },
+    "frontend_video": {
+      "arquivo": "frontend/docs/video/ZelaBairro_Final_5min.mp4",
+      "origem": "GS_Frontend_ZelaBairro_corrigido.zip/ZelaBairro/docs/video/ZelaBairro_Final_5min.mp4",
+      "sha256": "167bfba2a7e65871cf5b1c727ebbfa86cf4e462f21151a5ed21f9d083850ada6"
+    },
+    "rpa_codigo": {
+      "arquivo": "rpa/pipeline.py",
+      "origem": "Celulas 3, 7 e 9 do notebook original; imports, constantes e funcoes exportados por AST sem executar a demonstracao.",
+      "sha256": "93b45a319ff2fe0db195117f62627cd7daa4404ec04ffdf85baa95fa0a1f8e2c"
+    },
+    "visao_treino": {
+      "arquivo": "visao/train.py",
+      "origem": "CitizenTech_Visao_Computacional/train.py",
+      "sha256": "f8d65640fba750109f2be683bb0dc0a14ac87521a53840b351d6ed4fdd26d8f5"
+    },
+    "visao_dados": {
+      "arquivo": "visao/dados.py",
+      "origem": "CitizenTech_Visao_Computacional/dados.py",
+      "sha256": "f94fb6f64e7be80c9dc194d1091efbffbd7fa9d968a515e1159bfce23f211b39"
+    },
+    "visao_manifesto": {
+      "arquivo": "visao/data/manifesto.csv",
+      "origem": "CitizenTech_Visao_Computacional/data/manifesto.csv",
+      "sha256": "569328e9856a5385af0d2757a9996d2cbe956e04dca3c93ce32f2cced0470fe8"
+    },
+    "visao_video": {
+      "arquivo": "visao/Demonstracao_Visao_Computacional_CitizenTech.mp4",
+      "origem": "CitizenTech_Visao_Computacional/Demonstracao_Visao_Computacional_CitizenTech.mp4",
+      "sha256": "befaa206614b5cf1e508aa1446674987109398aa660df37a2c2e63c35518d525"
+    }
+  }
+}

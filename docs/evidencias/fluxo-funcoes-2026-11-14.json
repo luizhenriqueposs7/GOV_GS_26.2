@@ -1,0 +1,31 @@
+{
+  "resultado": "passou",
+  "modo": "Funções reais das rotas e bancos temporários; sem transporte HTTP",
+  "dados": "fictícios",
+  "etapas": [
+    "registrar",
+    "completar",
+    "revisar",
+    "persistir no ZelaBairro",
+    "repetir confirmação sem duplicação",
+    "contestar",
+    "preservar RPA e bloquear serviço de rampa"
+  ],
+  "indicadores_finais": {
+    "total": 2,
+    "revisados": 0,
+    "revisoes_pendentes": 2,
+    "sugestoes_corrigidas": 0,
+    "denominador_correcoes": 0,
+    "protocolos_informados": 0,
+    "com_fonte": 1,
+    "por_categoria": {
+      "Acessibilidade": 2
+    },
+    "por_situacao": {
+      "Aguardando revisão": 1,
+      "Nova revisão solicitada": 1
+    },
+    "alcance": "Registros desta demonstração local. Não mede demanda municipal, reparos executados ou benefício validado em campo."
+  }
+}

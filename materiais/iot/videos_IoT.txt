@@ -1,0 +1,4 @@
+deploy:https://youtube.com/shorts/sc7K3uruowY
+Teste_porta:https://youtu.be/DbAzry9Ixf0
+Teste_ambiente:https://youtu.be/UEolGS6UU3s
+Teste_campainha:https://youtu.be/LqlBq3hvnYA

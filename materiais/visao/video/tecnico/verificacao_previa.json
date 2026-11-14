@@ -1,0 +1,267 @@
+{
+  "canvas": [
+    1440,
+    900
+  ],
+  "fps": 25,
+  "duracao_audio": 457.0935,
+  "eventos": [
+    {
+      "nome": "citizentech",
+      "previsto": 0,
+      "real": 0.34826040000000014
+    },
+    {
+      "nome": "modulo_visual",
+      "previsto": 8,
+      "real": 0.5208225999999999
+    },
+    {
+      "nome": "primeira_previsao",
+      "previsto": 18,
+      "real": 0.5210971
+    },
+    {
+      "nome": "resultado_visual",
+      "previsto": 29.4,
+      "real": 0.5212086000000001
+    },
+    {
+      "nome": "fonte_dados",
+      "previsto": 35.4,
+      "real": 0.9659137000000001
+    },
+    {
+      "nome": "pares_rgb_mascara",
+      "previsto": 43.8,
+      "real": 1.2774905
+    },
+    {
+      "nome": "amostra",
+      "previsto": 51.1,
+      "real": 1.3974891
+    },
+    {
+      "nome": "iniciar_auditoria",
+      "previsto": 60,
+      "real": 1.4410262
+    },
+    {
+      "nome": "orientacao",
+      "previsto": 67.6,
+      "real": 1.6815117000000002
+    },
+    {
+      "nome": "divisao_por_foto",
+      "previsto": 72,
+      "real": 1.9282709000000002
+    },
+    {
+      "nome": "auditoria_dados",
+      "previsto": 78,
+      "real": 1.9286027000000001
+    },
+    {
+      "nome": "manifesto",
+      "previsto": 85.9,
+      "real": 1.9652111000000003
+    },
+    {
+      "nome": "hash_rgb",
+      "previsto": 92,
+      "real": 2.2116332
+    },
+    {
+      "nome": "resnet18",
+      "previsto": 99,
+      "real": 2.4118673
+    },
+    {
+      "nome": "pesos_imagenet",
+      "previsto": 105.8,
+      "real": 2.6771228000000002
+    },
+    {
+      "nome": "ajuste_parcial",
+      "previsto": 113,
+      "real": 2.9904570999999995
+    },
+    {
+      "nome": "treinamento",
+      "previsto": 120.6,
+      "real": 3.2565289999999996
+    },
+    {
+      "nome": "preprocessamento",
+      "previsto": 135.7,
+      "real": 3.4607972
+    },
+    {
+      "nome": "avaliacao_iniciada",
+      "previsto": 136.5,
+      "real": 3.4611512999999996
+    },
+    {
+      "nome": "normalizacao",
+      "previsto": 144.4,
+      "real": 3.6915451999999997
+    },
+    {
+      "nome": "limiar_validacao",
+      "previsto": 151.5,
+      "real": 3.9565675000000002
+    },
+    {
+      "nome": "configuracao_selecionada",
+      "previsto": 163.1,
+      "real": 4.1576704
+    },
+    {
+      "nome": "teste_em_execucao",
+      "previsto": 170.8,
+      "real": 4.1579524999999995
+    },
+    {
+      "nome": "metricas_recalculadas",
+      "previsto": 176.6,
+      "real": 4.1580617
+    },
+    {
+      "nome": "matriz_confusao",
+      "previsto": 187.9,
+      "real": 4.1581199
+    },
+    {
+      "nome": "treze_erros",
+      "previsto": 194,
+      "real": 4.1827919
+    },
+    {
+      "nome": "falsos_negativos",
+      "previsto": 202.9,
+      "real": 4.2336725
+    },
+    {
+      "nome": "falsos_positivos",
+      "previsto": 209.7,
+      "real": 4.2667823
+    },
+    {
+      "nome": "contexto_mascara",
+      "previsto": 216.1,
+      "real": 4.2872673
+    },
+    {
+      "nome": "resolucao_160",
+      "previsto": 225.4,
+      "real": 4.4980157
+    },
+    {
+      "nome": "comparacao_resolucoes",
+      "previsto": 233,
+      "real": 4.5400639
+    },
+    {
+      "nome": "medicao_video",
+      "previsto": 253.8,
+      "real": 4.8396673
+    },
+    {
+      "nome": "equipamento",
+      "previsto": 260,
+      "real": 4.8400662
+    },
+    {
+      "nome": "fps_medidos",
+      "previsto": 274,
+      "real": 4.875611699999999
+    },
+    {
+      "nome": "pipeline_inferencia",
+      "previsto": 292.9,
+      "real": 5.1038141999999995
+    },
+    {
+      "nome": "execucao_citizentech",
+      "previsto": 303.5,
+      "real": 5.1605441
+    },
+    {
+      "nome": "abrir_inspecao",
+      "previsto": 306,
+      "real": 5.2738811
+    },
+    {
+      "nome": "imagem_com_fissura",
+      "previsto": 311.3,
+      "real": 5.2742002
+    },
+    {
+      "nome": "imagem_sem_fissura",
+      "previsto": 326.2,
+      "real": 5.274460100000001
+    },
+    {
+      "nome": "selecionar_video",
+      "previsto": 335,
+      "real": 5.2748982
+    },
+    {
+      "nome": "inferir_video",
+      "previsto": 345.5,
+      "real": 5.275159799999999
+    },
+    {
+      "nome": "resultado_video",
+      "previsto": 361.5,
+      "real": 5.2756646
+    },
+    {
+      "nome": "classificacao_por_quadro",
+      "previsto": 369,
+      "real": 5.275938099999999
+    },
+    {
+      "nome": "conjunto_sutil",
+      "previsto": 375,
+      "real": 5.3654790000000006
+    },
+    {
+      "nome": "sutis_em_avaliacao",
+      "previsto": 390.3,
+      "real": 5.365683199999999
+    },
+    {
+      "nome": "sutis_confirmados",
+      "previsto": 398,
+      "real": 5.3658122
+    },
+    {
+      "nome": "decisao_modelo",
+      "previsto": 403.6,
+      "real": 5.5685655
+    },
+    {
+      "nome": "rota_integracao",
+      "previsto": 412.6,
+      "real": 5.7994443
+    },
+    {
+      "nome": "limites",
+      "previsto": 427.1,
+      "real": 6.0185382
+    },
+    {
+      "nome": "triagem_humana",
+      "previsto": 439.5,
+      "real": 6.2374787
+    },
+    {
+      "nome": "encerramento",
+      "previsto": 448.6,
+      "real": 6.330544
+    }
+  ],
+  "comandos": [],
+  "erros": []
+}

@@ -1,0 +1,12 @@
+{
+  "captura": "captura_completa.webm",
+  "quadro_inicial": 0,
+  "quadro_final_exclusivo": 11428,
+  "fps": 25,
+  "audio": "narracao_original.ogg",
+  "velocidade": 1.0,
+  "ganho_db": -2.5,
+  "fim_da_apresentacao_s": 457.12,
+  "faixa_video": "captura full-range convertida para faixa de vídeo limitada",
+  "motivo_do_corte_final": "encerrar após a fala e o encerramento previstos no roteiro"
+}

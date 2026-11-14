@@ -1,0 +1,156 @@
+{
+  "duracao_video_s": 457.08,
+  "duracao_audio_s": 457.1093125,
+  "fps": 25.002187800822615,
+  "atualizacoes_ao_vivo": 180,
+  "telas_conferidas": [
+    {
+      "tela": "abertura",
+      "segundo": 1.5,
+      "erro_medio": 1.4567477703094482
+    },
+    {
+      "tela": "problema",
+      "segundo": 9.5,
+      "erro_medio": 1.5111136436462402
+    },
+    {
+      "tela": "fluxo",
+      "segundo": 30.9,
+      "erro_medio": 1.472804307937622
+    },
+    {
+      "tela": "origem",
+      "segundo": 36.9,
+      "erro_medio": 1.4519411325454712
+    },
+    {
+      "tela": "amostra",
+      "segundo": 52.6,
+      "erro_medio": 1.4654417037963867
+    },
+    {
+      "tela": "divisao",
+      "segundo": 69.1,
+      "erro_medio": 1.3428443670272827
+    },
+    {
+      "tela": "manifesto",
+      "segundo": 87.4,
+      "erro_medio": 1.4866162538528442
+    },
+    {
+      "tela": "modelo",
+      "segundo": 100.5,
+      "erro_medio": 1.8409446477890015
+    },
+    {
+      "tela": "treino",
+      "segundo": 122.1,
+      "erro_medio": 1.8490039110183716
+    },
+    {
+      "tela": "preprocessamento",
+      "segundo": 137.2,
+      "erro_medio": 1.8266302347183228
+    },
+    {
+      "tela": "validacao",
+      "segundo": 153.0,
+      "erro_medio": 1.4347717761993408
+    },
+    {
+      "tela": "metricas",
+      "segundo": 172.3,
+      "erro_medio": 1.0177099704742432
+    },
+    {
+      "tela": "matriz",
+      "segundo": 189.4,
+      "erro_medio": 1.4371083974838257
+    },
+    {
+      "tela": "erros",
+      "segundo": 195.5,
+      "erro_medio": 1.4929814338684082
+    },
+    {
+      "tela": "mascara",
+      "segundo": 217.6,
+      "erro_medio": 1.822611689567566
+    },
+    {
+      "tela": "resolucoes",
+      "segundo": 226.9,
+      "erro_medio": 1.4810361862182617
+    },
+    {
+      "tela": "comparacao",
+      "segundo": 243.2,
+      "erro_medio": 1.3331949710845947
+    },
+    {
+      "tela": "equipamento",
+      "segundo": 255.3,
+      "erro_medio": 1.3423069715499878
+    },
+    {
+      "tela": "velocidade",
+      "segundo": 275.5,
+      "erro_medio": 1.3529599905014038
+    },
+    {
+      "tela": "pipeline",
+      "segundo": 294.4,
+      "erro_medio": 1.3044922351837158
+    },
+    {
+      "tela": "sutis",
+      "segundo": 376.5,
+      "erro_medio": 1.5204530954360962
+    },
+    {
+      "tela": "sutis_resultado",
+      "segundo": 391.8,
+      "erro_medio": 1.3454322814941406
+    },
+    {
+      "tela": "integracao",
+      "segundo": 414.1,
+      "erro_medio": 1.4956210851669312
+    },
+    {
+      "tela": "limites",
+      "segundo": 428.6,
+      "erro_medio": 1.5377883911132812
+    },
+    {
+      "tela": "encerramento",
+      "segundo": 450.1,
+      "erro_medio": 1.3233776092529297
+    }
+  ],
+  "comparacao_audio": [
+    {
+      "inicio": 0,
+      "correlacao": 0.9997315262746608
+    },
+    {
+      "inicio": 120,
+      "correlacao": 0.9997594882786585
+    },
+    {
+      "inicio": 240,
+      "correlacao": 0.999821472833899
+    },
+    {
+      "inicio": 360,
+      "correlacao": 0.9997533390574033
+    },
+    {
+      "inicio": 430,
+      "correlacao": 0.999711564471883
+    }
+  ],
+  "pico_audio": 0.8315078616142273
+}

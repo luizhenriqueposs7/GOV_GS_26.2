@@ -1,0 +1,17 @@
+{
+  "captura": "captura_tecnica.webm",
+  "audio": "../narracao_original.ogg",
+  "destino": "Apresentacao_Tecnica_CitizenTech.mp4",
+  "quadro_inicial": 0,
+  "quadro_final_exclusivo": 11428,
+  "fps": 25,
+  "velocidade_audio": 1.0,
+  "velocidade_captura": 1.0,
+  "ganho_db": -2.5,
+  "resolucao": [
+    1440,
+    900
+  ],
+  "cor": "SDR; conversão da captura full-range para faixa limitada",
+  "corte_final": "Apenas o excedente técnico após o fim da narração."
+}

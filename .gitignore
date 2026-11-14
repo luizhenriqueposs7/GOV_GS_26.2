@@ -1,0 +1,13 @@
+.venv/
+/.tmp/
+**/.venv/
+**/.runtime/
+**/__pycache__/
+*.pyc
+/data/
+.env
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+chave-gestao.txt

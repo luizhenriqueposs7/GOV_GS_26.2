@@ -1,0 +1,40 @@
+﻿arquivo,linha,alterado,comentário
+corpus_qa.jsonl,3,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,9,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,17,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,20,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,21,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,22,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,27,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,31,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,32,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,35,,Apoio ampliado com o título e a legenda do mapa. Fidelidade conferida de forma assistida. Revisão humana pendente.
+corpus_qa.jsonl,36,,Apoio ampliado com o título e a legenda do mapa. Fidelidade conferida de forma assistida. Revisão humana pendente.
+corpus_qa.jsonl,50,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,54,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,57,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,74,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,81,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,90,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,92,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,94,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,98,,Trecho e resposta comparados na conferência assistida; fiel. Revisão humana pendente.
+corpus_qa.jsonl,102,,Par reservado para revisão amostral. Revisão humana pendente.
+corpus_qa.jsonl,108,,Par reservado para revisão amostral. Revisão humana pendente.
+corpus_qa.jsonl,109,,Par reservado para revisão amostral. Revisão humana pendente.
+corpus_qa.jsonl,112,,Par reservado para revisão amostral. Revisão humana pendente.
+corpus_chat.jsonl,3,,Referências numeradas dos turnos conferidas na geração. Revisão humana pendente.
+corpus_chat.jsonl,6,,Referências numeradas dos turnos conferidas na geração. Revisão humana pendente.
+corpus_chat.jsonl,11,,Referências numeradas dos turnos conferidas na geração. Revisão humana pendente.
+corpus_chat.jsonl,18,,Recusa fora do tema com fonte nula conferida. Revisão humana pendente.
+corpus_chat.jsonl,22,,Referências numeradas dos turnos conferidas na geração. Revisão humana pendente.
+corpus_chat.jsonl,26,,Referências numeradas dos turnos conferidas na geração. Revisão humana pendente.
+corpus_chat.jsonl,27,,Referências numeradas dos turnos conferidas na geração. Revisão humana pendente.
+corpus_chat.jsonl,28,,Referências numeradas dos turnos conferidas na geração. Revisão humana pendente.
+corpus_chat.jsonl,29,,Referências numeradas dos turnos conferidas na geração. Revisão humana pendente.
+corpus_chat.jsonl,30,,Referências numeradas dos turnos conferidas na geração. Revisão humana pendente.
+corpus_teste.jsonl,2,,Conferir o gabarito e o tipo do caso. Revisão humana pendente.
+corpus_teste.jsonl,9,,Conferir o gabarito e o tipo do caso. Revisão humana pendente.
+corpus_teste.jsonl,13,,Conferir o gabarito e o tipo do caso. Revisão humana pendente.
+corpus_teste.jsonl,15,,Fonte complementar para os números oficiais. Pergunta e gabarito preservados. Revisão humana pendente.
+corpus_teste.jsonl,18,,Conferir o gabarito e o tipo do caso. Revisão humana pendente.

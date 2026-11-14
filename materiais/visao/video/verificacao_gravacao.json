@@ -1,0 +1,150 @@
+{
+  "eventos": [
+    {
+      "nome": "problema",
+      "previsto": 8,
+      "real": 8.0595745
+    },
+    {
+      "nome": "fluxo",
+      "previsto": 29.4,
+      "real": 29.466639100000002
+    },
+    {
+      "nome": "origem",
+      "previsto": 35.4,
+      "real": 35.459673599999995
+    },
+    {
+      "nome": "amostra",
+      "previsto": 51.1,
+      "real": 51.160230899999995
+    },
+    {
+      "nome": "divisao",
+      "previsto": 67.6,
+      "real": 67.6481468
+    },
+    {
+      "nome": "manifesto",
+      "previsto": 85.9,
+      "real": 85.94646589999999
+    },
+    {
+      "nome": "modelo",
+      "previsto": 99,
+      "real": 99.04235249999999
+    },
+    {
+      "nome": "treino",
+      "previsto": 120.6,
+      "real": 120.6559421
+    },
+    {
+      "nome": "preprocessamento",
+      "previsto": 135.7,
+      "real": 135.72908510000002
+    },
+    {
+      "nome": "validacao",
+      "previsto": 151.5,
+      "real": 151.53682080000002
+    },
+    {
+      "nome": "metricas",
+      "previsto": 170.8,
+      "real": 170.84255810000002
+    },
+    {
+      "nome": "matriz",
+      "previsto": 187.9,
+      "real": 187.95391170000002
+    },
+    {
+      "nome": "erros",
+      "previsto": 194,
+      "real": 194.0541306
+    },
+    {
+      "nome": "mascara",
+      "previsto": 216.1,
+      "real": 216.14380300000002
+    },
+    {
+      "nome": "resolucoes",
+      "previsto": 225.4,
+      "real": 225.45415530000002
+    },
+    {
+      "nome": "comparacao",
+      "previsto": 241.7,
+      "real": 241.7414861
+    },
+    {
+      "nome": "equipamento",
+      "previsto": 253.8,
+      "real": 253.8595108
+    },
+    {
+      "nome": "velocidade",
+      "previsto": 274,
+      "real": 274.04518169999994
+    },
+    {
+      "nome": "pipeline",
+      "previsto": 292.9,
+      "real": 292.9375771
+    },
+    {
+      "nome": "inicio_execucao",
+      "previsto": 303.5,
+      "real": 303.9377538
+    },
+    {
+      "nome": "imagem_com_fissura",
+      "previsto": 311.3,
+      "real": 311.94238870000004
+    },
+    {
+      "nome": "imagem_sem_fissura",
+      "previsto": 326.2,
+      "real": 326.3426162
+    },
+    {
+      "nome": "video_enviado",
+      "previsto": 345.5,
+      "real": 345.53825439999997
+    },
+    {
+      "nome": "atualizacoes_ao_vivo",
+      "quantidade": 180,
+      "fim": 354.11170509999994
+    },
+    {
+      "nome": "sutis",
+      "previsto": 375,
+      "real": 375.1083258
+    },
+    {
+      "nome": "sutis_resultado",
+      "previsto": 390.3,
+      "real": 390.35554249999996
+    },
+    {
+      "nome": "integracao",
+      "previsto": 412.6,
+      "real": 412.6347163
+    },
+    {
+      "nome": "limites",
+      "previsto": 427.1,
+      "real": 427.1482183
+    },
+    {
+      "nome": "encerramento",
+      "previsto": 448.6,
+      "real": 448.65157139999997
+    }
+  ],
+  "erros": []
+}
