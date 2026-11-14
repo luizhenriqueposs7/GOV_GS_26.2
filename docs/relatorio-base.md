@@ -140,13 +140,13 @@ Uma avaliação futura dependeria de dados operacionais e de uma comparação co
 
 ## 2.4 Frontend
 
-O ZelaBairro já contém validação de relatos e persistência em SQLite. A nova central possui interface separada e reutiliza as rotinas originais de validação e gravação. O banco do ZelaBairro fica separado do banco que guarda o histórico de Governança.
+A central tem interface própria e reutiliza a validação e a persistência do ZelaBairro. Os bancos de relatos e de histórico ficam separados.
 
-A confirmação exige informações completas e uma revisão com justificativa. O registro é associado à versão dessa decisão. Repetir a confirmação da mesma revisão não cria outro registro. Alterar a decisão ou pedir nova análise retira o vínculo atual, preservando a informação anterior no histórico.
+O formulário móvel reúne foto opcional e coordenadas confirmadas, com alternativas manuais. A imagem recebe normalização e remoção de metadados. O catálogo distingue tapa-buraco em via comum e em corredor de ônibus (SÃO PAULO, 2026c). O modelo de fissuras não identifica buracos.
 
-O identificador retornado é local. Um número de protocolo municipal pode ser anotado pelo usuário, mas permanece identificado como informação não verificada no órgão. Nenhuma operação de abertura de chamado foi presumida a partir da documentação pública consultada.
+A confirmação exige revisão justificada e dados completos. Repetir a confirmação da mesma revisão mantém o registro. Alterar o pedido ou contestar retira a decisão e o vínculo atuais, preservando o histórico. O identificador é local; protocolos externos anotados permanecem sem verificação no órgão.
 
-O fluxo foi executado pela interface: cadastro, revisão, confirmação e contestação. Repetir a confirmação da mesma revisão conservou o identificador do ZelaBairro. A contestação retirou a decisão e o vínculo atuais, mantendo o histórico. Os dois bancos foram conferidos em modo somente leitura.
+Cadastro, edição, revisão, confirmação e contestação foram executados no navegador. O rascunho salvo foi recuperado sem servidor. Perder a resposta após a gravação e reenviar conservou o mesmo pedido. Câmera, GPS e instalação ainda não foram testados em smartphone real; o acesso HTTPS protegido está pendente.
 
 <!-- pagina -->
 # DESENVOLVIMENTO
@@ -236,7 +236,7 @@ Fonte: implementação e materiais reunidos pelo grupo em 2026.
 
 Os indicadores são contagens do banco local. A razão de prioridades alteradas divide alterações pelas revisões atuais. Não mede qualidade do atendimento, benefício social ou reparos. Uma contestação retira a decisão atual do denominador até que ocorra nova revisão.
 
-Os 44 testes automáticos passaram. O fluxo completo também foi repetido pelo navegador, com correção de dois problemas de atualização da interface. A leitura dos bancos confirmou histórico preservado, revisão reaberta pela contestação e confirmação sem duplicação por versão.
+Passaram 55 testes Python e 7 JavaScript. O navegador verificou foto, coordenadas fictícias, revisão, confirmação e contestação. A leitura dos bancos confirmou histórico preservado e reenvio sem duplicação. A abertura do formulário sem servidor não permite enviar pedidos nem consultar registros sem conexão.
 
 <!-- pagina -->
 # 3 CONCLUSÃO
@@ -267,6 +267,8 @@ SÃO PAULO (Município). Avaliação de obstáculo na calçada. SP156, 2026b. Di
 SÃO PAULO (Município). Perguntas frequentes: iluminação pública. SP Regula, 2026. Disponível em: [prefeitura.sp.gov.br/web/spregula/w/iluminacao_publica/perguntas_frequentes/355960](https://prefeitura.sp.gov.br/web/spregula/w/iluminacao_publica/perguntas_frequentes/355960). Acesso em: 14 nov. 2026.
 
 SÃO PAULO (Município). Perguntas frequentes: SP156. 2026. Disponível em: [prefeitura.sp.gov.br/web/inovacao/w/acesso_a_informacao/350229](https://prefeitura.sp.gov.br/web/inovacao/w/acesso_a_informacao/350229). Acesso em: 14 nov. 2026.
+
+SÃO PAULO (Município). Tapa-buraco. SP156, 2026c. Disponível em: [sp156.prefeitura.sp.gov.br/portal/servicos/informacao?servico=952](https://sp156.prefeitura.sp.gov.br/portal/servicos/informacao?servico=952). Acesso em: 14 nov. 2026.
 
 POSS, Luiz Henrique; AMORIM, Luis Filipe Chaves; HONORATO, Felipe Stefani. Trabalhos da Global Solution CitizenTech. RPA, Cluster, Computação Quântica, Frontend, Generative AI, IoT, PLN e Visão Computacional. FIAP, 2026. Arquivos reunidos na pasta materiais, com origem e hashes no manifesto.
 

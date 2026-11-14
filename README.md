@@ -1,6 +1,6 @@
 # Central CitizenTech
 
-Preparação e acompanhamento local de pedidos sobre calçadas e iluminação em São Paulo. A central pede contexto, mostra a fonte do encaminhamento, conserva a triagem original, registra uma revisão justificada e permite contestar a decisão. Depois da conferência, reutiliza a persistência do ZelaBairro.
+Preparação e acompanhamento local de pedidos sobre calçadas, buracos no asfalto e iluminação em São Paulo. A central recebe foto opcional e localização confirmada, pede contexto, mostra a fonte do encaminhamento, conserva a triagem original, registra uma revisão justificada e permite contestar a decisão. Depois da conferência, reutiliza a persistência do ZelaBairro.
 
 Protótipo acadêmico para Governança em IA e Business Analytics, GS CitizenTech 2026. Use somente dados fictícios. Não abre chamado municipal e não foi validado com pessoas ou em campo.
 
@@ -30,7 +30,19 @@ $env:CITIZENTECH_GENAI_PYTHON = Join-Path $env:CITIZENTECH_GENAI_PROJECT '.runti
 .\INICIAR-IA.ps1
 ```
 
-As variáveis opcionais estão explicadas em `.env.example`. São variáveis do processo; não há carregamento automático de `.env`. As bases ficam em `data/central.sqlite` e `data/zelabairro.sqlite`; o histórico e as imagens não são enviados a serviços externos pela central. A imagem é normalizada, analisada em arquivo temporário e descartada. O histórico recebe a saída da análise quando houver vínculo selecionado.
+As variáveis opcionais estão explicadas em `.env.example`. São variáveis do processo; não há carregamento automático de `.env`. As bases ficam em `data/central.sqlite` e `data/zelabairro.sqlite`. Fotos anexadas ao pedido são normalizadas em JPEG, têm metadados retirados e ficam em `data/fotos`, identificadas por hash. A remoção retira o anexo atual e preserva a referência anterior no histórico; o arquivo não é apagado automaticamente. A imagem enviada apenas à análise de Visão é temporária e descartada. Histórico, fotos e coordenadas não são enviados a mapas ou outros serviços externos pela central.
+
+## Jornada móvel
+
+O formulário oferece câmera e galeria, prévia, substituição e remoção da foto. No navegador, JPEG/PNG de até 32 MB são reduzidos a 2048 pixels no maior lado; o servidor aceita até 8 MB e 16,8 megapixels. HEIC precisa ser exportado em JPEG. A foto é evidência do relato, sem detecção automática de buracos. O modelo original de Visão permanece restrito a sinalização de fissuras em concreto.
+
+As coordenadas são opcionais. O botão de posição pede permissão ao navegador; a pessoa deve confirmar que o ponto corresponde à ocorrência. Também é possível digitar coordenadas ou seguir apenas com a referência. GPS não determina o endereço, o bairro ou a competência do serviço.
+
+O rascunho é salvo explicitamente em IndexedDB neste navegador, com foto e coordenadas, sem chave de revisão. Recuperá-lo exige confirmar os dados novamente. Um rascunho salvo conserva a mesma tentativa de envio após perda de resposta. Registrar outro pedido não apaga esse rascunho. Nenhum envio é automático. Limpar os dados do navegador ou perder o aparelho pode eliminar o rascunho.
+
+Manifesto, ícones e service worker permitem instalar como PWA nos navegadores compatíveis. Só o conjunto estático do formulário entra no cache. APIs, fotos e respostas não são armazenadas pelo service worker. O envio e o acompanhamento dependem do servidor. Ao publicar uma nova versão, altere a versão de cache em `web/sw.js` e feche/reabra as abas para ativar a atualização.
+
+A abertura sem servidor e a recuperação do rascunho foram verificadas no navegador desta máquina. Câmera, GPS reais e instalação em smartphone continuam sem teste em aparelho. Para usar no celular, é necessário preparar um acesso HTTPS protegido; o endereço 127.0.0.1 do computador não abre a central no telefone. Não existe acesso externo publicado nesta entrega de trabalho.
 
 ## Percurso da demonstração
 
@@ -66,13 +78,18 @@ Catálogo consultado em 14/11/2026: [calçada pública](https://sp156.prefeitura
 
 ## Verificações técnicas
 
+Os testes JavaScript usam Node.js 20 ou posterior; o uso da central no navegador não exige Node.
+
 ```powershell
 .\.venv\Scripts\python.exe -X utf8 -m unittest discover -v
+node --test tests/mobile.test.mjs tests/sw.test.mjs
 ```
 
 Os testes usam bancos temporários e entradas fictícias. Cobrem o controle da barreira, preservação das decisões, contestação, atualização, repetição de lote, fonte de PLN, imagens inválidas, chave de revisão e falha de serviço. Isso verifica comportamento técnico; não é teste com usuários. O registro do que efetivamente foi executado nesta máquina está em `docs/progresso.md`.
 
-Em 14/11/2026, os 44 testes passaram, incluindo os 14 testes de API anteriormente bloqueados pelo ambiente da sessão. O servidor foi iniciado e a página inicial abriu no navegador. Uma consulta real de Generative AI pela central retornou orientação com fonte oficial; a evidência está em docs/evidencias/execucao-http-genai-2026-11-14.json. Como verificação complementar, `python -X utf8 verificar_fluxo.py` executa as funções reais das rotas e a persistência em bancos temporários; esse percurso também passou. O fluxo de cadastro, revisão, confirmação no ZelaBairro e contestação foi executado e repetido pela interface. O teste também conferiu o histórico, o bloqueio de confirmação sem revisão, a preservação de rascunho e a repetição da confirmação sem duplicação por versão. Evidências: docs/evidencias/fluxo-browser-2026-11-14.json e docs/evidencias/fluxo-persistencia-2026-11-14.json.
+Em 14/11/2026, os 55 testes Python e 7 testes JavaScript passaram, incluindo contratos móveis, reenvio e cache do formulário. O servidor foi iniciado e a página inicial abriu no navegador. Uma consulta real de Generative AI pela central retornou orientação com fonte oficial; a evidência está em docs/evidencias/execucao-http-genai-2026-11-14.json. Como verificação complementar, `python -X utf8 verificar_fluxo.py` executa as funções reais das rotas e a persistência em bancos temporários; esse percurso também passou. O fluxo de cadastro, revisão, confirmação no ZelaBairro e contestação foi executado e repetido pela interface. O teste também conferiu o histórico, o bloqueio de confirmação sem revisão, a preservação de rascunho e a repetição da confirmação sem duplicação por versão. Evidências: docs/evidencias/fluxo-browser-2026-11-14.json e docs/evidencias/fluxo-persistencia-2026-11-14.json.
+
+A ampliação móvel, o teste de resposta perdida e as verificações do formulário sem servidor estão em `docs/evidencias/mobile-2026-11-14.json`. A sonda de falha é `tests/tools/proxy-resposta-perdida.mjs`: aponta somente à prévia local em 8841 e usa 8842, sem interferir na instância principal.
 
 ## Limites para uso fora da demonstração
 

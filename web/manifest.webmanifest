@@ -1,0 +1,15 @@
+{
+  "id": "/",
+  "name": "CitizenTech — Atendimento urbano",
+  "short_name": "CitizenTech",
+  "lang": "pt-BR",
+  "start_url": "/#pedido",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f2f5f7",
+  "theme_color": "#203c55",
+  "icons": [
+    {"src": "/web/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/web/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"}
+  ]
+}

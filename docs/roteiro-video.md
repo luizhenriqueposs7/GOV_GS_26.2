@@ -5,7 +5,7 @@ Alvo de 6min30s, dentro do intervalo obrigatório de 5 a 7 minutos. Planejamento
 | Início | Fim | Tempo | Cena | O que demonstrar |
 | --- | --- | --- | --- | --- |
 | 00:00 | 00:20 | 20 s | Problema e beneficiário | Explicar a barreira enfrentada por um morador e o objetivo do protótipo. |
-| 00:20 | 01:05 | 45 s | Frontend e atendimento | Registrar um caso sintético e mostrar o vínculo entre a central e o ZelaBairro. |
+| 00:20 | 01:05 | 45 s | Frontend e atendimento móvel | Registrar caso fictício com foto e coordenadas manuais confirmadas. Mostrar a prévia e o pedido salvo; o vínculo com ZelaBairro será confirmado na cena de Governança. |
 | 01:05 | 01:45 | 40 s | RPA | Processar lote; exibir uma rejeição e a saída original do caso de acessibilidade. |
 | 01:45 | 02:25 | 40 s | Generative AI | Perguntar sobre um serviço, abrir a fonte e mostrar a abstenção quando falta evidência. |
 | 02:25 | 03:00 | 35 s | PLN | Consultar um trecho real da Fábrica e apontar página, fonte, data e limite da revisão do corpus. |
@@ -21,6 +21,8 @@ Alvo de 6min30s, dentro do intervalo obrigatório de 5 a 7 minutos. Planejamento
 Conferir os serviços e preparar os arquivos antes de gravar, mantendo na gravação a execução que sustenta o resultado apresentado. Nunca trocar uma falha do serviço por um resultado histórico sem identificar a mudança.
 
 O caso de acessibilidade deverá mostrar a saída real do RPA. A revisão e a contestação só entram como funções executadas depois de implementadas e verificadas. Não usar as imagens de uma fissura e de um concreto sem fissura como prova de reparo do mesmo local.
+
+A coleta móvel foi implementada e conferida em navegador com tela estreita. Se não houver execução em aparelho, descreva essa condição. Use coordenadas fictícias e imagem identificada como material de teste. Não diga que a foto detectou um buraco ou que o GPS confirmou o endereço. Deixe o caso preparado para cadastrar no começo; salvar/recuperar rascunho e abertura sem rede podem entrar como captura breve, sem ultrapassar 6min30s.
 
 Usar dados sintéticos e ocultar credenciais. A fala deve acompanhar a operação e explicar o significado de uma decisão, sem ler blocos do relatório. Evitar longas apresentações de código; mostrar apenas o trecho necessário para sustentar a integração.
 

@@ -1,5 +1,4 @@
 import csv
-import io
 import json
 import math
 import os
@@ -15,7 +14,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import ProxyHandler, Request, build_opener
 
-from PIL import Image, ImageOps, UnidentifiedImageError
+from .imagens import normalizar as normalizar_imagem
 
 from materiais.rpa.pipeline import classificar_solicitacao, executar_pipeline, normalizar
 
@@ -135,15 +134,7 @@ def executar_worker(operacao: str, dados: dict, interpretador: str | None = None
 
 
 def analisar_imagem(conteudo: bytes) -> dict:
-    if not conteudo or len(conteudo) > 8 * 1024 * 1024:
-        raise ValueError("Envie uma imagem JPEG ou PNG de até 8 MB.")
-    try:
-        with Image.open(io.BytesIO(conteudo)) as imagem:
-            if imagem.format not in {"JPEG", "PNG"} or imagem.width * imagem.height > 4096 * 4096:
-                raise ValueError("Use JPEG ou PNG de até 16,8 megapixels.")
-            normalizada = ImageOps.exif_transpose(imagem).convert("RGB")
-    except (OSError, UnidentifiedImageError, Image.DecompressionBombError) as erro:
-        raise ValueError("A imagem está ilegível ou excede o limite de tamanho.") from erro
+    normalizada = normalizar_imagem(conteudo)
     ambiente = os.getenv("CITIZENTECH_VISION_PYTHON", str(RAIZ / ".venv/Scripts/python.exe") if os.name == "nt" else sys.executable)
     with tempfile.TemporaryDirectory() as pasta:
         caminho = Path(pasta) / "imagem.png"

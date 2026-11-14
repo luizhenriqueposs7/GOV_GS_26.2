@@ -1,0 +1,80 @@
+{
+  "data": "2026-11-14T21:14:07.158385+00:00",
+  "validacao_em_campo": false,
+  "dados_ficticios": true,
+  "testes_automaticos": {
+    "python": 55,
+    "javascript": 7
+  },
+  "fluxo_principal": {
+    "id": "697af04a-29dc-4e88-a028-23fd31417308",
+    "etapas": [
+      "Atendimento registrado",
+      "Informações atualizadas",
+      "Decisão revisada",
+      "Registro confirmado no ZelaBairro",
+      "Nova análise solicitada"
+    ],
+    "foto": {
+      "sha256": "f07d49d24df9e5e777fc2f2bf51db6b62202db5933056d35b2f202563f757b3e",
+      "tipo": "image/jpeg",
+      "bytes": 5975,
+      "largura": 227,
+      "altura": 227
+    },
+    "localizacao": {
+      "latitude": -23.55,
+      "longitude": -46.63,
+      "precisao_m": null,
+      "origem": "manual",
+      "confirmado": true
+    },
+    "revisao_apos_contestacao": null,
+    "frontend_ativo": false,
+    "protocolo_municipal": null,
+    "registros_zelabairro_por_versao": 1,
+    "frontend_historico": "2b4d4bfe-3e01-46c1-a4ca-586e5db84399"
+  },
+  "falha_de_resposta": {
+    "id": "2121d452-3f4b-4372-b198-1ba9879f27ae",
+    "confirmado_no_servidor_antes_da_falha": true,
+    "reenvio_apos_recuperar_rascunho": true,
+    "registros": 1,
+    "eventos": 1
+  },
+  "interface": {
+    "tela_testada": [
+      390,
+      844
+    ],
+    "largura_util": 375,
+    "largura_conteudo": 375,
+    "rascunho_com_foto_recuperado": true,
+    "rascunho_independente_preservado": true,
+    "formulario_aberto_com_servidor_8842_desligado": true,
+    "texto_contestacao_preservado_ao_voltar_da_revisao": true,
+    "novo_cadastro_disponivel_apos_editar": true,
+    "confirmacao_bloqueada_apos_contestacao": true
+  },
+  "inferencia_apos_reuso_normalizador": {
+    "imagem_sha256": "00ae2afd85cba6fa37e2662773a198153b2eec1f99410713a55af8e315cb4a06",
+    "resultado": {
+      "classe": "Sem fissura sinalizada",
+      "confianca": 0.9480439051985741,
+      "escore": 0.051956094801425934,
+      "alerta": false,
+      "limiar": 0.48999999999999977,
+      "resolucao": 160,
+      "modelo": "ResNet18",
+      "modo": "Inferência atual com checkpoint entregue",
+      "limite": "Sinalização de possível fissura. Não atesta gravidade, acessibilidade ou segurança estrutural."
+    }
+  },
+  "nao_verificado": [
+    "camera em aparelho",
+    "GPS real",
+    "instalacao em smartphone",
+    "acesso HTTPS externo",
+    "usabilidade com pessoas"
+  ]
+}

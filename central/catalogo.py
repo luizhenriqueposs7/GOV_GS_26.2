@@ -3,6 +3,20 @@ import re
 
 DATA_CONSULTA = "2026-11-14"
 CONTEXTO = {
+    "asfalto_comum": {
+        "id": "952", "nome": "Tapa-buraco em via comum",
+        "responsavel": "Secretaria Municipal das Subprefeituras",
+        "url": "https://sp156.prefeitura.sp.gov.br/portal/servicos/informacao?servico=952",
+        "orientacao": "Para buraco no asfalto de via comum. Informe endereço completo e descrição. A vistoria e a execução dependem da equipe responsável; coordenadas e foto não substituem o endereço.",
+        "canal": "Portal ou aplicativo SP156, telefone 156 e atendimento presencial",
+    },
+    "corredor_onibus": {
+        "id": "3170", "nome": "Tapa-buraco em faixa exclusiva ou corredor de ônibus",
+        "responsavel": "Conferir a carta oficial específica",
+        "url": "https://sp156.prefeitura.sp.gov.br/portal/servicos/informacao?servico=3170",
+        "orientacao": "A carta de tapa-buraco em via comum remete faixas exclusivas e corredores a este serviço. Confira os requisitos diretamente no portal antes de abrir a solicitação.",
+        "canal": "Portal SP156",
+    },
     "area_publica": {
         "id": "931", "nome": "Manutenção de calçada pública",
         "responsavel": "Secretaria Municipal das Subprefeituras",
@@ -51,7 +65,7 @@ def preparar(descricao: str, contexto: str, local: str) -> dict:
         faltantes.append("contexto")
         pergunta = (
             "Qual é o contexto do problema? Na calçada, diferencie dano em área pública, "
-            "frente de imóvel e objeto bloqueando a passagem. Para iluminação, confirme "
+            "frente de imóvel e objeto bloqueando a passagem. No asfalto, diferencie via comum e corredor de ônibus. Para iluminação, confirme "
             "se o equipamento existe e está com defeito ou se é um pedido de instalação."
         )
     if not local.strip():

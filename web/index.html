@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CitizenTech | Atendimento urbano</title>
-  <link rel="stylesheet" href="/web/style.css"><script src="/web/app.js" defer></script>
+  <meta name="theme-color" content="#203c55">
+  <link rel="manifest" href="/web/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/web/icon-192.png">
+  <link rel="stylesheet" href="/web/style.css"><script src="/web/app.js" type="module"></script>
 </head>
 <body>
   <a class="skip" href="#principal">Pular para o conteúdo</a>
@@ -23,22 +26,36 @@
     <header class="topbar"><span id="breadcrumb">Novo pedido</span><span class="tag">São Paulo, SP</span></header>
     <main id="principal" tabindex="-1">
       <div id="aviso" class="notice" role="status" aria-live="polite" hidden></div>
+      <p id="conexao" class="notice" role="status" hidden>Você está sem conexão. Pode preencher o pedido e salvar um rascunho neste aparelho. O envio depende da central estar disponível.</p>
       <section data-panel="pedido">
-        <div class="page-heading entry-heading"><div><h1>Registrar uma ocorrência</h1><p>Calçadas, iluminação e circulação em São Paulo.</p></div><p class="demo-note">Use dados fictícios.<br> Este registro não é um chamado da prefeitura.</p></div>
+        <div class="page-heading entry-heading"><div><h1>Registrar uma ocorrência</h1><p>Calçadas, buracos no asfalto e iluminação em São Paulo.</p></div><p class="demo-note">Use dados fictícios.<br> Este registro não é um chamado da prefeitura.</p></div>
         <div class="columns entry-layout">
           <article class="panel request-panel"><div class="form-heading"><h2>Informações do pedido</h2><p>Descreva uma situação por registro. Não inclua dados pessoais.</p></div>
             <form id="pedido-form">
+              <fieldset class="photo-field"><legend>Foto da ocorrência <span>opcional</span></legend>
+                <p id="ajuda-foto" class="fine">Use uma imagem de demonstração, sem pessoas ou placas. A foto acompanha o relato; não identifica buracos automaticamente.</p>
+                <div class="actions"><label for="foto-camera" class="secondary file-action">Tirar uma foto<input id="foto-camera" class="sr-only" type="file" accept="image/jpeg,image/png" capture="environment" aria-describedby="ajuda-foto"></label><label for="foto-galeria" class="secondary file-action">Escolher imagem<input id="foto-galeria" class="sr-only" type="file" accept="image/jpeg,image/png" aria-describedby="ajuda-foto"></label></div>
+                <div id="foto-previa" hidden><img id="foto-preview" alt="Prévia da foto que acompanhará o pedido"><div class="actions"><span id="foto-status" class="fine" role="status"></span><button id="remover-foto" type="button" class="quiet">Remover foto</button></div></div>
+              </fieldset>
               <label for="descricao">Descreva a ocorrência <span>obrigatório</span></label><textarea id="descricao" name="descricao" minlength="10" maxlength="1500" rows="4" required placeholder="Ex.: o passeio de uma praça está danificado e dificulta a passagem."></textarea>
               <div class="field-row"><div><label for="bairro">Bairro fictício <span>obrigatório</span></label><input id="bairro" name="bairro" minlength="2" maxlength="100" required autocomplete="off" placeholder="Bairro de demonstração"></div><div><label for="local">Local e ponto de referência</label><input id="local" name="local" maxlength="250" autocomplete="off" placeholder="Praça Exemplo, junto à entrada"></div></div>
-              <label for="contexto">Qual é o contexto da ocorrência?</label><select id="contexto" name="contexto"><option value="nao_informado">Ainda não sei — preciso conferir</option><option value="area_publica">Calçada danificada em praça ou área pública</option><option value="frente_imovel">Calçada danificada em frente a um imóvel</option><option value="obstaculo">Objeto bloqueando a passagem na calçada</option><option value="iluminacao_existente">Iluminação existente com defeito</option><option value="nova_iluminacao">Local sem iluminação ou pedido de melhoria</option></select>
+              <label for="contexto">Qual é o contexto da ocorrência?</label><select id="contexto" name="contexto"><option value="nao_informado">Ainda não sei — preciso conferir</option><option value="asfalto_comum">Buraco no asfalto de uma via comum</option><option value="corredor_onibus">Buraco em faixa exclusiva ou corredor de ônibus</option><option value="area_publica">Calçada danificada em praça ou área pública</option><option value="frente_imovel">Calçada danificada em frente a um imóvel</option><option value="obstaculo">Objeto bloqueando a passagem na calçada</option><option value="iluminacao_existente">Iluminação existente com defeito</option><option value="nova_iluminacao">Local sem iluminação ou pedido de melhoria</option></select>
+              <fieldset class="location-field"><legend>Localização do problema <span>opcional</span></legend>
+                <p class="fine">O GPS informa a posição do aparelho. Confira se ela corresponde ao problema e mantenha o endereço ou referência acima. Nenhuma consulta a mapas é feita automaticamente.</p>
+                <div class="actions"><button id="obter-localizacao" type="button" class="secondary">Usar posição do aparelho</button><button id="limpar-localizacao" type="button" class="quiet">Limpar coordenadas</button></div>
+                <p id="localizacao-status" class="fine" role="status">Você também pode digitar coordenadas de demonstração ou continuar sem GPS.</p>
+                <div class="field-row"><div><label for="latitude">Latitude</label><input id="latitude" name="latitude" inputmode="decimal" maxlength="22" placeholder="Ex.: -23,5500"></div><div><label for="longitude">Longitude</label><input id="longitude" name="longitude" inputmode="decimal" maxlength="22" placeholder="Ex.: -46,6300"></div></div>
+                <label class="check"><input id="confirmar-localizacao" type="checkbox"><span>Conferi as coordenadas e confirmo que representam o local do problema.</span></label>
+              </fieldset>
               <label class="check"><input type="checkbox" name="confirmado" required><span>Estou usando dados fictícios e confirmo o registro nesta demonstração local.</span></label>
               <div class="actions"><button type="submit" class="primary">Preparar pedido</button><button type="button" id="cancelar-edicao" class="quiet" hidden>Cancelar edição</button></div>
+              <div class="draft-tools"><p class="fine">Quer continuar depois? O rascunho fica apenas neste navegador, com a foto e as coordenadas preenchidas. Use dados fictícios em aparelhos compartilhados.</p><div class="actions"><button id="salvar-rascunho" type="button" class="quiet">Salvar rascunho no aparelho</button><button id="restaurar-rascunho" type="button" class="quiet">Recuperar rascunho</button><button id="apagar-rascunho" type="button" class="quiet">Apagar rascunho salvo</button></div><p id="rascunho-status" class="fine" role="status"></p></div>
               <p class="fine">O registro local não abre chamado na prefeitura. O envio deve ser feito pelo canal oficial indicado.</p>
             </form>
           </article>
           <aside class="support service-reference" aria-label="Referência dos serviços">
             <div class="place-sign"><span>Referência de atendimento</span><strong>São Paulo</strong><small>Serviços urbanos</small></div>
-            <div class="catalogue-index"><section><h2>Calçadas</h2><p>Área pública, frente de imóvel ou objeto que impede a passagem.</p></section><section><h2>Iluminação</h2><p>Defeito no equipamento existente ou pedido de instalação e melhoria.</p></section><section><h2>Rampas e acessibilidade</h2><p>O serviço precisa ser confirmado com o atendimento oficial.</p></section></div>
+            <div class="catalogue-index"><section><h2>Calçadas</h2><p>Área pública, frente de imóvel ou objeto que impede a passagem.</p></section><section><h2>Buracos no asfalto</h2><p>Via comum e corredor de ônibus têm serviços distintos.</p></section><section><h2>Iluminação</h2><p>Defeito no equipamento existente ou pedido de instalação e melhoria.</p></section><section><h2>Rampas e acessibilidade</h2><p>O serviço precisa ser confirmado com o atendimento oficial.</p></section></div>
             <p class="reference-note">A orientação considera o contexto informado e as cartas de serviços da Prefeitura de São Paulo.</p><p class="fine">Catálogo consultado em 14/11/2026. Confira as informações no canal oficial antes de enviar.</p>
           </aside>
         </div>
@@ -71,6 +88,7 @@
         <article class="panel spaced"><p class="tool-kind">Prevenção de desastres</p><h2>Consultar o corpus de prevenção</h2><p class="muted">Busca textual no material de desastres, com fonte e página ou seção. Não informa a situação atual de um local.</p><form id="fontes-form" class="inline-form"><label for="busca" class="sr-only">O que deseja pesquisar?</label><input id="busca" minlength="3" maxlength="500" required placeholder="Ex.: prevenção de enchentes"><button class="secondary" type="submit">Buscar trechos</button></form><div id="fontes-resultado" aria-live="polite"></div></article>
         <div class="section-title spaced"><h2>Trabalhos integrados</h2><span class="collection-count">9 disciplinas</span></div><div id="ativos" class="asset-grid"></div>
       </section>
+      <details class="install-help"><summary>Usar a central como aplicativo</summary><p>Em uma conexão HTTPS, abra o menu do navegador e procure “Instalar aplicativo” ou “Adicionar à tela de início”. No iPhone, use Compartilhar no Safari. A instalação depende do navegador. O formulário pode abrir sem rede depois do primeiro acesso; para enviar e acompanhar, a central precisa estar disponível.</p><button id="instalar" type="button" class="secondary" hidden>Instalar neste aparelho</button></details>
       <footer class="footer"><span>CitizenTech — Governança em IA e Business Analytics</span><span>Dados de demonstração. Sem validação em campo.</span></footer>
     </main>
   </div>

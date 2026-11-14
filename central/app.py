@@ -2,8 +2,10 @@ import hmac
 import json
 import os
 import secrets
+import re
 from pathlib import Path
 from typing import Literal
+from uuid import UUID
 
 from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile
 from fastapi.exceptions import RequestValidationError
@@ -12,16 +14,24 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 from starlette.concurrency import run_in_threadpool
 
-from . import modulos
+from . import modulos, imagens
 from .catalogo import preparar
-from .registros import Repositorio
+from .registros import Repositorio, EnvioConflitante
 
 RAIZ = Path(__file__).resolve().parents[1]
-Contexto = Literal["nao_informado", "area_publica", "frente_imovel", "obstaculo", "iluminacao_existente", "nova_iluminacao"]
+Contexto = Literal["nao_informado", "area_publica", "frente_imovel", "obstaculo", "iluminacao_existente", "nova_iluminacao", "asfalto_comum", "corredor_onibus"]
 
 
 class Entrada(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+
+
+class Localizacao(Entrada):
+    latitude: float = Field(ge=-90, le=90, allow_inf_nan=False)
+    longitude: float = Field(ge=-180, le=180, allow_inf_nan=False)
+    precisao_m: float | None = Field(default=None, ge=0, le=100000, allow_inf_nan=False)
+    origem: Literal['gps', 'manual']
+    confirmado: Literal[True]
 
 
 class Pedido(Entrada):
@@ -31,6 +41,8 @@ class Pedido(Entrada):
     contexto: Contexto = "nao_informado"
     confirmado: Literal[True]
     origem_id: str | None = Field(default=None, max_length=64)
+    localizacao: Localizacao | None = None
+    envio_id: UUID | None = None
 
 
 class Revisao(Entrada):
@@ -68,7 +80,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             arquivo_chave.write_text(secrets.token_urlsafe(32), encoding="utf-8")
         chave = arquivo_chave.read_text(encoding="utf-8").strip()
 
-    app = FastAPI(title="Central CitizenTech", version="0.1.0", docs_url="/contrato")
+    app = FastAPI(title="Central CitizenTech", version="0.2.0", docs_url="/contrato")
     app.state.repo = repo
 
     def gestor(valor):
@@ -84,6 +96,10 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     @app.exception_handler(ValueError)
     async def valor_invalido(request, erro):
         return JSONResponse(status_code=422, content={"erro": str(erro)})
+
+    @app.exception_handler(EnvioConflitante)
+    async def envio_conflitante(request, erro):
+        return JSONResponse(status_code=409, content={'erro': str(erro)})
 
     @app.exception_handler(RuntimeError)
     async def modulo_indisponivel(request, erro):
@@ -104,7 +120,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
         resposta.headers["Referrer-Policy"] = "no-referrer"
         resposta.headers["Cache-Control"] = "no-store"
         resposta.headers["Content-Security-Policy"] = (
-            "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; "
+            "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; "
             "media-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
         )
         return resposta
@@ -116,10 +132,38 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
 
     @app.post("/api/atendimentos", status_code=201)
     def criar(entrada: Pedido):
-        dados = entrada.model_dump(exclude={"confirmado"})
+        dados = entrada.model_dump(mode='json', exclude={"confirmado"})
         dados["triagem_original"] = modulos.triagem(entrada.descricao)
         dados["preparacao"] = preparar(entrada.descricao, entrada.contexto, entrada.local)
         return repo.criar(dados)
+
+    def ler_pedido(dados):
+        try:
+            return Pedido.model_validate_json(dados)
+        except ValueError as erro:
+            raise ValueError('Confira descrição, bairro, contexto e coordenadas confirmadas. Use somente os campos do formulário.') from erro
+
+    @app.post('/api/atendimentos/com-anexo', status_code=201)
+    async def criar_com_anexo(dados: str = Form(max_length=10000), arquivo: UploadFile | None = File(default=None)):
+        entrada = ler_pedido(dados)
+        foto = None
+        if arquivo:
+            foto = await run_in_threadpool(imagens.guardar, await arquivo.read(8 * 1024 * 1024 + 1), pasta / 'fotos')
+        payload = entrada.model_dump(mode='json', exclude={'confirmado'})
+        payload.update(foto=foto, triagem_original=modulos.triagem(entrada.descricao),
+                       preparacao=preparar(entrada.descricao, entrada.contexto, entrada.local))
+        return repo.criar(payload)
+
+    @app.get('/api/atendimentos/{identificador}/foto')
+    def foto_do_pedido(identificador: str):
+        foto = obter(identificador).get('foto')
+        sha = foto.get('sha256', '') if foto else ''
+        if not re.fullmatch('[a-f0-9]{64}', sha):
+            raise HTTPException(404, 'Este pedido não possui foto.')
+        caminho = pasta / 'fotos' / (sha + '.jpg')
+        if not caminho.is_file():
+            raise HTTPException(404, 'Foto não disponível nesta instalação.')
+        return FileResponse(caminho, media_type='image/jpeg')
 
     @app.get("/api/atendimentos")
     def listar():
@@ -134,10 +178,31 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
         obter(identificador)
         if entrada.origem_id is not None:
             raise ValueError("A origem do atendimento não pode ser alterada.")
-        dados = entrada.model_dump(exclude={"confirmado", "origem_id"})
+        dados = entrada.model_dump(mode='json', exclude={"confirmado", "origem_id", "envio_id"}, exclude_unset=True)
+        dados.update(local=entrada.local, contexto=entrada.contexto)
         dados.update(triagem_original=modulos.triagem(entrada.descricao),
                      preparacao=preparar(entrada.descricao, entrada.contexto, entrada.local))
         return repo.atualizar(identificador, dados)
+
+    @app.put('/api/atendimentos/{identificador}/com-anexo')
+    async def atualizar_com_anexo(identificador: str, dados: str = Form(max_length=10000),
+                                 arquivo: UploadFile | None = File(default=None), remover_foto: bool = Form(default=False)):
+        obter(identificador)
+        entrada = ler_pedido(dados)
+        if arquivo and remover_foto:
+            raise ValueError('Escolha substituir ou remover a foto.')
+        foto = None
+        if arquivo:
+            foto = await run_in_threadpool(imagens.guardar, await arquivo.read(8 * 1024 * 1024 + 1), pasta / 'fotos')
+        payload = entrada.model_dump(mode='json', exclude={'confirmado', 'origem_id', 'envio_id'}, exclude_unset=True)
+        payload.update(local=entrada.local, contexto=entrada.contexto,
+                       triagem_original=modulos.triagem(entrada.descricao),
+                       preparacao=preparar(entrada.descricao, entrada.contexto, entrada.local))
+        if entrada.origem_id is not None:
+            raise ValueError('A origem do atendimento não pode ser alterada.')
+        if arquivo or remover_foto:
+            payload['foto'] = foto
+        return repo.atualizar(identificador, payload)
 
     @app.post("/api/atendimentos/{identificador}/revisao")
     def revisar(identificador: str, entrada: Revisao, x_manager_key: str | None = Header(default=None)):
@@ -246,6 +311,10 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     @app.get("/")
     def inicio():
         return FileResponse(RAIZ / "web/index.html")
+
+    @app.get('/sw.js')
+    def service_worker():
+        return FileResponse(RAIZ / 'web/sw.js', media_type='application/javascript')
 
     web = RAIZ / "web"
     if web.is_dir():

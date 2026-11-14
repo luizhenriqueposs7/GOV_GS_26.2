@@ -1,4 +1,5 @@
 import json
+import hashlib
 import sqlite3
 from collections import Counter
 from contextlib import closing, contextmanager
@@ -11,6 +12,10 @@ from .catalogo import preparar
 
 def agora():
     return datetime.now(timezone.utc).isoformat()
+
+
+class EnvioConflitante(ValueError):
+    pass
 
 
 class Repositorio:
@@ -26,6 +31,11 @@ class Repositorio:
                     numero INTEGER PRIMARY KEY AUTOINCREMENT,
                     atendimento_id TEXT NOT NULL REFERENCES atendimentos(id),
                     conteudo TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS envios (
+                    id TEXT PRIMARY KEY,
+                    atendimento_id TEXT NOT NULL REFERENCES atendimentos(id),
+                    assinatura TEXT NOT NULL
                 );
             """)
 
@@ -60,12 +70,20 @@ class Repositorio:
 
     def criar(self, dados: dict) -> dict:
         entrada = {chave: dados.get(chave) for chave in (
-            "descricao", "bairro", "local", "contexto", "triagem_original", "preparacao", "origem_id"
+            "descricao", "bairro", "local", "contexto", "triagem_original", "preparacao", "origem_id", "foto", "localizacao"
         )}
         if not entrada["descricao"] or not entrada["bairro"]:
             raise ValueError("Informe a descrição e o bairro.")
         with self.conexao() as con:
             con.execute("BEGIN IMMEDIATE")
+            envio_id = dados.get('envio_id')
+            assinatura = hashlib.sha256(json.dumps(entrada, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+            if envio_id:
+                envio = con.execute('SELECT atendimento_id, assinatura FROM envios WHERE id = ?', (envio_id,)).fetchone()
+                if envio:
+                    if envio['assinatura'] != assinatura:
+                        raise EnvioConflitante('Este envio já foi registrado com outros dados. Confira o pedido antes de iniciar outro envio.')
+                    return self._obter(con, envio['atendimento_id'])
             entrada_origem = {k: entrada[k] for k in ("descricao", "bairro")}
             lote_rpa = str(entrada.get("origem_id") or "").startswith("rpa:")
             row = con.execute("SELECT id FROM atendimentos WHERE origem_id = ?", (entrada["origem_id"],)).fetchone()
@@ -76,6 +94,7 @@ class Repositorio:
                     if fonte_anterior == entrada_origem:
                         return anterior
                     entrada.update(local=anterior["local"], contexto=anterior["contexto"])
+                    entrada.update(foto=anterior.get('foto'), localizacao=anterior.get('localizacao'))
                     entrada["preparacao"] = preparar(entrada["descricao"], entrada["contexto"], entrada["local"])
                 if all(anterior.get(k) == v for k, v in entrada.items()):
                     return anterior
@@ -87,7 +106,8 @@ class Repositorio:
             else:
                 caso = {**entrada, "id": str(uuid4()), "criado_em": agora(), "protocolo_oficial": None}
                 acao = "Atendimento registrado"
-                evidencia = {"triagem_original": entrada["triagem_original"], "origem_id": entrada["origem_id"]}
+                evidencia = {"triagem_original": entrada["triagem_original"], "origem_id": entrada["origem_id"],
+                             'foto': entrada['foto'], 'localizacao': entrada['localizacao']}
             if lote_rpa:
                 caso["entrada_origem"] = entrada_origem
             analise = entrada["triagem_original"] or {}
@@ -98,6 +118,8 @@ class Repositorio:
                 modo="Demonstração local",
             )
             self._salvar(con, caso, acao, evidencia)
+            if envio_id:
+                con.execute('INSERT INTO envios VALUES (?, ?, ?)', (envio_id, caso['id'], assinatura))
             return self._obter(con, caso["id"])
 
     def listar(self) -> list[dict]:
@@ -114,10 +136,11 @@ class Repositorio:
                 return None
 
     def atualizar(self, identificador, dados):
-        campos = ("descricao", "bairro", "local", "contexto", "triagem_original", "preparacao")
+        campos = ("descricao", "bairro", "local", "contexto", "triagem_original", "preparacao", "foto", "localizacao")
         with self.conexao() as con:
             con.execute("BEGIN IMMEDIATE")
             caso = self._obter(con, identificador)
+            dados = {**{k: caso.get(k) for k in campos}, **dados}
             if all(caso.get(k) == dados[k] for k in campos):
                 return caso
             evidencia = {"entrada_anterior": {k: caso.get(k) for k in campos},
