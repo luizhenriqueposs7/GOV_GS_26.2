@@ -50,7 +50,7 @@ Leaflet 1.9.4 e a fonte Archivo estão em `web/vendor`, com licenças. Os tiles 
 
 Na revisão, a foto, o relato, a sugestão do RPA, a justificativa humana e o histórico ocupam áreas distintas. A chave continua obrigatória para decidir e confirmar no ZelaBairro. A contestação retira a decisão do estado atual e exige nova revisão, sem apagar as versões anteriores.
 
-A abertura sem servidor e a recuperação do rascunho foram verificadas no navegador desta máquina. Câmera, GPS reais e instalação em smartphone continuam sem teste em aparelho. Para usar no celular, é necessário preparar um acesso HTTPS protegido; o endereço 127.0.0.1 do computador não abre a central no telefone. Não existe acesso externo publicado nesta entrega de trabalho.
+A abertura sem servidor e a recuperação do rascunho foram verificadas no navegador desta máquina. Câmera, GPS reais e instalação em smartphone continuam sem teste em aparelho pelo assistente. O acesso temporário para o teste da pessoa responsável usa HTTPS e código enviado ao e-mail autorizado. Veja [teste no celular](docs/teste-celular.md). O link dura até uma hora por padrão e muda a cada inicialização; não é uma publicação de produção. O endereço 127.0.0.1 do computador não abre a central no telefone.
 
 ## Percurso da demonstração
 

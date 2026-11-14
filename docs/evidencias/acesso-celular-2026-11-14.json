@@ -1,0 +1,31 @@
+{
+  "data": "2026-11-14T23:43:29.856647+00:00",
+  "provedor": "Cloudflare Quick Tunnel",
+  "cloudflared": "2026.11.0",
+  "protecao": "codigo_por_email_autorizado",
+  "requisicoes_sem_cookie": [
+    {
+      "rota": "/",
+      "status": 302,
+      "destino": "login.trycloudflare.com",
+      "sem_autenticacao": "redirecionado_para_login"
+    },
+    {
+      "rota": "/api/atendimentos",
+      "status": 302,
+      "destino": "login.trycloudflare.com",
+      "sem_autenticacao": "redirecionado_para_login"
+    },
+    {
+      "rota": "/api/atendimentos/pedido_ficticio/foto",
+      "status": 302,
+      "destino": "login.trycloudflare.com",
+      "sem_autenticacao": "redirecionado_para_login"
+    }
+  ],
+  "tempo_programado_minutos": 60,
+  "sintaxe_powershell": "aprovada",
+  "validacoes_parametros": "4/4",
+  "aparelho_fisico_testado_pelo_assistente": false,
+  "resultado_no_celular": "aguardando_teste_do_usuario"
+}
