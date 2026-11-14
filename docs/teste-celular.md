@@ -15,12 +15,18 @@ O computador precisa permanecer ligado, conectado e sem suspensão durante o tes
 
 ## Percurso
 
+O teste físico e a gravação foram planejados pelo integrante para 15/11/2026. O link temporário de 14/11 não será reutilizado: iniciar a central e gerar outro link protegido no momento do teste. O e-mail já autorizado pode ser mantido. Isso não significa que o teste físico tenha passado antecipadamente.
+
+Para a gravação, escolha uma situação urbana simples que possa fotografar sem risco, como um trecho de calçada. Capture a foto pelo aplicativo, confira o GPS e envie o pedido na hora. Continue o mesmo identificador no computador: verifique o anexo e o ponto, registre a revisão e a justificativa, confirme no ZelaBairro e faça a contestação. O histórico deve conservar cada etapa. Grave a operação completa; selecione depois o trecho que cabe no vídeo final de 5 a 7 minutos, que também precisa apresentar as outras disciplinas.
+
 1. Abra o link HTTPS no Safari do iPhone ou Chrome do Android. Informe o e-mail autorizado e o código enviado à caixa de entrada. Não use o navegador interno de um mensageiro.
 2. Entre em Registrar. Toque no botão da câmera e permita o acesso. Fotografe um objeto ou superfície de demonstração, sem pessoas, placas ou documentos. Se a câmera ao vivo não abrir, use Câmera do aparelho ou Escolher imagem.
 3. Escreva um relato claramente identificado como teste. Avance para localização e toque em Usar posição do aparelho. Permita a localização; confira o ponto, a precisão informada e a referência. O GPS não preenche endereço ou bairro automaticamente.
 4. Para não guardar a posição real no pedido, após conferir o GPS use Limpar coordenadas e escolha um ponto de demonstração. Se mantiver a posição real, ela ficará no banco e no histórico locais, fora do Git.
 5. Confirme o ponto, avance, confira a foto e o relato e registre o pedido de demonstração. Anote o identificador recebido. Ele aparecerá na mesma central aberta no computador.
 6. Abra Meus pedidos para conferir a foto e o histórico. Revisão e confirmação no ZelaBairro continuam exigindo a chave local do responsável. O registro não abre chamado municipal.
+
+O que a demonstração pode provar: captura/anexo, localização do aparelho, confirmação do ponto, persistência e revisão do pedido. A foto de uma calçada não comprova detecção automática de buraco; o GPS não comprova o endereço. Se alguma etapa falhar, registre a condição e o resultado observado, sem substituir silenciosamente por uma execução anterior.
 
 Registre separadamente o aparelho, navegador, permissões concedidas, resultado da câmera, precisão do GPS e identificador do pedido. A preparação do link não comprova funcionamento físico: esse resultado depende do teste feito pela pessoa no celular. Não envie códigos de acesso, chave de gestão ou foto pessoal para o GitHub.
 
