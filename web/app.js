@@ -1,7 +1,7 @@
 "use strict";
 const $ = (id) => document.getElementById(id);
 const state = {casos: [], selecionado: null, edicao: null, ativos: false};
-const titulos = {pedido: "PREPARAR PEDIDO", acompanhar: "ACOMPANHAR", revisao: "REVISÃO", evidencias: "EVIDÊNCIAS"};
+const titulos = {pedido: "Novo pedido", acompanhar: "Acompanhamento", revisao: "Revisão", evidencias: "Materiais e fontes"};
 const data = (valor) => valor ? new Date(valor).toLocaleString("pt-BR") : "—";
 function el(tag, texto, classe) {
   const node = document.createElement(tag);
@@ -53,7 +53,7 @@ async function navegar(view, foco = true) {
   if (!titulos[view]) view = "pedido";
   document.querySelectorAll("[data-panel]").forEach(n => n.hidden = n.dataset.panel !== view);
   document.querySelectorAll("[data-view]").forEach(n => {n.classList.toggle("active", n.dataset.view === view); if(n.dataset.view === view) n.setAttribute("aria-current", "page"); else n.removeAttribute("aria-current");});
-  $("breadcrumb").textContent = "ATENDIMENTO / " + titulos[view];
+  $("breadcrumb").textContent = titulos[view];
   if (location.hash !== "#" + view) history.replaceState(null, "", "#" + view);
   if (foco) { $("principal").focus(); window.scrollTo(0, 0); }
   try { await atualizar(); if (view === "evidencias" && !state.ativos) await ativos(); }
@@ -85,15 +85,15 @@ function lista() {
   state.casos.forEach(c => {
     const row = el("article", null, "case-row"), texto = el("div");
     texto.append(badge(c.situacao, c.revisao ? "" : "orange"), el("h3", c.descricao), el("p", c.bairro + " · Registro local " + c.id.slice(0, 8) + " · " + data(c.criado_em)));
-    row.append(texto, botao("Ver pedido ↗", () => durante(row.querySelector("button"), () => detalhe(c.id)))); box.append(row);
+    row.append(texto, botao("Ver pedido", () => durante(row.querySelector("button"), () => detalhe(c.id)))); box.append(row);
   });
 }
 function preparacao(caso) {
   const p = caso.preparacao, box = el("article", null, "result");
-  box.append(badge(p.faltantes.length ? "PRECISA DE CONFERÊNCIA" : "SERVIÇO PARA CONFERIR", p.faltantes.length ? "orange" : ""));
+  box.append(badge(p.faltantes.length ? "Precisa de conferência" : "Serviço para conferir", p.faltantes.length ? "orange" : ""));
   box.append(el("h2", p.servico ? p.servico.nome : "Vamos conferir o encaminhamento."));
   if(p.pergunta) box.append(el("p", p.pergunta, "lead"));
-  if(p.servico) {box.append(el("p", p.servico.orientacao, "lead"), link("Consultar a orientação oficial ↗", p.servico.url), el("p", "Canal: " + p.servico.canal, "fine"));}
+  if(p.servico) {box.append(el("p", p.servico.orientacao, "lead"), link("Consultar a orientação oficial", p.servico.url), el("p", "Canal: " + p.servico.canal, "fine"));}
   if(p.faltantes.length) box.append(el("p", "Pendências: " + p.faltantes.map(f => ({contexto:"contexto do local", local:"localização", enquadramento:"serviço para o caso da rampa"}[f] || f)).join("; ") + ".", "inset warning"));
   box.append(el("p", p.observacao, "fine"), el("p", "Registro local: " + caso.id + " · Fonte consultada em " + p.data_consulta, "fine"));
   const actions = el("div", null, "actions");
@@ -108,7 +108,7 @@ formulario("pedido-form", async form => {
   const resultado = $("preparacao-resultado"); resultado.replaceChildren(preparacao(caso)); resultado.hidden = false; resultado.scrollIntoView({block:"start"});
   aviso(editando ? "Informações atualizadas. Se houve alteração, a decisão anterior precisa de nova revisão." : "Pedido registrado nesta demonstração. Confira a preparação abaixo.");
 });
-function cancelarEdicao() {state.edicao = null; $("pedido-form").reset(); $("cancelar-edicao").hidden = true; $("pedido-form").querySelector("button[type=submit]").textContent = "Preparar meu pedido ↗";}
+function cancelarEdicao() {state.edicao = null; $("pedido-form").reset(); $("cancelar-edicao").hidden = true; $("pedido-form").querySelector("button[type=submit]").textContent = "Preparar pedido";}
 $("cancelar-edicao").addEventListener("click", cancelarEdicao);
 async function editar(caso) {
   await navegar("pedido"); state.edicao = caso.id;
@@ -125,7 +125,7 @@ async function detalhe(id) {
   const grid = el("div", null, "details-grid"), principal = el("div"), decisao = el("div");
   const dl = el("dl"); for(const [nome,valor] of [["Bairro",caso.bairro],["Local",caso.local || "Não informado"],["Serviço",caso.preparacao.servico?.nome || "Ainda não definido"],["Pendências",caso.preparacao.faltantes.join(", ") || "Informações disponíveis para conferência"]]) dl.append(el("dt",nome),el("dd",valor));
   principal.append(dl);
-  if(caso.preparacao.fonte) principal.append(link("Ver fonte do encaminhamento ↗",caso.preparacao.fonte));
+  if(caso.preparacao.fonte) principal.append(link("Ver fonte do encaminhamento",caso.preparacao.fonte));
   if(caso.preparacao.pergunta) principal.append(el("p",caso.preparacao.pergunta,"inset warning"));
   principal.append(botao("Completar ou corrigir informações",()=>editar(caso),"quiet"));
   decisao.append(el("h3","Análise original do RPA"),el("p",caso.triagem_original.category+" · prioridade "+caso.triagem_original.priority,"inset"),el("p","Confiança heurística: "+caso.triagem_original.confidence+". Revisão indicada pelo RPA: "+(caso.triagem_original.review_required?"sim":"não")+".","fine"));
@@ -157,8 +157,38 @@ $("revisao-caso").addEventListener("change",resumoRevisao);
 formulario("revisao-form",async form=>{const id=$("revisao-caso").value;if(!id)throw new Error("Selecione um pedido.");await enviar("/api/atendimentos/"+id+"/revisao",Object.fromEntries(form),$("chave").value);await atualizar();aviso("Decisão registrada com justificativa. A análise original permanece no histórico.");});
 $("confirmar-frontend").addEventListener("click",e=>durante(e.currentTarget,async()=>{if(!$("chave").value)throw new Error("Preencha a chave local de revisão.");const id=$("revisao-caso").value;const caso=await enviar("/api/atendimentos/"+id+"/zelabairro",{},$("chave").value);await atualizar();$("frontend-resultado").textContent="Registro local confirmado: "+caso.frontend.id+". Não é um protocolo municipal.";aviso("Registro confirmado na persistência do ZelaBairro.");}));
 formulario("lote-form",async()=>{if(!$("chave").value)throw new Error("Preencha a chave local de revisão.");const arquivo=$("lote-arquivo").files[0];if(arquivo.size>1024*1024)throw new Error("O CSV deve ter até 1 MB.");const form=new FormData();form.append("arquivo",arquivo);const resultado=await api("/api/lotes",{method:"POST",headers:{"X-Manager-Key":$("chave").value},body:form});$("lote-resultado").textContent=JSON.stringify(resultado.resumo,null,2);$("lote-resultado").hidden=false;await atualizar();aviso("Lote processado. Registros aceitos: "+resultado.atendimentos.length+"; rejeitados pelo RPA: "+resultado.rejeitados.length+".");});
-formulario("assistente-form",async()=>{const box=$("assistente-resultado");box.replaceChildren(el("p","Consultando o modelo local. A operação pode levar até um minuto…","fine"));try{const r=await enviar("/api/assistente",{pergunta:$("pergunta").value,atendimento_id:$("evidencia-caso").value||null});box.replaceChildren(el("p",r.resposta,"inset"),el("p","Status: "+r.status+" · "+r.modo,"fine"));if(r.fonte)box.append(link("Consultar a fonte da orientação ↗",r.fonte.url));if($("evidencia-caso").value)box.append(el("p","Saída vinculada ao histórico do pedido.","fine"));}catch(erro){box.replaceChildren(el("p",erro.message,"inset warning"));throw erro;}});
+formulario("assistente-form",async()=>{const box=$("assistente-resultado");box.replaceChildren(el("p","Consultando o modelo local. A operação pode levar até um minuto…","fine"));try{const r=await enviar("/api/assistente",{pergunta:$("pergunta").value,atendimento_id:$("evidencia-caso").value||null});box.replaceChildren(el("p",r.resposta,"inset"),el("p","Status: "+r.status+" · "+r.modo,"fine"));if(r.fonte)box.append(link("Consultar a fonte da orientação",r.fonte.url));if($("evidencia-caso").value)box.append(el("p","Saída vinculada ao histórico do pedido.","fine"));}catch(erro){box.replaceChildren(el("p",erro.message,"inset warning"));throw erro;}});
 formulario("visao-form",async()=>{const arquivo=$("imagem").files[0];if(arquivo.size>8*1024*1024)throw new Error("A imagem deve ter até 8 MB.");const form=new FormData();form.append("arquivo",arquivo);form.append("atendimento_id",$("evidencia-caso").value);const box=$("visao-resultado");box.replaceChildren(el("p","Executando o modelo de Visão…","fine"));try{const r=await api("/api/visao",{method:"POST",body:form});box.replaceChildren(el("p",r.rotulo||r.classe||r.resultado||"Inferência concluída","inset"),el("p",r.limite,"fine"));const details=el("details");details.append(el("summary","Ver saída e parâmetros"),json(r));box.append(details);}catch(erro){box.replaceChildren(el("p",erro.message,"inset warning"));throw erro;}});
-formulario("fontes-form",async()=>{const fontes=await api("/api/fontes?q="+encodeURIComponent($("busca").value));const box=$("fontes-resultado");box.replaceChildren();if(!fontes.length)box.append(el("p","Nenhum trecho localizado. Tente outro termo do assunto.","inset"));fontes.forEach(f=>{const card=el("article",null,"source-card");card.append(badge("LINHA "+f.linha_corpus),el("p",f.text),link(f.fonte||"Consultar fonte ↗",f.url),el("p",(f.paginas?"Páginas: "+f.paginas.join(", "):"Seção: "+f.secao)+" · "+(f.data_coleta||f.data_acesso||"Data registrada no corpus"),"fine"));card.append(botao("Vincular este trecho ao pedido",e=>durante(e.currentTarget,async()=>{const id=$("evidencia-caso").value;if(!id)throw new Error("Selecione um pedido para vincular o trecho.");await enviar("/api/atendimentos/"+id+"/evidencia-pln",{linha_corpus:f.linha_corpus});aviso("Trecho e origem vinculados ao histórico do pedido.");})));box.append(card);});});
-async function ativos(){const materiais=await api("/api/ativos");const box=$("ativos");box.replaceChildren();materiais.forEach(m=>{const card=el("article",null,"asset");card.append(badge(m.modo,["cluster","quantica","iot"].includes(m.id)?"orange":""),el("h3",m.nome),el("p",m.resumo));if(m.metricas){const ul=el("ul",null,"mini-metrics");m.metricas.forEach(k=>{const li=el("li");li.append(el("span",k.nome),el("strong",k.valor));ul.append(li);});card.append(ul);}card.append(el("p",m.limite,"limit"));const links=el("div",null,"material-links");m.materiais.forEach((id,i)=>links.append(link("Material "+(i+1)+" ↗","/api/materiais/"+encodeURIComponent(id))));(m.videos||[]).forEach(v=>links.append(link(v.nome+" ↗",v.url)));card.append(links);box.append(card);});state.ativos=true;}
+formulario("fontes-form",async()=>{const fontes=await api("/api/fontes?q="+encodeURIComponent($("busca").value));const box=$("fontes-resultado");box.replaceChildren();if(!fontes.length)box.append(el("p","Nenhum trecho localizado. Tente outro termo do assunto.","inset"));fontes.forEach(f=>{const card=el("article",null,"source-card");card.append(badge("LINHA "+f.linha_corpus),el("p",f.text),link(f.fonte||"Consultar fonte",f.url),el("p",(f.paginas?"Páginas: "+f.paginas.join(", "):"Seção: "+f.secao)+" · "+(f.data_coleta||f.data_acesso||"Data registrada no corpus"),"fine"));card.append(botao("Vincular este trecho ao pedido",e=>durante(e.currentTarget,async()=>{const id=$("evidencia-caso").value;if(!id)throw new Error("Selecione um pedido para vincular o trecho.");await enviar("/api/atendimentos/"+id+"/evidencia-pln",{linha_corpus:f.linha_corpus});aviso("Trecho e origem vinculados ao histórico do pedido.");})));box.append(card);});});
+async function ativos() {
+  const materiais = await api("/api/ativos"), box = $("ativos");
+  const nomes = {
+    rpa_notebook: "Notebook entregue", rpa_codigo: "Pipeline de triagem",
+    cluster_relatorio: "Relatório", cluster_2: "Modelo com 2 workers", cluster_4: "Modelo com 4 workers",
+    quantica_relatorio: "Relatório",
+    frontend_readme: "Instruções do ZelaBairro", frontend_testes: "Verificações do módulo", frontend_video: "Vídeo do ZelaBairro",
+    genai_relatorio: "Relatório", genai_resultados: "Avaliações registradas", genai_corpus: "Fontes do assistente",
+    iot_relatorio: "Relatório do OuviAí", iot_videos: "Links das gravações", iot_enunciado: "Enunciado de IoT",
+    pln_relatorio: "Relatório da fábrica", pln_revisao: "Planilha de revisão", pln_corpus_texto: "Corpus de textos",
+    pln_corpus_qa: "Perguntas e respostas", pln_corpus_chat: "Diálogos", pln_corpus_teste: "Casos de teste", pln_qualidade: "Relatório de qualidade",
+    visao_relatorio: "Relatório", visao_codigo: "Rotina de inferência", visao_metricas: "Métricas do modelo",
+    visao_treino: "Código de treinamento", visao_manifesto: "Relação dos recortes", visao_video: "Vídeo de demonstração"
+  };
+  box.replaceChildren();
+  materiais.forEach(m => {
+    const row = el("article", null, "asset"), identidade = el("div", null, "asset-identity"), conteudo = el("div", null, "asset-main");
+    identidade.append(el("h3", m.nome), badge(m.modo, ["cluster", "quantica", "iot"].includes(m.id) ? "orange" : ""));
+    conteudo.append(el("p", m.resumo), el("p", m.limite, "limit"));
+    if (m.metricas) {
+      const ul = el("ul", null, "mini-metrics");
+      m.metricas.forEach(k => { const li = el("li"); li.append(el("span", k.nome + ":"), el("strong", k.valor)); ul.append(li); });
+      conteudo.append(ul);
+    }
+    const links = el("div", null, "material-links");
+    m.materiais.forEach(id => links.append(link(nomes[id] || "Abrir arquivo", "/api/materiais/" + encodeURIComponent(id))));
+    (m.videos || []).forEach(v => links.append(link(v.nome, v.url)));
+    row.append(identidade, conteudo, links); box.append(row);
+  });
+  state.ativos = true;
+}
 navegar(location.hash.slice(1)||"pedido",false);

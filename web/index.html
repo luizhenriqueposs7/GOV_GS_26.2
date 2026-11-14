@@ -2,76 +2,76 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Central CitizenTech · Do relato ao encaminhamento</title>
+  <title>CitizenTech | Atendimento urbano</title>
   <link rel="stylesheet" href="/web/style.css"><script src="/web/app.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#principal">Pular para o conteúdo</a>
-  <aside class="sidebar">
-    <a class="brand" href="#pedido" aria-label="CitizenTech, início"><span class="symbol" aria-hidden="true">c<span>t</span></span><span>citizen<span>tech</span><small>CENTRAL DE ATENDIMENTO</small></span></a>
-    <p class="nav-label">DO RELATO À DECISÃO</p>
-    <nav aria-label="Navegação principal">
-      <button data-view="pedido" class="active" aria-current="page"><span>01</span> Preparar pedido <b aria-hidden="true">↗</b></button>
-      <button data-view="acompanhar"><span>02</span> Acompanhar</button>
-      <button data-view="revisao"><span>03</span> Revisão</button>
-      <button data-view="evidencias"><span>04</span> Evidências</button>
-    </nav>
-    <div class="side-note"><span class="dot"></span> Ambiente de demonstração<p>Use apenas dados fictícios. Os registros ficam nesta instalação.</p></div>
-    <div class="side-footer">GLOBAL SOLUTION <strong>2026</strong><br>Governança em IA e Business Analytics</div>
-  </aside>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#pedido" aria-label="CitizenTech, início"><span class="brand-mark" aria-hidden="true">c<span>t</span></span><span class="brand-name">CitizenTech<small>Central de atendimento urbano</small></span></a>
+      <div class="header-context"><span>Global Solution 2026</span><small>Demonstração acadêmica</small></div>
+    </div>
+    <nav class="main-nav" aria-label="Navegação principal"><div>
+      <button data-view="pedido" class="active" aria-current="page">Novo pedido</button>
+      <button data-view="acompanhar">Acompanhamento</button>
+      <button data-view="revisao">Revisão</button>
+      <button data-view="evidencias">Materiais e fontes</button>
+    </div></nav>
+  </header>
   <div class="workspace">
-    <header class="topbar"><span id="breadcrumb">ATENDIMENTO / PREPARAR PEDIDO</span><span class="tag">São Paulo · SP</span></header>
+    <header class="topbar"><span id="breadcrumb">Novo pedido</span><span class="tag">São Paulo, SP</span></header>
     <main id="principal" tabindex="-1">
       <div id="aviso" class="notice" role="status" aria-live="polite" hidden></div>
       <section data-panel="pedido">
-        <div class="hero">
-          <div><p class="eyebrow">CUIDAR DO BAIRRO COMEÇA POR UM PEDIDO CLARO.</p><h1>O problema tem endereço.<br>O pedido precisa ter direção.</h1><p>Organize as informações, confira o serviço e acompanhe a decisão com uma fonte para consultar.</p><div class="hero-meta"><span>01 / PREPARAÇÃO</span><span>CALÇADAS + ILUMINAÇÃO</span></div></div>
-          <div class="hero-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span>DO RELATO<br>AO PRÓXIMO<br>PASSO. ↗</span></div>
-        </div>
-        <div class="flow" aria-label="Etapas do atendimento"><div><b>01</b><span>Descrever<small>O que acontece e onde</small></span></div><div><b>02</b><span>Conferir<small>Contexto e fonte oficial</small></span></div><div><b>03</b><span>Revisar<small>Decisão com justificativa</small></span></div><div><b>04</b><span>Acompanhar<small>Histórico e nova análise</small></span></div></div>
-        <div class="columns">
-          <article class="panel"><div class="section-title"><h2>Conte o que precisa de atenção</h2><span class="micro">PASSO 1 DE 4</span></div><p class="muted">Descreva uma situação por pedido. Não informe nome, documento ou contato de outras pessoas.</p>
+        <div class="page-heading entry-heading"><div><h1>Registrar uma ocorrência</h1><p>Calçadas, iluminação e circulação em São Paulo.</p></div><p class="demo-note">Use dados fictícios.<br> Este registro não é um chamado da prefeitura.</p></div>
+        <div class="columns entry-layout">
+          <article class="panel request-panel"><div class="form-heading"><h2>Informações do pedido</h2><p>Descreva uma situação por registro. Não inclua dados pessoais.</p></div>
             <form id="pedido-form">
-              <label for="descricao">Qual é o problema? <span>obrigatório</span></label><textarea id="descricao" name="descricao" minlength="10" maxlength="1500" rows="4" required placeholder="Ex.: o passeio de uma praça está danificado e dificulta a passagem."></textarea>
+              <label for="descricao">Descreva a ocorrência <span>obrigatório</span></label><textarea id="descricao" name="descricao" minlength="10" maxlength="1500" rows="4" required placeholder="Ex.: o passeio de uma praça está danificado e dificulta a passagem."></textarea>
               <div class="field-row"><div><label for="bairro">Bairro fictício <span>obrigatório</span></label><input id="bairro" name="bairro" minlength="2" maxlength="100" required autocomplete="off" placeholder="Bairro de demonstração"></div><div><label for="local">Local e ponto de referência</label><input id="local" name="local" maxlength="250" autocomplete="off" placeholder="Praça Exemplo, junto à entrada"></div></div>
-              <label for="contexto">Qual situação descreve melhor o local?</label><select id="contexto" name="contexto"><option value="nao_informado">Ainda não sei — preciso conferir</option><option value="area_publica">Calçada danificada em praça ou área pública</option><option value="frente_imovel">Calçada danificada em frente a um imóvel</option><option value="obstaculo">Objeto bloqueando a passagem na calçada</option><option value="iluminacao_existente">Iluminação existente com defeito</option><option value="nova_iluminacao">Local sem iluminação ou pedido de melhoria</option></select>
+              <label for="contexto">Qual é o contexto da ocorrência?</label><select id="contexto" name="contexto"><option value="nao_informado">Ainda não sei — preciso conferir</option><option value="area_publica">Calçada danificada em praça ou área pública</option><option value="frente_imovel">Calçada danificada em frente a um imóvel</option><option value="obstaculo">Objeto bloqueando a passagem na calçada</option><option value="iluminacao_existente">Iluminação existente com defeito</option><option value="nova_iluminacao">Local sem iluminação ou pedido de melhoria</option></select>
               <label class="check"><input type="checkbox" name="confirmado" required><span>Estou usando dados fictícios e confirmo o registro nesta demonstração local.</span></label>
-              <div class="actions"><button type="submit" class="primary">Preparar meu pedido <span aria-hidden="true">↗</span></button><button type="button" id="cancelar-edicao" class="quiet" hidden>Cancelar edição</button></div>
+              <div class="actions"><button type="submit" class="primary">Preparar pedido</button><button type="button" id="cancelar-edicao" class="quiet" hidden>Cancelar edição</button></div>
               <p class="fine">O registro local não abre chamado na prefeitura. O envio deve ser feito pelo canal oficial indicado.</p>
             </form>
           </article>
-          <aside class="support"><span class="micro">ANTES DE ENVIAR</span><h2>O contexto muda<br>o encaminhamento.</h2><p>Uma calçada de praça, um objeto na passagem e a falta de uma rampa podem exigir serviços diferentes.</p><hr><h3>Se faltar informação, a central pergunta.</h3><p>Casos relacionados a rampas ficam sem serviço definido até a confirmação com o atendimento oficial.</p><div class="source-label">BASE DA ORIENTAÇÃO<strong>Cartas e canais da Prefeitura de São Paulo</strong><small>Consulta: 14 nov. 2026 · confira atualizações no portal.</small></div></aside>
+          <aside class="support service-reference" aria-label="Referência dos serviços">
+            <div class="place-sign"><span>Referência de atendimento</span><strong>São Paulo</strong><small>Serviços urbanos</small></div>
+            <div class="catalogue-index"><section><h2>Calçadas</h2><p>Área pública, frente de imóvel ou objeto que impede a passagem.</p></section><section><h2>Iluminação</h2><p>Defeito no equipamento existente ou pedido de instalação e melhoria.</p></section><section><h2>Rampas e acessibilidade</h2><p>O serviço precisa ser confirmado com o atendimento oficial.</p></section></div>
+            <p class="reference-note">A orientação considera o contexto informado e as cartas de serviços da Prefeitura de São Paulo.</p><p class="fine">Catálogo consultado em 14/11/2026. Confira as informações no canal oficial antes de enviar.</p>
+          </aside>
         </div>
         <div id="preparacao-resultado" hidden></div>
       </section>
       <section data-panel="acompanhar" hidden>
-        <div class="page-heading"><p class="eyebrow">02 / ACOMPANHAMENTO</p><h1>Cada pedido tem um histórico.</h1><p>Veja as informações registradas, complete o que falta e peça uma nova análise quando necessário.</p></div>
-        <div class="section-title"><h2>Pedidos desta demonstração</h2><button id="atualizar-casos" class="quiet">Atualizar lista</button></div><div id="lista-casos"></div><div id="detalhe-caso"></div>
+        <div class="page-heading"><h1>Acompanhamento dos pedidos</h1><p>Consulte o registro, complete informações e acompanhe as decisões.</p></div>
+        <div class="section-title"><h2>Registros locais</h2><button id="atualizar-casos" class="quiet">Atualizar lista</button></div><div id="lista-casos"></div><div id="detalhe-caso"></div>
       </section>
       <section data-panel="revisao" hidden>
-        <div class="page-heading"><p class="eyebrow">03 / REVISÃO E RESPONSABILIDADE</p><h1>Uma sugestão precisa de contexto.</h1><p>A saída do RPA fica preservada. A revisão é registrada separadamente, com responsável e justificativa.</p></div>
+        <div class="page-heading"><h1>Revisão dos pedidos</h1><p>Confira o relato e registre uma decisão justificada. A análise original permanece no histórico.</p></div>
         <div id="indicadores" class="metrics"></div>
         <div class="columns"><article class="panel"><h2>Revisar um pedido</h2><form id="revisao-form">
           <label for="revisao-caso">Pedido</label><select id="revisao-caso" required></select><div id="resumo-revisao" class="inset"></div>
           <div class="field-row"><div><label for="revisor">Identificação do revisor</label><input id="revisor" name="revisor" minlength="2" maxlength="80" required placeholder="Revisor da demonstração"></div><div><label for="prioridade">Prioridade revisada</label><select id="prioridade" name="prioridade"><option>Baixa</option><option>Média</option><option>Alta</option></select></div></div>
           <label for="justificativa">Por que essa é a decisão?</label><textarea id="justificativa" name="justificativa" minlength="10" maxlength="500" rows="3" required placeholder="Explique o contexto considerado e os limites da decisão."></textarea>
-          <label for="chave">Chave local de revisão</label><input id="chave" type="password" required autocomplete="off" aria-describedby="ajuda-chave"><p id="ajuda-chave" class="fine">Disponível ao responsável pela instalação em data/chave-gestao.txt. A chave não é salva pelo navegador.</p>
+          <label for="chave">Chave local de revisão</label><input id="chave" type="password" required autocomplete="off" aria-describedby="ajuda-chave"><p id="ajuda-chave" class="fine">Acesso reservado ao responsável pela revisão nesta instalação.</p>
           <button class="primary" type="submit">Registrar decisão</button></form>
-          <div class="divider"><h3>Confirmar no ZelaBairro</h3><p class="muted">Depois da revisão e das informações completas, registre na persistência do projeto de Frontend.</p><button id="confirmar-frontend" class="secondary">Confirmar registro local</button><p id="frontend-resultado" class="fine"></p></div>
-        </article><aside class="support"><span class="micro">CONTROLE DE GOVERNANÇA</span><h2>O erro original<br>continua visível.</h2><p>No caso “Calçada sem rampa acessível”, a regra original sugere prioridade baixa e dispensa revisão. A central conserva essa saída e exige revisão para a categoria Acessibilidade.</p><hr><p>Isso demonstra um controle aplicado ao processo. Ainda não demonstra redução de desigualdade ou benefício em campo.</p><div class="source-label">INDICADORES DO PROCESSO<strong>Contagens do banco local</strong><small>Não representam demanda da cidade ou serviços executados.</small></div></aside></div>
+          <div class="divider"><h3>Confirmar no ZelaBairro</h3><p class="muted">O pedido revisado pode receber um registro local no ZelaBairro. Isso não gera protocolo municipal.</p><button id="confirmar-frontend" class="secondary" disabled>Confirmar registro local</button><p id="frontend-resultado" class="fine"></p></div>
+        </article><aside class="support review-reference"><h2>Antes de registrar a decisão</h2><ol><li>Confira a descrição e a localização.</li><li>Verifique a fonte e as informações pendentes.</li><li>Explique a prioridade escolhida.</li></ol><h3>Barreiras de acessibilidade</h3><p>A central exige revisão para essa categoria, mesmo quando a regra original a dispensa.</p><div class="source-label"><strong>O histórico conserva as versões.</strong><p>Uma contestação ou alteração do pedido exige nova análise.</p></div><p class="fine">Os indicadores descrevem os registros desta instalação. Não representam reparos ou demanda da cidade.</p></aside></div>
         <article class="panel spaced"><h2>Importar lote do RPA</h2><p class="muted">CSV com case_id, description e neighborhood, de até 1 MB. O mesmo ID atualiza o pedido; mudanças anulam a revisão anterior.</p><form id="lote-form" class="inline-form"><label for="lote-arquivo" class="sr-only">Arquivo CSV</label><input id="lote-arquivo" type="file" accept=".csv,text/csv" required><button class="secondary" type="submit">Processar lote com a chave acima</button></form><pre id="lote-resultado" class="output" hidden></pre></article>
       </section>
       <section data-panel="evidencias" hidden>
-        <div class="page-heading"><p class="eyebrow">04 / INTEGRAÇÃO E EVIDÊNCIAS</p><h1>Cada módulo tem um papel. E um limite.</h1><p>Execute os recursos disponíveis e consulte os materiais de cada disciplina.</p></div>
+        <div class="page-heading"><h1>Materiais e fontes</h1><p>Consulte orientações, analise uma imagem e encontre os trabalhos que compõem a central.</p></div>
         <div class="association"><label for="evidencia-caso">Vincular as próximas consultas ao pedido</label><select id="evidencia-caso"><option value="">Consultar sem vínculo</option></select><p class="fine">Use o vínculo apenas quando a evidência for pertinente ao problema. O registro conserva a saída e a origem.</p></div>
         <div class="tool-grid">
-          <article class="panel"><p class="eyebrow">GENERATIVE AI</p><h2>Conferir uma orientação</h2><p class="muted">O serviço local seleciona evidências de serviços municipais. Pode pedir esclarecimento ou se abster.</p><form id="assistente-form"><label for="pergunta">Sua pergunta</label><textarea id="pergunta" minlength="1" maxlength="500" rows="3" required placeholder="Como solicitar manutenção de iluminação pública?"></textarea><button class="secondary" type="submit">Consultar o serviço local</button></form><div id="assistente-resultado" class="tool-result" aria-live="polite"></div></article>
-          <article class="panel"><p class="eyebrow">VISÃO COMPUTACIONAL</p><h2>Verificar sinal de fissura</h2><p class="muted">Envie um recorte de superfície em JPEG ou PNG. A sinalização não determina gravidade nem segurança.</p><form id="visao-form"><label for="imagem">Imagem de até 8 MB</label><input id="imagem" type="file" accept="image/jpeg,image/png" required><button class="secondary" type="submit">Analisar com o modelo entregue</button></form><div id="visao-resultado" class="tool-result" aria-live="polite"></div></article>
+          <article class="panel"><p class="tool-kind">Orientação municipal</p><h2>Consultar um serviço</h2><p class="muted">Faça uma pergunta sobre os serviços municipais. A orientação é acompanhada de fonte e pode solicitar mais contexto.</p><form id="assistente-form"><label for="pergunta">Sua pergunta</label><textarea id="pergunta" minlength="1" maxlength="500" rows="3" required placeholder="Como solicitar manutenção de iluminação pública?"></textarea><button class="secondary" type="submit">Consultar o serviço local</button></form><div id="assistente-resultado" class="tool-result" aria-live="polite"></div></article>
+          <article class="panel"><p class="tool-kind">Análise de imagem</p><h2>Verificar sinal de fissura</h2><p class="muted">Envie um recorte de superfície em JPEG ou PNG. A sinalização não determina gravidade nem segurança.</p><form id="visao-form"><label for="imagem">Imagem de até 8 MB</label><input id="imagem" type="file" accept="image/jpeg,image/png" required><button class="secondary" type="submit">Analisar com o modelo entregue</button></form><div id="visao-resultado" class="tool-result" aria-live="polite"></div></article>
         </div>
-        <article class="panel spaced"><p class="eyebrow">PROCESSAMENTO DE LINGUAGEM NATURAL</p><h2>Consultar o corpus de prevenção</h2><p class="muted">Busca textual no material de desastres, com fonte e página ou seção. Não informa a situação atual de um local.</p><form id="fontes-form" class="inline-form"><label for="busca" class="sr-only">O que deseja pesquisar?</label><input id="busca" minlength="3" maxlength="500" required placeholder="Ex.: prevenção de enchentes"><button class="secondary" type="submit">Buscar trechos</button></form><div id="fontes-resultado" aria-live="polite"></div></article>
-        <div class="section-title spaced"><h2>Mapa das nove disciplinas</h2><span class="micro">EXECUÇÃO, EVIDÊNCIA E LIMITES</span></div><div id="ativos" class="asset-grid"></div>
+        <article class="panel spaced"><p class="tool-kind">Prevenção de desastres</p><h2>Consultar o corpus de prevenção</h2><p class="muted">Busca textual no material de desastres, com fonte e página ou seção. Não informa a situação atual de um local.</p><form id="fontes-form" class="inline-form"><label for="busca" class="sr-only">O que deseja pesquisar?</label><input id="busca" minlength="3" maxlength="500" required placeholder="Ex.: prevenção de enchentes"><button class="secondary" type="submit">Buscar trechos</button></form><div id="fontes-resultado" aria-live="polite"></div></article>
+        <div class="section-title spaced"><h2>Trabalhos integrados</h2><span class="collection-count">9 disciplinas</span></div><div id="ativos" class="asset-grid"></div>
       </section>
-      <footer class="footer"><span>CITIZENTECH / GLOBAL SOLUTION 2026</span><span>Protótipo local · sem validação em campo</span></footer>
+      <footer class="footer"><span>CitizenTech — Governança em IA e Business Analytics</span><span>Dados de demonstração. Sem validação em campo.</span></footer>
     </main>
   </div>
 </body></html>

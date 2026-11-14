@@ -1,0 +1,39 @@
+{
+  "data": "2026-11-14",
+  "aplicacao": "http://127.0.0.1:8840",
+  "areas_conferidas": [
+    "Novo pedido",
+    "Acompanhamento",
+    "Revisão",
+    "Materiais e fontes"
+  ],
+  "desktop": {
+    "viewport_configurado": {
+      "largura": 1280,
+      "altura": 900
+    },
+    "captura": "output/screenshots/central-atendimento-desktop.jpg"
+  },
+  "celular": {
+    "viewport_configurado": {
+      "largura": 390,
+      "altura": 844
+    },
+    "largura_util": 375,
+    "largura_do_conteudo": 375,
+    "sem_rolagem_horizontal": true,
+    "telas_medidas": [
+      "Novo pedido",
+      "Materiais e fontes"
+    ],
+    "captura": "output/screenshots/central-atendimento-celular.jpg"
+  },
+  "consulta_na_interface": {
+    "pergunta": "Como solicitar manutenção de iluminação pública?",
+    "status": "respondido",
+    "modo": "Serviço atual de Generative AI",
+    "fonte_disponivel": true,
+    "vinculada_a_atendimento": false
+  },
+  "observacao": "Conferência técnica da interface. Não inclui testes com pessoas ou validação em campo."
+}

@@ -72,7 +72,7 @@ Catálogo consultado em 14/11/2026: [calçada pública](https://sp156.prefeitura
 
 Os testes usam bancos temporários e entradas fictícias. Cobrem o controle da barreira, preservação das decisões, contestação, atualização, repetição de lote, fonte de PLN, imagens inválidas, chave de revisão e falha de serviço. Isso verifica comportamento técnico; não é teste com usuários. O registro do que efetivamente foi executado nesta máquina está em `docs/progresso.md`.
 
-Em 14/11/2026, os 30 testes de catálogo, registros e módulos passaram. A suíte HTTP não concluiu por bloqueio de comunicação local no ambiente desta sessão; não está declarada aprovada. Como verificação complementar, `python -X utf8 verificar_fluxo.py` executa as funções reais das rotas e a persistência em bancos temporários. Esse percurso passou, sem substituir a conferência HTTP e visual que ainda precisa ser feita.
+Em 14/11/2026, os 44 testes passaram, incluindo os 14 testes de API anteriormente bloqueados pelo ambiente da sessão. O servidor foi iniciado e a página inicial abriu no navegador. Uma consulta real de Generative AI pela central retornou orientação com fonte oficial; a evidência está em docs/evidencias/execucao-http-genai-2026-11-14.json. Como verificação complementar, `python -X utf8 verificar_fluxo.py` executa as funções reais das rotas e a persistência em bancos temporários; esse percurso também passou. A navegação completa no navegador continua sendo uma conferência distinta.
 
 ## Limites para uso fora da demonstração
 

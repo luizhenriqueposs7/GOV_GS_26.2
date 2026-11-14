@@ -1,0 +1,102 @@
+{
+  "verificado_em": "2026-11-14T19:02:27.2736441Z",
+  "central": {
+    "servico": "Central CitizenTech",
+    "status": "ok",
+    "modo": "Demonstração local",
+    "validacao_em_campo": false,
+    "abertura_automatica_sp156": false
+  },
+  "modelo_local": {
+    "status": "ok"
+  },
+  "pergunta": "Como solicitar manutenção de iluminação pública?",
+  "resposta": {
+    "assunto": "ILU.1",
+    "candidatos_modelo": [
+      "ILU.1",
+      "ILU.3",
+      "CAL.2",
+      "ILU.2",
+      "CAL.3"
+    ],
+    "fonte": {
+      "categoria": "Iluminação pública",
+      "consulta": "2026-11-07",
+      "documento": "ILU",
+      "id": "ILU.1",
+      "secao": "Manutenção de lâmpada, luminária ou poste metálico",
+      "texto": "Lâmpada apagada ou piscando à noite, luminária acesa durante o dia e poste metálico atingido em uma colisão são casos de manutenção da iluminação pública. Para pedir o reparo gratuito, informe o endereço completo da ocorrência pelo aplicativo Ilumina SP ou pelo telefone 0800 779 0156.",
+      "titulo": "Carta de serviços de iluminação pública — SP Regula",
+      "url": "https://prefeitura.sp.gov.br/web/spregula/w/iluminacao_publica/perguntas_frequentes/355960"
+    },
+    "recuperados": [
+      {
+        "categoria": "Iluminação pública",
+        "consulta": "2026-11-07",
+        "documento": "ILU",
+        "id": "ILU.1",
+        "score": 0.0328,
+        "secao": "Manutenção de lâmpada, luminária ou poste metálico",
+        "texto": "Lâmpada apagada ou piscando à noite, luminária acesa durante o dia e poste metálico atingido em uma colisão são casos de manutenção da iluminação pública. Para pedir o reparo gratuito, informe o endereço completo da ocorrência pelo aplicativo Ilumina SP ou pelo telefone 0800 779 0156.",
+        "titulo": "Carta de serviços de iluminação pública — SP Regula",
+        "url": "https://prefeitura.sp.gov.br/web/spregula/w/iluminacao_publica/perguntas_frequentes/355960"
+      },
+      {
+        "categoria": "Iluminação pública",
+        "consulta": "2026-11-07",
+        "documento": "ILU",
+        "id": "ILU.3",
+        "score": 0.0317,
+        "secao": "Melhoria ou implantação de iluminação",
+        "texto": "Quando um local público nunca teve iluminação ou quando a rede existente é insuficiente, cabe solicitar melhoria ou ampliação. O pedido gratuito pode ser feito pelo SP156 ou presencialmente em uma Praça de Atendimento ou unidade do Descomplica SP. A SP Regula encaminha o endereço para vistoria técnica e, se a intervenção for necessária, desenvolve o projeto com a concessionária.",
+        "titulo": "Carta de serviços de iluminação pública — SP Regula",
+        "url": "https://prefeitura.sp.gov.br/web/spregula/w/iluminacao_publica/perguntas_frequentes/355960"
+      },
+      {
+        "categoria": "Acessibilidade",
+        "consulta": "2026-11-07",
+        "documento": "CAL",
+        "id": "CAL.2",
+        "score": 0.0315,
+        "secao": "Calçada particular danificada e manutenção de calçada pública",
+        "texto": "O Portal SP156 separa os pedidos conforme o tipo de calçada. Para passeio particular danificado ou inexistente, o catálogo orienta registrar uma denúncia. Para uma calçada pública que precisa de conserto, há um pedido de manutenção. Também existe uma opção de sugerir a construção de calçada em área pública ou praça.",
+        "titulo": "Serviços do Portal 156 — Secretaria Municipal das Subprefeituras",
+        "url": "https://prefeitura.sp.gov.br/web/subprefeituras/w/pracas_de_atendimento/335674"
+      },
+      {
+        "categoria": "Iluminação pública",
+        "consulta": "2026-11-07",
+        "documento": "ILU",
+        "id": "ILU.2",
+        "score": 0.0311,
+        "secao": "Protocolo e avaliação do equipamento",
+        "texto": "O registro de manutenção gera um número de protocolo para acompanhar o pedido. Uma equipe técnica vai ao endereço informado, avalia a luminária ou a rede e registra no encerramento do protocolo o resultado da avaliação e o serviço efetuado. A SP Regula informa que os postes de concreto pertencem à concessionária de energia elétrica.",
+        "titulo": "Carta de serviços de iluminação pública — SP Regula",
+        "url": "https://prefeitura.sp.gov.br/web/spregula/w/iluminacao_publica/perguntas_frequentes/355960"
+      },
+      {
+        "categoria": "Acessibilidade",
+        "consulta": "2026-11-07",
+        "documento": "CAL",
+        "id": "CAL.3",
+        "score": 0.0303,
+        "secao": "Fiscalização de guia rebaixada irregular",
+        "texto": "Se o problema estiver em um rebaixamento de guia existente que pareça irregular, o Portal SP156 oferece um serviço específico para solicitar fiscalização. A opção aparece no catálogo das Subprefeituras na categoria de guias rebaixadas. O pedido de manutenção de guias, sarjetas e sarjetões tem entrada própria.",
+        "titulo": "Serviços do Portal 156 — Secretaria Municipal das Subprefeituras",
+        "url": "https://prefeitura.sp.gov.br/web/subprefeituras/w/pracas_de_atendimento/335674"
+      }
+    ],
+    "resposta": "Lâmpada apagada ou piscando à noite, luminária acesa durante o dia e poste metálico atingido em uma colisão são casos de manutenção da iluminação pública. Para pedir o reparo gratuito, informe o endereço completo da ocorrência pelo aplicativo Ilumina SP ou pelo telefone 0800 779 0156.",
+    "status": "respondido",
+    "triagem": {
+      "category": "Iluminação pública",
+      "confidence": 0.5,
+      "priority": "Média",
+      "review_required": true
+    },
+    "modo": "Serviço atual de Generative AI",
+    "historico": false
+  },
+  "observacao": "Consulta técnica sem vínculo com atendimento; não representa teste com pessoas."
+}

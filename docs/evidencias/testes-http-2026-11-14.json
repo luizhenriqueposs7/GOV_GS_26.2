@@ -1,0 +1,10 @@
+{
+  "data": "2026-11-14",
+  "comando": ".venv/Scripts/python.exe -X utf8 -m unittest discover -q",
+  "exit_code": 0,
+  "testes": 44,
+  "segundos_reportados_pelo_unittest": 5.374,
+  "saida": "Ran 44 tests in 5.374s; OK",
+  "alcance": "Verificação técnica com bancos temporários e dados fictícios. Não é validação em campo.",
+  "etapa": "Após a revisão visual da interface"
+}
