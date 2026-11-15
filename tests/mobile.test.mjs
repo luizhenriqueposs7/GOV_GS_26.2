@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {coordenadas, dadosRascunho, criarRascunho, mesmoRascunho, bloquearDurante} from '../web/mobile.mjs';
+import * as mobile from '../web/mobile.mjs';
 
 test('coordenadas são opcionais, mas pares incompletos e sem confirmação são rejeitados', () => {
   assert.equal(coordenadas('', '', false), null);
@@ -52,4 +53,58 @@ test('seleção, remoção e envio ficam bloqueados até a preparação assíncr
   assert.deepEqual(controles.map(n=>n.disabled),[false,true,false]);
   await assert.rejects(()=>bloquearDurante(controles,async()=>{throw new Error('foto ilegível');}),/ilegível/);
   assert.deepEqual(controles.map(n=>n.disabled),[false,true,false]);
+});
+
+test('cancelar câmera libera a espera e fecha um stream que chega depois',async()=>{
+  assert.equal(typeof mobile.abrirCamera,'function');
+  let liberar,paradas=0;
+  const pendente=new Promise(resolve=>{liberar=resolve;});
+  const controle=new AbortController();
+  const tarefa=mobile.abrirCamera({getUserMedia:()=>pendente},controle.signal);
+  controle.abort();
+  assert.equal(await tarefa,null);
+  liberar({getTracks:()=>[{stop:()=>{paradas++;}}]});
+  await pendente; await Promise.resolve();
+  assert.equal(paradas,1);
+});
+
+test('câmera negada informa erro sem retornar uma captura falsa',async()=>{
+  assert.equal(typeof mobile.abrirCamera,'function');
+  await assert.rejects(()=>mobile.abrirCamera({getUserMedia:async()=>{throw new Error('negada');}},new AbortController().signal),/negada/);
+});
+
+test('GPS cancelado ignora resultado tardio e sucesso conserva precisão e opções',async()=>{
+  assert.equal(typeof mobile.obterPosicao,'function');
+  let responder,opcoes;
+  const geo={getCurrentPosition:(ok,erro,opts)=>{responder=ok;opcoes=opts;}};
+  const controle=new AbortController(),tarefa=mobile.obterPosicao(geo,controle.signal);
+  controle.abort();assert.equal(await tarefa,null);
+  responder({coords:{latitude:1,longitude:2,accuracy:3}});
+  const nova=mobile.obterPosicao(geo,new AbortController().signal);
+  const pos={coords:{latitude:-23.55,longitude:-46.63,accuracy:15}};
+  responder(pos);assert.equal(await nova,pos);
+  assert.deepEqual(opcoes,{enableHighAccuracy:true,timeout:20000,maximumAge:0});
+});
+
+test('falhas de localização distinguem permissão, sinal e tempo de espera',()=>{
+  assert.equal(typeof mobile.erroLocalizacao,'function');
+  assert.match(mobile.erroLocalizacao(1),/permissão/i);
+  assert.match(mobile.erroLocalizacao(2),/posição/i);
+  assert.match(mobile.erroLocalizacao(3),/demorou/i);
+  assert.match(mobile.erroLocalizacao(99),/mapa/i);
+});
+
+test('bloqueios sobrepostos mantêm controles ocupados e restauram o estado original',async()=>{
+  for(const primeiro of [0,1]) {
+    const camera={disabled:false},galeria={disabled:false},jaBloqueado={disabled:true};
+    let liberarCamera,liberarFoto;
+    const esperaCamera=new Promise(resolve=>{liberarCamera=resolve;});
+    const esperaFoto=new Promise(resolve=>{liberarFoto=resolve;});
+    const tarefas=[bloquearDurante([camera],()=>esperaCamera),bloquearDurante([camera,galeria,jaBloqueado],()=>esperaFoto)];
+    const liberar=[liberarCamera,liberarFoto];
+    liberar[primeiro]();await tarefas[primeiro];
+    assert.equal(camera.disabled,true,'a câmera ainda pertence à outra operação');
+    liberar[1-primeiro]();await tarefas[1-primeiro];
+    assert.deepEqual([camera.disabled,galeria.disabled,jaBloqueado.disabled],[false,false,true]);
+  }
 });

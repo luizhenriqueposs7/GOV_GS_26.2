@@ -11,6 +11,8 @@ O executável oficial cloudflared 2026.11.0 foi baixado em `data/runtime/cloudfl
 
 Com a central aberta, execute em PowerShell: `./INICIAR-CELULAR.ps1 -Email SEU_EMAIL -Minutos 60`. O e-mail real fica apenas no processo local e na configuração temporária do provedor, sem ser versionado. O endereço e o horário limite ficam em `data/runtime/celular-acesso.json`. O link muda a cada inicialização. Ao terminar o tempo, o processo encerra o túnel. Para encerrar antes, use `./ENCERRAR-CELULAR.ps1`; a central local continua aberta.
 
+Para preparar tudo em um comando, use `./PREPARAR.ps1 -Celular -Email SEU_EMAIL -Minutos 60`. Ele inicia ou reutiliza a central e a IA, confere as sete integrações técnicas e só depois abre o acesso protegido. Sem `-Celular`, a preparação é apenas local. A leitura de câmera e GPS pode ser cancelada: uma resposta atrasada não deve substituir o ponto escolhido manualmente. A confirmação final declara o teste, sem exigir que uma foto ou coordenada reais sejam chamadas de fictícias.
+
 O computador precisa permanecer ligado, conectado e sem suspensão durante o teste. A disponibilidade do serviço temporário depende da Cloudflare. O acesso não é uma publicação de produção.
 
 ## Percurso

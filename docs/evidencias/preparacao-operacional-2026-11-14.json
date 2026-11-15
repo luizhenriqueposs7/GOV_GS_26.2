@@ -1,0 +1,118 @@
+{
+  "data": "2026-11-15T00:07:56.552886+00:00",
+  "ok": true,
+  "verificacoes": [
+    {
+      "nome": "Central",
+      "ok": true,
+      "resultado": {
+        "endereco": "http://127.0.0.1:8840",
+        "status": "ok"
+      }
+    },
+    {
+      "nome": "RPA",
+      "ok": true,
+      "resultado": {
+        "categoria": "Acessibilidade",
+        "prioridade_original": "Baixa",
+        "confianca_heuristica": 1
+      }
+    },
+    {
+      "nome": "Registro, revisão e contestação",
+      "ok": true,
+      "resultado": {
+        "modo": "Funções reais das rotas e bancos temporários; sem transporte HTTP",
+        "etapas": [
+          "registrar",
+          "completar",
+          "revisar",
+          "persistir no ZelaBairro",
+          "repetir confirmação sem duplicação",
+          "contestar",
+          "preservar RPA e bloquear serviço de rampa"
+        ]
+      }
+    },
+    {
+      "nome": "PLN",
+      "ok": true,
+      "resultado": {
+        "trechos_encontrados": 5,
+        "fonte": "https://educacao.cemaden.gov.br/wp-content/uploads/2023/10/cartilhaperiferiasemrisco.pdf"
+      }
+    },
+    {
+      "nome": "Visão Computacional",
+      "ok": true,
+      "resultado": {
+        "modelo": "ResNet18",
+        "escore": 0.021210798993706703,
+        "classe": "Sem fissura sinalizada",
+        "imagem": "recorte do acervo, sem vínculo a um pedido"
+      }
+    },
+    {
+      "nome": "Generative AI",
+      "ok": true,
+      "resultado": {
+        "status": "respondido",
+        "fonte": "https://prefeitura.sp.gov.br/web/spregula/w/iluminacao_publica/perguntas_frequentes/355960",
+        "historico": false
+      }
+    },
+    {
+      "nome": "Materiais",
+      "ok": true,
+      "resultado": {
+        "disciplinas": 9,
+        "participacao": {
+          "rpa": "Código reutilizado",
+          "cluster": "Simulação histórica",
+          "quantica": "Estudo conceitual",
+          "frontend": "Persistência reutilizada",
+          "genai": "Serviço local",
+          "iot": "Execução externa no celular",
+          "pln": "Consulta ao corpus",
+          "visao": "Inferência local",
+          "governanca": "Registros desta central"
+        }
+      }
+    }
+  ],
+  "teste_fisico": "pendente",
+  "limites": [
+    "IoT permanece externo.",
+    "Cluster é simulação.",
+    "Quântica é estudo conceitual.",
+    "A inferência sinaliza fissuras; não valida um detector de buracos."
+  ],
+  "reinicio_controlado_verificado": true,
+  "testes": {
+    "python": 60,
+    "javascript": 17,
+    "powershell": 4
+  },
+  "revisao_independente": "Conflito de bloqueios câmera/galeria reproduzido e corrigido com contagem por controle; teste passou nas duas ordens.",
+  "acesso_externo": "Permanece encerrado; abrir apenas ao executar com -Celular.",
+  "interface": {
+    "viewport": "390 x 844",
+    "foto_do_acervo_preparada": true,
+    "ponto_manual_confirmado": true,
+    "confirmacao_atualizada": true,
+    "controles_camera_galeria_habilitados": true,
+    "sem_rolagem_horizontal": true,
+    "console_sem_erros": true,
+    "pedido_de_preparacao_nao_enviado": true
+  },
+  "registros_preservados": {
+    "quantidade": 4,
+    "eventos": [
+      7,
+      5,
+      4,
+      4
+    ]
+  }
+}

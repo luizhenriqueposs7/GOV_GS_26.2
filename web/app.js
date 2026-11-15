@@ -1,5 +1,5 @@
 "use strict";
-import {coordenadas, dadosRascunho, criarRascunho, reduzirFoto, rascunho, bloquearDurante} from './mobile.mjs';
+import {coordenadas, dadosRascunho, criarRascunho, reduzirFoto, rascunho, bloquearDurante, abrirCamera, obterPosicao, erroLocalizacao} from './mobile.mjs';
 import {criarMapa, pontoValido, proximos, filtrarCasos} from './mapa.mjs';
 const $ = (id) => document.getElementById(id);
 const state = {casos: [], selecionado: null, edicao: null, ativos: false, etapa:0, mapa:null, mapaLocal:null, mapaId:null, camera:null};
@@ -63,7 +63,7 @@ function formulario(id, acao) {
 }
 async function navegar(view, foco = true) {
   if (!titulos[view]) view = "pedido";
-  if(view!=='pedido')fecharCamera();
+  if(view!=='pedido'){fecharCamera();cancelarGeo();}
   if(view==='pedido') {$('pedido-form').hidden=false;$('request-progress').hidden=false;$('preparacao-resultado').hidden=true;mostrarEtapa(state.etapa,false);}
   $("aviso").hidden = true;
   document.querySelectorAll("[data-panel]").forEach(n => n.hidden = n.dataset.panel !== view);
@@ -286,20 +286,24 @@ for(const id of ['foto-camera','foto-galeria']) $(id).addEventListener('change',
   });} catch(erro){aviso(erro.message,true);} finally {$(id).value='';}
 });
 $('remover-foto').addEventListener('click',()=>{limparFoto(); state.removerFoto=true; state.envioId=null;});
-function limparGeo() {for(const id of ['latitude','longitude'])$(id).value=''; $('confirmar-localizacao').checked=false; state.origemGeo='manual'; state.precisaoGeo=null; state.mapaLocal?.ponto(null);$('localizacao-status').textContent='Você pode marcar no mapa, digitar coordenadas ou continuar sem GPS.';}
+function cancelarGeo() {state.leituraGeo?.abort();state.leituraGeo=null;}
+function limparGeo() {cancelarGeo();for(const id of ['latitude','longitude'])$(id).value=''; $('confirmar-localizacao').checked=false; state.origemGeo='manual'; state.precisaoGeo=null; state.mapaLocal?.ponto(null);$('localizacao-status').textContent='Você pode marcar no mapa, digitar coordenadas ou continuar sem GPS.';}
 $('limpar-localizacao').addEventListener('click',limparGeo);
-for(const id of ['latitude','longitude'])$(id).addEventListener('input',()=>{state.origemGeo='manual';state.precisaoGeo=null;$('confirmar-localizacao').checked=false;sincronizarPonto();});
-$('obter-localizacao').addEventListener('click',e=>durante(e.currentTarget,async()=>{
+for(const id of ['latitude','longitude'])$(id).addEventListener('input',()=>{cancelarGeo();state.origemGeo='manual';state.precisaoGeo=null;$('confirmar-localizacao').checked=false;sincronizarPonto();$('localizacao-status').textContent='Coordenadas editadas. Confira o ponto e confirme novamente.';});
+$('obter-localizacao').addEventListener('click',e=>bloquearDurante([e.currentTarget],async()=>{
   if(!window.isSecureContext || !navigator.geolocation)throw new Error('O GPS precisa de HTTPS e permissão no navegador. Digite a referência ou coordenadas manualmente.');
+  cancelarGeo();const leitura=new AbortController();state.leituraGeo=leitura;
   $('localizacao-status').textContent='Aguardando sua permissão e a posição do aparelho…';
   try {
-    const pos=await new Promise((resolve,reject)=>navigator.geolocation.getCurrentPosition(resolve,reject,{enableHighAccuracy:true,timeout:12000,maximumAge:0}));
+    const pos=await obterPosicao(navigator.geolocation,leitura.signal);
+    if(!pos||leitura.signal.aborted)return;
     $('latitude').value=pos.coords.latitude.toFixed(6); $('longitude').value=pos.coords.longitude.toFixed(6);
     state.origemGeo='gps'; state.precisaoGeo=Math.min(100000,pos.coords.accuracy); $('confirmar-localizacao').checked=false;
     sincronizarPonto();
     $('localizacao-status').textContent='Posição recebida, com precisão aproximada de '+Math.round(pos.coords.accuracy)+' m. Confira o local antes de confirmar.';
-  } catch { $('localizacao-status').textContent='Não foi possível obter a posição. Você pode preencher o endereço e seguir sem GPS.'; throw new Error('GPS indisponível ou sem permissão. Preencha o local manualmente.'); }
-}));
+  } catch(erro) {if(leitura.signal.aborted)return;const mensagem=erroLocalizacao(erro.code);$('localizacao-status').textContent=mensagem;throw new Error(mensagem);}
+  finally{if(state.leituraGeo===leitura)state.leituraGeo=null;}
+}).catch(erro=>aviso(erro.message,true)));
 $('salvar-rascunho').addEventListener('click',e=>durante(e.currentTarget,async()=>{
   if(state.edicao)throw new Error('Conclua a edição antes de salvar um novo rascunho.');
   const novoId=crypto.randomUUID();
@@ -365,6 +369,7 @@ function pontoFormulario() {
 }
 function sincronizarPonto() {state.mapaLocal?.ponto(pontoFormulario());}
 function escolherPonto(latitude,longitude) {
+  cancelarGeo();
   $('latitude').value=latitude.toFixed(6);$('longitude').value=longitude.toFixed(6);state.origemGeo='manual';state.precisaoGeo=null;$('confirmar-localizacao').checked=false;
   state.mapaLocal?.ponto(pontoFormulario(),false);$('localizacao-status').textContent='Ponto ajustado no mapa. Confira a referência e confirme as coordenadas abaixo.';
 }
@@ -379,6 +384,7 @@ function conferirEtapa(n) {
 }
 function mostrarEtapa(n,foco=true) {
   state.etapa=n;if(n!==0)fecharCamera();
+  if(n!==1)cancelarGeo();
   document.querySelectorAll('[data-request-step]').forEach(p=>p.hidden=Number(p.dataset.requestStep)!==n);
   document.querySelectorAll('[data-step]').forEach(b=>{if(Number(b.dataset.step)===n)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});
   if(n===1){if(!state.mapaLocal)state.mapaLocal=criarMapa('mapa-local','mapa-local-status',escolherPonto);state.mapaLocal?.resize();sincronizarPonto();}
@@ -389,16 +395,21 @@ document.querySelectorAll('[data-step],[data-next],[data-back]').forEach(b=>b.ad
 $('seguir-texto').addEventListener('click',()=>{if(conferirEtapa(1))mostrarEtapa(1);});
 $('pedido-form').addEventListener('invalid',e=>{const p=e.target.closest('[data-request-step]');if(p)mostrarEtapa(Number(p.dataset.requestStep),false);},true);
 function fecharCamera() {
+  state.leituraCamera?.abort();state.leituraCamera=null;
   state.camera?.getTracks().forEach(t=>t.stop());state.camera=null;$('camera-video').srcObject=null;$('camera-video').hidden=true;
   $('ativar-camera').hidden=false;$('capturar-camera').hidden=true;$('fechar-camera').hidden=true;
+  $('camera-status').textContent='Você pode usar foto, imagem da galeria ou somente texto.';
 }
-$('ativar-camera').addEventListener('click',e=>durante(e.currentTarget,async()=>{
+$('ativar-camera').addEventListener('click',e=>bloquearDurante([e.currentTarget],async()=>{
   if(!isSecureContext||!navigator.mediaDevices?.getUserMedia){$('camera-status').textContent='Câmera ao vivo indisponível. Use “Câmera do aparelho” ou escolha uma imagem.';return;}
-  try{const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
-    if(state.etapa!==0||document.querySelector('[data-panel="pedido"]').hidden){stream.getTracks().forEach(t=>t.stop());return;}
-    fecharCamera();state.camera=stream;$('camera-video').srcObject=stream;$('camera-video').hidden=false;$('ativar-camera').hidden=true;$('capturar-camera').hidden=false;$('fechar-camera').hidden=false;$('camera-status').textContent='Enquadre o problema e toque em Capturar foto.';
-  }catch{$('camera-status').textContent='Câmera não autorizada ou indisponível. Escolha uma imagem ou use a câmera do aparelho.';}
-}));
+  fecharCamera();const leitura=new AbortController();state.leituraCamera=leitura;$('fechar-camera').hidden=false;$('camera-status').textContent='Aguardando a permissão da câmera. Você pode cancelar e continuar por texto.';
+  try{const stream=await abrirCamera(navigator.mediaDevices,leitura.signal);
+    if(!stream)return;
+    if(leitura.signal.aborted||state.etapa!==0||document.querySelector('[data-panel="pedido"]').hidden){stream.getTracks().forEach(t=>t.stop());return;}
+    state.camera=stream;$('camera-video').srcObject=stream;$('camera-video').hidden=false;$('ativar-camera').hidden=true;$('capturar-camera').hidden=false;$('fechar-camera').hidden=false;$('camera-status').textContent='Enquadre o problema e toque em Capturar foto.';
+  }catch{if(!leitura.signal.aborted){fecharCamera();$('camera-status').textContent='Câmera não autorizada ou indisponível. Escolha uma imagem ou use a câmera do aparelho.';}}
+  finally{if(state.leituraCamera===leitura)state.leituraCamera=null;}
+}).catch(erro=>aviso(erro.message,true)));
 $('fechar-camera').addEventListener('click',fecharCamera);window.addEventListener('pagehide',fecharCamera);
 $('capturar-camera').addEventListener('click',e=>durante(e.currentTarget,async()=>{
   const video=$('camera-video');if(!video.videoWidth)throw new Error('A imagem da câmera ainda não está pronta. Aguarde e tente novamente.');

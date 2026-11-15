@@ -1,3 +1,31 @@
+export async function abrirCamera(dispositivos, signal) {
+  if(signal.aborted)return null;
+  const captura=dispositivos.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false}).then(stream=>{
+    if(signal.aborted){stream.getTracks().forEach(t=>t.stop());return null;}
+    return stream;
+  });
+  let cancelar;
+  const cancelada=new Promise(resolve=>{cancelar=()=>resolve(null);signal.addEventListener('abort',cancelar,{once:true});});
+  try{return await Promise.race([captura,cancelada]);}
+  finally{signal.removeEventListener('abort',cancelar);}
+}
+
+export function obterPosicao(geolocation, signal) {
+  if(signal.aborted)return Promise.resolve(null);
+  let cancelar;
+  const espera=new Promise((resolve,reject)=>{
+    cancelar=()=>resolve(null);signal.addEventListener('abort',cancelar,{once:true});
+    geolocation.getCurrentPosition(resolve,reject,{enableHighAccuracy:true,timeout:20000,maximumAge:0});
+  });
+  return espera.finally(()=>signal.removeEventListener('abort',cancelar));
+}
+
+export function erroLocalizacao(codigo) {
+  return ({1:'A permissão de localização foi bloqueada. Ative-a nas configurações do site ou marque o ponto no mapa.',
+    2:'A posição do aparelho está indisponível. Tente novamente ou marque o ponto no mapa.',
+    3:'O GPS demorou para responder. Tente novamente ou marque o ponto no mapa.'})[codigo] || 'Não foi possível obter a localização. Use o mapa ou preencha o local manualmente.';
+}
+
 export function coordenadas(latitude, longitude, confirmado, origem = 'manual', precisao = null) {
   if (!latitude.trim() && !longitude.trim()) return null;
   if (!latitude.trim() || !longitude.trim()) throw new Error('Preencha as duas coordenadas ou deixe ambas vazias.');
@@ -22,10 +50,15 @@ export function criarRascunho(campos, estado) {
 
 export function mesmoRascunho(salvo, id) {return Boolean(id && salvo?.id === id);}
 
+const bloqueios=new WeakMap();
 export async function bloquearDurante(controles, acao) {
-  const anteriores = controles.map(n=>[n,n.disabled]);
-  anteriores.forEach(([n])=>n.disabled=true);
-  try {return await acao();} finally {anteriores.forEach(([n,antes])=>n.disabled=antes);}
+  const entradas=controles.map(n=>{
+    let estado=bloqueios.get(n);
+    if(!estado){estado={ativos:0,anterior:n.disabled};bloqueios.set(n,estado);}
+    estado.ativos++;n.disabled=true;return [n,estado];
+  });
+  try {return await acao();}
+  finally {entradas.forEach(([n,estado])=>{estado.ativos--;n.disabled=estado.ativos>0||estado.anterior;if(!estado.ativos)bloqueios.delete(n);});}
 }
 
 export async function reduzirFoto(arquivo) {

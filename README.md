@@ -2,7 +2,7 @@
 
 Preparação e acompanhamento local de pedidos sobre calçadas, buracos no asfalto e iluminação em São Paulo. A central recebe foto opcional e localização confirmada, pede contexto, mostra a fonte do encaminhamento, conserva a triagem original, registra uma revisão justificada e permite contestar a decisão. Depois da conferência, reutiliza a persistência do ZelaBairro.
 
-Protótipo acadêmico para Governança em IA e Business Analytics, GS CitizenTech 2026. Use somente dados fictícios. Não abre chamado municipal e não foi validado com pessoas ou em campo.
+Protótipo acadêmico para Governança em IA e Business Analytics, GS CitizenTech 2026. Use relatos identificados como teste, sem nomes, contatos ou documentos. A gravação técnica pode usar foto e posição reais, conferidas pela pessoa e mantidas na base local. Não abre chamado municipal e não foi validado com moradores ou em campo.
 
 ## Executar no Windows
 
@@ -13,6 +13,14 @@ Requer Python 3.13 e PowerShell. Na pasta deste arquivo:
 ```
 
 A primeira instalação de Visão baixa cerca de 620 MB de bibliotecas de CPU. Nas próximas execuções, basta ` .\INICIAR.ps1 `. Abra [a central local](http://127.0.0.1:8840). O serviço escuta apenas no computador, com uma instância. A chave para revisar é gerada em `data/chave-gestao.txt`, se `GOV_MANAGER_KEY` não estiver definida. Esse arquivo não é servido pela aplicação nem versionado.
+
+### Preparar a gravação
+
+Com os ambientes já instalados, execute `./PREPARAR.ps1`. Ele inicia ou reutiliza a central e a IA local, sem abrir acesso externo, e executa sete verificações: central, RPA, registro/revisão/contestação em banco temporário, PLN, inferência de Visão, resposta atual de Generative AI e catálogo de materiais. O resultado atual fica em `data/runtime/prontidao.json`; uma falha impede a mensagem de preparação concluída. Nenhum pedido de teste é criado na base principal por esse diagnóstico.
+
+Para abrir também o acesso HTTPS protegido no momento de gravar, use `./PREPARAR.ps1 -Celular -Email SEU_EMAIL -Minutos 60`. O e-mail deve ser o autorizado para o teste. O script permanece acompanhando o túnel até o encerramento; o computador precisa continuar ligado. As instruções do telefone estão em [teste no celular](docs/teste-celular.md).
+
+Os caminhos do ambiente de IA desta máquina ficam em `data/preparacao-local.json`, fora do Git, com os campos `PastaProjetoIA` e `PythonIA`. As variáveis `CITIZENTECH_GENAI_PROJECT` e `CITIZENTECH_GENAI_PYTHON` têm prioridade. Sem configuração, o preparador procura o ambiente em `materiais/genai`. Se faltar ambiente ou modelo, indica a instalação necessária antes da gravação. Se apenas parte da IA estiver respondendo, interrompe com orientação de reinício, sem encerrar processos desconhecidos.
 
 Generative AI usa o projeto original em processo separado. Em outro terminal:
 
@@ -34,7 +42,7 @@ As variáveis opcionais estão explicadas em `.env.example`. São variáveis do 
 
 ## Jornada móvel
 
-O registro tem três etapas: foto e relato, localização e conferência. Oferece câmera ao vivo em navegadores compatíveis, câmera do aparelho e galeria, com prévia, substituição e remoção da foto. Permissão negada mantém as outras opções e o envio somente por texto. No navegador, JPEG/PNG de até 32 MB são reduzidos a 2048 pixels no maior lado; o servidor aceita até 8 MB e 16,8 megapixels. HEIC precisa ser exportado em JPEG. A foto é evidência do relato, sem detecção automática de buracos. O modelo original de Visão permanece restrito a sinalização de fissuras em concreto.
+O registro tem três etapas: foto e relato, localização e conferência. Oferece câmera ao vivo em navegadores compatíveis, câmera do aparelho e galeria, com prévia, substituição e remoção da foto. A espera pela permissão não bloqueia todo o formulário. Cancelar ou trocar de etapa descarta leituras atrasadas; um stream que chega depois do cancelamento é fechado. Permissão negada mantém as outras opções e o envio somente por texto. No navegador, JPEG/PNG de até 32 MB são reduzidos a 2048 pixels no maior lado; o servidor aceita até 8 MB e 16,8 megapixels. HEIC precisa ser exportado em JPEG. A foto é evidência do relato, sem detecção automática de buracos. O modelo original de Visão permanece restrito a sinalização de fissuras em concreto.
 
 As coordenadas são opcionais. É possível marcar ou arrastar o ponto no mapa, usar GPS, digitar coordenadas ou seguir apenas com a referência. O botão de posição pede permissão ao navegador. Mudar o ponto, editar ou recuperar um rascunho exige nova confirmação. GPS não determina o endereço, o bairro ou a competência do serviço.
 
@@ -95,7 +103,7 @@ node --test tests/mobile.test.mjs tests/sw.test.mjs tests/mapa.test.mjs
 
 Os testes usam bancos temporários e entradas fictícias. Cobrem o controle da barreira, preservação das decisões, contestação, atualização, repetição de lote, fonte de PLN, imagens inválidas, chave de revisão e falha de serviço. Isso verifica comportamento técnico; não é teste com usuários. O registro do que efetivamente foi executado nesta máquina está em `docs/progresso.md`.
 
-Em 14/11/2026, os 57 testes Python e 12 testes JavaScript passaram, incluindo contratos móveis, reenvio, mapa e cache do formulário. A interface ZelaBairro foi verificada no desktop e em larguras de 390 e 320 pixels, com foto, localização, revisão, confirmação e contestação. Os resultados e capturas estão em [evidências da interface](docs/evidencias/zelabairro-v2-2026-11-14.md). Isso não equivale a teste em smartphone físico.
+Em 14/11/2026, os 60 testes Python, 17 testes JavaScript e quatro validações PowerShell passaram. Incluem contratos móveis, reenvio, mapa, cancelamento de câmera/GPS, bloqueios sobrepostos e diagnóstico de integração. O preparador passou com os serviços ativos e após reinício controlado. A interface ZelaBairro foi verificada no desktop e em larguras de 390 e 320 pixels. Os resultados anteriores e capturas estão em [evidências da interface](docs/evidencias/zelabairro-v2-2026-11-14.md); a preparação atual está em [diagnóstico operacional](docs/evidencias/preparacao-operacional-2026-11-14.json). Isso não equivale a teste em smartphone físico.
 
 Uma consulta real anterior de Generative AI pela central retornou orientação com fonte oficial; a evidência está em docs/evidencias/execucao-http-genai-2026-11-14.json. Como verificação complementar, `python -X utf8 verificar_fluxo.py` executa as funções reais das rotas e a persistência em bancos temporários; esse percurso também passou. O fluxo de cadastro, revisão, confirmação no ZelaBairro e contestação foi executado e repetido pela interface. O teste também conferiu o histórico, o bloqueio de confirmação sem revisão, a preservação de rascunho e a repetição da confirmação sem duplicação por versão. Evidências anteriores: docs/evidencias/fluxo-browser-2026-11-14.json e docs/evidencias/fluxo-persistencia-2026-11-14.json.
 
