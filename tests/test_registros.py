@@ -121,6 +121,17 @@ class RegistrosTest(unittest.TestCase):
         self.assertEqual(repetido["revisao"], revisado["revisao"])
         self.assertEqual(len(repetido["historico"]), len(revisado["historico"]))
 
+    def test_lote_atualizado_preserva_vinculo_de_passagem_e_exige_nova_revisao(self):
+        origem = self.dados('rpa:passagem')
+        caso = self.repo.criar(origem)
+        vinculo = {'percurso_id': 'ponto-ubs-demo', 'trecho_id': 'rampa', 'condicao': 'bloqueado'}
+        self.repo.atualizar(caso['id'], {'passagem': vinculo})
+        self.repo.revisar(caso['id'], 'Alta', 'Interrompe a ligação do percurso didático.', 'Revisor')
+        atualizado = self.repo.criar({**origem, 'descricao': origem['descricao'] + ' na travessia.'})
+        self.assertEqual(atualizado['passagem'], vinculo)
+        self.assertIsNone(atualizado['revisao'])
+        self.assertTrue(atualizado['exige_revisao'])
+
 
 if __name__ == "__main__":
     unittest.main()

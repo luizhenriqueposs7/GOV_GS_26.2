@@ -3,6 +3,27 @@ import assert from 'node:assert/strict';
 import {coordenadas, dadosRascunho, criarRascunho, mesmoRascunho, bloquearDurante} from '../web/mobile.mjs';
 import * as mobile from '../web/mobile.mjs';
 
+test('a assinatura de um pedido sem vínculo é compatível com rascunhos anteriores à atualização',()=>{
+  assert.equal(typeof mobile.assinaturaPedido,'function');
+  const antes={descricao:'Pedido de teste',bairro:'Exemplo',localizacao:null,confirmado:true};
+  assert.equal(mobile.assinaturaPedido({...antes,passagem:null}),JSON.stringify(antes));
+  assert.notEqual(mobile.assinaturaPedido({...antes,passagem:{trecho_id:'calcada'}}),JSON.stringify(antes));
+});
+
+test('vínculo do percurso é opcional e conservado no rascunho sem guardar confirmação',()=>{
+  assert.equal(typeof mobile.vinculoPassagem,'function');
+  assert.equal(mobile.vinculoPassagem('', 'bloqueado'),null);
+  assert.deepEqual(mobile.vinculoPassagem('calcada','dificultado'),{
+    percurso_id:'ponto-ubs-demo',trecho_id:'calcada',condicao:'dificultado'
+  });
+  assert.throws(()=>mobile.vinculoPassagem('inexistente','bloqueado'),/trecho/i);
+  assert.throws(()=>mobile.vinculoPassagem('calcada','livre'),/condição/i);
+  const r=dadosRascunho({'passagem-trecho':'rampa','passagem-condicao':'nao_verificado',confirmado:'on'});
+  assert.equal(r['passagem-trecho'],'rampa');
+  assert.equal(r['passagem-condicao'],'nao_verificado');
+  assert.equal(r.confirmado,undefined);
+});
+
 test('coordenadas são opcionais, mas pares incompletos e sem confirmação são rejeitados', () => {
   assert.equal(coordenadas('', '', false), null);
   assert.throws(() => coordenadas('-23.55', '', true), /duas coordenadas/);

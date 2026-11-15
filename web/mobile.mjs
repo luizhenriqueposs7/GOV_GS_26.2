@@ -38,7 +38,7 @@ export function coordenadas(latitude, longitude, confirmado, origem = 'manual', 
 }
 
 export function dadosRascunho(dados) {
-  return Object.fromEntries(['descricao', 'bairro', 'local', 'contexto', 'latitude', 'longitude']
+  return Object.fromEntries(['descricao', 'bairro', 'local', 'contexto', 'latitude', 'longitude', 'passagem-trecho', 'passagem-condicao']
     .map(k => [k, String(dados[k] || '')]));
 }
 
@@ -46,6 +46,18 @@ export function criarRascunho(campos, estado) {
   const {foto, origemGeo, precisaoGeo, envioId, assinatura, rascunhoId} = estado;
   return {id:rascunhoId, campos:dadosRascunho(campos), foto, origemGeo, precisaoGeo,
     envioId, assinatura, salvoEm:new Date().toISOString()};
+}
+
+export function vinculoPassagem(trecho, condicao) {
+  if(!trecho)return null;
+  if(!['acesso','calcada','rampa','entrada'].includes(trecho))throw new Error('Confira o trecho do percurso.');
+  if(!['bloqueado','dificultado','nao_verificado'].includes(condicao))throw new Error('Informe a condição da passagem.');
+  return {percurso_id:'ponto-ubs-demo',trecho_id:trecho,condicao};
+}
+
+export function assinaturaPedido(dados) {
+  const {passagem,...semVinculo}=dados;
+  return JSON.stringify(passagem?dados:semVinculo);
 }
 
 export function mesmoRascunho(salvo, id) {return Boolean(id && salvo?.id === id);}

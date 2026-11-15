@@ -18,7 +18,7 @@ export function filtrarCasos(casos, termo='', filtro='todos') {
   return casos.filter(c=>(filtro==='todos'||fase(c)===filtro) && normalizar([c.id,c.descricao,c.bairro,c.local].join(' ')).includes(busca));
 }
 
-export function criarMapa(id, statusId, aoEscolher) {
+export function criarMapa(id, statusId, aoEscolher, orientacao) {
   const container=document.getElementById(id), status=document.getElementById(statusId), L=globalThis.L;
   if(!L) {status.textContent='Mapa indisponível. Use os campos de localização ou a lista de pedidos.';return null;}
   const mapa=L.map(container,{scrollWheelZoom:false,minZoom:3,maxZoom:19}).setView([-23.5443,-46.6432],16);
@@ -26,7 +26,7 @@ export function criarMapa(id, statusId, aoEscolher) {
     maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>',
     referrerPolicy:'strict-origin-when-cross-origin',updateWhenIdle:true,keepBuffer:0
   }).on('tileerror',()=>{status.textContent='O mapa base não carregou. Você pode usar as coordenadas ou abrir um registro pela lista.';})
-    .on('tileload',()=>{status.textContent=aoEscolher?'Toque no mapa para marcar o problema. Depois confira e confirme o ponto.':'Selecione um ponto ou abra um pedido pela lista.';}).addTo(mapa);
+    .on('tileload',()=>{status.textContent=orientacao||(aoEscolher?'Toque no mapa para marcar o problema. Depois confira e confirme o ponto.':'Selecione um ponto ou abra um pedido pela lista.');}).addTo(mapa);
   const camada=L.layerGroup().addTo(mapa);
   let ponto;
   function marcador(latlon,classe,titulo,arrastavel=false) {
@@ -46,6 +46,22 @@ export function criarMapa(id, statusId, aoEscolher) {
       camada.clearLayers();
       casos.filter(pontoValido).forEach(c=>marcador([c.localizacao.latitude,c.localizacao.longitude],fase(c)+(c.id===selecionado?' selected':''),c.descricao)
         .on('click',()=>abrir(c.id)).addTo(camada));
+    },
+    trechos(trechos) {
+      camada.clearLayers();
+      const cores={barreira:'#b64b1f',nao_verificado:'#6e7473',reparo_hipotetico:'#14675d',livre_no_cenario:'#596b83'};
+      const estados={barreira:'barreira informada',nao_verificado:'sem verificação',reparo_hipotetico:'reparo hipotético',livre_no_cenario:'livre apenas no cenário'};
+      trechos.forEach(t=>{
+        const texto=document.createElement('span');texto.textContent=t.nome+' · '+estados[t.simulado];
+        L.polyline(t.geometria,{color:cores[t.simulado],weight:9,opacity:0.95,
+          dashArray:t.simulado==='nao_verificado'?'5 10':t.simulado==='reparo_hipotetico'?'12 6':null})
+          .bindTooltip(texto).addTo(camada);
+        marcador(t.geometria[0],'route-marker',t.nome+' · '+estados[t.simulado]).addTo(camada);
+      });
+      if(trechos.length) {
+        const ultimo=trechos.at(-1);marcador(ultimo.geometria.at(-1),'route-marker','Unidade de saúde ilustrativa').addTo(camada);
+        mapa.fitBounds(trechos.flatMap(t=>t.geometria),{padding:[40,40],maxZoom:18});
+      }
     },
     enquadrar(casos) {
       const pontos=casos.filter(pontoValido).map(c=>[c.localizacao.latitude,c.localizacao.longitude]);

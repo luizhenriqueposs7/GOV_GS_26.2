@@ -1,0 +1,41 @@
+{
+  "data": "2026-11-15T15:44:39.785051+00:00",
+  "ok": true,
+  "verificacoes": [
+    {
+      "nome": "Central",
+      "ok": true
+    },
+    {
+      "nome": "RPA",
+      "ok": true
+    },
+    {
+      "nome": "Registro, revisão e contestação",
+      "ok": true
+    },
+    {
+      "nome": "PLN",
+      "ok": true
+    },
+    {
+      "nome": "Visão Computacional",
+      "ok": true
+    },
+    {
+      "nome": "Generative AI",
+      "ok": true
+    },
+    {
+      "nome": "Materiais",
+      "ok": true
+    }
+  ],
+  "teste_fisico": "pendente",
+  "limites": [
+    "IoT permanece externo.",
+    "Cluster é simulação.",
+    "Quântica é estudo conceitual.",
+    "A inferência sinaliza fissuras; não valida um detector de buracos."
+  ]
+}

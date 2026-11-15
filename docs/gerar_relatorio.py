@@ -66,7 +66,7 @@ class Fluxo(Flowable):
         c.setFont("Helvetica", 8.5)
         c.drawString(0, 41, "IoT: execução externa  |  Cluster: simulação  |  Quântica: estudo conceitual")
         c.setFont("Helvetica", 8)
-        c.drawString(0, 22, "O fluxo termina no registro local. O chamado municipal é feito pelo canal oficial.")
+        c.drawString(0, 22, "Passagem Livre compara reparos e conserva a decisão. Chamado municipal: canal oficial.")
 
 
 def tabela(linhas):
@@ -90,8 +90,8 @@ def fundo(c, doc):
         c.setFillColor(LARANJA);c.setFont(TITULO,14);c.drawString(3*cm,h-3*cm,"FIAP / GLOBAL SOLUTION 2026")
         c.setFillColor(colors.white);c.setFont(TITULO,38);c.drawString(3*cm,h-11*cm,"Central")
         c.drawString(3*cm,h-12.6*cm,"CitizenTech")
-        c.setFont("Helvetica",14);c.drawString(3*cm,h-14*cm,"Preparação de pedidos, revisão")
-        c.drawString(3*cm,h-14.7*cm,"e acompanhamento")
+        c.setFont("Helvetica",14);c.drawString(3*cm,h-14*cm,"Planejamento de acesso,")
+        c.drawString(3*cm,h-14.7*cm,"pedidos e revisão")
         c.setStrokeColor(LARANJA);c.line(3*cm,h-16*cm,w-2*cm,h-16*cm)
         c.setFont("Helvetica",10);c.drawString(3*cm,h-17*cm,"GOVERNANÇA EM IA E BUSINESS ANALYTICS")
         for i,nome in enumerate(("Luiz Henrique Poss | RM562177","Luis Filipe Chaves Amorim | RM564706","Felipe Stefani Honorato | RM563380")):
@@ -111,10 +111,10 @@ def fundo(c, doc):
             for i,nome in enumerate(("Luiz Henrique Poss · RM562177","Luis Filipe Chaves Amorim · RM564706","Felipe Stefani Honorato · RM563380")):
                 c.drawCentredString(A4[0]/2,A4[1]-4*cm-i*20,nome)
             c.setFont(TITULO,18);c.drawCentredString(A4[0]/2,A4[1]-8*cm,"CENTRAL CITIZENTECH")
-            c.setFont("Times-Roman",12);c.drawCentredString(A4[0]/2,A4[1]-9*cm,"Preparação de pedidos, revisão e acompanhamento")
+            c.setFont("Times-Roman",12);c.drawCentredString(A4[0]/2,A4[1]-9*cm,"Planejamento de acesso, pedidos e revisão")
             natureza=Paragraph("Relatório de integração dos trabalhos da Global Solution, apresentado à disciplina de Governança em IA e Business Analytics da FIAP. O documento descreve a participação dos módulos e os limites da aplicação construída.",ParagraphStyle("natureza",fontName="Times-Roman",fontSize=12,leading=18,alignment=TA_JUSTIFY))
             _,altura=natureza.wrap(8*cm,500);natureza.drawOn(c,A4[0]-10*cm,A4[1]-11*cm-altura)
-            nota=Paragraph("Dados fictícios. Sem testes com pessoas ou validação em campo. Versão de trabalho de 14 de novembro de 2026; conclusão conjunta e publicação pendentes.",estilos["legenda"])
+            nota=Paragraph("Percurso didático. Sem testes com pessoas ou validação em campo. Versão de trabalho de 15 de novembro de 2026; conclusão conjunta e publicação pendentes.",estilos["legenda"])
             _,altura=nota.wrap(LARGURA,100);nota.drawOn(c,3*cm,6*cm-altura)
             c.setFont("Times-Roman",12);c.drawCentredString(A4[0]/2,3*cm,"São Paulo · 2026")
     c.restoreState()

@@ -14,7 +14,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 from starlette.concurrency import run_in_threadpool
 
-from . import modulos, imagens
+from . import modulos, imagens, passagem
 from .catalogo import preparar
 from .registros import Repositorio, EnvioConflitante
 
@@ -34,6 +34,12 @@ class Localizacao(Entrada):
     confirmado: Literal[True]
 
 
+class VinculoPassagem(Entrada):
+    percurso_id: Literal['ponto-ubs-demo']
+    trecho_id: Literal['acesso', 'calcada', 'rampa', 'entrada']
+    condicao: Literal['bloqueado', 'dificultado', 'nao_verificado']
+
+
 class Pedido(Entrada):
     descricao: str = Field(min_length=10, max_length=1500)
     bairro: str = Field(min_length=2, max_length=100)
@@ -43,6 +49,7 @@ class Pedido(Entrada):
     origem_id: str | None = Field(default=None, max_length=64)
     localizacao: Localizacao | None = None
     envio_id: UUID | None = None
+    passagem: VinculoPassagem | None = None
 
 
 class Revisao(Entrada):
@@ -67,6 +74,16 @@ class Pergunta(Entrada):
 
 class Trecho(Entrada):
     linha_corpus: int = Field(ge=1, le=10000)
+
+
+class SimulacaoPassagem(Entrada):
+    reparos: list[str] = Field(max_length=4)
+
+
+class PlanoPassagem(SimulacaoPassagem):
+    base: str = Field(pattern='^[a-f0-9]{64}$')
+    revisor: str = Field(min_length=2, max_length=80)
+    justificativa: str = Field(min_length=10, max_length=500)
 
 
 def criar_app(pasta_dados: Path | None = None) -> FastAPI:
@@ -129,6 +146,42 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     def status():
         return {"servico": "Central CitizenTech", "status": "ok", "modo": "Demonstração local",
                 "validacao_em_campo": False, "abertura_automatica_sp156": False}
+
+    @app.get('/api/passagem')
+    def percurso():
+        resultado = passagem.avaliar(repo.listar(), [])
+        resultado['planos'] = [{**p, 'desatualizado': p['base'] != resultado['base']}
+                               for p in repo.planos_passagem()]
+        return resultado
+
+    @app.post('/api/passagem/simular')
+    def simular_passagem(entrada: SimulacaoPassagem):
+        return passagem.avaliar(repo.listar(), entrada.reparos)
+
+    @app.post('/api/passagem/planos', status_code=201)
+    def plano_passagem(entrada: PlanoPassagem, x_manager_key: str | None = Header(default=None)):
+        gestor(x_manager_key)
+        return repo.planejar_passagem(entrada.base, entrada.reparos, entrada.revisor, entrada.justificativa)
+
+    @app.post('/api/passagem/demonstracao')
+    def preparar_percurso(x_manager_key: str | None = Header(default=None)):
+        gestor(x_manager_key)
+        exemplos = [
+            ('calcada', 'Cenário fictício: calçada quebrada impede a passagem com cadeira de rodas na praça.',
+             'area_publica', 'Praça ilustrativa · trecho 02', -23.54415, -46.64360),
+            ('rampa', 'Cenário fictício: objeto obstrui a rampa da travessia e interrompe a passagem pela calçada.',
+             'obstaculo', 'Travessia ilustrativa · trecho 03', -23.54430, -46.64340),
+        ]
+        ids = []
+        for trecho, descricao, contexto, local, lat, lon in exemplos:
+            dados = {'descricao': descricao, 'bairro': 'Bairro de demonstração', 'local': local,
+                     'contexto': contexto, 'origem_id': 'passagem:demo:' + trecho,
+                     'triagem_original': modulos.triagem(descricao), 'preparacao': preparar(descricao, contexto, local),
+                     'localizacao': {'latitude': lat, 'longitude': lon, 'origem': 'manual',
+                                     'precisao_m': None, 'confirmado': True},
+                     'passagem': {'percurso_id': passagem.PERCURSO['id'], 'trecho_id': trecho, 'condicao': 'bloqueado'}}
+            ids.append(repo.criar(dados, somente_se_novo=True)['id'])
+        return {'atendimentos': ids, 'modo': 'Pedidos fictícios; sem vistoria ou reparo executado.'}
 
     @app.post("/api/atendimentos", status_code=201)
     def criar(entrada: Pedido):

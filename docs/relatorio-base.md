@@ -1,6 +1,6 @@
 # CENTRAL CITIZENTECH
 
-Preparação de pedidos, revisão e acompanhamento
+Planejamento de acesso, pedidos e revisão
 
 Governança em IA e Business Analytics · Global Solution 2026
 
@@ -25,13 +25,13 @@ Felipe Stefani Honorato · RM563380
 
 ## CENTRAL CITIZENTECH
 
-Preparação de pedidos, revisão e acompanhamento
+Planejamento de acesso, pedidos e revisão
 
 Relatório de integração dos trabalhos da Global Solution, apresentado à disciplina de Governança em IA e Business Analytics da FIAP. O documento reúne os materiais das disciplinas, descreve a participação de cada módulo e registra os limites da aplicação construída.
 
 O projeto utiliza dados fictícios. Não houve testes com pessoas nem validação em campo, por decisão do grupo. As verificações mencionadas neste relatório são técnicas.
 
-Versão de trabalho de 14 de novembro de 2026. A conclusão será elaborada com os integrantes. Os endereços do vídeo integrado e do repositório serão acrescentados após a publicação.
+Versão de trabalho de 15 de novembro de 2026. A conclusão será elaborada com os integrantes. Os endereços do vídeo integrado e do repositório serão acrescentados após a publicação.
 
 São Paulo · 2026
 
@@ -142,11 +142,11 @@ Uma avaliação futura dependeria de dados operacionais e de uma comparação co
 
 A central tem interface própria e reutiliza a validação e a persistência do ZelaBairro. Os bancos de relatos e de histórico ficam separados.
 
-O formulário móvel reúne foto opcional e coordenadas confirmadas, com alternativas manuais. A imagem recebe normalização e remoção de metadados. O catálogo distingue tapa-buraco em via comum e em corredor de ônibus (SÃO PAULO, 2026c). O modelo de fissuras não identifica buracos.
+O formulário móvel reúne foto opcional, coordenadas confirmadas e associação declarada a um trecho do Passagem Livre. O rascunho conserva esses dados. A imagem recebe normalização e remoção de metadados. O catálogo distingue via comum e corredor de ônibus (SÃO PAULO, 2026c). O modelo de fissuras não identifica buracos.
 
 A confirmação exige revisão justificada e dados completos. Repetir a confirmação da mesma revisão mantém o registro. Alterar o pedido ou contestar retira a decisão e o vínculo atuais, preservando o histórico. O identificador é local; protocolos externos anotados permanecem sem verificação no órgão.
 
-Cadastro, edição, revisão, confirmação e contestação foram executados no navegador. O rascunho salvo foi recuperado sem servidor. Perder a resposta após a gravação e reenviar conservou o mesmo pedido. Câmera, GPS e instalação ainda não foram testados em smartphone real; o acesso HTTPS protegido está pendente.
+Cadastro, edição, revisão, confirmação e contestação foram executados no navegador. O rascunho salvo foi recuperado sem servidor. Reenviar após perder a resposta conservou o pedido, inclusive no contrato anterior ao Passagem Livre. O acesso HTTPS protegido está preparado; câmera, GPS e instalação ainda dependem do teste físico no smartphone.
 
 <!-- pagina -->
 # DESENVOLVIMENTO
@@ -216,7 +216,9 @@ Os resultados pertencem ao acervo avaliado. O desempenho em fissuras sutis é um
 
 ## 2.9 Governança em IA e Business Analytics
 
-A contribuição de Governança é controlar o uso das saídas no processo: preservar a sugestão original, exigir revisão, registrar justificativa e permitir contestação. As pendências impedem a confirmação no ZelaBairro. A chave local protege revisão e importação; não equivale a um sistema de contas para uso público.
+A Governança preserva a sugestão original, exige revisão, registra justificativa e permite contestação. As pendências impedem a confirmação no ZelaBairro. A chave local protege decisões e importação; não equivale a contas individuais para uso público.
+
+O Passagem Livre compara reparos em quatro trechos de um percurso didático. Só a calçada reparada mantém a barreira da rampa; ambas tratadas permitem continuidade na hipótese. Condições desconhecidas permanecem pendentes. O plano exige revisão, conserva cenário e justificativa e fica desatualizado após mudança ou contestação. O cálculo é determinístico, sem execução quântica ou certificação de acessibilidade.
 
 Quadro 1 - Participação dos materiais na central
 
@@ -230,13 +232,11 @@ Quadro 1 - Participação dos materiais na central
 | IoT | Documento e vídeos do OuviAí | Eventos automáticos do celular |
 | PLN | Consulta ao corpus e origem do trecho | Revisão humana concluída |
 | Visão | Inferência com checkpoint original | Laudo ou diagnóstico estrutural |
-| Governança | Decisão, histórico e indicadores | Validação com usuários ou em campo |
+| Governança | Revisão, plano, histórico e indicadores | Validação com usuários ou em campo |
 
 Fonte: implementação e materiais reunidos pelo grupo em 2026.
 
-Os indicadores são contagens do banco local. A razão de prioridades alteradas divide alterações pelas revisões atuais. Não mede qualidade do atendimento, benefício social ou reparos. Uma contestação retira a decisão atual do denominador até que ocorra nova revisão.
-
-Passaram 55 testes Python e 7 JavaScript. O navegador verificou foto, coordenadas fictícias, revisão, confirmação e contestação. A leitura dos bancos confirmou histórico preservado e reenvio sem duplicação. A abertura do formulário sem servidor não permite enviar pedidos nem consultar registros sem conexão.
+Os indicadores contam registros locais; prioridades alteradas são divididas pelas revisões atuais. Não medem benefício social ou reparos. As evidências em docs/evidencias registram foto do acervo, ponto manual, vínculo, revisão, persistência, plano e contestação no navegador. O teste físico permanece pendente.
 
 <!-- pagina -->
 # 3 CONCLUSÃO

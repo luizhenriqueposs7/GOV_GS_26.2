@@ -1,5 +1,13 @@
 # Teste no celular
 
+## Passagem Livre na gravação
+
+Depois de autenticar o telefone, abra “Passagem Livre”. O percurso ponto → unidade de saúde é didático e esquemático. O computador pode preparar os dois pedidos fictícios antes da tomada, usando a chave de gestão. Marcar só a calçada conserva a barreira da rampa; marcar ambos mostra continuidade na hipótese do cenário. O resultado não comprova passagem física ou reparo executado.
+
+Use “Registrar observação neste trecho” para vincular uma observação didática. Na segunda etapa, confira o trecho e informe a condição da passagem; a terceira etapa mostra o vínculo junto da foto e do ponto confirmado. A associação é declarada, sem ajuste automático da posição ao traçado. Se a foto/GPS reais forem de outro local, faça o pedido sem vínculo ao percurso ilustrativo. Escolher “Não consigo avaliar” conserva a incerteza na simulação.
+
+Salvar e recuperar o rascunho mantém o vínculo, a foto e as coordenadas, mas pede nova confirmação. Para mostrar a Governança, revise os pedidos, registre o plano e depois conteste um pedido. O plano anterior passa a desatualizado; o histórico permanece. A revisão da rampa pode coexistir com pendência de enquadramento municipal, que impede confirmar aquele pedido no ZelaBairro. A gravação deve explicar essa abstenção.
+
 O acesso temporário usa Cloudflare Quick Tunnel com `--allowed-mail`. Apenas o e-mail explicitamente autorizado pode entrar com o código recebido. O túnel aponta para a central local em 127.0.0.1:8840 e não exige abrir portas no roteador. Fotos, relatos e GPS atravessam a Cloudflare até o computador; a área do mapa também é recebida pelo OpenStreetMap. As permissões de câmera e localização são concedidas pela pessoa no telefone.
 
 ## Preparação

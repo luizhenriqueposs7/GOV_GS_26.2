@@ -4,7 +4,7 @@ Alvo de 6min30s, dentro do intervalo obrigatório de 5 a 7 minutos. Planejamento
 
 | Início | Fim | Tempo | Cena | O que demonstrar |
 | --- | --- | --- | --- | --- |
-| 00:00 | 00:20 | 20 s | Problema e beneficiário | Explicar a barreira enfrentada por um morador e o objetivo do protótipo. |
+| 00:00 | 00:20 | 20 s | Problema e beneficiário | Mostrar o percurso didático ponto → unidade de saúde: um reparo isolado pode manter outra barreira. Apresentar o Passagem Livre e o limite do cenário. |
 | 00:20 | 01:05 | 45 s | Frontend e atendimento móvel | Trecho do teste no celular: foto tirada na hora, GPS conferido e ponto confirmado, envio e identificador recebido. Identificar o relato como demonstração. Se o GPS falhar e forem usadas coordenadas manuais, dizer isso. O vínculo com ZelaBairro será confirmado na cena de Governança. |
 | 01:05 | 01:45 | 40 s | RPA | Processar lote; exibir uma rejeição e a saída original do caso de acessibilidade. |
 | 01:45 | 02:25 | 40 s | Generative AI | Perguntar sobre um serviço, abrir a fonte e mostrar a abstenção quando falta evidência. |
@@ -13,10 +13,14 @@ Alvo de 6min30s, dentro do intervalo obrigatório de 5 a 7 minutos. Planejamento
 | 03:40 | 04:15 | 35 s | IoT | Mostrar o OuviAí no celular ou sua evidência, identificando qual das duas situações foi usada. |
 | 04:15 | 04:40 | 25 s | Cluster | Comparar os dois cenários iSPD e explicar que os números são de simulação. |
 | 04:40 | 05:00 | 20 s | Quântica | Relacionar o estudo ao planejamento da revisão; deixar explícita a contribuição conceitual. |
-| 05:00 | 06:10 | 70 s | Governança e Business Analytics | Revisar o caso, justificar a decisão, mostrar contestação/histórico, indicadores e matriz de integração. Incluir uma falha tratada, sem perder o registro anterior. |
+| 05:00 | 06:10 | 70 s | Governança e Business Analytics | No Passagem Livre, marcar só um reparo e depois os dois; explicar o efeito conjunto. Mostrar revisão dos pedidos e plano justificado. Contestar um pedido e conferir plano desatualizado/histórico. Apontar a matriz das nove disciplinas e a condição desconhecida. |
 | 06:10 | 06:30 | 20 s | Encerramento | Dizer o resultado efetivamente demonstrado e a principal limitação; mostrar o acesso ao repositório. |
 
 ## Preparação
+
+Preparar os dois pedidos fictícios pelo controle do Passagem Livre antes de gravar; usar o formulário móvel para uma observação explicitamente didática ou registrar o teste real sem vínculo se ocorrer em outro local. O mapa do percurso é esquemático. Gravar uma tomada longa do fluxo e selecionar os trechos para os tempos acima. A comparação usa somente condições informadas; não estima custos, beneficiários ou segurança real. Não apresentar o cálculo determinístico como execução quântica nem o OuviAí como sensor integrado automaticamente.
+
+A pendência de enquadramento no caso relacionado à rampa é uma abstenção do catálogo: a revisão permite o planejamento local, mas a confirmação no ZelaBairro segue bloqueada. A calçada permite demonstrar a persistência original. Na cena final, manter visível “hipótese” e explicar que a contestação muda a validade da decisão, não a condição física da calçada. A coleta, revisão, evidências e confirmação dos módulos continuam distribuídas nas cenas por disciplina.
 
 Conferir os serviços e preparar os arquivos antes de gravar, mantendo na gravação a execução que sustenta o resultado apresentado. Nunca trocar uma falha do serviço por um resultado histórico sem identificar a mudança.
 

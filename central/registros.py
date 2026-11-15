@@ -8,6 +8,7 @@ from pathlib import Path
 from uuid import uuid4
 
 from .catalogo import preparar
+from .passagem import avaliar, validar_vinculo
 
 
 def agora():
@@ -36,6 +37,9 @@ class Repositorio:
                     id TEXT PRIMARY KEY,
                     atendimento_id TEXT NOT NULL REFERENCES atendimentos(id),
                     assinatura TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS planos_passagem (
+                    id TEXT PRIMARY KEY, conteudo TEXT NOT NULL
                 );
             """)
 
@@ -68,16 +72,19 @@ class Repositorio:
         )]
         return caso
 
-    def criar(self, dados: dict) -> dict:
+    def criar(self, dados: dict, somente_se_novo=False) -> dict:
         entrada = {chave: dados.get(chave) for chave in (
-            "descricao", "bairro", "local", "contexto", "triagem_original", "preparacao", "origem_id", "foto", "localizacao"
+            "descricao", "bairro", "local", "contexto", "triagem_original", "preparacao", "origem_id", "foto", "localizacao", "passagem"
         )}
+        entrada['passagem'] = validar_vinculo(entrada['passagem'])
         if not entrada["descricao"] or not entrada["bairro"]:
             raise ValueError("Informe a descrição e o bairro.")
         with self.conexao() as con:
             con.execute("BEGIN IMMEDIATE")
             envio_id = dados.get('envio_id')
-            assinatura = hashlib.sha256(json.dumps(entrada, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+            # Ausência de vínculo mantém a assinatura usada pelos envios anteriores ao Passagem Livre.
+            dados_assinatura = {k: v for k, v in entrada.items() if k != 'passagem' or v is not None}
+            assinatura = hashlib.sha256(json.dumps(dados_assinatura, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
             if envio_id:
                 envio = con.execute('SELECT atendimento_id, assinatura FROM envios WHERE id = ?', (envio_id,)).fetchone()
                 if envio:
@@ -89,12 +96,15 @@ class Repositorio:
             row = con.execute("SELECT id FROM atendimentos WHERE origem_id = ?", (entrada["origem_id"],)).fetchone()
             if row:
                 anterior = self._obter(con, row["id"])
+                if somente_se_novo:
+                    return anterior
                 if lote_rpa:
                     fonte_anterior = anterior.get("entrada_origem", {k: anterior[k] for k in entrada_origem})
                     if fonte_anterior == entrada_origem:
                         return anterior
                     entrada.update(local=anterior["local"], contexto=anterior["contexto"])
-                    entrada.update(foto=anterior.get('foto'), localizacao=anterior.get('localizacao'))
+                    entrada.update(foto=anterior.get('foto'), localizacao=anterior.get('localizacao'),
+                                   passagem=anterior.get('passagem'))
                     entrada["preparacao"] = preparar(entrada["descricao"], entrada["contexto"], entrada["local"])
                 if all(anterior.get(k) == v for k, v in entrada.items()):
                     return anterior
@@ -112,7 +122,7 @@ class Repositorio:
                 caso["entrada_origem"] = entrada_origem
             analise = entrada["triagem_original"] or {}
             caso.update(
-                exige_revisao=bool(analise.get("review_required") or analise.get("category") == "Acessibilidade"),
+                exige_revisao=bool(entrada.get('passagem') or analise.get("review_required") or analise.get("category") == "Acessibilidade"),
                 revisao=None,
                 situacao="Aguardando revisão",
                 modo="Demonstração local",
@@ -136,18 +146,19 @@ class Repositorio:
                 return None
 
     def atualizar(self, identificador, dados):
-        campos = ("descricao", "bairro", "local", "contexto", "triagem_original", "preparacao", "foto", "localizacao")
+        campos = ("descricao", "bairro", "local", "contexto", "triagem_original", "preparacao", "foto", "localizacao", "passagem")
         with self.conexao() as con:
             con.execute("BEGIN IMMEDIATE")
             caso = self._obter(con, identificador)
             dados = {**{k: caso.get(k) for k in campos}, **dados}
+            dados['passagem'] = validar_vinculo(dados.get('passagem'))
             if all(caso.get(k) == dados[k] for k in campos):
                 return caso
             evidencia = {"entrada_anterior": {k: caso.get(k) for k in campos},
                          "revisao_anterior": caso.get("revisao"), "frontend_anterior": caso.pop("frontend", None)}
             caso.update({k: dados[k] for k in campos})
             analise = dados["triagem_original"]
-            caso.update(revisao=None, exige_revisao=bool(analise.get("review_required") or analise.get("category") == "Acessibilidade"),
+            caso.update(revisao=None, exige_revisao=bool(dados.get('passagem') or analise.get("review_required") or analise.get("category") == "Acessibilidade"),
                         situacao="Aguardando revisão")
             self._salvar(con, caso, "Informações atualizadas", evidencia, "Solicitante da demonstração")
             return self._obter(con, identificador)
@@ -211,6 +222,28 @@ class Repositorio:
             caso.setdefault("evidencias", []).append(evidencia)
             self._salvar(con, caso, "Evidência vinculada", evidencia)
             return self._obter(con, identificador)
+
+    def planos_passagem(self):
+        with self.conexao() as con:
+            return [json.loads(row['conteudo']) for row in con.execute(
+                'SELECT conteudo FROM planos_passagem ORDER BY rowid DESC')]
+
+    def planejar_passagem(self, base, reparos, revisor, justificativa):
+        with self.conexao() as con:
+            con.execute('BEGIN IMMEDIATE')
+            casos = [json.loads(row['conteudo']) for row in con.execute('SELECT conteudo FROM atendimentos')]
+            resultado = avaliar(casos, reparos)
+            if resultado['base'] != base:
+                raise EnvioConflitante('Os pedidos mudaram. Atualize o percurso e confira a simulação antes de decidir.')
+            if resultado['pendentes_revisao']:
+                raise EnvioConflitante('Revise todos os pedidos vinculados antes de registrar o plano.')
+            if not reparos or not any(t['atual'] == 'barreira' and t['id'] in reparos for t in resultado['trechos']):
+                raise ValueError('Selecione pelo menos um trecho com barreira informada.')
+            plano = {'id': str(uuid4()), 'data': agora(), 'base': base, 'reparos': resultado['reparos'],
+                     'revisor': revisor, 'justificativa': justificativa, 'resultado': resultado}
+            con.execute('INSERT INTO planos_passagem VALUES (?, ?)',
+                        (plano['id'], json.dumps(plano, ensure_ascii=False)))
+            return plano
 
     def indicadores(self) -> dict:
         casos = self.listar()
