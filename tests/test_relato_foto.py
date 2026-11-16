@@ -78,6 +78,20 @@ class RelatoFotoTest(unittest.TestCase):
             self.assertEqual(self.previa().status_code, 503)
         self.assertEqual(self.client.get('/api/atendimentos').json(), [])
 
+    def test_diagnostico_remoto_nao_expoe_chave_ou_imagem(self):
+        from central import relato_foto
+        from urllib.error import HTTPError
+        erro = HTTPError('https://api.groq.com', 400, 'contrato', {}, io.BytesIO(json.dumps({
+            'error': {'message': 'Schema recusado. Credencial chave-diagnostico, imagem data:image/jpeg;base64,QUJDRA=='}}).encode()))
+        with patch.dict('os.environ', {'GROQ_API_KEY': 'chave-diagnostico'}), \
+                patch.object(relato_foto, 'urlopen', side_effect=erro), self.assertLogs('central.relato_foto', 'WARNING') as logs:
+            r = self.previa()
+        self.assertEqual(r.status_code, 503)
+        self.assertIn('400', logs.output[0])
+        self.assertNotIn('chave-diagnostico', logs.output[0])
+        self.assertNotIn('QUJDRA==', logs.output[0])
+        self.assertNotIn('Schema recusado', r.text)
+
     def test_origem_assinada_preserva_texto_original_e_contestacao(self):
         from central import relato_foto
         with patch.object(relato_foto, 'urlopen', return_value=self.remoto()):

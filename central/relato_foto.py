@@ -3,7 +3,9 @@ import base64
 import hashlib
 import hmac
 import json
+import logging
 import os
+import re
 from datetime import datetime, timezone
 from typing import Literal
 from urllib.error import HTTPError, URLError
@@ -79,6 +81,12 @@ def gerar(conteudo: bytes, chave: str) -> dict:
         elif len(sugestao.descricao) < 10:
             raise ValueError('Descrição insuficiente.')
     except HTTPError as erro:
+        try:
+            mensagem = str(json.loads(erro.read(4096)).get('error', {}).get('message', ''))
+            mensagem = re.sub(r'data:image/[^\s"\']+', '[imagem]', mensagem.replace(api_key, '[segredo]'))
+            logging.getLogger(__name__).warning('Groq foto HTTP %s: %.350s', erro.code, mensagem)
+        except (OSError, ValueError, AttributeError):
+            logging.getLogger(__name__).warning('Groq foto HTTP %s; diagnóstico indisponível', erro.code)
         if erro.code == 429:
             raise RuntimeError('A cota gratuita da geração por foto foi atingida. Aguarde ou preencha o relato manualmente.') from erro
         raise RuntimeError('O Groq não conseguiu analisar a foto agora. A imagem foi mantida; você pode preencher o relato.') from erro
