@@ -420,7 +420,7 @@ async function gerarAutomatico(){
   cancelarAutomatico();if(!state.foto)return;
   limparGeo();const leitura=new AbortController();state.geracaoFoto=leitura;state.previaFoto=null;state.envioId=null;
   $('gerar-automatico').hidden=false;$('gerar-automatico').disabled=true;
-  $('automatico-status').textContent='Analisando a foto e buscando sua posição. Aguarde as permissões. Em caso de fila, pode levar até 75 segundos; você pode continuar manualmente.';
+  $('automatico-status').textContent='Analisando a foto e buscando sua posição. Aguarde as permissões. Em caso de fila, pode levar mais de um minuto; você pode continuar manualmente.';
   const foto=state.foto;const form=new FormData();form.append('arquivo',foto,'ocorrencia.jpg');
   try{
     const resultado=await prepararAutomatico(()=>api('/api/relato-foto',{method:'POST',body:form,signal:leitura.signal}),

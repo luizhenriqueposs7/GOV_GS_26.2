@@ -4,7 +4,7 @@ Repositório da entrega: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_
 
 O [relatório de trabalho em PDF](output/pdf/Central_CitizenTech_Governanca_Versao_de_Trabalho.pdf) tem 14 páginas. A conclusão será elaborada com os integrantes. O [roteiro do vídeo integrado](docs/roteiro-video.md) prevê 6min30s; o vídeo deve ser publicado como Não Listado e seu link ainda será acrescentado. A central está em [gov262.vercel.app](https://gov262.vercel.app), com acesso privado do grupo. A execução local continua disponível.
 
-A jornada móvel agora tem duas etapas: **tirar foto → conferir e enviar**. A foto gera uma descrição preliminar pelo Groq; com permissão, o aparelho obtém GPS e consulta uma região aproximada. Texto e ponto continuam editáveis. A prévia não cria pedido. A sugestão original é assinada pelo servidor e vinculada à foto, preservando origem e correções no histórico. Cadastro manual, revisão, confirmação e contestação permanecem disponíveis. [Teste no celular](docs/teste-celular.md).
+A jornada móvel agora tem duas etapas: **tirar foto → conferir e enviar**. A foto gera uma descrição preliminar pelo Groq, com tentativas limitadas em caso de lotação; com permissão, o aparelho obtém GPS e consulta uma região aproximada. Texto e ponto continuam editáveis. A prévia não cria pedido. A sugestão original é assinada pelo servidor e vinculada à foto, preservando origem e correções no histórico. Cadastro manual, revisão, confirmação e contestação permanecem disponíveis. [Teste no celular](docs/teste-celular.md).
 
 
 Preparação e acompanhamento local de pedidos sobre calçadas, buracos no asfalto e iluminação em São Paulo. A central recebe foto opcional e localização confirmada, pede contexto, mostra a fonte do encaminhamento, conserva a triagem original, registra uma revisão justificada e permite contestar a decisão. Depois da conferência, reutiliza a persistência do ZelaBairro.
@@ -17,7 +17,7 @@ Protótipo acadêmico para Governança em IA e Business Analytics, GS CitizenTec
 
 Para a adaptação à Vercel, veja [configuração e requisitos de publicação](docs/publicacao-vercel.md). O ponto de entrada e as dependências estão em `pyproject.toml`. O modo online usa Postgres e fotos privadas no Supabase, preserva a execução local e identifica a troca do modelo de Generative AI para Groq Free. As verificações e os limites estão registrados nesse documento.
 
-Em 16/11/2026, o fluxo foi verificado pelo HTTPS: foto, localização manual confirmada, revisão, confirmação na persistência original do ZelaBairro, contestação, Visão e Groq com fonte. RPA processou um registro e rejeitou outro; PLN retornou trechos do corpus. No Passagem Livre, a contestação desatualizou o plano e impediu novo salvamento sem revisão. Passaram 131 testes Python e 19 JavaScript. O relatório mantém 14 páginas. Câmera e GPS físicos, conclusão e vídeo final continuam pendentes.
+Em 16/11/2026, o fluxo foi verificado pelo HTTPS: foto, localização manual confirmada, revisão, confirmação na persistência original do ZelaBairro, contestação, Visão e Groq com fonte. RPA processou um registro e rejeitou outro; PLN retornou trechos do corpus. No Passagem Livre, a contestação desatualizou o plano e impediu novo salvamento sem revisão. Passaram 139 testes Python e 25 JavaScript. O relatório mantém 14 páginas. Câmera e GPS físicos, conclusão e vídeo final continuam pendentes.
 
 Requer Python 3.13 e PowerShell. Na pasta deste arquivo:
 

@@ -109,6 +109,24 @@ class RelatoFotoTest(unittest.TestCase):
         self.assertEqual([c.args[0] for c in esperar.call_args_list], [2,4])
         self.assertEqual(self.client.get('/api/atendimentos').json(), [])
 
+    def test_leitura_do_corpo_respeita_o_tempo_restante_apos_cabecalhos(self):
+        from central import relato_foto
+        from types import SimpleNamespace
+        relogio = [0]
+        timeouts = []
+        class CorpoLento(io.BytesIO):
+            def read1(self, tamanho):
+                relogio[0] += 40
+                return super().read1(tamanho)
+        corpo = CorpoLento(self.remoto().getvalue())
+        corpo.fp = SimpleNamespace(raw=SimpleNamespace(_sock=SimpleNamespace(settimeout=timeouts.append)))
+        def cabecalhos(*args, **kwargs):
+            relogio[0] += 40
+            return corpo
+        with patch.object(relato_foto, 'monotonic', lambda: relogio[0]), patch.object(relato_foto, 'urlopen', cabecalhos):
+            self.assertEqual(self.previa().status_code, 503)
+        self.assertEqual(timeouts, [35])
+
     def test_origem_assinada_preserva_texto_original_e_contestacao(self):
         from central import relato_foto
         with patch.object(relato_foto, 'urlopen', return_value=self.remoto()):

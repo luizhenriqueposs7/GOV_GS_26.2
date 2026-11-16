@@ -46,6 +46,26 @@ PROMPT = (
 )
 
 
+def _ler(resposta, limite, prazo):
+    leitor = resposta.fp if isinstance(resposta, HTTPError) and resposta.fp is not None else resposta
+    ler = getattr(leitor, 'read1', leitor.read)
+    corpo = bytearray()
+    while len(corpo) <= limite:
+        restante = prazo - monotonic()
+        if restante <= 0:
+            raise TimeoutError('Prazo da análise excedido.')
+        socket = getattr(getattr(getattr(leitor, 'fp', None), 'raw', None), '_sock', None)
+        if socket is not None:
+            socket.settimeout(min(45, restante))
+        bloco = ler(min(4096, limite + 1 - len(corpo)))
+        if monotonic() >= prazo:
+            raise TimeoutError('Prazo da análise excedido.')
+        if not bloco:
+            break
+        corpo.extend(bloco)
+    return bytes(corpo)
+
+
 def gerar(conteudo: bytes, chave: str) -> dict:
     foto, metadados = preparar_foto(conteudo)
     api_key = os.getenv('GROQ_API_KEY', '').strip()
@@ -74,7 +94,7 @@ def gerar(conteudo: bytes, chave: str) -> dict:
                 raise RuntimeError('A análise demorou além do limite. Tente novamente ou preencha o relato manualmente.')
             try:
                 with urlopen(req, timeout=min(45, restante)) as remoto:
-                    resposta = remoto.read(16385)
+                    resposta = _ler(remoto, 16384, prazo)
                 break
             except HTTPError as erro:
                 espera = 2 ** (tentativa + 1)
@@ -97,7 +117,7 @@ def gerar(conteudo: bytes, chave: str) -> dict:
             raise ValueError('Descrição insuficiente.')
     except HTTPError as erro:
         try:
-            mensagem = str(json.loads(erro.read(4096)).get('error', {}).get('message', ''))
+            mensagem = str(json.loads(_ler(erro, 4096, prazo)).get('error', {}).get('message', ''))
             mensagem = re.sub(r'data:image/[^\s"\']+', '[imagem]', mensagem.replace(api_key, '[segredo]'))
             logging.getLogger(__name__).warning('Groq foto HTTP %s: %.350s', erro.code, mensagem)
         except (OSError, ValueError, AttributeError):

@@ -45,6 +45,8 @@ Files: web/automatico.mjs, web/app.js, web/mobile.mjs, web/index.html, web/style
 
 Files: docs/publicacao-vercel.md, docs/teste-celular.md, docs/relatorio-base.md, README.md, docs/evidencias/relato-foto-2026-11-16.json.
 
-- [ ] Executar modelo real com imagem existente sem dados pessoais; verificar fluxo completo e casos de falha pelo navegador.
-- [ ] Revisar diff, rodar verificações relevantes e atualizar documentação/relatório mantendo 14 páginas e conclusão reservada.
-- [ ] Commit/push e acompanhar build. Verificar HTTPS com senha, sem bypass, e nova geração real; informar limites do teste físico.
+- [x] Executar modelo real com imagem existente sem dados pessoais; verificar fluxo completo e casos de falha pelo navegador.
+- [x] Revisar diff, rodar verificações relevantes e atualizar documentação/relatório mantendo 14 páginas e conclusão reservada.
+- [x] Commit/push e acompanhar build. Verificar HTTPS com senha, sem bypass, e nova geração real; informar limites do teste físico.
+
+Execução: 139 Python com PG/TLS e 25 Node; navegador móvel sintético e HTTPS com modelo real. Revisão independente confirmou correções de cancelamento, rascunho e leitura tardia. Evidências em docs/evidencias/relato-foto-local e relato-foto-https. Câmera/GPS físicos seguem com o integrante.

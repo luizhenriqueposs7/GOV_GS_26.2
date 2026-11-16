@@ -1,0 +1,28 @@
+{
+  "data": "2026-11-16T19:38:01.432714+00:00",
+  "url": "https://gov262.vercel.app",
+  "modelo": "qwen/qwen3.8-27b",
+  "imagem_acervo": "materiais/visao/data/recortes/585_908_2270.jpg",
+  "imagem_original_sha256": "81bfe43756862e43fa07fe2ada153b6259bc9a553eacf104febdf89f4da170b5",
+  "foto_normalizada_sha256": "743688bff402f1a56f9a9123e6849ba10d1375f260319e1d54b68062aebdee11",
+  "resposta_real": {
+    "status": "identificado",
+    "tipo": "fissura",
+    "descricao": "A imagem mostra um close-up de uma superfície cinza e irregular, possivelmente de concreto ou asfalto. Há uma fenda escura e irregular visível na parte inferior da foto. A baixa resolução impede a avaliação do contexto ou da extensão do dano.",
+    "limites": "A foto não permite concluir se a fenda é estrutural, sua profundidade ou se há outros danos ao redor."
+  },
+  "latencia_s": 33.46,
+  "previa_sem_gravar": true,
+  "controle_cinza_inconclusivo": true,
+  "caso_ficticio": "dc8c8ad4-1eb5-40b0-8340-c711e9bb8641",
+  "gps": "Coordenadas manuais fictícias confirmadas; não é teste físico",
+  "regiao": "Nenhuma chamada real ao geocodificador com coordenadas de teste",
+  "texto_corrigido_e_origem_assinada": true,
+  "reenvio_idempotente": true,
+  "revisao_confirmacao_contestacao": true,
+  "foto_e_historico_outra_instancia": true,
+  "acesso_sem_bypass": true,
+  "nao_mede": "Acurácia geral, endereço real, câmera/GPS físicos ou benefício social",
+  "implantacao": "dpl_9dkJKF8fn5ySZwy5NMagrtQov17k",
+  "sobrecarga_observada": "HTTP503 over capacity; tratada com até 3 tentativas, sem repetir cota 429"
+}

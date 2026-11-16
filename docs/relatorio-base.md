@@ -155,7 +155,7 @@ Cadastro, edição, revisão, confirmação e contestação foram executados no 
 
 A execução local de Generative AI utiliza recuperação híbrida e Qwen3-4B-Instruct-2507, em Q4_K_M. O modelo seleciona uma evidência recuperada. A resposta corresponde ao trecho escolhido, com endereço oficial para consulta.
 
-Na versão online, Qwen3.8-27B no Groq Free seleciona evidências do corpus e gera descrições preliminares por foto. A sugestão guarda modelo, data e hash da imagem; não substitui o ResNet18 nem a revisão. A consulta textual retornou ILU.1 e passou nos controles. As avaliações abaixo pertencem ao modelo local.
+Na versão online, Qwen3.8-27B no Groq Free seleciona evidências do corpus e gera descrições preliminares por foto. A sugestão guarda modelo, data e hash da imagem; não substitui o ResNet18 nem a revisão. Texto retornou ILU.1; a foto gerou relato. Sobrecarga exigiu tentativas limitadas. As avaliações abaixo pertencem ao modelo local.
 
 O serviço pode pedir esclarecimento, indicar falta de evidência, reconhecer uma pergunta fora do escopo e bloquear pedidos incompatíveis com suas regras. A orientação não cria protocolo e não confirma que o serviço foi solicitado.
 

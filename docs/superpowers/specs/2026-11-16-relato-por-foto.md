@@ -16,3 +16,7 @@ Alternativas: manter três etapas conserva o excesso de preenchimento; enviar au
 ## Aceite
 
 Teste de navegador móvel com imagem, GPS controlado e região simulada: geração real do Groq, revisão humana do texto, envio, revisão de gestão, confirmação, contestação e persistência. Controles de imagem inconclusiva, falhas remotas, GPS negado, cancelamento, origem assinada e foto divergente. Publicação HTTPS com autenticação, sem bypass. Câmera/GPS físicos serão conferidos pelo integrante.
+
+## Ajuste após teste real
+
+O provedor retornou HTTP503 por capacidade esgotada, embora a requisição correta também tenha respondido. Foram acrescentadas até três tentativas somente para 500/502/503/504, com esperas de 2 e 4 s e orçamento compartilhado75s para chamadas e leitura do corpo. Cota 429 e erros de contrato não são repetidos. O diagnóstico é sanitizado; a interface conserva os dados e permite ação manual. Não prometer prazo total exato incluindo preparo e condições de rede.
