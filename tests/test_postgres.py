@@ -105,6 +105,20 @@ class PostgresRealTest(unittest.TestCase):
         self.assertEqual(len(tabelas), 5)
         self.assertTrue(all(t['relrowsecurity'] for t in tabelas))
 
+    def test_ciclo_atendimento_persiste_e_reabre_no_postgres(self):
+        caso = self.revisado()
+        caso = self.repo.confirmar_frontend(caso['id'])
+        self.repo.informar_protocolo(caso['id'], 'SIM-PG-001', True)
+        self.repo.registrar_retorno(caso['id'], 'correcao_informada', 'Correção ilustrativa no banco temporário.',
+                                   {'sha256': 'a' * 64})
+        self.repo.verificar_correcao(caso['id'], 'Grupo', 'Foto e contexto conferidos na demonstração.',
+                                    self.repo.obter(caso['id'])['atualizado_em'])
+        self.assertEqual(self.repo.obter(caso['id'])['atendimento']['etapa'], 'correcao_verificada')
+        reaberto = self.repo.contestar(caso['id'], 'A passagem continua obstruída no teste.')
+        self.assertEqual(reaberto['atendimento']['etapa'], 'reaberto')
+        self.assertTrue(reaberto['historico'][-1]['dados']['atendimento_anterior']['conferencia'])
+        self.assertEqual(self.repo.indicadores()['protocolos_demonstracao'], 1)
+
     def test_rollback_desfaz_caso_evento_e_chave_de_reenvio(self):
         with self.assertRaisesRegex(RuntimeError, 'Falha proposital'):
             with self.repo.conexao():

@@ -1,4 +1,5 @@
 import hmac
+import hashlib
 import json
 import os
 import secrets
@@ -8,7 +9,7 @@ from typing import Literal
 from uuid import UUID
 from urllib.parse import quote
 
-from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse, Response, RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -65,6 +66,14 @@ class Contestacao(Entrada):
 
 class Protocolo(Entrada):
     protocolo: str = Field(min_length=1, max_length=80)
+    demonstracao: bool = False
+
+
+class Conferencia(Entrada):
+    base: str = Field(min_length=1, max_length=40)
+    revisor: str = Field(min_length=2, max_length=80)
+    justificativa: str = Field(min_length=10, max_length=500)
+    confirmado: Literal[True]
 
 
 class Pergunta(Entrada):
@@ -112,7 +121,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             arquivo_chave.write_text(secrets.token_urlsafe(32), encoding="utf-8")
         chave = arquivo_chave.read_text(encoding="utf-8").strip()
 
-    app = FastAPI(title="ZelaBairro", version="0.4.1", docs_url="/contrato")
+    app = FastAPI(title="ZelaBairro", version="0.5.0", docs_url="/contrato")
     app.state.repo = repo
 
     def guardar_foto(conteudo, previa=''):
@@ -230,7 +239,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
 
     @app.post('/api/atendimentos/com-anexo', status_code=201)
     async def criar_com_anexo(dados: str = Form(max_length=10000), arquivo: UploadFile | None = File(default=None),
-                             previa: str = Form(default='', max_length=6000)):
+                             previa: str = Form(default='', max_length=16000)):
         entrada = ler_pedido(dados)
         foto = None
         if arquivo:
@@ -243,8 +252,11 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
         return await run_in_threadpool(repo.criar, payload)
 
     @app.get('/api/atendimentos/{identificador}/foto')
-    def foto_do_pedido(identificador: str):
-        foto = obter(identificador).get('foto')
+    @app.get('/api/atendimentos/{identificador}/foto-correcao')
+    def foto_do_pedido(identificador: str, request: Request):
+        caso = obter(identificador)
+        foto = (caso.get('atendimento', {}).get('retorno', {}).get('foto')
+                if request.url.path.endswith('/foto-correcao') else caso.get('foto'))
         sha = foto.get('sha256', '') if foto else ''
         if not re.fullmatch('[a-f0-9]{64}', sha):
             raise HTTPException(404, 'Este pedido não possui foto.')
@@ -277,7 +289,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     @app.put('/api/atendimentos/{identificador}/com-anexo')
     async def atualizar_com_anexo(identificador: str, dados: str = Form(max_length=10000),
                                  arquivo: UploadFile | None = File(default=None), remover_foto: bool = Form(default=False),
-                                 previa: str = Form(default='', max_length=6000)):
+                                 previa: str = Form(default='', max_length=16000)):
         anterior = await run_in_threadpool(obter, identificador)
         entrada = ler_pedido(dados)
         if arquivo and remover_foto:
@@ -312,7 +324,35 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     @app.post("/api/atendimentos/{identificador}/protocolo")
     def protocolo(identificador: str, entrada: Protocolo):
         obter(identificador)
-        return repo.informar_protocolo(identificador, entrada.protocolo)
+        return repo.informar_protocolo(identificador, entrada.protocolo, entrada.demonstracao)
+
+    @app.get('/api/atendimentos/{identificador}/ficha')
+    def ficha(identificador: str):
+        from .catalogo import ficha_encaminhamento
+        return Response(ficha_encaminhamento(obter(identificador)), media_type='text/plain',
+                        headers={'Content-Disposition': f'attachment; filename="zelabairro-{identificador}.txt"'})
+
+    @app.post('/api/atendimentos/{identificador}/retorno')
+    async def retorno(identificador: str, etapa: Literal['em_atendimento', 'sem_solucao', 'correcao_informada'] = Form(),
+                      relato: str = Form(min_length=10, max_length=1000), arquivo: UploadFile | None = File(default=None)):
+        caso = await run_in_threadpool(obter, identificador)
+        if not caso.get('atendimento') or caso['atendimento']['etapa'] == 'correcao_verificada':
+            raise ValueError('Anote o protocolo ou solicite nova análise de um acompanhamento encerrado.')
+        foto = None
+        if arquivo:
+            conteudo = await arquivo.read(8 * 1024 * 1024 + 1)
+            metadados = await run_in_threadpool(lambda: imagens.preparar_foto(conteudo)[1])
+            inicial = (caso.get('foto') or {}).get('sha256')
+            if etapa != 'correcao_informada' or inicial in {metadados['sha256'], hashlib.sha256(conteudo).hexdigest()}:
+                raise ValueError('Use uma nova foto para informar a correção, diferente da foto inicial.')
+            foto = await run_in_threadpool(guardar_foto, conteudo)
+        return await run_in_threadpool(repo.registrar_retorno, identificador, etapa, relato, foto)
+
+    @app.post('/api/atendimentos/{identificador}/verificar-correcao')
+    def verificar_correcao(identificador: str, entrada: Conferencia, x_manager_key: str | None = Header(default=None)):
+        gestor(x_manager_key)
+        obter(identificador)
+        return repo.verificar_correcao(identificador, entrada.revisor, entrada.justificativa, entrada.base)
 
     @app.post("/api/atendimentos/{identificador}/zelabairro")
     def encaminhar(identificador: str, x_manager_key: str | None = Header(default=None)):

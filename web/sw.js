@@ -1,7 +1,7 @@
 'use strict';
 // Atualize a versão ao publicar mudanças no conjunto estático abaixo.
-const CACHE = 'citizentech-formulario-v16';
-const ARQUIVOS = ['/', '/web/style.css', '/web/app.js', '/web/mobile.mjs', '/web/automatico.mjs', '/web/mapa.mjs', '/web/passagem.mjs', '/web/brand.svg', '/web/vendor/leaflet.js', '/web/vendor/leaflet.css', '/web/vendor/archivo-regular.ttf', '/web/vendor/archivo-bold.ttf', '/web/manifest.webmanifest', '/web/icon-192.png', '/web/icon-512.png'];
+const CACHE = 'citizentech-formulario-v17';
+const ARQUIVOS = ['/', '/web/style.css', '/web/app.js', '/web/mobile.mjs', '/web/automatico.mjs', '/web/mapa.mjs', '/web/passagem.mjs', '/web/atendimento.mjs', '/web/brand.svg', '/web/vendor/leaflet.js', '/web/vendor/leaflet.css', '/web/vendor/archivo-regular.ttf', '/web/vendor/archivo-bold.ttf', '/web/manifest.webmanifest', '/web/icon-192.png', '/web/icon-512.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ARQUIVOS)));
 });

@@ -142,7 +142,7 @@ Uma avaliação futura dependeria de dados operacionais e de uma comparação co
 
 A central reutiliza a validação e a persistência do ZelaBairro. Localmente, os bancos ficam separados. Na adaptação online, Postgres mantém relatos e histórico na mesma transação, com fotos privadas no Supabase.
 
-Na jornada móvel, a foto inicia um relato preliminar e solicita GPS. O aparelho sugere a região pela BigDataCloud, sem rua ou número. A pessoa confere texto e ponto antes de enviar. O rascunho conserva esses dados. A foto perde metadados. O catálogo distingue via comum e corredor de ônibus (SÃO PAULO, 2026c).
+Na jornada móvel, a foto prepara ocorrência, impactos possíveis e pedido de vistoria, sem medir dimensões. O GPS sugere região pela BigDataCloud, sem rua ou número. A pessoa confere texto e ponto antes de enviar. O rascunho conserva os dados; a foto perde metadados. O catálogo distingue os serviços (SÃO PAULO, 2026c).
 
 A confirmação exige revisão justificada e dados completos. Repetir a confirmação da mesma revisão mantém o registro. Alterar o pedido ou contestar retira a decisão e o vínculo atuais, preservando o histórico. O identificador é da central; protocolos externos anotados permanecem sem verificação no órgão.
 
@@ -216,9 +216,9 @@ Os resultados pertencem ao acervo avaliado. O desempenho em fissuras sutis é um
 
 ## 2.9 Governança em IA e Business Analytics
 
-A Governança preserva sugestão, revisão justificada e contestação. Pendências impedem a confirmação. Pedidos e fotos são públicos, sem contas individuais. A chave de gestão protege revisão e confirmação.
+A Governança preserva sugestão, revisão e contestação. A ficha reúne relato, destino e canal; o envio cabe ao solicitante. Protocolo declarado e demonstração ficam separados. Retorno e foto posterior exigem conferência humana para encerrar. Pedidos e fotos são públicos; a chave protege decisões de gestão.
 
-O Passagem Livre compara reparos em quatro trechos de um percurso didático. Só a calçada reparada mantém a barreira da rampa; ambas tratadas permitem continuidade na hipótese. Condições desconhecidas permanecem pendentes. O plano exige revisão, conserva cenário e justificativa e fica desatualizado após mudança ou contestação. O cálculo é determinístico, sem execução quântica ou certificação de acessibilidade.
+O Passagem Livre compara reparos em quatro trechos didáticos. Correção conferida retira só a barreira daquele pedido; outras barreiras e condições desconhecidas permanecem. Alteração ou contestação reabre o acompanhamento e desatualiza o plano. O cálculo é determinístico, sem execução quântica ou certificação de acessibilidade.
 
 Quadro 1 - Participação dos materiais na central
 
@@ -236,7 +236,7 @@ Quadro 1 - Participação dos materiais na central
 
 Fonte: implementação e materiais reunidos pelo grupo em 2026.
 
-Os indicadores contam os pedidos; prioridades alteradas são divididas pelas revisões atuais. Não medem benefício social ou reparos. As evidências em docs/evidencias registram foto do acervo, ponto manual, vínculo, revisão, persistência, plano e contestação no navegador. O teste físico permanece pendente.
+Indicadores separam pedidos sem protocolo, protocolos declarados e demonstrações. Correções conferidas são decisões do protótipo, sem confirmação municipal. Não houve envio ao órgão nem reparo validado. Evidências técnicas estão em docs/evidencias. O teste físico permanece pendente.
 
 <!-- pagina -->
 # 3 CONCLUSÃO

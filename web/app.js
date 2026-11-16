@@ -3,6 +3,7 @@ import {coordenadas, dadosRascunho, criarRascunho, reduzirFoto, rascunho, bloque
 import {criarMapa, pontoValido, proximos, filtrarCasos} from './mapa.mjs';
 import {iniciarPassagem} from './passagem.mjs';
 import {localizarAtual, prepararAutomatico} from './automatico.mjs';
+import {atendimento} from './atendimento.mjs';
 const $ = (id) => document.getElementById(id);
 const state = {casos: [], selecionado: null, edicao: null, ativos: false, etapa:0, mapa:null, mapaLocal:null, mapaId:null, camera:null};
 Object.assign(state, {foto: null, fotoAtual: null, fotoUrl: null, removerFoto: false, origemGeo: 'manual', precisaoGeo: null, envioId: null, assinatura: null, rascunhoId:null, previaFoto:null, regiaoAuto:null});
@@ -101,7 +102,7 @@ async function atualizar() {
   }
 }
 function metricas(m) {
-  const cards = [["Pedidos registrados", m.total, "Somente desta instalação"], ["Decisões revisadas", m.revisados, "Revisões atuais"], ["Revisões obrigatórias pendentes", m.revisoes_pendentes, "Controle de acessibilidade e RPA"], ["Prioridades alteradas", m.sugestoes_corrigidas + " / " + m.denominador_correcoes, "Entre as decisões revisadas"]];
+  const cards = [["Pedidos registrados", m.total, "Somente desta instalação"], ["Decisões revisadas", m.revisados, "Revisões atuais"], ["Sem protocolo anotado", m.sem_protocolo, "Ainda sem acompanhamento externo declarado"], ["Protocolos declarados", m.protocolos_informados, "Sem validação no órgão"], ["Correções conferidas", m.correcoes_conferidas, "Conferência do protótipo; sem vistoria técnica"], ["Demonstrações", m.protocolos_demonstracao, m.correcoes_demo+' correção(ões) conferida(s) no cenário']];
   $("indicadores").replaceChildren(...cards.map(([nome, valor, nota]) => {const card = el("div", null, "metric");card.append(el("span", nome), el("strong", valor), el("small", nota));return card;}));
 }
 function lista() {
@@ -116,7 +117,7 @@ function lista() {
 }
 function preparacao(caso) {
   const p = caso.preparacao, box = el("article", null, "result");
-  box.append(el('p','Pedido recebido · '+caso.id.slice(0,8).toUpperCase(),'receipt-id'),el('h2',caso.descricao),evidenciaVisual(caso));
+  box.append(el('p','Pedido recebido na central · '+caso.id.slice(0,8).toUpperCase(),'receipt-id'),el('h2','Seu pedido foi registrado.'),el('p',caso.descricao,'occurrence-body'),evidenciaVisual(caso));
   box.append(badge(p.faltantes.length ? "Precisa de conferência" : "Serviço para conferir", p.faltantes.length ? "orange" : ""));
   box.append(el("h2", p.servico ? p.servico.nome : "Vamos conferir o encaminhamento."));
   if(p.pergunta) box.append(el("p", p.pergunta, "lead"));
@@ -179,7 +180,7 @@ async function detalhe(id, rolar = true) {
   if (!rolar && state.selecionado?.id === id && state.selecionado.atualizado_em === caso.atualizado_em) return;
   state.selecionado = caso;
   const box = el("article", null, "panel detail");
-  box.append(badge(caso.situacao), el("h2", caso.descricao), el("p", "Registro local " + caso.id, "fine"));
+  box.append(badge(caso.situacao), el('h2', 'Pedido ' + caso.id.slice(0,8).toUpperCase()), el('p',caso.descricao,'occurrence-body'), el("p", "Registro local " + caso.id, "fine"));
   const grid = el("div", null, "details-grid"), principal = el("div"), decisao = el("div");
   const dl = el("dl"); for(const [nome,valor] of [["Bairro",caso.bairro],["Local",caso.local || "Não informado"],["Serviço",caso.preparacao.servico?.nome || "Ainda não definido"],["Pendências",caso.preparacao.faltantes.join(", ") || "Informações disponíveis para conferência"]]) dl.append(el("dt",nome),el("dd",valor));
   principal.append(dl);
@@ -193,13 +194,12 @@ async function detalhe(id, rolar = true) {
   if(caso.frontend) decisao.append(el("p","ZelaBairro: "+caso.frontend.id+" · protocolo local.","fine"));
   if(caso.protocolo_oficial) decisao.append(el("p","Protocolo externo informado: "+caso.protocolo_oficial.numero+". Não verificado no órgão.","inset warning"));
   grid.append(principal,decisao); box.append(grid);
-  const forms = el("div",null,"details-grid divider"), contestar = el("form"), protocolo = el("form");
+  box.append(atendimento(caso,{el,link,botao,enviar,api,durante,aviso,atualizar,reduzirFoto,data}));
+  const forms = el("div",null,"details-grid divider"), contestar = el("form");
   contestar.append(el("h3","Pedir uma nova análise"));const motivo=el("textarea"); motivo.id="motivo-contestacao";motivo.minLength=10;motivo.maxLength=500;motivo.required=true;motivo.rows=3;const lm=el("label","Explique o que precisa ser reconsiderado");lm.htmlFor=motivo.id;
   const bc=el("button","Solicitar nova revisão","secondary");bc.type="submit";contestar.append(lm,motivo,bc);
   contestar.addEventListener("submit",e=>{e.preventDefault();durante(bc,async()=>{await enviar("/api/atendimentos/"+id+"/contestacao",{motivo:motivo.value});await atualizar();aviso("Nova análise solicitada. A revisão anterior ficou preservada no histórico.");});});
-  protocolo.append(el("h3","Anotar protocolo externo"),el("p","Somente se você já abriu o chamado pelo canal oficial. Aqui o número é uma informação fornecida, sem confirmação do órgão.","fine"));const numero=el("input");numero.id="numero-protocolo";numero.required=true;numero.maxLength=80;const ln=el("label","Número informado");ln.htmlFor=numero.id;const bp=el("button","Salvar número informado","secondary");bp.type="submit";protocolo.append(ln,numero,bp);
-  protocolo.addEventListener("submit",e=>{e.preventDefault();durante(bp,async()=>{await enviar("/api/atendimentos/"+id+"/protocolo",{protocolo:numero.value});await detalhe(id);aviso("Número externo anotado como informação não verificada.");});});
-  forms.append(contestar,protocolo);box.append(forms,el("h3","Histórico do pedido","spaced"));
+  forms.append(contestar);box.append(forms,el("h3","Histórico do pedido","spaced"));
   box.append(historico(caso));
   $("detalhe-caso").replaceChildren(box);
   if (rolar) box.scrollIntoView({block:"start"});
@@ -269,7 +269,9 @@ async function ativos() {
 }
 function evidenciaVisual(caso) {
   const box=el('div',null,'case-evidence');
-  if(caso.foto) {const img=el('img'); img.src='/api/atendimentos/'+encodeURIComponent(caso.id)+'/foto?v='+caso.foto.sha256; img.alt='Foto anexada ao relato: '+caso.descricao; img.loading='lazy'; box.append(img,el('p','Foto fornecida pelo solicitante. A descrição automática é preliminar e não constitui laudo.','fine'));}
+  if(caso.foto) {const img=el('img'); img.src='/api/atendimentos/'+encodeURIComponent(caso.id)+'/foto?v='+caso.foto.sha256; img.alt='Foto inicial do pedido '+caso.id.slice(0,8); img.loading='lazy'; box.append(img,el('p','Foto fornecida pelo solicitante. A descrição automática é preliminar e não constitui laudo.','fine'));
+    if(caso.sugestao_foto?.tipo==='fissura' && /concreto/i.test(caso.sugestao_foto.observacao||caso.sugestao_foto.descricao))box.append(botao('Analisar esta fissura em concreto',e=>durante(e.currentTarget,async()=>{const resposta=await fetch('/api/atendimentos/'+encodeURIComponent(caso.id)+'/foto');if(!resposta.ok)throw new Error('Foto indisponível.');const form=new FormData();form.append('arquivo',await resposta.blob(),'ocorrencia.jpg');form.append('atendimento_id',caso.id);const r=await api('/api/visao',{method:'POST',body:form});await atualizar();aviso((r.rotulo||r.classe||'Inferência vinculada ao pedido')+'. '+r.limite);}), 'secondary'));
+  }
   if(caso.sugestao_foto){const s=caso.sugestao_foto;const origem=el('details',null,'photo-origin');origem.append(el('summary','Como o relato foi preparado'),el('p','Sugestão original: '+(s.descricao||'Imagem inconclusiva; descrição preenchida pela pessoa.')),el('p',s.modelo+' · '+data(s.gerado_em),'fine'),el('p',s.limites,'fine'));if(s.descricao&&s.descricao!==caso.descricao)origem.append(el('p','O relato enviado foi corrigido pelo solicitante. A sugestão original permanece registrada.','fine'));box.append(origem);}
   if(caso.localizacao) {const g=caso.localizacao; box.append(el('p','Coordenadas confirmadas: '+g.latitude.toFixed(6)+', '+g.longitude.toFixed(6),'fine'),el('p',(g.origem==='gps'?'Posição do aparelho':'Coordenadas digitadas')+(g.precisao_m!==null?' · precisão informada pelo aparelho: '+Math.round(g.precisao_m)+' m':'')+'. Endereço não verificado.','fine'));}
   if(caso.passagem) {

@@ -15,6 +15,13 @@ def agora():
     return datetime.now(timezone.utc).isoformat()
 
 
+def reabrir_atendimento(caso, evidencia):
+    if caso.get('atendimento'):
+        evidencia['atendimento_anterior'] = caso['atendimento']
+        caso['atendimento'] = {k: v for k, v in caso['atendimento'].items() if k in ('demonstracao', 'protocolo')}
+        caso['atendimento'].update(etapa='reaberto', atualizado_em=agora())
+
+
 class EnvioConflitante(ValueError):
     pass
 
@@ -112,6 +119,7 @@ class Repositorio:
                 acao = "Lote atualizado"
                 evidencia = {"entrada_anterior": {k: anterior.get(k) for k in entrada},
                              "revisao_anterior": anterior.get("revisao"), "frontend_anterior": anterior.get("frontend")}
+                reabrir_atendimento(caso, evidencia)
                 caso.pop("frontend", None)
             else:
                 caso = {**entrada, "id": str(uuid4()), "criado_em": agora(), "protocolo_oficial": None}
@@ -159,6 +167,7 @@ class Repositorio:
             evidencia = {"entrada_anterior": {k: caso.get(k) for k in campos},
                          "revisao_anterior": caso.get("revisao"), "frontend_anterior": caso.pop("frontend", None)}
             caso.update({k: dados[k] for k in campos})
+            reabrir_atendimento(caso, evidencia)
             analise = dados["triagem_original"]
             caso.update(revisao=None, exige_revisao=bool(dados.get('passagem') or analise.get("review_required") or analise.get("category") == "Acessibilidade"),
                         situacao="Aguardando revisão")
@@ -177,7 +186,10 @@ class Repositorio:
                        "revisor": revisor.strip(), "data": agora()}
             caso["revisao"] = revisao
             caso["situacao"] = "Revisado; faltam informações" if caso["preparacao"].get("faltantes") else "Preparado para encaminhar"
-            self._salvar(con, caso, "Decisão revisada", {**revisao, "frontend_anterior": caso.pop("frontend", None)}, revisor.strip())
+            evidencia = {**revisao, 'frontend_anterior': caso.pop('frontend', None)}
+            if caso.get('atendimento', {}).get('etapa') == 'correcao_verificada':
+                reabrir_atendimento(caso, evidencia)
+            self._salvar(con, caso, 'Decisão revisada', evidencia, revisor.strip())
             return self._obter(con, identificador)
 
     def contestar(self, identificador, motivo):
@@ -188,20 +200,74 @@ class Repositorio:
             caso = self._obter(con, identificador)
             evidencia = {"motivo": motivo.strip(), "revisao_anterior": caso.get("revisao"),
                          "frontend_anterior": caso.pop("frontend", None)}
+            reabrir_atendimento(caso, evidencia)
             caso.update(revisao=None, exige_revisao=True, situacao="Nova revisão solicitada")
             self._salvar(con, caso, "Nova análise solicitada", evidencia, "Solicitante da demonstração")
             return self._obter(con, identificador)
 
-    def informar_protocolo(self, identificador, protocolo):
+    def informar_protocolo(self, identificador, protocolo, demonstracao=False):
         if not 1 <= len(protocolo.strip()) <= 80:
             raise ValueError("Informe um protocolo de até 80 caracteres.")
         with self.conexao() as con:
             con.execute("BEGIN IMMEDIATE")
             caso = self._obter(con, identificador)
+            atendimento = caso.get('atendimento') or {}
+            anterior = atendimento.get('protocolo') or caso.get('protocolo_oficial')
+            if anterior:
+                if bool(atendimento.get('demonstracao')) != demonstracao:
+                    raise ValueError('Use outro pedido para demonstrar o fluxo. Não misture protocolo declarado e demonstração.')
+                if atendimento and anterior['numero'] == protocolo.strip():
+                    return caso
+                if atendimento.get('etapa') == 'correcao_verificada':
+                    raise ValueError('Solicite nova análise antes de substituir o protocolo de um caso encerrado.')
             registro = {"numero": protocolo.strip(), "origem": "Informado pelo usuário",
                         "verificado_no_orgao": False, "data": agora()}
-            caso["protocolo_oficial"] = registro
-            self._salvar(con, caso, "Protocolo externo informado", registro, "Solicitante da demonstração")
+            if demonstracao:
+                registro['origem'] = 'Protocolo fictício de demonstração'
+            caso['protocolo_oficial'] = None if demonstracao else registro
+            caso['atendimento'] = dict(etapa='protocolo_informado', demonstracao=demonstracao, protocolo=registro)
+            self._salvar(con, caso, 'Protocolo de demonstração anotado' if demonstracao else 'Protocolo externo informado',
+                         {**registro, 'atendimento_anterior': atendimento}, 'Solicitante')
+            return self._obter(con, identificador)
+
+    def registrar_retorno(self, identificador, etapa, relato, foto=None):
+        if etapa not in {'em_atendimento', 'sem_solucao', 'correcao_informada'} or not 10 <= len(relato.strip()) <= 1000:
+            raise ValueError('Informe a situação e um relato de 10 a 1000 caracteres.')
+        with self.conexao() as con:
+            con.execute('BEGIN IMMEDIATE')
+            caso = self._obter(con, identificador)
+            atendimento = caso.get('atendimento')
+            if not atendimento:
+                raise ValueError('Anote um protocolo declarado ou de demonstração antes de registrar o retorno.')
+            if atendimento['etapa'] == 'correcao_verificada':
+                raise ValueError('Solicite nova análise para reabrir este acompanhamento.')
+            if etapa == 'correcao_informada' and (not foto or foto.get('sha256') == (caso.get('foto') or {}).get('sha256')):
+                raise ValueError('Anexe uma nova foto do local após a correção, diferente da foto inicial.')
+            if etapa != 'correcao_informada' and foto:
+                raise ValueError('Use a foto posterior somente ao informar uma possível correção.')
+            retorno = dict(relato=relato.strip(), foto=foto, data=agora(), origem='Relato do usuário, sem confirmação do órgão')
+            caso['atendimento'] = {k: v for k, v in atendimento.items() if k in ('demonstracao', 'protocolo')}
+            caso['atendimento'].update(etapa=etapa, retorno=retorno)
+            self._salvar(con, caso, 'Retorno do atendimento anotado',
+                         {**caso['atendimento'], 'atendimento_anterior': atendimento}, 'Solicitante')
+            return self._obter(con, identificador)
+
+    def verificar_correcao(self, identificador, revisor, justificativa, base):
+        if not 2 <= len(revisor.strip()) <= 80 or not 10 <= len(justificativa.strip()) <= 500:
+            raise ValueError('Informe responsável e justificativa da conferência.')
+        with self.conexao() as con:
+            con.execute('BEGIN IMMEDIATE')
+            caso = self._obter(con, identificador)
+            if caso['atualizado_em'] != base:
+                raise EnvioConflitante('O pedido ou a foto posterior mudou. Atualize e confira a evidência atual antes de confirmar.')
+            atendimento = caso.get('atendimento') or {}
+            if (atendimento.get('etapa') != 'correcao_informada' or not atendimento.get('retorno', {}).get('foto')
+                    or not caso.get('revisao') or not caso.get('frontend')):
+                raise ValueError('Conclua a revisão, confirme o registro local e anexe uma foto posterior antes de conferir a correção.')
+            conferencia = dict(revisor=revisor.strip(), justificativa=justificativa.strip(), data=agora(),
+                               alcance='Conferência humana do protótipo; não é vistoria técnica nem confirmação municipal')
+            atendimento.update(etapa='correcao_verificada', conferencia=conferencia)
+            self._salvar(con, caso, 'Correção conferida no protótipo', conferencia, revisor.strip())
             return self._obter(con, identificador)
 
     def vincular_frontend(self, identificador, registro, revisao):
@@ -256,6 +322,11 @@ class Repositorio:
             "revisoes_pendentes": sum(c["exige_revisao"] and not c.get("revisao") for c in casos),
             "sugestoes_corrigidas": corrigidos, "denominador_correcoes": len(revisados),
             "protocolos_informados": sum(bool(c.get("protocolo_oficial")) for c in casos),
+            'protocolos_demonstracao': sum(bool(c.get('atendimento', {}).get('demonstracao')) for c in casos),
+            'sem_protocolo': sum(not c.get('atendimento') and not c.get('protocolo_oficial') for c in casos),
+            'correcoes_informadas': sum(c.get('atendimento', {}).get('etapa') == 'correcao_informada' for c in casos),
+            'correcoes_conferidas': sum(c.get('atendimento', {}).get('etapa') == 'correcao_verificada' and not c['atendimento'].get('demonstracao') for c in casos),
+            'correcoes_demo': sum(c.get('atendimento', {}).get('etapa') == 'correcao_verificada' and c['atendimento'].get('demonstracao') for c in casos),
             "com_fonte": sum(bool(c["preparacao"].get("fonte")) for c in casos),
             "por_categoria": dict(Counter(c["triagem_original"].get("category", "Sem categoria") for c in casos)),
             "por_situacao": dict(Counter(c["situacao"] for c in casos)),

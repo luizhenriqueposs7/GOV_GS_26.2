@@ -60,6 +60,13 @@ class PlanejamentoTest(unittest.TestCase):
         self.casos[0]['evidencias'] = [{'modulo': 'pln', 'resultado': 'Trecho vinculado'}]
         self.assertNotEqual(base, avaliar(self.casos, [])['base'])
 
+    def test_correcao_nao_remove_condicao_desconhecida(self):
+        desconhecido = pedido('x', 'acesso', 'nao_verificado')
+        desconhecido['atendimento'] = {'etapa': 'correcao_verificada', 'demonstracao': True}
+        resultado = avaliar([desconhecido], [])
+        self.assertEqual(resultado['trechos'][0]['atual'], 'nao_verificado')
+        self.assertEqual(resultado['atual']['desconhecidos'], 3)
+
     def test_vinculo_opcional_e_valores_invalidos(self):
         self.assertIsNone(validar_vinculo(None))
         valido = self.casos[0]['passagem']

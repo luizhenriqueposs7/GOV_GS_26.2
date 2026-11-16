@@ -44,6 +44,7 @@ export function iniciarPassagem({api,enviar,el,botao,badge,data,aviso,durante,ab
         if(c.foto){const img=el('img',null,'passage-thumb');img.src='/api/atendimentos/'+encodeURIComponent(c.id)+'/foto?v='+c.foto.sha256;img.alt='Foto do pedido associado';img.loading='lazy';pedido.append(img);}
         const condicao={bloqueado:'Passagem interrompida',dificultado:'Passagem dificultada',nao_verificado:'Condição não verificada'}[c.passagem.condicao];
         pedido.append(el('p',c.descricao),el('small',condicao+' · Registro '+c.id.slice(0,8)+' · '+(c.revisao?'Revisão atual registrada':'Revisão pendente')));
+        if(c.atendimento?.etapa==='correcao_verificada')pedido.append(el('p','Barreira deste pedido desconsiderada após conferência humana '+(c.atendimento.demonstracao?'de demonstração':'do protótipo')+'. Outras barreiras e condições desconhecidas permanecem.','inset'));
         const acoes=el('div',null,'actions');
         acoes.append(botao('Pedido e contestação',()=>abrir(c.id),'quiet'),botao('Revisar',()=>revisar(c.id),'quiet'),botao('Consultar evidências',()=>evidencias(c.id),'quiet'));pedido.append(acoes);card.append(pedido);
       });

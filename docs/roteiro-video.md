@@ -5,7 +5,7 @@ Alvo de 6min30s, dentro do intervalo obrigatório de 5 a 7 minutos. Planejamento
 | Início | Fim | Tempo | Cena | O que demonstrar |
 | --- | --- | --- | --- | --- |
 | 00:00 | 00:20 | 20 s | Problema e beneficiário | Mostrar o percurso didático ponto → unidade de saúde: um reparo isolado pode manter outra barreira. Apresentar o Passagem Livre e o limite do cenário. |
-| 00:20 | 01:05 | 45 s | Frontend e atendimento móvel | Trecho do teste no celular: foto tirada na hora, GPS conferido e ponto confirmado, envio e identificador recebido. Identificar o relato como demonstração. Se o GPS falhar e forem usadas coordenadas manuais, dizer isso. O vínculo com ZelaBairro será confirmado na cena de Governança. |
+| 00:20 | 01:05 | 45 s | Frontend e atendimento móvel | Foto, GPS e conferência do relato: ocorrência, impactos possíveis e pedido de vistoria. Mostrar envio e identificador. Identificar demonstração ou localização manual quando usadas. Não atribuir medidas à foto. |
 | 01:05 | 01:45 | 40 s | RPA | Processar lote; exibir uma rejeição e a saída original do caso de acessibilidade. |
 | 01:45 | 02:25 | 40 s | Generative AI | Perguntar sobre um serviço, abrir a fonte e mostrar a abstenção quando falta evidência. |
 | 02:25 | 03:00 | 35 s | PLN | Consultar um trecho real da Fábrica e apontar página, fonte, data e limite da revisão do corpus. |
@@ -13,7 +13,7 @@ Alvo de 6min30s, dentro do intervalo obrigatório de 5 a 7 minutos. Planejamento
 | 03:40 | 04:15 | 35 s | IoT | Mostrar o OuviAí no celular ou sua evidência, identificando qual das duas situações foi usada. |
 | 04:15 | 04:40 | 25 s | Cluster | Comparar os dois cenários iSPD e explicar que os números são de simulação. |
 | 04:40 | 05:00 | 20 s | Quântica | Relacionar o estudo ao planejamento da revisão; deixar explícita a contribuição conceitual. |
-| 05:00 | 06:10 | 70 s | Governança e Business Analytics | No Passagem Livre, marcar só um reparo e depois os dois; explicar o efeito conjunto. Mostrar revisão dos pedidos e plano justificado. Contestar um pedido e conferir plano desatualizado/histórico. Apontar a matriz das nove disciplinas e a condição desconhecida. |
+| 05:00 | 06:10 | 70 s | Governança e Business Analytics | Mostrar revisão e confirmação; responsável e ficha; iniciar protocolo SIM, registrar retorno/foto posterior e conferir correção no protótipo. No Passagem Livre, mostrar outra barreira ou condição desconhecida que permaneceu. Contestar e conferir reabertura/plano desatualizado. Exibir indicadores separados de demonstração e matriz das nove disciplinas. Usar cortes de uma execução contínua. |
 | 06:10 | 06:30 | 20 s | Encerramento | Dizer o resultado efetivamente demonstrado e a principal limitação; mostrar o acesso ao repositório. |
 
 ## Preparação
@@ -28,7 +28,9 @@ Conferir os serviços e preparar os arquivos antes de gravar, mantendo na grava�
 
 O caso de acessibilidade deverá mostrar a saída real do RPA. A revisão e a contestação só entram como funções executadas depois de implementadas e verificadas. Não usar as imagens de uma fissura e de um concreto sem fissura como prova de reparo do mesmo local.
 
-A coleta móvel foi implementada e conferida em navegador com tela estreita. O integrante planejou o teste físico para 15/11/2026: tirar a foto, obter a posição e registrar o pedido durante a gravação. Antes do teste, abrir um novo link HTTPS protegido e autenticar o aparelho; o endereço temporário de 14/11 expira no mesmo dia. A execução física permanece pendente até acontecer.
+A coleta móvel foi conferida em navegador com tela estreita. Abrir https://gov262.vercel.app/#pedido diretamente no Safari/Chrome, sem usuário e senha. O computador pode estar desligado. Fechar abas antigas para atualizar o aplicativo. O teste físico de câmera/GPS permanece pendente até ser executado pelo integrante. A chave de gestão é usada apenas na revisão e conferência da correção e não deve aparecer no vídeo.
+
+Não encaminhar exemplos fictícios à prefeitura. Usar protocolo SIM e fotos identificadas como cenário, sem sugerir reparo real. Uma foto posterior não comprova data ou lugar: a conferência é uma decisão humana do protótipo. O responsável municipal está indicado no catálogo, sem parceria ou integração automática de recebimento.
 
 Gravar o percurso completo e reservar um trecho de aproximadamente 45 segundos para a cena móvel da versão final. Os cortes não devem alterar a ordem das ações nem sugerir que uma etapa sem resultado funcionou. Reutilizar o identificador gerado na cena de Governança. Se não houver execução em aparelho, descrever essa condição e identificar a imagem e as coordenadas de demonstração. Não dizer que a foto detectou um buraco ou que o GPS confirmou o endereço. Salvar/recuperar rascunho e abertura sem rede podem entrar como captura breve, sem ultrapassar 6min30s.
 

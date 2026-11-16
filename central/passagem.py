@@ -48,7 +48,7 @@ def avaliar(casos, reparos):
     vinculados = sorted((c for c in casos if c.get('passagem')
                          and c['passagem'].get('percurso_id') == PERCURSO['id']), key=lambda c: c['id'])
     campos = ('id', 'descricao', 'bairro', 'local', 'contexto', 'foto', 'localizacao', 'passagem',
-              'triagem_original', 'preparacao', 'revisao', 'situacao', 'frontend', 'evidencias')
+              'triagem_original', 'preparacao', 'revisao', 'situacao', 'frontend', 'evidencias', 'atendimento')
     entradas = [{k: c.get(k) for k in campos} for c in vinculados]
     base = hashlib.sha256(json.dumps({'percurso': PERCURSO, 'pedidos': entradas},
                           sort_keys=True, ensure_ascii=False).encode()).hexdigest()
@@ -56,7 +56,9 @@ def avaliar(casos, reparos):
     for original in PERCURSO['trechos']:
         trecho = deepcopy(original)
         pedidos = [c for c in vinculados if c['passagem']['trecho_id'] == trecho['id']]
-        condicoes = {c['passagem']['condicao'] for c in pedidos}
+        ativos = [c for c in pedidos if c['passagem']['condicao'] == 'nao_verificado'
+                  or c.get('atendimento', {}).get('etapa') != 'correcao_verificada']
+        condicoes = {c['passagem']['condicao'] for c in ativos}
         barreira = bool(condicoes & {'bloqueado', 'dificultado'})
         desconhecido = 'nao_verificado' in condicoes
         atual = 'barreira' if barreira else 'nao_verificado' if desconhecido else trecho['condicao_base']
@@ -65,7 +67,7 @@ def avaliar(casos, reparos):
             simulado = 'nao_verificado' if desconhecido else 'reparo_hipotetico'
         trecho.update(atual=atual, simulado=simulado,
                       tem_condicao_desconhecida=desconhecido or atual == 'nao_verificado', pedidos=[
-            {k: c.get(k) for k in ('id', 'descricao', 'passagem', 'revisao', 'foto', 'localizacao')}
+            {k: c.get(k) for k in ('id', 'descricao', 'passagem', 'revisao', 'foto', 'localizacao', 'atendimento')}
             for c in pedidos])
         trechos.append(trecho)
     return {'percurso': deepcopy(PERCURSO), 'base': base, 'trechos': trechos,
