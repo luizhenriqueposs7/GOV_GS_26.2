@@ -31,7 +31,7 @@ Relatório de integração dos trabalhos da Global Solution, apresentado à disc
 
 O projeto utiliza dados fictícios. Não houve testes com pessoas nem validação em campo, por decisão do grupo. As verificações mencionadas neste relatório são técnicas.
 
-Versão de trabalho de 15 de novembro de 2026. A conclusão será elaborada com os integrantes. Os endereços do vídeo integrado e do repositório serão acrescentados após a publicação.
+Versão de trabalho de 16 de novembro de 2026. A conclusão será elaborada com os integrantes. O repositório está indicado no tópico Links; o endereço do vídeo integrado será acrescentado após a publicação.
 
 São Paulo · 2026
 
@@ -251,7 +251,7 @@ A execução técnica está registrada em docs/evidencias. A conclusão desta se
 
 Vídeo integrado de Governança: publicação pendente. A versão final deverá ter de 5 a 7 minutos e estar no YouTube como Não Listado.
 
-Repositório do GitHub: publicação pendente. O endereço deverá apontar para a versão que contém os códigos, materiais, relatório e instruções da entrega.
+Repositório do GitHub: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_GS_26.2). Destino dos códigos, materiais, relatório e instruções da entrega.
 
 Os quatro vídeos do OuviAí e os vídeos das outras disciplinas são evidências complementares. Eles não substituem o vídeo integrado exigido para Governança.
 

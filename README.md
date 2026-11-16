@@ -1,5 +1,9 @@
 # ZelaBairro · Central CitizenTech
 
+Repositório da entrega: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_GS_26.2). O código, os materiais das nove disciplinas e as instruções de execução estão reunidos neste projeto.
+
+O [relatório de trabalho em PDF](output/pdf/Central_CitizenTech_Governanca_Versao_de_Trabalho.pdf) tem 14 páginas. A conclusão será elaborada com os integrantes. O [roteiro do vídeo integrado](docs/roteiro-video.md) prevê 6min30s; o vídeo deve ser publicado como Não Listado e seu link ainda será acrescentado. O repositório contém a aplicação para execução local; o acesso HTTPS da demonstração é preparado separadamente.
+
 Preparação e acompanhamento local de pedidos sobre calçadas, buracos no asfalto e iluminação em São Paulo. A central recebe foto opcional e localização confirmada, pede contexto, mostra a fonte do encaminhamento, conserva a triagem original, registra uma revisão justificada e permite contestar a decisão. Depois da conferência, reutiliza a persistência do ZelaBairro.
 
 O **Passagem Livre** relaciona pedidos em um percurso didático de quatro trechos, do ponto de ônibus até uma unidade de saúde ilustrativa. Compara reparos isolados e combinados, mantém condições desconhecidas e registra planos justificados sobre as versões dos pedidos. A linha no mapa é esquemática, sem levantamento de calçadas ou garantia de acessibilidade.
@@ -125,4 +129,4 @@ A ampliação móvel, o teste de resposta perdida e as verificações do formul�
 
 Esta instalação não possui contas individuais, isolamento entre solicitantes nem controle de leitura por usuário. A chave protege operações de revisão e lote; as demais operações pertencem à demonstração local. Não exponha a porta na rede nem insira dados pessoais. Para operar com pessoas reais, seria necessário definir responsáveis pelo atendimento, autenticação, autorizações, retenção e proteção de dados, além de acordos operacionais com quem recebe os pedidos.
 
-O relatório e o roteiro da entrega ficam em `docs/`. A conclusão será elaborada com o integrante. Os links do vídeo final não listado e do repositório público dependem da publicação; os vídeos de módulos anteriores não substituem a gravação integrada de 5 a 7 minutos.
+O relatório e o roteiro da entrega ficam em `docs/`. A conclusão será elaborada com os integrantes. O link do vídeo final não listado depende da publicação; os vídeos de módulos anteriores não substituem a gravação integrada de 5 a 7 minutos. Repositório da entrega: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_GS_26.2).

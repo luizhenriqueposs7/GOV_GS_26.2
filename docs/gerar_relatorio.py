@@ -114,7 +114,7 @@ def fundo(c, doc):
             c.setFont("Times-Roman",12);c.drawCentredString(A4[0]/2,A4[1]-9*cm,"Planejamento de acesso, pedidos e revisão")
             natureza=Paragraph("Relatório de integração dos trabalhos da Global Solution, apresentado à disciplina de Governança em IA e Business Analytics da FIAP. O documento descreve a participação dos módulos e os limites da aplicação construída.",ParagraphStyle("natureza",fontName="Times-Roman",fontSize=12,leading=18,alignment=TA_JUSTIFY))
             _,altura=natureza.wrap(8*cm,500);natureza.drawOn(c,A4[0]-10*cm,A4[1]-11*cm-altura)
-            nota=Paragraph("Percurso didático. Sem testes com pessoas ou validação em campo. Versão de trabalho de 15 de novembro de 2026; conclusão conjunta e publicação pendentes.",estilos["legenda"])
+            nota=Paragraph("Percurso didático. Sem testes com pessoas ou validação em campo. Versão de trabalho de 16 de novembro de 2026; conclusão conjunta e vídeo pendentes.",estilos["legenda"])
             _,altura=nota.wrap(LARGURA,100);nota.drawOn(c,3*cm,6*cm-altura)
             c.setFont("Times-Roman",12);c.drawCentredString(A4[0]/2,3*cm,"São Paulo · 2026")
     c.restoreState()
