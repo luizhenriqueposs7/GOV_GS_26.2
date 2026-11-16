@@ -12,8 +12,7 @@ from central.app import criar_app
 class NuvemTest(unittest.TestCase):
     def setUp(self):
         self.env = {'GOV_RUNTIME': 'vercel', 'GOV_DATABASE_URL': 'postgresql://servidor/banco?sslmode=require',
-                    'GOV_MANAGER_KEY': 'gestao-' + 'x' * 32, 'GOV_ACCESS_USER': 'demonstracao',
-                    'GOV_ACCESS_PASSWORD': 'senha-' + 'y' * 24,
+                    'GOV_MANAGER_KEY': 'gestao-' + 'x' * 32,
                     'SUPABASE_URL': 'https://projeto.supabase.co', 'SUPABASE_SECRET_KEY': 'sb_secret_' + 'z' * 32}
 
     def test_nuvem_sem_configuracao_nao_cria_sqlite_nem_chave_local(self):
@@ -22,20 +21,32 @@ class NuvemTest(unittest.TestCase):
                 criar_app(Path(pasta) / 'nao-criar')
             self.assertEqual(list(Path(pasta).iterdir()), [])
 
-    def test_autenticacao_protege_tambem_foto_estaticos_e_contrato(self):
-        with patch.dict(os.environ, self.env), patch('central.postgres.RepositorioPostgres') as repositorio:
+    def test_acesso_publico_abre_interface_api_foto_e_contrato_sem_login(self):
+        with patch.dict(os.environ, self.env, clear=True), patch('central.postgres.RepositorioPostgres') as repositorio, \
+                patch('central.storage.StorageFotos.ler', return_value=b'foto-de-teste'):
+            repositorio.return_value.obter.return_value = {'id': 'teste', 'foto': {'sha256': 'f' * 64}}
             with TestClient(criar_app()) as client:
-                for url in ['/', '/web/app.js', '/api/status', '/api/atendimentos/qualquer/foto', '/contrato']:
+                for url in ['/', '/web/app.js', '/api/status', '/api/atendimentos/teste/foto', '/contrato', '/openapi.json']:
                     r = client.get(url)
-                    self.assertEqual(r.status_code, 401, url)
+                    self.assertEqual(r.status_code, 200, url)
                     self.assertEqual(r.headers['cache-control'], 'no-store')
-                    self.assertIn('Basic', r.headers['www-authenticate'])
-                self.assertEqual(client.get('/api/status', headers={'Authorization': 'Basic /w=='}).status_code, 401)
-                client.auth = ('demonstracao', self.env['GOV_ACCESS_PASSWORD'])
-                self.assertEqual(client.get('/api/status').status_code, 200)
-                self.assertEqual(client.get('/web/app.js').status_code, 200)
+                    self.assertNotIn('www-authenticate', r.headers)
+                self.assertEqual(client.get('/api/status', headers={'Authorization': 'Basic /w=='}).status_code, 200)
                 self.assertIn('online', client.get('/api/status').json()['modo'])
                 self.assertEqual(client.post('/api/atendimentos', json={}, headers={'Origin': 'https://outro.example'}).status_code, 403)
+
+    def test_acesso_publico_mantem_revisao_confirmacao_e_lote_com_chave(self):
+        with patch.dict(os.environ, self.env, clear=True), patch('central.postgres.RepositorioPostgres') as repositorio:
+            with TestClient(criar_app()) as client:
+                revisao = {'prioridade': 'Alta', 'revisor': 'Teste', 'justificativa': 'Conferência do cenário de teste.'}
+                for chave in ({}, {'X-Manager-Key': 'incorreta'}):
+                    self.assertEqual(client.post('/api/atendimentos/teste/revisao', json=revisao, headers=chave).status_code, 401)
+                    self.assertEqual(client.post('/api/atendimentos/teste/zelabairro', headers=chave).status_code, 401)
+                    self.assertEqual(client.post('/api/passagem/demonstracao', headers=chave).status_code, 401)
+                    self.assertEqual(client.post('/api/lotes', headers=chave,
+                        files={'arquivo': ('lote.csv', b'case_id,description,neighborhood', 'text/csv')}).status_code, 401)
+                repositorio.return_value.revisar.assert_not_called()
+                repositorio.return_value.confirmar_frontend.assert_not_called()
                 repositorio.return_value.confirmar_frontend.return_value = {'id': 'teste'}
                 r = client.post('/api/atendimentos/teste/zelabairro', headers={'X-Manager-Key': self.env['GOV_MANAGER_KEY']})
                 self.assertEqual(r.status_code, 200, r.text)
@@ -51,7 +62,6 @@ class NuvemTest(unittest.TestCase):
         with patch.dict(os.environ, self.env), patch('central.postgres.RepositorioPostgres') as repositorio:
             with patch('central.storage.StorageFotos.guardar', side_effect=RuntimeError('Armazenamento indisponível.')):
                 with TestClient(criar_app()) as client:
-                    client.auth = ('demonstracao', self.env['GOV_ACCESS_PASSWORD'])
                     r = client.post('/api/atendimentos/com-anexo', data={'dados': json.dumps(entrada)},
                                     files={'arquivo': ('foto.jpg', imagem.getvalue(), 'image/jpeg')})
         self.assertEqual(r.status_code, 503)
@@ -60,7 +70,6 @@ class NuvemTest(unittest.TestCase):
     def test_nuvem_recusa_pedido_maior_que_o_limite_da_funcao(self):
         with patch.dict(os.environ, self.env), patch('central.postgres.RepositorioPostgres'):
             with TestClient(criar_app()) as client:
-                client.auth = ('demonstracao', self.env['GOV_ACCESS_PASSWORD'])
                 r = client.post('/api/atendimentos', content=b'x', headers={'Content-Length': str(5 * 1024 * 1024)})
                 self.assertEqual(r.status_code, 413)
 
@@ -80,7 +89,6 @@ class NuvemTest(unittest.TestCase):
         with patch.dict(os.environ, self.env), patch('central.postgres.RepositorioPostgres') as repositorio:
             repositorio.return_value.criar.side_effect = gravar
             with TestClient(criar_app()) as client, ThreadPoolExecutor(max_workers=2) as pool:
-                client.auth = ('demonstracao', self.env['GOV_ACCESS_PASSWORD'])
                 envio = pool.submit(client.post, '/api/atendimentos/com-anexo', data={'dados': json.dumps(entrada)})
                 try:
                     self.assertTrue(esperando.wait(3))

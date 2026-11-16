@@ -1,6 +1,4 @@
 import hmac
-import base64
-import binascii
 import json
 import os
 import secrets
@@ -94,13 +92,12 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     nuvem = os.getenv('GOV_RUNTIME') == 'vercel' or os.getenv('VERCEL') == '1'
     fotos = None
     if nuvem:
-        obrigatorias = ('GOV_DATABASE_URL', 'GOV_MANAGER_KEY', 'GOV_ACCESS_USER', 'GOV_ACCESS_PASSWORD',
-                        'SUPABASE_URL', 'SUPABASE_SECRET_KEY')
+        obrigatorias = ('GOV_DATABASE_URL', 'GOV_MANAGER_KEY', 'SUPABASE_URL', 'SUPABASE_SECRET_KEY')
         faltantes = [nome for nome in obrigatorias if not os.getenv(nome, '').strip()]
         if faltantes:
             raise RuntimeError('Configure as variáveis do servidor: ' + ', '.join(faltantes))
-        if len(os.environ['GOV_MANAGER_KEY'].strip()) < 24 or len(os.environ['GOV_ACCESS_PASSWORD']) < 16:
-            raise RuntimeError('Use uma chave de gestão de pelo menos 24 caracteres e senha de acesso de pelo menos 16.')
+        if len(os.environ['GOV_MANAGER_KEY'].strip()) < 24:
+            raise RuntimeError('Use uma chave de gestão de pelo menos 24 caracteres.')
         from .postgres import RepositorioPostgres
         from .storage import StorageFotos
         repo = RepositorioPostgres(os.environ['GOV_DATABASE_URL'])
@@ -115,10 +112,8 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             arquivo_chave.write_text(secrets.token_urlsafe(32), encoding="utf-8")
         chave = arquivo_chave.read_text(encoding="utf-8").strip()
 
-    app = FastAPI(title="ZelaBairro", version="0.4.0", docs_url="/contrato")
+    app = FastAPI(title="ZelaBairro", version="0.4.1", docs_url="/contrato")
     app.state.repo = repo
-    usuario_acesso = os.getenv('GOV_ACCESS_USER', '').encode()
-    senha_acesso = os.getenv('GOV_ACCESS_PASSWORD', '').encode()
 
     def guardar_foto(conteudo, previa=''):
         if previa:
@@ -154,21 +149,9 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
 
     @app.middleware("http")
     async def proteger(request, call_next):
-        autorizado = not nuvem
-        if nuvem:
-            esquema, _, valor = request.headers.get('authorization', '').partition(' ')
-            try:
-                credencial = base64.b64decode(valor, validate=True).decode('utf-8') if esquema.lower() == 'basic' and len(valor) < 4096 else ''
-                usuario, separador, senha = credencial.partition(':')
-                autorizado = bool(separador) & hmac.compare_digest(usuario.encode(), usuario_acesso) & hmac.compare_digest(senha.encode(), senha_acesso)
-            except (ValueError, UnicodeError, binascii.Error):
-                autorizado = False
         tamanho = request.headers.get("content-length")
         origem = request.headers.get('origin')
-        if not autorizado:
-            resposta = JSONResponse(status_code=401, content={'erro': 'Entre com o acesso privado da demonstração.'},
-                                    headers={'WWW-Authenticate': 'Basic realm="ZelaBairro", charset="UTF-8"'})
-        elif nuvem and request.method not in {'GET', 'HEAD', 'OPTIONS'} and (
+        if nuvem and request.method not in {'GET', 'HEAD', 'OPTIONS'} and (
                 (origem and origem.rstrip('/') != str(request.base_url).rstrip('/'))
                 or request.headers.get('sec-fetch-site') == 'cross-site'):
             resposta = JSONResponse(status_code=403, content={'erro': 'Envie o pedido pelo endereço desta central.'})

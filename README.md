@@ -2,7 +2,7 @@
 
 Repositório da entrega: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_GS_26.2). O código, os materiais das nove disciplinas e as instruções de execução estão reunidos neste projeto.
 
-O [relatório de trabalho em PDF](output/pdf/Central_CitizenTech_Governanca_Versao_de_Trabalho.pdf) tem 14 páginas. A conclusão será elaborada com os integrantes. O [roteiro do vídeo integrado](docs/roteiro-video.md) prevê 6min30s; o vídeo deve ser publicado como Não Listado e seu link ainda será acrescentado. A central está em [gov262.vercel.app](https://gov262.vercel.app), com acesso privado do grupo. A execução local continua disponível.
+O [relatório de trabalho em PDF](output/pdf/Central_CitizenTech_Governanca_Versao_de_Trabalho.pdf) tem 14 páginas. A conclusão será elaborada com os integrantes. O [roteiro do vídeo integrado](docs/roteiro-video.md) prevê 6min30s; o vídeo deve ser publicado como Não Listado e seu link ainda será acrescentado. A central está em [gov262.vercel.app](https://gov262.vercel.app), com acesso público sem login. A execução local continua disponível.
 
 A jornada móvel agora tem duas etapas: **tirar foto → conferir e enviar**. A foto gera uma descrição preliminar pelo Groq, com tentativas limitadas em caso de lotação; com permissão, o aparelho obtém GPS e consulta uma região aproximada. Texto e ponto continuam editáveis. A prévia não cria pedido. A sugestão original é assinada pelo servidor e vinculada à foto, preservando origem e correções no histórico. Cadastro manual, revisão, confirmação e contestação permanecem disponíveis. [Teste no celular](docs/teste-celular.md).
 
@@ -134,6 +134,6 @@ A ampliação móvel, o teste de resposta perdida e as verificações do formul�
 
 ## Limites para uso fora da demonstração
 
-A instalação local não possui contas individuais ou isolamento entre solicitantes. Na versão online, o acesso privado da demonstração protege interface, APIs e fotos; a chave de revisão permanece separada. O acesso é compartilhado pelo grupo. Para operar com pessoas reais, ainda seria necessário definir contas e permissões por solicitante, responsáveis, retenção dos dados e acordos com quem recebe os pedidos.
+Esta demonstração não possui contas individuais ou isolamento entre solicitantes. A entrada online é pública, sem usuário e senha; os pedidos e fotos podem ser consultados pelo link. Revisão, confirmação, lotes e planos continuam exigindo a chave de gestão. Para operar com pessoas reais, ainda seria necessário definir contas e permissões por solicitante, responsáveis, retenção dos dados e acordos com quem recebe os pedidos.
 
 O relatório e o roteiro da entrega ficam em `docs/`. A conclusão será elaborada com os integrantes. O link do vídeo final não listado depende da publicação; os vídeos de módulos anteriores não substituem a gravação integrada de 5 a 7 minutos. Repositório da entrega: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_GS_26.2).

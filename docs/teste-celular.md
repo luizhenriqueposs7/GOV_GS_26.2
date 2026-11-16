@@ -2,7 +2,7 @@
 
 ## Acesso online atual
 
-Abra **https://gov262.vercel.app/#pedido** no Chrome do Android ou Safari do iPhone. Não é necessário deixar o computador ligado. O usuário, senha e chave de revisão estão somente no arquivo privado local `data/acesso-zelabairro-online.txt`, fora do Git. Senha de entrada e chave de revisão são diferentes. Se a versão anterior estiver aberta ou instalada, feche todas as abas da central e abra novamente para atualizar o formulário.
+Abra **https://gov262.vercel.app/#pedido** no Chrome do Android ou Safari do iPhone. Não é necessário deixar o computador ligado. A entrada é direta, sem usuário e senha. Somente as ações de gestão exigem a chave de revisão, disponível no arquivo privado local `data/acesso-zelabairro-online.txt`, fora do Git. Pedidos e fotos da demonstração ficam visíveis a quem acessar o link. Se a versão anterior estiver aberta ou instalada, feche todas as abas da central e abra novamente para atualizar o formulário.
 
 1. Em **Registrar**, fotografe pelo botão da câmera e depois **Capturar foto**, ou use **Câmera do aparelho**. Escolher uma imagem também inicia a preparação automática.
 2. Permita a localização. A foto vai ao Groq para preparar uma descrição; a posição atual vai diretamente do aparelho à BigDataCloud para sugerir uma região. O mapa usa OpenStreetMap. Não há endereço inventado pela imagem ou localização por IP.

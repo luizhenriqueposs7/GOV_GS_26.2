@@ -2,6 +2,10 @@
 
 Plano: ../../docs/superpowers/plans/2026-11-14-central-citizentech.md
 
+## Entrada sem login, 16/11/2026
+
+Por solicitação do integrante, a versão 0.4.1 remove usuário e senha da entrada. Interface, atendimento, fotos e contrato abrem diretamente. A chave de gestão continua obrigatória para revisão, confirmação, lote, exemplos e planos. Credenciais de banco e armazenamento permanecem somente no servidor. Não foram alterados os dados existentes. Documentação e relatório de 14 páginas foram ajustados à entrada pública.
+
 ## Relato por foto, 16/11/2026
 
 Fluxo solicitado: foto → GPS/região e descrição preliminar → conferência editável → envio. A implementação reutiliza Qwen3.8-27B no Groq, exige resposta estruturada, mantém abstenção e assina a sugestão contra o hash da foto. A prévia não cria pedido. Original e correção humana ficam separados no histórico. ResNet18 e demais disciplinas foram preservados.

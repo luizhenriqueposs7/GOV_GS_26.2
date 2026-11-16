@@ -216,7 +216,7 @@ Os resultados pertencem ao acervo avaliado. O desempenho em fissuras sutis é um
 
 ## 2.9 Governança em IA e Business Analytics
 
-A Governança preserva sugestão, revisão justificada e contestação. Pendências impedem a confirmação. Na nuvem, o acesso privado do grupo é separado da chave de revisão. Ainda não há contas individuais.
+A Governança preserva sugestão, revisão justificada e contestação. Pendências impedem a confirmação. Pedidos e fotos são públicos, sem contas individuais. A chave de gestão protege revisão e confirmação.
 
 O Passagem Livre compara reparos em quatro trechos de um percurso didático. Só a calçada reparada mantém a barreira da rampa; ambas tratadas permitem continuidade na hipótese. Condições desconhecidas permanecem pendentes. O plano exige revisão, conserva cenário e justificativa e fica desatualizado após mudança ou contestação. O cálculo é determinístico, sem execução quântica ou certificação de acessibilidade.
 
