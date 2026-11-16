@@ -43,9 +43,9 @@ export function dadosRascunho(dados) {
 }
 
 export function criarRascunho(campos, estado) {
-  const {foto, origemGeo, precisaoGeo, envioId, assinatura, rascunhoId} = estado;
+  const {foto, origemGeo, precisaoGeo, envioId, assinatura, rascunhoId, previaFoto, regiaoAuto} = estado;
   return {id:rascunhoId, campos:dadosRascunho(campos), foto, origemGeo, precisaoGeo,
-    envioId, assinatura, salvoEm:new Date().toISOString()};
+    envioId, assinatura, previaFoto, regiaoAuto, salvoEm:new Date().toISOString()};
 }
 
 export function vinculoPassagem(trecho, condicao) {

@@ -142,11 +142,11 @@ Uma avaliação futura dependeria de dados operacionais e de uma comparação co
 
 A central reutiliza a validação e a persistência do ZelaBairro. Localmente, os bancos ficam separados. Na adaptação online, Postgres mantém relatos e histórico na mesma transação, com fotos privadas no Supabase.
 
-O formulário móvel reúne foto opcional, coordenadas confirmadas e associação declarada a um trecho do Passagem Livre. O rascunho conserva esses dados. A imagem recebe normalização e remoção de metadados. O catálogo distingue via comum e corredor de ônibus (SÃO PAULO, 2026c). O modelo de fissuras não identifica buracos.
+Na jornada móvel, a foto inicia um relato preliminar e solicita GPS. O aparelho sugere a região pela BigDataCloud, sem rua ou número. A pessoa confere texto e ponto antes de enviar. O rascunho conserva esses dados. A foto perde metadados. O catálogo distingue via comum e corredor de ônibus (SÃO PAULO, 2026c).
 
 A confirmação exige revisão justificada e dados completos. Repetir a confirmação da mesma revisão mantém o registro. Alterar o pedido ou contestar retira a decisão e o vínculo atuais, preservando o histórico. O identificador é da central; protocolos externos anotados permanecem sem verificação no órgão.
 
-Cadastro, edição, revisão, confirmação e contestação foram executados no navegador. O rascunho salvo foi recuperado sem servidor. Reenviar após perder a resposta conservou o pedido, inclusive no contrato anterior ao Passagem Livre. O acesso HTTPS protegido está preparado; câmera, GPS e instalação ainda dependem do teste físico no smartphone.
+Cadastro, edição, revisão, confirmação e contestação foram executados no navegador. A prévia não grava pedidos; a sugestão original e as correções ficam rastreáveis. O teste móvel controlado conferiu rascunho, GPS negado e cancelamento. Câmera, GPS reais e instalação ainda dependem do teste físico no smartphone.
 
 <!-- pagina -->
 # DESENVOLVIMENTO
@@ -155,7 +155,7 @@ Cadastro, edição, revisão, confirmação e contestação foram executados no 
 
 A execução local de Generative AI utiliza recuperação híbrida e Qwen3-4B-Instruct-2507, em Q4_K_M. O modelo seleciona uma evidência recuperada. A resposta corresponde ao trecho escolhido, com endereço oficial para consulta.
 
-Na versão online, Qwen3.8-27B no Groq Free seleciona evidências do corpus original. A consulta HTTPS retornou a fonte ILU.1 e os controles de privacidade e escopo passaram. Falhas retornam indisponibilidade. As avaliações abaixo pertencem ao modelo local.
+Na versão online, Qwen3.8-27B no Groq Free seleciona evidências do corpus e gera descrições preliminares por foto. A sugestão guarda modelo, data e hash da imagem; não substitui o ResNet18 nem a revisão. A consulta textual retornou ILU.1 e passou nos controles. As avaliações abaixo pertencem ao modelo local.
 
 O serviço pode pedir esclarecimento, indicar falta de evidência, reconhecer uma pergunta fora do escopo e bloquear pedidos incompatíveis com suas regras. A orientação não cria protocolo e não confirma que o serviço foi solicitado.
 

@@ -2,6 +2,14 @@
 
 Plano: ../../docs/superpowers/plans/2026-11-14-central-citizentech.md
 
+## Relato por foto, 16/11/2026
+
+Fluxo solicitado: foto → GPS/região e descrição preliminar → conferência editável → envio. A implementação reutiliza Qwen3.8-27B no Groq, exige resposta estruturada, mantém abstenção e assina a sugestão contra o hash da foto. A prévia não cria pedido. Original e correção humana ficam separados no histórico. ResNet18 e demais disciplinas foram preservados.
+
+A localização consulta apenas GPS atual autorizado, diretamente no navegador. BigDataCloud fornece região, sem rua/número. Cadastro manual, rascunho, revisão, confirmação e contestação continuam disponíveis. Foram corrigidas, com reprodução anterior, a preparação tardia após navegar e a região antiga ao recuperar rascunho. A revisão independente confirmou as correções.
+
+Verificado: 136 testes Python com Postgres temporário/TLS e 25 Node. Navegador móvel 412 × 839 passou fluxo completo e controles, usando IA sintética e GPS/região simulados, sem chamar o geocodificador com coordenadas de teste. Relatório atualizado e conferido visualmente, 14 páginas. Publicação e chamada de imagem real pelo HTTPS são os próximos passos. Conclusão conjunta, vídeo e câmera/GPS físicos continuam pendentes.
+
 ## Publicação completa na Vercel, 16/11/2026
 
 Central disponível em https://gov262.vercel.app, com autenticação privada e chave de revisão separada. A execução local e seus bancos foram preservados. O novo Supabase recebeu somente exemplos explicitamente fictícios. As cinco tabelas têm RLS, com papel de execução restrito; fotos são privadas, normalizadas e verificadas por SHA. A confirmação chama a validação e persistência originais do Frontend na mesma transação do histórico.

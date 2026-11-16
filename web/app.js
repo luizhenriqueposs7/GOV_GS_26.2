@@ -1,10 +1,11 @@
 "use strict";
-import {coordenadas, dadosRascunho, criarRascunho, reduzirFoto, rascunho, bloquearDurante, abrirCamera, obterPosicao, erroLocalizacao, vinculoPassagem, assinaturaPedido} from './mobile.mjs';
+import {coordenadas, dadosRascunho, criarRascunho, reduzirFoto, rascunho, bloquearDurante, abrirCamera, vinculoPassagem, assinaturaPedido} from './mobile.mjs';
 import {criarMapa, pontoValido, proximos, filtrarCasos} from './mapa.mjs';
 import {iniciarPassagem} from './passagem.mjs';
+import {localizarAtual, prepararAutomatico} from './automatico.mjs';
 const $ = (id) => document.getElementById(id);
 const state = {casos: [], selecionado: null, edicao: null, ativos: false, etapa:0, mapa:null, mapaLocal:null, mapaId:null, camera:null};
-Object.assign(state, {foto: null, fotoAtual: null, fotoUrl: null, removerFoto: false, origemGeo: 'manual', precisaoGeo: null, envioId: null, assinatura: null, rascunhoId:null});
+Object.assign(state, {foto: null, fotoAtual: null, fotoUrl: null, removerFoto: false, origemGeo: 'manual', precisaoGeo: null, envioId: null, assinatura: null, rascunhoId:null, previaFoto:null, regiaoAuto:null});
 const titulos = {mapa:'Mapa do bairro', passagem:'Passagem Livre', pedido: "Novo pedido", acompanhar: "Meus pedidos", revisao: "Revisão", evidencias: "Materiais e fontes"};
 const data = (valor) => valor ? new Date(valor).toLocaleString("pt-BR") : "—";
 function el(tag, texto, classe) {
@@ -52,7 +53,7 @@ async function durante(botao, acao) {
   const form=botao.closest('#pedido-form'), jaInerte=form?.inert;
   if(form)form.inert=true;
   try { await acao(); } catch (erro) { aviso(erro.message || "Não foi possível concluir a operação.", true); }
-  finally {if(form)form.inert=jaInerte; botao.disabled = false; botao.textContent = form && botao.type==='submit' ? (state.edicao?'Atualizar pedido':'Registrar pedido') : anterior; }
+  finally {if(form)form.inert=jaInerte; botao.disabled = false; botao.textContent = form && botao.type==='submit' ? (state.edicao?'Atualizar pedido':'Enviar pedido') : anterior; }
 }
 function formulario(id, acao) {
   $(id).addEventListener("submit", event => {
@@ -64,7 +65,7 @@ function formulario(id, acao) {
 }
 async function navegar(view, foco = true) {
   if (!titulos[view]) view = "pedido";
-  if(view!=='pedido'){fecharCamera();cancelarGeo();}
+  if(view!=='pedido'){fecharCamera();cancelarGeo();cancelarAutomatico();}
   if(view==='pedido') {$('pedido-form').hidden=false;$('request-progress').hidden=false;$('preparacao-resultado').hidden=true;mostrarEtapa(state.etapa,false);}
   $("aviso").hidden = true;
   document.querySelectorAll("[data-panel]").forEach(n => n.hidden = n.dataset.panel !== view);
@@ -143,6 +144,7 @@ formulario("pedido-form", async form => {
   }
   const envio = new FormData(); envio.append('dados', JSON.stringify(dados));
   if (state.foto) envio.append('arquivo', state.foto, 'ocorrencia.jpg');
+  if (state.previaFoto?.previa) envio.append('previa', state.previaFoto.previa);
   if (editando) envio.append('remover_foto', String(state.removerFoto));
   const caso = await api('/api/atendimentos' + (editando ? '/' + editando : '') + '/com-anexo', {method:editando?'PUT':'POST', body:envio});
   if (rascunhoEnviado) {
@@ -154,7 +156,7 @@ formulario("pedido-form", async form => {
   aviso(editando ? "Informações atualizadas. Se houve alteração, a decisão anterior precisa de nova revisão." : "Pedido registrado nesta demonstração. Confira a preparação abaixo.");
   try {await atualizar();} catch {aviso('Pedido '+caso.id.slice(0,8)+' registrado. A lista não pôde ser atualizada agora; confira novamente quando a central responder.');}
 });
-function cancelarEdicao() {state.edicao = null; $("pedido-form").reset(); limparFoto(); limparGeo(); state.envioId=null; state.assinatura=null; state.rascunhoId=null; $('salvar-rascunho').disabled=false; $("cancelar-edicao").hidden = true; $("pedido-form").querySelector("button[type=submit]").textContent = "Registrar pedido";mostrarEtapa(0,false);}
+function cancelarEdicao() {cancelarAutomatico();state.edicao = null; $("pedido-form").reset(); limparFoto(); limparGeo(); state.envioId=null; state.assinatura=null; state.rascunhoId=null; state.regiaoAuto=null; $('salvar-rascunho').disabled=false; $("cancelar-edicao").hidden = true; $("pedido-form").querySelector("button[type=submit]").textContent = "Enviar pedido";mostrarEtapa(0,false);}
 $("cancelar-edicao").addEventListener("click", cancelarEdicao);
 async function editar(caso) {
   mostrarEtapa(0,false);
@@ -164,12 +166,13 @@ async function editar(caso) {
   $('passagem-condicao').value=caso.passagem?.condicao||'nao_verificado';
   limparFoto(); limparGeo();
   if(caso.foto) {state.fotoAtual=caso.foto; mostrarFoto('/api/atendimentos/'+caso.id+'/foto?v='+caso.foto.sha256, 'Foto já registrada. Você pode manter, substituir ou remover.');}
+  state.previaFoto=caso.sugestao_foto||null;
   if(caso.localizacao) {const g=caso.localizacao; $('latitude').value=g.latitude; $('longitude').value=g.longitude; state.origemGeo=g.origem; state.precisaoGeo=g.precisao_m;sincronizarPonto();}
   $('salvar-rascunho').disabled=true;
   $("pedido-form").elements.confirmado.checked = false;
   $("pedido-form").querySelector("button[type=submit]").textContent = "Atualizar pedido";
   $("cancelar-edicao").hidden = false; $("preparacao-resultado").hidden = true;
-  aviso("Editando o pedido " + caso.id.slice(0,8) + ". Alterações exigem nova revisão antes de confirmar no ZelaBairro."); $("descricao").focus();
+  mostrarEtapa(1,false);aviso("Editando o pedido " + caso.id.slice(0,8) + ". Alterações exigem nova revisão antes de confirmar no ZelaBairro."); $("descricao").focus();
 }
 async function detalhe(id, rolar = true) {
   const caso = await api("/api/atendimentos/" + encodeURIComponent(id));
@@ -266,7 +269,8 @@ async function ativos() {
 }
 function evidenciaVisual(caso) {
   const box=el('div',null,'case-evidence');
-  if(caso.foto) {const img=el('img'); img.src='/api/atendimentos/'+encodeURIComponent(caso.id)+'/foto?v='+caso.foto.sha256; img.alt='Foto anexada ao relato: '+caso.descricao; img.loading='lazy'; box.append(img,el('p','Foto fornecida pelo solicitante. Não constitui detecção de buraco ou laudo.','fine'));}
+  if(caso.foto) {const img=el('img'); img.src='/api/atendimentos/'+encodeURIComponent(caso.id)+'/foto?v='+caso.foto.sha256; img.alt='Foto anexada ao relato: '+caso.descricao; img.loading='lazy'; box.append(img,el('p','Foto fornecida pelo solicitante. A descrição automática é preliminar e não constitui laudo.','fine'));}
+  if(caso.sugestao_foto){const s=caso.sugestao_foto;const origem=el('details',null,'photo-origin');origem.append(el('summary','Como o relato foi preparado'),el('p','Sugestão original: '+(s.descricao||'Imagem inconclusiva; descrição preenchida pela pessoa.')),el('p',s.modelo+' · '+data(s.gerado_em),'fine'),el('p',s.limites,'fine'));if(s.descricao&&s.descricao!==caso.descricao)origem.append(el('p','O relato enviado foi corrigido pelo solicitante. A sugestão original permanece registrada.','fine'));box.append(origem);}
   if(caso.localizacao) {const g=caso.localizacao; box.append(el('p','Coordenadas confirmadas: '+g.latitude.toFixed(6)+', '+g.longitude.toFixed(6),'fine'),el('p',(g.origem==='gps'?'Posição do aparelho':'Coordenadas digitadas')+(g.precisao_m!==null?' · precisão informada pelo aparelho: '+Math.round(g.precisao_m)+' m':'')+'. Endereço não verificado.','fine'));}
   if(caso.passagem) {
     const v=caso.passagem;
@@ -286,6 +290,7 @@ function mostrarFoto(url, mensagem) {
   $('camera-vazia').hidden=true;$('remover-foto').hidden=false;
 }
 function limparFoto() {
+  cancelarAutomatico();state.previaFoto=null;
   if(state.fotoUrl) URL.revokeObjectURL(state.fotoUrl);
   Object.assign(state,{foto:null,fotoAtual:null,fotoUrl:null,removerFoto:false});
   $('foto-preview').removeAttribute('src'); $('foto-previa').hidden=true;
@@ -294,27 +299,35 @@ function limparFoto() {
 }
 for(const id of ['foto-camera','foto-galeria']) $(id).addEventListener('change',async()=>{
   const arquivo=$(id).files[0]; if(!arquivo)return;
+  cancelarAutomatico();const versao=state.versaoFoto;let preparada=false;
   try {await bloquearDurante([...$('pedido-form').querySelectorAll('button,input[type=file]')],async()=>{
-    const foto=await reduzirFoto(arquivo); state.foto=foto; state.removerFoto=false; state.envioId=null; mostrarFoto(URL.createObjectURL(foto),'Foto preparada: '+Math.ceil(foto.size/1024)+' KB.');
-  });} catch(erro){aviso(erro.message,true);} finally {$(id).value='';}
+    const foto=await reduzirFoto(arquivo);if(versao!==state.versaoFoto||document.querySelector('[data-panel="pedido"]').hidden)return;
+    state.previaFoto=null;state.foto=foto; state.removerFoto=false; state.envioId=null; mostrarFoto(URL.createObjectURL(foto),'Foto preparada: '+Math.ceil(foto.size/1024)+' KB.');preparada=true;
+  });if(preparada){if(!state.edicao)await gerarAutomatico();else mostrarEtapa(1);}} catch(erro){aviso(erro.message,true);} finally {$(id).value='';}
 });
 $('remover-foto').addEventListener('click',()=>{limparFoto(); state.removerFoto=true; state.envioId=null;});
 function cancelarGeo() {state.leituraGeo?.abort();state.leituraGeo=null;}
-function limparGeo() {cancelarGeo();for(const id of ['latitude','longitude'])$(id).value=''; $('confirmar-localizacao').checked=false; state.origemGeo='manual'; state.precisaoGeo=null; state.mapaLocal?.ponto(null);$('localizacao-status').textContent='Você pode marcar no mapa, digitar coordenadas ou continuar sem GPS.';}
+function limparRegiaoAutomatica(){if(state.regiaoAuto)for(const id of ['bairro','local'])if($(id).value===state.regiaoAuto[id])$(id).value='';state.regiaoAuto=null;}
+function limparGeo() {cancelarGeo();limparRegiaoAutomatica();for(const id of ['latitude','longitude'])$(id).value=''; $('confirmar-localizacao').checked=false; state.origemGeo='manual'; state.precisaoGeo=null; state.mapaLocal?.ponto(null);$('localizacao-status').textContent='Você pode marcar no mapa, digitar coordenadas ou continuar sem GPS.';}
 $('limpar-localizacao').addEventListener('click',limparGeo);
-for(const id of ['latitude','longitude'])$(id).addEventListener('input',()=>{cancelarGeo();state.origemGeo='manual';state.precisaoGeo=null;$('confirmar-localizacao').checked=false;sincronizarPonto();$('localizacao-status').textContent='Coordenadas editadas. Confira o ponto e confirme novamente.';});
+for(const id of ['latitude','longitude'])$(id).addEventListener('input',()=>{cancelarGeo();limparRegiaoAutomatica();state.origemGeo='manual';state.precisaoGeo=null;$('confirmar-localizacao').checked=false;sincronizarPonto();$('localizacao-status').textContent='Coordenadas editadas. Confira o ponto e confirme novamente.';});
+for(const id of ['bairro','local'])$(id).addEventListener('input',cancelarGeo);
+function aplicarLocalizacao(resultado){
+  if(!resultado)return;
+  const g=resultado.posicao;
+  $('latitude').value=g.latitude.toFixed(6);$('longitude').value=g.longitude.toFixed(6);state.origemGeo='gps';state.precisaoGeo=g.precisao_m;
+  for(const id of ['bairro','local'])if(!$(id).value||$(id).value===state.regiaoAuto?.[id])$(id).value=resultado[id];
+  state.regiaoAuto={bairro:resultado.bairro,local:resultado.local};$('confirmar-localizacao').checked=false;sincronizarPonto();
+  $('localizacao-status').textContent='Posição do aparelho'+(g.precisao_m!==null?' · precisão aproximada de '+Math.round(g.precisao_m)+' m':'')+'. Confira o ponto. Região aproximada: BigDataCloud.'+(resultado.aviso?' '+resultado.aviso:'');
+}
 $('obter-localizacao').addEventListener('click',e=>bloquearDurante([e.currentTarget],async()=>{
   if(!window.isSecureContext || !navigator.geolocation)throw new Error('O GPS precisa de HTTPS e permissão no navegador. Digite a referência ou coordenadas manualmente.');
   cancelarGeo();const leitura=new AbortController();state.leituraGeo=leitura;
   $('localizacao-status').textContent='Aguardando sua permissão e a posição do aparelho…';
   try {
-    const pos=await obterPosicao(navigator.geolocation,leitura.signal);
-    if(!pos||leitura.signal.aborted)return;
-    $('latitude').value=pos.coords.latitude.toFixed(6); $('longitude').value=pos.coords.longitude.toFixed(6);
-    state.origemGeo='gps'; state.precisaoGeo=Math.min(100000,pos.coords.accuracy); $('confirmar-localizacao').checked=false;
-    sincronizarPonto();
-    $('localizacao-status').textContent='Posição recebida, com precisão aproximada de '+Math.round(pos.coords.accuracy)+' m. Confira o local antes de confirmar.';
-  } catch(erro) {if(leitura.signal.aborted)return;const mensagem=erroLocalizacao(erro.code);$('localizacao-status').textContent=mensagem;throw new Error(mensagem);}
+    const resultado=await localizarAtual(navigator.geolocation,leitura.signal);
+    if(!leitura.signal.aborted)aplicarLocalizacao(resultado);
+  } catch(erro) {if(leitura.signal.aborted)return;$('localizacao-status').textContent=erro.message;throw erro;}
   finally{if(state.leituraGeo===leitura)state.leituraGeo=null;}
 }).catch(erro=>aviso(erro.message,true)));
 $('salvar-rascunho').addEventListener('click',e=>durante(e.currentTarget,async()=>{
@@ -331,9 +344,11 @@ $('restaurar-rascunho').addEventListener('click',e=>durante(e.currentTarget,asyn
   state.envioId=salvo.envioId;
   try {state.assinatura=salvo.assinatura?assinaturaPedido(JSON.parse(salvo.assinatura)):null;} catch {state.assinatura=null;}
   state.rascunhoId=salvo.id||crypto.randomUUID(); state.origemGeo=salvo.origemGeo||'manual'; state.precisaoGeo=salvo.precisaoGeo??null;
+  state.previaFoto=salvo.previaFoto||null;
+  state.regiaoAuto=salvo.regiaoAuto||null;
   if(salvo.foto instanceof Blob){state.foto=salvo.foto; mostrarFoto(URL.createObjectURL(salvo.foto),'Foto recuperada do rascunho.');}
   sincronizarPonto();
-  $('rascunho-status').textContent='Rascunho de '+data(salvo.salvoEm)+' recuperado. Confira os dados e confirme novamente antes de enviar.';
+  mostrarEtapa(1,false);$('rascunho-status').textContent='Rascunho de '+data(salvo.salvoEm)+' recuperado. Confira os dados e confirme novamente antes de enviar.';
 }));
 $('apagar-rascunho').addEventListener('click',e=>durante(e.currentTarget,async()=>{await rascunho('delete');state.rascunhoId=null;$('rascunho-status').textContent='Rascunho salvo apagado deste navegador. O formulário atual foi mantido.';}));
 function conexao() {$('conexao').hidden=navigator.onLine;}
@@ -383,32 +398,43 @@ function pontoFormulario() {
 }
 function sincronizarPonto() {state.mapaLocal?.ponto(pontoFormulario());}
 function escolherPonto(latitude,longitude) {
-  cancelarGeo();
+  cancelarGeo();limparRegiaoAutomatica();
   $('latitude').value=latitude.toFixed(6);$('longitude').value=longitude.toFixed(6);state.origemGeo='manual';state.precisaoGeo=null;$('confirmar-localizacao').checked=false;
   state.mapaLocal?.ponto(pontoFormulario(),false);$('localizacao-status').textContent='Ponto ajustado no mapa. Confira a referência e confirme as coordenadas abaixo.';
-}
-function conferirEtapa(n) {
-  if(n>=1 && !$('descricao').reportValidity()){mostrarEtapa(0);return false;}
-  if(n>=2) {
-    if(!$('bairro').reportValidity()){mostrarEtapa(1);return false;}
-    if(!$('local').reportValidity()){mostrarEtapa(1);return false;}
-    try{coordenadas($('latitude').value,$('longitude').value,$('confirmar-localizacao').checked,state.origemGeo,state.precisaoGeo);}
-    catch(erro){mostrarEtapa(1);aviso(erro.message,true);$('confirmar-localizacao').focus();return false;}
-  }return true;
 }
 function mostrarEtapa(n,foco=true) {
   state.etapa=n;if(n!==0)fecharCamera();
   if(n!==1)cancelarGeo();
   document.querySelectorAll('[data-request-step]').forEach(p=>p.hidden=Number(p.dataset.requestStep)!==n);
   document.querySelectorAll('[data-step]').forEach(b=>{if(Number(b.dataset.step)===n)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});
-  if(n===1){if(!state.mapaLocal)state.mapaLocal=criarMapa('mapa-local','mapa-local-status',escolherPonto);state.mapaLocal?.resize();sincronizarPonto();}
-  if(n===2){const box=$('pedido-conferencia');box.replaceChildren();if(state.foto||state.fotoAtual){const img=el('img');img.src=$('foto-preview').src;img.alt='Foto que acompanhará o pedido';box.append(img);}const texto=el('div');texto.append(el('h3',$('descricao').value),el('p',($('local').value||'Sem referência textual')+' · '+$('bairro').value),el('p',$('contexto').selectedOptions[0].textContent,'fine'));const g=pontoFormulario();texto.append(el('p',g?'Ponto confirmado: '+g.latitude.toFixed(6)+', '+g.longitude.toFixed(6):'Sem coordenadas: a localização depende da referência informada.','inset'));box.append(texto);}
-  if(n===2&&$('passagem-trecho').value)$('pedido-conferencia').append(el('p','Vínculo declarado: '+$('passagem-trecho').selectedOptions[0].textContent+' · '+$('passagem-condicao').selectedOptions[0].textContent+'. Percurso didático, sem confirmação espacial.','inset'));
+  if(n===1){$('passagem-vinculo').open=Boolean($('passagem-trecho').value);if(!state.mapaLocal)state.mapaLocal=criarMapa('mapa-local','mapa-local-status',escolherPonto);state.mapaLocal?.resize();sincronizarPonto();}
+  if(n===1){const box=$('pedido-conferencia');box.replaceChildren();if(state.foto||state.fotoAtual){const img=el('img');img.src=$('foto-preview').src;img.alt='Foto que acompanhará o pedido';box.append(img);}const s=state.previaFoto;$('automatico-origem').textContent=s?(s.status==='inconclusivo'?'A imagem não permitiu identificar uma ocorrência. Descreva o problema abaixo. ':'Relato gerado a partir da foto. ')+s.limites:'Preenchimento manual. Confira o relato e o local antes de enviar.';}
   if(foco){const alvo=document.querySelector('[data-request-step="'+n+'"] h2');if(alvo){alvo.tabIndex=-1;alvo.focus();} $('request-progress').scrollIntoView({block:'start'});}
 }
-document.querySelectorAll('[data-step],[data-next],[data-back]').forEach(b=>b.addEventListener('click',()=>{const n=Number(b.dataset.step??b.dataset.next??b.dataset.back);if(n<=state.etapa||conferirEtapa(n))mostrarEtapa(n);}));
-$('seguir-texto').addEventListener('click',()=>{if(conferirEtapa(1))mostrarEtapa(1);});
-$('pedido-form').addEventListener('invalid',e=>{const p=e.target.closest('[data-request-step]');if(p)mostrarEtapa(Number(p.dataset.requestStep),false);},true);
+document.querySelectorAll('[data-step],[data-next],[data-back]').forEach(b=>b.addEventListener('click',()=>{cancelarAutomatico();mostrarEtapa(Number(b.dataset.step??b.dataset.next??b.dataset.back));}));
+$('seguir-texto').addEventListener('click',()=>{cancelarAutomatico();mostrarEtapa(1);});
+$('pedido-form').addEventListener('invalid',e=>{const p=e.target.closest('[data-request-step]');if(p)mostrarEtapa(Number(p.dataset.requestStep),false);for(let n=e.target.parentElement;n&&n!==p;n=n.parentElement)if(n.tagName==='DETAILS')n.open=true;},true);
+$('pedido-form').addEventListener('input',e=>{if(e.target!==$('confirmar-localizacao'))$('confirmar-localizacao').checked=false;});
+function cancelarAutomatico(){state.versaoFoto=(state.versaoFoto||0)+1;state.geracaoFoto?.abort();state.geracaoFoto=null;$('gerar-automatico').disabled=false;$('gerar-automatico').hidden=!state.foto;$('automatico-status').textContent=state.foto?'Foto pronta. Você pode gerar novamente ou preencher manualmente.':'Comece pela câmera ao lado.';}
+async function gerarAutomatico(){
+  cancelarAutomatico();if(!state.foto)return;
+  limparGeo();const leitura=new AbortController();state.geracaoFoto=leitura;state.previaFoto=null;state.envioId=null;
+  $('gerar-automatico').hidden=false;$('gerar-automatico').disabled=true;
+  $('automatico-status').textContent='Analisando a foto e buscando sua posição. Aguarde as permissões do aparelho…';
+  const foto=state.foto;const form=new FormData();form.append('arquivo',foto,'ocorrencia.jpg');
+  try{
+    const resultado=await prepararAutomatico(()=>api('/api/relato-foto',{method:'POST',body:form,signal:leitura.signal}),
+      ()=>localizarAtual(navigator.geolocation,leitura.signal),leitura.signal);
+    if(!resultado||leitura.signal.aborted||state.foto!==foto)return;
+    if(resultado.foto){state.previaFoto=resultado.foto;$('descricao').value=resultado.foto.descricao;}
+    aplicarLocalizacao(resultado.localizacao);$('confirmar-localizacao').checked=false;
+    mostrarEtapa(1);
+    if(resultado.avisos.length)aviso(resultado.avisos.join(' '),true);
+    else aviso(resultado.foto?.status==='identificado'?'Relato e localização preparados. Confira, ajuste se necessário e envie.':'Confira o local e escreva o que precisa ser avaliado.');
+  }catch(erro){if(!leitura.signal.aborted){mostrarEtapa(1);aviso(erro.message,true);}}
+  finally{if(state.geracaoFoto===leitura){state.geracaoFoto=null;$('gerar-automatico').disabled=false;$('automatico-status').textContent='Prévia preparada. O pedido só será registrado depois da sua confirmação.';}}
+}
+$('gerar-automatico').addEventListener('click',gerarAutomatico);
 function fecharCamera() {
   state.leituraCamera?.abort();state.leituraCamera=null;
   state.camera?.getTracks().forEach(t=>t.stop());state.camera=null;$('camera-video').srcObject=null;$('camera-video').hidden=true;
@@ -416,6 +442,7 @@ function fecharCamera() {
   $('camera-status').textContent='Você pode usar foto, imagem da galeria ou somente texto.';
 }
 $('ativar-camera').addEventListener('click',e=>bloquearDurante([e.currentTarget],async()=>{
+  cancelarAutomatico();
   if(!isSecureContext||!navigator.mediaDevices?.getUserMedia){$('camera-status').textContent='Câmera ao vivo indisponível. Use “Câmera do aparelho” ou escolha uma imagem.';return;}
   fecharCamera();const leitura=new AbortController();state.leituraCamera=leitura;$('fechar-camera').hidden=false;$('camera-status').textContent='Aguardando a permissão da câmera. Você pode cancelar e continuar por texto.';
   try{const stream=await abrirCamera(navigator.mediaDevices,leitura.signal);
@@ -425,12 +452,15 @@ $('ativar-camera').addEventListener('click',e=>bloquearDurante([e.currentTarget]
   }catch{if(!leitura.signal.aborted){fecharCamera();$('camera-status').textContent='Câmera não autorizada ou indisponível. Escolha uma imagem ou use a câmera do aparelho.';}}
   finally{if(state.leituraCamera===leitura)state.leituraCamera=null;}
 }).catch(erro=>aviso(erro.message,true)));
-$('fechar-camera').addEventListener('click',fecharCamera);window.addEventListener('pagehide',fecharCamera);
+$('fechar-camera').addEventListener('click',fecharCamera);window.addEventListener('pagehide',()=>{fecharCamera();cancelarGeo();cancelarAutomatico();});
 $('capturar-camera').addEventListener('click',e=>durante(e.currentTarget,async()=>{
+  cancelarAutomatico();const versao=state.versaoFoto;
   const video=$('camera-video');if(!video.videoWidth)throw new Error('A imagem da câmera ainda não está pronta. Aguarde e tente novamente.');
   const canvas=document.createElement('canvas');canvas.width=video.videoWidth;canvas.height=video.videoHeight;canvas.getContext('2d').drawImage(video,0,0);
   const arquivo=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.9));if(!arquivo)throw new Error('Não foi possível capturar. Escolha uma imagem.');
-  const foto=await reduzirFoto(arquivo);state.foto=foto;state.removerFoto=false;state.envioId=null;fecharCamera();mostrarFoto(URL.createObjectURL(foto),'Foto capturada e preparada: '+Math.ceil(foto.size/1024)+' KB.');
+  const foto=await reduzirFoto(arquivo);if(versao!==state.versaoFoto||document.querySelector('[data-panel="pedido"]').hidden)return;
+  state.previaFoto=null;state.foto=foto;state.removerFoto=false;state.envioId=null;fecharCamera();mostrarFoto(URL.createObjectURL(foto),'Foto capturada e preparada: '+Math.ceil(foto.size/1024)+' KB.');
+  if(!state.edicao)void gerarAutomatico();else mostrarEtapa(1);
 }));
 const passagem=iniciarPassagem({api,enviar,el,botao,badge,data,aviso,durante,
   abrir:async id=>{await navegar('acompanhar');await detalhe(id);},

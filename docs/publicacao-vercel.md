@@ -67,3 +67,14 @@ Câmera e GPS físicos dependem do aparelho. O percurso não foi vistoriado, nã
 - [Groq: modelo escolhido](https://console.groq.com/docs/model/qwen/qwen3.8-27b).
 
 Consulta em 16/11/2026. Sem contratação de serviços pagos.
+
+
+## Relato por foto, 16/11/2026
+
+A foto inicia a geração de uma descrição preliminar pelo mesmo Qwen3.8-27B, com resposta estruturada e abstenção. Em paralelo, o navegador solicita GPS e consulta a região diretamente na BigDataCloud, usando somente a posição atual autorizada. O endpoint gratuito não fornece endereço de rua. Ponto e texto são conferidos antes de enviar; falha de um serviço permite preenchimento manual, sem fingir sucesso.
+
+A prévia não grava foto ou pedido. No envio, a assinatura do servidor é verificada contra o hash da foto antes de armazenar o anexo. Modelo, data e descrição original ficam no histórico, separados do texto conferido. Rascunho conserva essa origem e os campos automáticos, sem conservar a confirmação.
+
+Passaram 136 testes Python com Postgres temporário e TLS e 25 testes JavaScript. O navegador móvel, com IA sintética, GPS controlado e região simulada, executou prévia, correção, envio, revisão, confirmação, contestação e recuperação de rascunho. Cancelamento durante preparo e região antiga após restaurar rascunho foram reproduzidos e corrigidos. O teste físico continua pendente.
+
+Fontes técnicas: [imagens e saída estruturada no Groq](https://console.groq.com/docs/vision), [uso gratuito e consentido da região no próprio aparelho](https://www.bigdatacloud.com/docs/article/fair-use-policy-for-free-client-side-reverse-geocoding-api), [limite de região sem rua/número](https://www.bigdatacloud.com/reverse-geocoding).

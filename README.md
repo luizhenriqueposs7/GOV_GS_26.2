@@ -4,6 +4,9 @@ Repositório da entrega: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_
 
 O [relatório de trabalho em PDF](output/pdf/Central_CitizenTech_Governanca_Versao_de_Trabalho.pdf) tem 14 páginas. A conclusão será elaborada com os integrantes. O [roteiro do vídeo integrado](docs/roteiro-video.md) prevê 6min30s; o vídeo deve ser publicado como Não Listado e seu link ainda será acrescentado. A central está em [gov262.vercel.app](https://gov262.vercel.app), com acesso privado do grupo. A execução local continua disponível.
 
+A jornada móvel agora tem duas etapas: **tirar foto → conferir e enviar**. A foto gera uma descrição preliminar pelo Groq; com permissão, o aparelho obtém GPS e consulta uma região aproximada. Texto e ponto continuam editáveis. A prévia não cria pedido. A sugestão original é assinada pelo servidor e vinculada à foto, preservando origem e correções no histórico. Cadastro manual, revisão, confirmação e contestação permanecem disponíveis. [Teste no celular](docs/teste-celular.md).
+
+
 Preparação e acompanhamento local de pedidos sobre calçadas, buracos no asfalto e iluminação em São Paulo. A central recebe foto opcional e localização confirmada, pede contexto, mostra a fonte do encaminhamento, conserva a triagem original, registra uma revisão justificada e permite contestar a decisão. Depois da conferência, reutiliza a persistência do ZelaBairro.
 
 O **Passagem Livre** relaciona pedidos em um percurso didático de quatro trechos, do ponto de ônibus até uma unidade de saúde ilustrativa. Compara reparos isolados e combinados, mantém condições desconhecidas e registra planos justificados sobre as versões dos pedidos. A linha no mapa é esquemática, sem levantamento de calçadas ou garantia de acessibilidade.

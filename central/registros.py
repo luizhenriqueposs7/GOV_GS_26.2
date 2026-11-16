@@ -74,7 +74,7 @@ class Repositorio:
 
     def criar(self, dados: dict, somente_se_novo=False) -> dict:
         entrada = {chave: dados.get(chave) for chave in (
-            "descricao", "bairro", "local", "contexto", "triagem_original", "preparacao", "origem_id", "foto", "localizacao", "passagem"
+            "descricao", "bairro", "local", "contexto", "triagem_original", "preparacao", "origem_id", "foto", "localizacao", "passagem", "sugestao_foto"
         )}
         entrada['passagem'] = validar_vinculo(entrada['passagem'])
         if not entrada["descricao"] or not entrada["bairro"]:
@@ -83,7 +83,7 @@ class Repositorio:
             con.execute("BEGIN IMMEDIATE")
             envio_id = dados.get('envio_id')
             # Ausência de vínculo mantém a assinatura usada pelos envios anteriores ao Passagem Livre.
-            dados_assinatura = {k: v for k, v in entrada.items() if k != 'passagem' or v is not None}
+            dados_assinatura = {k: v for k, v in entrada.items() if k not in {'passagem', 'sugestao_foto'} or v is not None}
             assinatura = hashlib.sha256(json.dumps(dados_assinatura, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
             if envio_id:
                 envio = con.execute('SELECT atendimento_id, assinatura FROM envios WHERE id = ?', (envio_id,)).fetchone()
@@ -104,7 +104,7 @@ class Repositorio:
                         return anterior
                     entrada.update(local=anterior["local"], contexto=anterior["contexto"])
                     entrada.update(foto=anterior.get('foto'), localizacao=anterior.get('localizacao'),
-                                   passagem=anterior.get('passagem'))
+                                   passagem=anterior.get('passagem'), sugestao_foto=anterior.get('sugestao_foto'))
                     entrada["preparacao"] = preparar(entrada["descricao"], entrada["contexto"], entrada["local"])
                 if all(anterior.get(k) == v for k, v in entrada.items()):
                     return anterior
@@ -118,6 +118,8 @@ class Repositorio:
                 acao = "Atendimento registrado"
                 evidencia = {"triagem_original": entrada["triagem_original"], "origem_id": entrada["origem_id"],
                              'foto': entrada['foto'], 'localizacao': entrada['localizacao']}
+                if entrada.get('sugestao_foto'):
+                    evidencia['sugestao_foto'] = entrada['sugestao_foto']
             if lote_rpa:
                 caso["entrada_origem"] = entrada_origem
             analise = entrada["triagem_original"] or {}
@@ -146,7 +148,7 @@ class Repositorio:
                 return None
 
     def atualizar(self, identificador, dados):
-        campos = ("descricao", "bairro", "local", "contexto", "triagem_original", "preparacao", "foto", "localizacao", "passagem")
+        campos = ("descricao", "bairro", "local", "contexto", "triagem_original", "preparacao", "foto", "localizacao", "passagem", "sugestao_foto")
         with self.conexao() as con:
             con.execute("BEGIN IMMEDIATE")
             caso = self._obter(con, identificador)

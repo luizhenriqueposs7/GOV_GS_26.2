@@ -17,7 +17,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 from starlette.concurrency import run_in_threadpool
 
-from . import modulos, imagens, passagem
+from . import modulos, imagens, passagem, relato_foto
 from .catalogo import preparar
 from .registros import Repositorio, EnvioConflitante
 
@@ -115,12 +115,14 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             arquivo_chave.write_text(secrets.token_urlsafe(32), encoding="utf-8")
         chave = arquivo_chave.read_text(encoding="utf-8").strip()
 
-    app = FastAPI(title="ZelaBairro", version="0.3.0", docs_url="/contrato")
+    app = FastAPI(title="ZelaBairro", version="0.4.0", docs_url="/contrato")
     app.state.repo = repo
     usuario_acesso = os.getenv('GOV_ACCESS_USER', '').encode()
     senha_acesso = os.getenv('GOV_ACCESS_PASSWORD', '').encode()
 
-    def guardar_foto(conteudo):
+    def guardar_foto(conteudo, previa=''):
+        if previa:
+            relato_foto.validar(previa, imagens.preparar_foto(conteudo)[1], chave)
         return fotos.guardar(conteudo) if fotos else imagens.guardar(conteudo, pasta / 'fotos')
 
     def gestor(valor):
@@ -179,7 +181,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
         resposta.headers["Cache-Control"] = "no-store"
         resposta.headers["Content-Security-Policy"] = (
             "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://tile.openstreetmap.org; "
-            "media-src 'self' blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+            "connect-src 'self' https://api.bigdatacloud.net; media-src 'self' blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
         )
         return resposta
 
@@ -239,15 +241,22 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
         except ValueError as erro:
             raise ValueError('Confira descrição, bairro, contexto e coordenadas confirmadas. Use somente os campos do formulário.') from erro
 
+    @app.post('/api/relato-foto')
+    async def gerar_relato_foto(arquivo: UploadFile = File(...)):
+        return await run_in_threadpool(relato_foto.gerar, await arquivo.read(8 * 1024 * 1024 + 1), chave)
+
     @app.post('/api/atendimentos/com-anexo', status_code=201)
-    async def criar_com_anexo(dados: str = Form(max_length=10000), arquivo: UploadFile | None = File(default=None)):
+    async def criar_com_anexo(dados: str = Form(max_length=10000), arquivo: UploadFile | None = File(default=None),
+                             previa: str = Form(default='', max_length=6000)):
         entrada = ler_pedido(dados)
         foto = None
         if arquivo:
-            foto = await run_in_threadpool(guardar_foto, await arquivo.read(8 * 1024 * 1024 + 1))
+            foto = await run_in_threadpool(guardar_foto, await arquivo.read(8 * 1024 * 1024 + 1), previa)
         payload = entrada.model_dump(mode='json', exclude={'confirmado'})
         payload.update(foto=foto, triagem_original=modulos.triagem(entrada.descricao),
                        preparacao=preparar(entrada.descricao, entrada.contexto, entrada.local))
+        if previa:
+            payload['sugestao_foto'] = relato_foto.validar(previa, foto, chave)
         return await run_in_threadpool(repo.criar, payload)
 
     @app.get('/api/atendimentos/{identificador}/foto')
@@ -284,14 +293,15 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
 
     @app.put('/api/atendimentos/{identificador}/com-anexo')
     async def atualizar_com_anexo(identificador: str, dados: str = Form(max_length=10000),
-                                 arquivo: UploadFile | None = File(default=None), remover_foto: bool = Form(default=False)):
-        await run_in_threadpool(obter, identificador)
+                                 arquivo: UploadFile | None = File(default=None), remover_foto: bool = Form(default=False),
+                                 previa: str = Form(default='', max_length=6000)):
+        anterior = await run_in_threadpool(obter, identificador)
         entrada = ler_pedido(dados)
         if arquivo and remover_foto:
             raise ValueError('Escolha substituir ou remover a foto.')
         foto = None
         if arquivo:
-            foto = await run_in_threadpool(guardar_foto, await arquivo.read(8 * 1024 * 1024 + 1))
+            foto = await run_in_threadpool(guardar_foto, await arquivo.read(8 * 1024 * 1024 + 1), previa)
         payload = entrada.model_dump(mode='json', exclude={'confirmado', 'origem_id', 'envio_id'}, exclude_unset=True)
         payload.update(local=entrada.local, contexto=entrada.contexto,
                        triagem_original=modulos.triagem(entrada.descricao),
@@ -300,6 +310,9 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             raise ValueError('A origem do atendimento não pode ser alterada.')
         if arquivo or remover_foto:
             payload['foto'] = foto
+            payload['sugestao_foto'] = None
+        if previa:
+            payload['sugestao_foto'] = relato_foto.validar(previa, foto if arquivo or remover_foto else anterior.get('foto'), chave)
         return await run_in_threadpool(repo.atualizar, identificador, payload)
 
     @app.post("/api/atendimentos/{identificador}/revisao")

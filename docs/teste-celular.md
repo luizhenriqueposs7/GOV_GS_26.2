@@ -1,5 +1,25 @@
 # Teste no celular
 
+## Acesso online atual
+
+Abra **https://gov262.vercel.app/#pedido** no Chrome do Android ou Safari do iPhone. Não é necessário deixar o computador ligado. O usuário, senha e chave de revisão estão somente no arquivo privado local `data/acesso-zelabairro-online.txt`, fora do Git. Senha de entrada e chave de revisão são diferentes. Se a versão anterior estiver aberta ou instalada, feche todas as abas da central e abra novamente para atualizar o formulário.
+
+1. Em **Registrar**, fotografe pelo botão da câmera e depois **Capturar foto**, ou use **Câmera do aparelho**. Escolher uma imagem também inicia a preparação automática.
+2. Permita a localização. A foto vai ao Groq para preparar uma descrição; a posição atual vai diretamente do aparelho à BigDataCloud para sugerir uma região. O mapa usa OpenStreetMap. Não há endereço inventado pela imagem ou localização por IP.
+3. Aguarde a tela **Conferir e enviar**. Confira a foto, ajuste o relato, o bairro/região e o ponto no mapa. A região é aproximada, sem rua ou número; complete uma referência quando necessário. Se GPS/IA falharem, a tela explica a falha e permite preencher manualmente. Imagem inconclusiva exige descrição da pessoa.
+4. O tipo de local e vínculo ao Passagem Livre são opcionais para registrar. Expanda **Conferir tipo de local** quando souber o contexto. Não associe uma foto real de outro lugar ao percurso didático.
+5. Marque a única confirmação de texto, foto e local e toque em **Enviar pedido**. Antes desse botão, nenhum pedido foi registrado. Anote o identificador e confira o mesmo registro em **Meus pedidos**.
+6. Em **Revisão**, selecione o pedido, informe revisor, prioridade, justificativa e chave. Toque em **Registrar decisão** e depois **Confirmar registro local**. Pendências de contexto/localização podem impedir a confirmação; corrija o pedido e revise novamente. Não é um protocolo municipal.
+7. Em **Abrir pedido e contestação**, explique o motivo e toque em **Solicitar nova revisão**. A revisão anterior fica no histórico e a confirmação passa a exigir nova decisão.
+
+Em **Como o relato foi preparado**, confira modelo, data, sugestão original e alterações humanas. O rascunho guarda a sugestão e os campos, mas pede nova confirmação após recuperar. Campos preenchidos automaticamente acompanham o novo GPS; correções manuais são preservadas.
+
+O navegador automatizado verificou o fluxo em 412 × 839, com controles sintéticos claramente identificados. Câmera e GPS físicos ainda devem ser testados pelo integrante. Registre aparelho, navegador, resultado, precisão GPS e identificador do pedido, sem divulgar senha/chave. A análise é preliminar e não comprova gravidade ou acessibilidade.
+
+## Histórico da execução local por túnel
+
+As instruções abaixo documentam o modo local anterior. Para a publicação atual, use o acesso online acima.
+
 ## Passagem Livre na gravação
 
 Depois de autenticar o telefone, abra “Passagem Livre”. O percurso ponto → unidade de saúde é didático e esquemático. O computador pode preparar os dois pedidos fictícios antes da tomada, usando a chave de gestão. Marcar só a calçada conserva a barreira da rampa; marcar ambos mostra continuidade na hipótese do cenário. O resultado não comprova passagem física ou reparo executado.
