@@ -7,6 +7,7 @@ import logging
 import os
 import re
 from datetime import datetime, timezone
+from time import monotonic, sleep
 from typing import Literal
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -66,8 +67,22 @@ def gerar(conteudo: bytes, chave: str) -> dict:
                   headers={'Content-Type': 'application/json', 'Accept': 'application/json',
                            'User-Agent': 'ZelaBairro/0.4', 'Authorization': 'Bearer ' + api_key})
     try:
-        with urlopen(req, timeout=45) as remoto:
-            resposta = remoto.read(16385)
+        prazo = monotonic() + 75
+        for tentativa in range(3):
+            restante = prazo - monotonic()
+            if restante <= 0:
+                raise RuntimeError('A análise demorou além do limite. Tente novamente ou preencha o relato manualmente.')
+            try:
+                with urlopen(req, timeout=min(45, restante)) as remoto:
+                    resposta = remoto.read(16385)
+                break
+            except HTTPError as erro:
+                espera = 2 ** (tentativa + 1)
+                if erro.code not in {500, 502, 503, 504} or tentativa == 2 or monotonic() + espera >= prazo:
+                    raise
+                logging.getLogger(__name__).warning('Groq foto HTTP %s; nova tentativa em %s s', erro.code, espera)
+                erro.close()
+                sleep(espera)
         if len(resposta) > 16384:
             raise ValueError('Resposta excessiva.')
         dados = json.loads(resposta)
@@ -89,6 +104,8 @@ def gerar(conteudo: bytes, chave: str) -> dict:
             logging.getLogger(__name__).warning('Groq foto HTTP %s; diagnóstico indisponível', erro.code)
         if erro.code == 429:
             raise RuntimeError('A cota gratuita da geração por foto foi atingida. Aguarde ou preencha o relato manualmente.') from erro
+        if erro.code in {500, 502, 503, 504}:
+            raise RuntimeError('O serviço de imagem continua temporariamente indisponível após as tentativas. Sua foto foi mantida. Tente gerar novamente ou preencha o relato.') from erro
         raise RuntimeError('O Groq não conseguiu analisar a foto agora. A imagem foi mantida; você pode preencher o relato.') from erro
     except (URLError, OSError, ValueError, TypeError, KeyError, IndexError) as erro:
         raise RuntimeError('A análise da foto não retornou uma prévia válida. Você pode preencher o relato manualmente.') from erro

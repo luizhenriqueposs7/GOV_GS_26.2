@@ -92,6 +92,23 @@ class RelatoFotoTest(unittest.TestCase):
         self.assertNotIn('QUJDRA==', logs.output[0])
         self.assertNotIn('Schema recusado', r.text)
 
+    def test_lotacao_tem_tentativas_limitadas_sem_gravar_pedido(self):
+        from central import relato_foto
+        from urllib.error import HTTPError
+        lotado = lambda: HTTPError('https://api.groq.com', 503, 'capacidade', {}, io.BytesIO(b'{"error":{"message":"over capacity"}}'))
+        with patch.object(relato_foto, 'urlopen', side_effect=[lotado(), self.remoto()]) as remoto, \
+                patch.object(relato_foto, 'sleep', create=True) as esperar:
+            r = self.previa()
+        self.assertEqual(r.status_code, 200, r.text)
+        self.assertEqual(remoto.call_count, 2)
+        esperar.assert_called_once_with(2)
+        with patch.object(relato_foto, 'urlopen', side_effect=[lotado(),lotado(),lotado()]) as remoto, \
+                patch.object(relato_foto, 'sleep', create=True) as esperar:
+            self.assertEqual(self.previa().status_code, 503)
+        self.assertEqual(remoto.call_count, 3)
+        self.assertEqual([c.args[0] for c in esperar.call_args_list], [2,4])
+        self.assertEqual(self.client.get('/api/atendimentos').json(), [])
+
     def test_origem_assinada_preserva_texto_original_e_contestacao(self):
         from central import relato_foto
         with patch.object(relato_foto, 'urlopen', return_value=self.remoto()):
