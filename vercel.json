@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "fastapi",
+  "regions": ["gru1"],
+  "functions": {
+    "central/app.py": {
+      "maxDuration": 180,
+      "excludeFiles": "{.{git,tmp,venv}/**,**/{__pycache__,.venv}/**,{data,docs,output,tests,supabase}/**,materiais/{visao/{data,video},frontend/frontend,pln/tokenizador}/**,{materiais,modelos_online}/**/.runtime/**,**/*.{pth,onnx,pdf,ipynb,mp4,webm,zip,docx,exe,ps1},.env*}"
+    }
+  }
+}

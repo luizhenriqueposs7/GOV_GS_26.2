@@ -5,3 +5,7 @@ pandas==2.2.3
 Pillow==12.3.0
 python-multipart==0.0.27
 httpx==0.28.1
+psycopg[binary]==3.3.9
+fastembed==0.9.1
+onnxruntime==1.31.1
+numpy==2.5.4

@@ -438,4 +438,8 @@ const passagem=iniciarPassagem({api,enviar,el,botao,badge,data,aviso,durante,
   evidencias:async id=>{await navegar('evidencias');$('evidencia-caso').value=id;aviso('As próximas consultas serão vinculadas ao pedido '+id.slice(0,8)+'. Use evidências pertinentes.');},
   novo:async trecho=>{if(state.edicao){aviso('Conclua ou cancele a edição atual antes de registrar outra observação.',true);return;}await navegar('pedido');$('passagem-trecho').value=trecho;$('passagem-condicao').value='nao_verificado';mostrarEtapa(0);}
 });
+api('/api/status').then(status=>{
+  document.querySelector('.demo-pill').textContent=status.modo;
+  document.querySelector('.demo-pill').title='Assistente: '+status.modelo_genai+(status.genai_configurada?'':' · chave ainda não configurada');
+}).catch(()=>{});
 navegar(location.hash.slice(1)||(matchMedia('(max-width:680px)').matches?'pedido':'mapa'),false);

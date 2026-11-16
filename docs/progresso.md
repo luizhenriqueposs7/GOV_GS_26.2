@@ -2,6 +2,18 @@
 
 Plano: ../../docs/superpowers/plans/2026-11-14-central-citizentech.md
 
+## Publicação completa na Vercel, 16/11/2026
+
+Central disponível em https://gov262.vercel.app, com autenticação privada e chave de revisão separada. A execução local e seus bancos foram preservados. O novo Supabase recebeu somente exemplos explicitamente fictícios. As cinco tabelas têm RLS, com papel de execução restrito; fotos são privadas, normalizadas e verificadas por SHA. A confirmação chama a validação e persistência originais do Frontend na mesma transação do histórico.
+
+O pacote completo de 603,20 MB foi recusado pela conta, mesmo com a configuração beta. A versão padrão de 222,95 MB foi aceita. Os mesmos pesos são obtidos por revisão e hash fixos, com cache temporário de aproximadamente 297 MB. A preparação tem prazo e locks limitados. Uma revisão independente reproduziu e corrigiu uma falha no fim da leitura HTTP de um peso; o teste usa HTTPResponse real, além dos controles de tamanho, hash e interrupção. Dados dos pedidos permanecem no Supabase.
+
+Verificação final: 131 testes Python com Postgres real temporário e 19 JavaScript passaram. Pelo HTTPS, foto, ponto manual, reenvio, revisão, confirmação, contestação e Visão foram executados. Outra instância recuperou foto e histórico. O Groq Free Qwen3.8-27B retornou a fonte ILU.1; privacidade, município fora do escopo e falta de evidência também passaram. A primeira consulta levou 20,24 segundos. As métricas do Qwen3-4B continuam históricas, sem serem atribuídas ao novo modelo.
+
+RPA processou um registro fictício e rejeitou outro; PLN retornou trechos com localizador. O catálogo manteve as nove disciplinas. Passagem Livre comparou um e dois reparos, persistiu plano, desatualizou-o por contestação e bloqueou novo salvamento até revisão. IoT continua externo, Cluster é simulação histórica e Quântica é conceitual. Evidências: cloud-https, groq-https, passagem-https e vercel-encoder-linux, em docs/evidencias.
+
+O domínio principal respondeu 401 sem senha e 200 com senha, sem bypass. O segredo de automação usado na prévia foi autorizado pelo usuário, revogado ao término e conferido: zero bypasses restantes. O arquivo de acesso do grupo fica em data/acesso-zelabairro-online.txt, ignorado pelo Git. O relatório conserva 14 páginas e o roteiro, 6min30s. Câmera e GPS físicos, conclusão conjunta e vídeo integrado ainda estão pendentes.
+
 Em 14/11/2026, iniciada a implementação em pasta própria. O usuário pediu uma central separada, orientada à utilidade prática, e decidiu não realizar testes com pessoas ou piloto externo. As verificações técnicas permanecem previstas.
 
 Decisão do assistente: executar diretamente neste chat e manter os originais preservados. Usar preparação de pedidos com cartas oficiais como fluxo principal; tratar revisão de acessibilidade como controle dentro desse fluxo. O recorte não será apresentado como validado em campo.

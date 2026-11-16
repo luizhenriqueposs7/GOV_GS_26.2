@@ -1,0 +1,99 @@
+{
+  "modo": "Chamada HTTPS atual ao modelo Groq",
+  "resposta": {
+    "fonte": {
+      "id": "ILU.1",
+      "documento": "ILU",
+      "titulo": "Carta de serviços de iluminação pública — SP Regula",
+      "categoria": "Iluminação pública",
+      "secao": "Manutenção de lâmpada, luminária ou poste metálico",
+      "texto": "Lâmpada apagada ou piscando à noite, luminária acesa durante o dia e poste metálico atingido em uma colisão são casos de manutenção da iluminação pública. Para pedir o reparo gratuito, informe o endereço completo da ocorrência pelo aplicativo Ilumina SP ou pelo telefone 0800 779 0156.",
+      "url": "https://prefeitura.sp.gov.br/web/spregula/w/iluminacao_publica/perguntas_frequentes/355960",
+      "consulta": "2026-11-07"
+    },
+    "recuperados": [
+      {
+        "id": "ILU.1",
+        "documento": "ILU",
+        "titulo": "Carta de serviços de iluminação pública — SP Regula",
+        "categoria": "Iluminação pública",
+        "secao": "Manutenção de lâmpada, luminária ou poste metálico",
+        "texto": "Lâmpada apagada ou piscando à noite, luminária acesa durante o dia e poste metálico atingido em uma colisão são casos de manutenção da iluminação pública. Para pedir o reparo gratuito, informe o endereço completo da ocorrência pelo aplicativo Ilumina SP ou pelo telefone 0800 779 0156.",
+        "url": "https://prefeitura.sp.gov.br/web/spregula/w/iluminacao_publica/perguntas_frequentes/355960",
+        "consulta": "2026-11-07",
+        "score": 0.0328
+      },
+      {
+        "id": "CAL.2",
+        "documento": "CAL",
+        "titulo": "Serviços do Portal 156 — Secretaria Municipal das Subprefeituras",
+        "categoria": "Acessibilidade",
+        "secao": "Calçada particular danificada e manutenção de calçada pública",
+        "texto": "O Portal SP156 separa os pedidos conforme o tipo de calçada. Para passeio particular danificado ou inexistente, o catálogo orienta registrar uma denúncia. Para uma calçada pública que precisa de conserto, há um pedido de manutenção. Também existe uma opção de sugerir a construção de calçada em área pública ou praça.",
+        "url": "https://prefeitura.sp.gov.br/web/subprefeituras/w/pracas_de_atendimento/335674",
+        "consulta": "2026-11-07",
+        "score": 0.0318
+      },
+      {
+        "id": "ILU.2",
+        "documento": "ILU",
+        "titulo": "Carta de serviços de iluminação pública — SP Regula",
+        "categoria": "Iluminação pública",
+        "secao": "Protocolo e avaliação do equipamento",
+        "texto": "O registro de manutenção gera um número de protocolo para acompanhar o pedido. Uma equipe técnica vai ao endereço informado, avalia a luminária ou a rede e registra no encerramento do protocolo o resultado da avaliação e o serviço efetuado. A SP Regula informa que os postes de concreto pertencem à concessionária de energia elétrica.",
+        "url": "https://prefeitura.sp.gov.br/web/spregula/w/iluminacao_publica/perguntas_frequentes/355960",
+        "consulta": "2026-11-07",
+        "score": 0.0315
+      },
+      {
+        "id": "ECO.1",
+        "documento": "ECO",
+        "titulo": "Conheça os Ecopontos da cidade de São Paulo",
+        "categoria": "Resíduos e limpeza",
+        "secao": "Materiais aceitos nos Ecopontos",
+        "texto": "Ecopontos são locais de entrega voluntária e gratuita. Recebem entulho de pequenas reformas, itens volumosos como sofás e colchões, resíduos de poda de árvores domiciliares e recicláveis como papelão, plástico, vidro e metal. Separar os materiais facilita a destinação adequada de cada tipo de resíduo.",
+        "url": "https://prefeitura.sp.gov.br/w/conhe%C3%A7a-os-ecopontos-da-cidade-de-s%C3%A3o-paulo",
+        "consulta": "2026-11-07",
+        "score": 0.0306
+      },
+      {
+        "id": "CAL.1",
+        "documento": "CAL",
+        "titulo": "Serviços do Portal 156 — Secretaria Municipal das Subprefeituras",
+        "categoria": "Acessibilidade",
+        "secao": "Obstáculo que dificulta a circulação na calçada",
+        "texto": "Para comunicar uma barreira que prejudica a circulação de pedestres na calçada, o Portal SP156 disponibiliza um serviço específico de acessibilidade para pedir avaliação de obstáculo. O pedido pode ser iniciado pelo link da carta de serviço no catálogo da Secretaria Municipal das Subprefeituras.",
+        "url": "https://prefeitura.sp.gov.br/web/subprefeituras/w/pracas_de_atendimento/335674",
+        "consulta": "2026-11-07",
+        "score": 0.0293
+      }
+    ],
+    "candidatos_modelo": [
+      "ILU.1",
+      "CAL.2",
+      "ILU.2",
+      "ECO.1",
+      "CAL.1"
+    ],
+    "triagem": {
+      "category": "Iluminação pública",
+      "priority": "Média",
+      "confidence": 0.5,
+      "review_required": true
+    },
+    "assunto": "ILU.1",
+    "status": "respondido",
+    "resposta": "Lâmpada apagada ou piscando à noite, luminária acesa durante o dia e poste metálico atingido em uma colisão são casos de manutenção da iluminação pública. Para pedir o reparo gratuito, informe o endereço completo da ocorrência pelo aplicativo Ilumina SP ou pelo telefone 0800 779 0156.",
+    "modelo": "qwen/qwen3.8-27b",
+    "modo": "Generative AI online · Groq Free",
+    "historico": false
+  },
+  "implantacao": "dpl_DGbgjcVPiybGnaLstDKoz6tv3M3g",
+  "controles": [
+    "privacidade",
+    "fora_escopo",
+    "sem_evidencia"
+  ],
+  "latencia_primeira_consulta_s": 20.24,
+  "nao_mede": "Acurácia geral, benefício social ou uso por pessoas reais"
+}

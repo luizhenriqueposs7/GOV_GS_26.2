@@ -85,6 +85,9 @@ def buscar_fontes(pergunta: str) -> list[dict]:
 
 
 def perguntar(texto: str, anterior: str | None = None) -> dict:
+    if os.getenv('GOV_RUNTIME') == 'vercel' or os.getenv('VERCEL') == '1':
+        from .ia_online import perguntar as perguntar_online
+        return perguntar_online(texto, anterior)
     base = os.getenv("CITIZENTECH_GENAI_URL", "http://127.0.0.1:8765").rstrip("/")
     url = urlsplit(base)
     if (url.scheme != "http" or url.hostname not in {"127.0.0.1", "localhost", "::1"}
@@ -134,6 +137,9 @@ def executar_worker(operacao: str, dados: dict, interpretador: str | None = None
 
 
 def analisar_imagem(conteudo: bytes) -> dict:
+    if os.getenv('GOV_RUNTIME') == 'vercel' or os.getenv('VERCEL') == '1':
+        from .visao_online import analisar_imagem as analisar_online
+        return analisar_online(conteudo)
     normalizada = normalizar_imagem(conteudo)
     ambiente = os.getenv("CITIZENTECH_VISION_PYTHON", str(RAIZ / ".venv/Scripts/python.exe") if os.name == "nt" else sys.executable)
     with tempfile.TemporaryDirectory() as pasta:
@@ -163,7 +169,7 @@ def materiais() -> dict:
 def ativos() -> list[dict]:
     resultado_gen = json.loads((MATERIAIS / "genai/resultados.json").read_text(encoding="utf-8"))
     visual = json.loads((MATERIAIS / "visao/artifacts/metricas.json").read_text(encoding="utf-8"))
-    return [
+    resultado = [
         {"id": "rpa", "nome": "RPA", "modo": "Código reutilizado", "resumo": "Triagem e processamento de lotes do notebook original.",
          "limite": "Regras limitadas ao vocabulário. A confiança é heurística.", "materiais": ["rpa_notebook", "rpa_codigo"]},
         {"id": "cluster", "nome": "Cluster Computing", "modo": "Simulação histórica", "resumo": "Dois modelos iSPD, com 2 e 4 workers.",
@@ -188,3 +194,14 @@ def ativos() -> list[dict]:
         {"id": "governanca", "nome": "Governança e Business Analytics", "modo": "Registros desta central", "resumo": "Revisão, contestação, origem das evidências e indicadores do processo.",
          "limite": "Sem testes com pessoas ou validação em campo, por decisão do grupo.", "materiais": []},
     ]
+    if os.getenv('GOV_RUNTIME') == 'vercel' or os.getenv('VERCEL') == '1':
+        por_id = {item['id']: item for item in resultado}
+        por_id['frontend'].update(modo='Persistência em Postgres',
+            resumo='Validação e gravação originais do ZelaBairro adaptadas à mesma transação da central.',
+            limite='Protocolo da demonstração. Não abre chamado municipal.')
+        por_id['genai'].update(modo='Groq gratuito · Qwen3.8-27B',
+            resumo='Corpus, busca híbrida e filtros do assistente original; seleção de evidências por Qwen3.8-27B via Groq.',
+            limite='Modelo online diferente do Qwen3-4B local. As métricas abaixo pertencem ao modelo original; não avaliam esta adaptação.')
+        por_id['visao'].update(modo='Inferência ONNX em CPU',
+            resumo='Mesmo checkpoint ResNet18 de 160 × 160 convertido para ONNX; aplicado à imagem enviada.')
+    return resultado

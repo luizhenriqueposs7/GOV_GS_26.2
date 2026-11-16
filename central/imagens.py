@@ -20,13 +20,20 @@ def normalizar(conteudo: bytes) -> Image.Image:
         raise ValueError('A imagem está ilegível ou excede o limite de tamanho.') from erro
 
 
-def guardar(conteudo: bytes, pasta: Path) -> dict:
+def preparar_foto(conteudo: bytes) -> tuple[bytes, dict]:
     imagem = normalizar(conteudo)
     imagem.thumbnail((2048, 2048))
     saida = io.BytesIO()
     imagem.save(saida, format='JPEG', quality=85)
     foto = saida.getvalue()
     sha = hashlib.sha256(foto).hexdigest()
+    return foto, {'sha256': sha, 'tipo': 'image/jpeg', 'bytes': len(foto),
+                  'largura': imagem.width, 'altura': imagem.height}
+
+
+def guardar(conteudo: bytes, pasta: Path) -> dict:
+    foto, metadados = preparar_foto(conteudo)
+    sha = metadados['sha256']
     pasta.mkdir(parents=True, exist_ok=True)
     destino = pasta / (sha + '.jpg')
     temporario = pasta / (str(uuid4()) + '.tmp')
@@ -37,5 +44,4 @@ def guardar(conteudo: bytes, pasta: Path) -> dict:
         raise RuntimeError('Não foi possível guardar a foto. O pedido não foi registrado; tente novamente.') from erro
     finally:
         temporario.unlink(missing_ok=True)
-    return {'sha256': sha, 'tipo': 'image/jpeg', 'bytes': len(foto),
-            'largura': imagem.width, 'altura': imagem.height}
+    return metadados

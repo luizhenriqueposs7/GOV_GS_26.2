@@ -2,7 +2,7 @@
 
 Repositório da entrega: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_GS_26.2). O código, os materiais das nove disciplinas e as instruções de execução estão reunidos neste projeto.
 
-O [relatório de trabalho em PDF](output/pdf/Central_CitizenTech_Governanca_Versao_de_Trabalho.pdf) tem 14 páginas. A conclusão será elaborada com os integrantes. O [roteiro do vídeo integrado](docs/roteiro-video.md) prevê 6min30s; o vídeo deve ser publicado como Não Listado e seu link ainda será acrescentado. O repositório contém a aplicação para execução local; o acesso HTTPS da demonstração é preparado separadamente.
+O [relatório de trabalho em PDF](output/pdf/Central_CitizenTech_Governanca_Versao_de_Trabalho.pdf) tem 14 páginas. A conclusão será elaborada com os integrantes. O [roteiro do vídeo integrado](docs/roteiro-video.md) prevê 6min30s; o vídeo deve ser publicado como Não Listado e seu link ainda será acrescentado. A central está em [gov262.vercel.app](https://gov262.vercel.app), com acesso privado do grupo. A execução local continua disponível.
 
 Preparação e acompanhamento local de pedidos sobre calçadas, buracos no asfalto e iluminação em São Paulo. A central recebe foto opcional e localização confirmada, pede contexto, mostra a fonte do encaminhamento, conserva a triagem original, registra uma revisão justificada e permite contestar a decisão. Depois da conferência, reutiliza a persistência do ZelaBairro.
 
@@ -11,6 +11,10 @@ O **Passagem Livre** relaciona pedidos em um percurso didático de quatro trecho
 Protótipo acadêmico para Governança em IA e Business Analytics, GS CitizenTech 2026. Use relatos identificados como teste, sem nomes, contatos ou documentos. A gravação técnica pode usar foto e posição reais, conferidas pela pessoa e mantidas na base local. Não abre chamado municipal e não foi validado com moradores ou em campo.
 
 ## Executar no Windows
+
+Para a adaptação à Vercel, veja [configuração e requisitos de publicação](docs/publicacao-vercel.md). O ponto de entrada e as dependências estão em `pyproject.toml`. O modo online usa Postgres e fotos privadas no Supabase, preserva a execução local e identifica a troca do modelo de Generative AI para Groq Free. As verificações e os limites estão registrados nesse documento.
+
+Em 16/11/2026, o fluxo foi verificado pelo HTTPS: foto, localização manual confirmada, revisão, confirmação na persistência original do ZelaBairro, contestação, Visão e Groq com fonte. RPA processou um registro e rejeitou outro; PLN retornou trechos do corpus. No Passagem Livre, a contestação desatualizou o plano e impediu novo salvamento sem revisão. Passaram 131 testes Python e 19 JavaScript. O relatório mantém 14 páginas. Câmera e GPS físicos, conclusão e vídeo final continuam pendentes.
 
 Requer Python 3.13 e PowerShell. Na pasta deste arquivo:
 
@@ -92,7 +96,7 @@ Não existem registros inseridos automaticamente nem contagens de impacto invent
 | Cluster Computing | Relatório e modelos iSPD de 2 e 4 workers | Simulação histórica; não é infraestrutura de produção |
 | Computação Quântica | Relatório de alternativas para alocação da revisão | Estudo conceitual; nenhum ganho quântico demonstrado |
 | Frontend | Validação e persistência originais do ZelaBairro, acionadas pela central | Interface nova; protocolo local de POC |
-| Generative AI | Chamada HTTP local do projeto atual, com seleção de fonte pelo Qwen3 | Execução depende do serviço e modelo; métricas históricas identificadas |
+| Generative AI | Qwen3-4B local; seleção Groq online com corpus original | Modelo online identificado; métricas históricas do original |
 | IoT | Documento e quatro vídeos do OuviAí no celular | Execução externa; sem fluxo automático de eventos para a central |
 | PLN | Busca FTS5 no corpus original e vinculação de trecho com origem | Material de desastres; revisão humana do corpus pendente |
 | Visão Computacional | Inferência atual do ResNet18, checkpoint e rotina originais | Sinalização de fissura; não constitui laudo |
@@ -127,6 +131,6 @@ A ampliação móvel, o teste de resposta perdida e as verificações do formul�
 
 ## Limites para uso fora da demonstração
 
-Esta instalação não possui contas individuais, isolamento entre solicitantes nem controle de leitura por usuário. A chave protege operações de revisão e lote; as demais operações pertencem à demonstração local. Não exponha a porta na rede nem insira dados pessoais. Para operar com pessoas reais, seria necessário definir responsáveis pelo atendimento, autenticação, autorizações, retenção e proteção de dados, além de acordos operacionais com quem recebe os pedidos.
+A instalação local não possui contas individuais ou isolamento entre solicitantes. Na versão online, o acesso privado da demonstração protege interface, APIs e fotos; a chave de revisão permanece separada. O acesso é compartilhado pelo grupo. Para operar com pessoas reais, ainda seria necessário definir contas e permissões por solicitante, responsáveis, retenção dos dados e acordos com quem recebe os pedidos.
 
 O relatório e o roteiro da entrega ficam em `docs/`. A conclusão será elaborada com os integrantes. O link do vídeo final não listado depende da publicação; os vídeos de módulos anteriores não substituem a gravação integrada de 5 a 7 minutos. Repositório da entrega: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_GS_26.2).

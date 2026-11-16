@@ -1,0 +1,12 @@
+{
+  "data": "2026-11-16T17:33:57.856389+00:00",
+  "modo": "HTTPS Vercel",
+  "caso_ficticio": "2b3ce169-c82d-41a7-9053-cdc2cee6f280",
+  "historico": 5,
+  "reenvio_idempotente": true,
+  "foto_outra_instancia": true,
+  "confirmacao_original_frontend": true,
+  "contestacao_invalida_revisao": true,
+  "visao_atual_controle_sintetico": true,
+  "genai_configurada": true
+}

@@ -86,7 +86,7 @@ export async function reduzirFoto(arquivo) {
     canvas.height = Math.max(1, Math.round(imagem.height * escala));
     canvas.getContext('2d').drawImage(imagem, 0, 0, canvas.width, canvas.height);
     const foto = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', .85));
-    if (!foto || foto.size > 8 * 1024 * 1024) throw new Error();
+    if (!foto || foto.size > 3 * 1024 * 1024) throw new Error();
     return foto;
   } catch {
     throw new Error('Não foi possível preparar a foto. Tente outra imagem JPEG ou PNG.');

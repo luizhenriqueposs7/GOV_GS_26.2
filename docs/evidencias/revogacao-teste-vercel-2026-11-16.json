@@ -1,0 +1,11 @@
+{
+  "data": "2026-11-16T17:51:47.712529+00:00",
+  "projeto": "prj_Ii0bi0hsYcspysSy0dYrVM8f4Ffh",
+  "segredo_temporario_revogado": true,
+  "bypasses_restantes": 0,
+  "sso": {
+    "deploymentType": "all_except_custom_domains"
+  },
+  "dominio": "https://gov262.vercel.app",
+  "acesso_por_senha": true
+}

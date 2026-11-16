@@ -1,0 +1,23 @@
+{
+  "referencia_fastembed": "0.7.3",
+  "fastembed_runtime": "0.9.1",
+  "revisao": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "encoder_sha256": "634d0f66c29dc934c8fa72b8a4fe91dd4d420a22f1d82a241058d4316e659a99",
+  "sistema": "Windows",
+  "arquitetura": "AMD64",
+  "trechos": 20,
+  "consultas": 8,
+  "erro_absoluto_maximo_vetores": 2.750983607580082e-08,
+  "erros_absolutos_corpus_consultas": [
+    1.476929251120751e-08,
+    2.750983607580082e-08
+  ],
+  "cosseno_minimo_corpus": 0.9999999999999994,
+  "cosseno_minimo_consultas": 0.9999999999999993,
+  "rankings_identicos": true,
+  "criterio_portatil_fp16": {
+    "erro_absoluto_maximo": 0.001,
+    "cosseno_minimo": 0.99999,
+    "rankings_identicos": true
+  }
+}

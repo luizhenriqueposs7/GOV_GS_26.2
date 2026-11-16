@@ -55,7 +55,7 @@ class Repositorio:
         caso["atualizado_em"] = agora()
         registro = {k: v for k, v in caso.items() if k != "historico"}
         con.execute(
-            "INSERT INTO atendimentos VALUES (?, ?, ?) ON CONFLICT(id) DO UPDATE SET conteudo = excluded.conteudo",
+            "INSERT INTO atendimentos (id, origem_id, conteudo) VALUES (?, ?, ?) ON CONFLICT(id) DO UPDATE SET conteudo = excluded.conteudo",
             (caso["id"], caso.get("origem_id"), json.dumps(registro, ensure_ascii=False)),
         )
         evento = {"acao": acao, "autor": autor, "data": caso["atualizado_em"], "dados": dados}
@@ -129,7 +129,7 @@ class Repositorio:
             )
             self._salvar(con, caso, acao, evidencia)
             if envio_id:
-                con.execute('INSERT INTO envios VALUES (?, ?, ?)', (envio_id, caso['id'], assinatura))
+                con.execute('INSERT INTO envios (id, atendimento_id, assinatura) VALUES (?, ?, ?)', (envio_id, caso['id'], assinatura))
             return self._obter(con, caso["id"])
 
     def listar(self) -> list[dict]:
@@ -241,7 +241,7 @@ class Repositorio:
                 raise ValueError('Selecione pelo menos um trecho com barreira informada.')
             plano = {'id': str(uuid4()), 'data': agora(), 'base': base, 'reparos': resultado['reparos'],
                      'revisor': revisor, 'justificativa': justificativa, 'resultado': resultado}
-            con.execute('INSERT INTO planos_passagem VALUES (?, ?)',
+            con.execute('INSERT INTO planos_passagem (id, conteudo) VALUES (?, ?)',
                         (plano['id'], json.dumps(plano, ensure_ascii=False)))
             return plano
 

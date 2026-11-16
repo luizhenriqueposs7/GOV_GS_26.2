@@ -1,4 +1,6 @@
 import hmac
+import base64
+import binascii
 import json
 import os
 import secrets
@@ -6,10 +8,11 @@ import re
 from pathlib import Path
 from typing import Literal
 from uuid import UUID
+from urllib.parse import quote
 
 from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 from starlette.concurrency import run_in_threadpool
@@ -88,8 +91,23 @@ class PlanoPassagem(SimulacaoPassagem):
 
 def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     pasta = pasta_dados or Path(os.getenv("GOV_DATA_DIR", str(RAIZ / "data")))
-    pasta.mkdir(parents=True, exist_ok=True)
-    repo = Repositorio(pasta / "central.sqlite")
+    nuvem = os.getenv('GOV_RUNTIME') == 'vercel' or os.getenv('VERCEL') == '1'
+    fotos = None
+    if nuvem:
+        obrigatorias = ('GOV_DATABASE_URL', 'GOV_MANAGER_KEY', 'GOV_ACCESS_USER', 'GOV_ACCESS_PASSWORD',
+                        'SUPABASE_URL', 'SUPABASE_SECRET_KEY')
+        faltantes = [nome for nome in obrigatorias if not os.getenv(nome, '').strip()]
+        if faltantes:
+            raise RuntimeError('Configure as variáveis do servidor: ' + ', '.join(faltantes))
+        if len(os.environ['GOV_MANAGER_KEY'].strip()) < 24 or len(os.environ['GOV_ACCESS_PASSWORD']) < 16:
+            raise RuntimeError('Use uma chave de gestão de pelo menos 24 caracteres e senha de acesso de pelo menos 16.')
+        from .postgres import RepositorioPostgres
+        from .storage import StorageFotos
+        repo = RepositorioPostgres(os.environ['GOV_DATABASE_URL'])
+        fotos = StorageFotos(os.environ['SUPABASE_URL'], os.environ['SUPABASE_SECRET_KEY'])
+    else:
+        pasta.mkdir(parents=True, exist_ok=True)
+        repo = Repositorio(pasta / "central.sqlite")
     chave = os.getenv("GOV_MANAGER_KEY", "").strip()
     if not chave:
         arquivo_chave = pasta / "chave-gestao.txt"
@@ -97,11 +115,16 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             arquivo_chave.write_text(secrets.token_urlsafe(32), encoding="utf-8")
         chave = arquivo_chave.read_text(encoding="utf-8").strip()
 
-    app = FastAPI(title="Central CitizenTech", version="0.2.0", docs_url="/contrato")
+    app = FastAPI(title="ZelaBairro", version="0.3.0", docs_url="/contrato")
     app.state.repo = repo
+    usuario_acesso = os.getenv('GOV_ACCESS_USER', '').encode()
+    senha_acesso = os.getenv('GOV_ACCESS_PASSWORD', '').encode()
+
+    def guardar_foto(conteudo):
+        return fotos.guardar(conteudo) if fotos else imagens.guardar(conteudo, pasta / 'fotos')
 
     def gestor(valor):
-        if not valor or not hmac.compare_digest(valor, chave):
+        if not valor or not hmac.compare_digest(valor.encode(), chave.encode()):
             raise HTTPException(401, "Chave de revisão não autorizada.")
 
     def obter(identificador):
@@ -129,10 +152,28 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
 
     @app.middleware("http")
     async def proteger(request, call_next):
+        autorizado = not nuvem
+        if nuvem:
+            esquema, _, valor = request.headers.get('authorization', '').partition(' ')
+            try:
+                credencial = base64.b64decode(valor, validate=True).decode('utf-8') if esquema.lower() == 'basic' and len(valor) < 4096 else ''
+                usuario, separador, senha = credencial.partition(':')
+                autorizado = bool(separador) & hmac.compare_digest(usuario.encode(), usuario_acesso) & hmac.compare_digest(senha.encode(), senha_acesso)
+            except (ValueError, UnicodeError, binascii.Error):
+                autorizado = False
         tamanho = request.headers.get("content-length")
-        if tamanho and (not tamanho.isdigit() or int(tamanho) > 9 * 1024 * 1024):
-            return JSONResponse(status_code=413, content={"erro": "O envio excede o limite de tamanho."})
-        resposta = await call_next(request)
+        origem = request.headers.get('origin')
+        if not autorizado:
+            resposta = JSONResponse(status_code=401, content={'erro': 'Entre com o acesso privado da demonstração.'},
+                                    headers={'WWW-Authenticate': 'Basic realm="ZelaBairro", charset="UTF-8"'})
+        elif nuvem and request.method not in {'GET', 'HEAD', 'OPTIONS'} and (
+                (origem and origem.rstrip('/') != str(request.base_url).rstrip('/'))
+                or request.headers.get('sec-fetch-site') == 'cross-site'):
+            resposta = JSONResponse(status_code=403, content={'erro': 'Envie o pedido pelo endereço desta central.'})
+        elif tamanho and (not tamanho.isdigit() or int(tamanho) > (4 if nuvem else 9) * 1024 * 1024):
+            resposta = JSONResponse(status_code=413, content={"erro": "O envio excede o limite de tamanho. Reduza a foto e tente novamente."})
+        else:
+            resposta = await call_next(request)
         resposta.headers["X-Content-Type-Options"] = "nosniff"
         resposta.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
         resposta.headers["Cache-Control"] = "no-store"
@@ -144,7 +185,9 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
 
     @app.get("/api/status")
     def status():
-        return {"servico": "Central CitizenTech", "status": "ok", "modo": "Demonstração local",
+        return {"servico": "ZelaBairro", "status": "ok", "modo": "Demonstração online" if nuvem else "Demonstração local",
+                'modelo_genai': 'Qwen3.8-27B via Groq' if nuvem else 'Qwen3-4B-Instruct-2507 local',
+                'genai_configurada': bool(os.getenv('GROQ_API_KEY')) if nuvem else True,
                 "validacao_em_campo": False, "abertura_automatica_sp156": False}
 
     @app.get('/api/passagem')
@@ -201,11 +244,11 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
         entrada = ler_pedido(dados)
         foto = None
         if arquivo:
-            foto = await run_in_threadpool(imagens.guardar, await arquivo.read(8 * 1024 * 1024 + 1), pasta / 'fotos')
+            foto = await run_in_threadpool(guardar_foto, await arquivo.read(8 * 1024 * 1024 + 1))
         payload = entrada.model_dump(mode='json', exclude={'confirmado'})
         payload.update(foto=foto, triagem_original=modulos.triagem(entrada.descricao),
                        preparacao=preparar(entrada.descricao, entrada.contexto, entrada.local))
-        return repo.criar(payload)
+        return await run_in_threadpool(repo.criar, payload)
 
     @app.get('/api/atendimentos/{identificador}/foto')
     def foto_do_pedido(identificador: str):
@@ -213,6 +256,8 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
         sha = foto.get('sha256', '') if foto else ''
         if not re.fullmatch('[a-f0-9]{64}', sha):
             raise HTTPException(404, 'Este pedido não possui foto.')
+        if fotos:
+            return Response(fotos.ler(sha), media_type='image/jpeg')
         caminho = pasta / 'fotos' / (sha + '.jpg')
         if not caminho.is_file():
             raise HTTPException(404, 'Foto não disponível nesta instalação.')
@@ -240,13 +285,13 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     @app.put('/api/atendimentos/{identificador}/com-anexo')
     async def atualizar_com_anexo(identificador: str, dados: str = Form(max_length=10000),
                                  arquivo: UploadFile | None = File(default=None), remover_foto: bool = Form(default=False)):
-        obter(identificador)
+        await run_in_threadpool(obter, identificador)
         entrada = ler_pedido(dados)
         if arquivo and remover_foto:
             raise ValueError('Escolha substituir ou remover a foto.')
         foto = None
         if arquivo:
-            foto = await run_in_threadpool(imagens.guardar, await arquivo.read(8 * 1024 * 1024 + 1), pasta / 'fotos')
+            foto = await run_in_threadpool(guardar_foto, await arquivo.read(8 * 1024 * 1024 + 1))
         payload = entrada.model_dump(mode='json', exclude={'confirmado', 'origem_id', 'envio_id'}, exclude_unset=True)
         payload.update(local=entrada.local, contexto=entrada.contexto,
                        triagem_original=modulos.triagem(entrada.descricao),
@@ -255,7 +300,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             raise ValueError('A origem do atendimento não pode ser alterada.')
         if arquivo or remover_foto:
             payload['foto'] = foto
-        return repo.atualizar(identificador, payload)
+        return await run_in_threadpool(repo.atualizar, identificador, payload)
 
     @app.post("/api/atendimentos/{identificador}/revisao")
     def revisar(identificador: str, entrada: Revisao, x_manager_key: str | None = Header(default=None)):
@@ -276,6 +321,11 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     @app.post("/api/atendimentos/{identificador}/zelabairro")
     def encaminhar(identificador: str, x_manager_key: str | None = Header(default=None)):
         gestor(x_manager_key)
+        if nuvem:
+            try:
+                return repo.confirmar_frontend(identificador)
+            except KeyError:
+                raise HTTPException(404, 'Atendimento não encontrado.') from None
         caso = obter(identificador)
         if not caso.get("revisao") or caso["preparacao"]["faltantes"]:
             raise HTTPException(409, "Revise a decisão e complete as informações antes de confirmar no ZelaBairro.")
@@ -300,6 +350,9 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
         item = modulos.materiais().get(identificador)
         if not item:
             raise HTTPException(404, "Material não encontrado.")
+        if nuvem:
+            return RedirectResponse('https://github.com/luizhenriqueposs7/GOV_GS_26.2/blob/aacab6427679a87d9ac3971d8343ea95f3c6adea/materiais/'
+                                    + quote(item['arquivo'], safe='/'), status_code=307)
         caminho = (modulos.MATERIAIS / item["arquivo"]).resolve()
         if not caminho.is_relative_to(modulos.MATERIAIS.resolve()) or not caminho.is_file():
             raise HTTPException(404, "Material não disponível.")
@@ -337,7 +390,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             dados = entrada.model_dump(exclude={"confirmado"})
             dados.update(triagem_original=modulos.triagem(entrada.descricao),
                          preparacao=preparar(entrada.descricao, entrada.contexto, entrada.local))
-            ids.append(repo.criar(dados)["id"])
+            ids.append((await run_in_threadpool(repo.criar, dados))["id"])
         return {**resultado, "atendimentos": ids}
 
     @app.post("/api/assistente")
@@ -346,7 +399,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             obter(entrada.atendimento_id)
         resultado = modulos.perguntar(entrada.pergunta, entrada.anterior)
         if resultado["status"] == "indisponivel":
-            raise RuntimeError("O modelo local está indisponível. Confira o serviço de Generative AI.")
+            raise RuntimeError("O assistente está indisponível. Confira a configuração do serviço de Generative AI.")
         if entrada.atendimento_id:
             repo.adicionar_evidencia(entrada.atendimento_id, "genai", resultado)
         return resultado
@@ -354,11 +407,11 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     @app.post("/api/visao")
     async def visao(arquivo: UploadFile = File(...), atendimento_id: str = Form(default="")):
         if atendimento_id:
-            obter(atendimento_id)
+            await run_in_threadpool(obter, atendimento_id)
         conteudo = await arquivo.read(8 * 1024 * 1024 + 1)
         resultado = await run_in_threadpool(modulos.analisar_imagem, conteudo)
         if atendimento_id:
-            repo.adicionar_evidencia(atendimento_id, "visao", resultado)
+            await run_in_threadpool(repo.adicionar_evidencia, atendimento_id, "visao", resultado)
         return resultado
 
     @app.get("/")

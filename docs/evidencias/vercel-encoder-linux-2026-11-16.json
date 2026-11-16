@@ -1,0 +1,22 @@
+{
+  "data": "2026-11-16T16:47:50Z",
+  "implantacao": "dpl_GcSLUhJvtPx4BVp1GiAPATa6gF8v",
+  "fase": "Paridade aprovada no build Linux; publicação recusada depois pelo tamanho da função",
+  "encoder_sha256": "634d0f66c29dc934c8fa72b8a4fe91dd4d420a22f1d82a241058d4316e659a99",
+  "referencia_fastembed": "0.7.3",
+  "fastembed_runtime": "0.9.1",
+  "sistema": "Linux",
+  "arquitetura": "x86_64",
+  "trechos": 20,
+  "consultas": 8,
+  "erro_absoluto_maximo_vetores": 0.00019981415681941117,
+  "cosseno_minimo_corpus": 0.9999998761856673,
+  "cosseno_minimo_consultas": 0.999999999602,
+  "rankings_identicos": true,
+  "criterio_portatil_fp16": {
+    "erro_absoluto_maximo": 0.001,
+    "cosseno_minimo": 0.99999,
+    "rankings_identicos": true
+  },
+  "nao_avalia": "Qualidade das respostas Groq ou desempenho com usuários"
+}

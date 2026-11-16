@@ -1,0 +1,26 @@
+[project]
+name = "zelabairro-gov"
+version = "0.3.0"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "fastapi==0.121.3",
+    "uvicorn==0.38.0",
+    "pydantic==2.10.6",
+    "pandas==2.2.3",
+    "Pillow==12.3.0",
+    "python-multipart==0.0.27",
+    "httpx==0.28.1",
+    "psycopg[binary]==3.3.9",
+    "fastembed==0.9.1",
+    "onnxruntime==1.31.1",
+    "numpy==2.5.4",
+]
+
+[tool.vercel]
+entrypoint = "central.app:app"
+
+[tool.vercel.scripts]
+build = "python scripts/build_vercel.py"
+
+[tool.vercel.fastapi.static]
+cdn = false

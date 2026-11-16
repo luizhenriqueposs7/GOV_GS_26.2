@@ -18,6 +18,8 @@ Alvo de 6min30s, dentro do intervalo obrigatório de 5 a 7 minutos. Planejamento
 
 ## Preparação
 
+Na versão Vercel, identificar o modelo Qwen3.8-27B via Groq, diferente do Qwen3-4B local. Abrir uma consulta e testar Visão antes de gravar para preparar o cache dos pesos. Confirmar uma resposta atual, com fonte, sem usar os resultados históricos como demonstração da inferência online. O carregamento inicial pode levar alguns segundos.
+
 Preparar os dois pedidos fictícios pelo controle do Passagem Livre antes de gravar; usar o formulário móvel para uma observação explicitamente didática ou registrar o teste real sem vínculo se ocorrer em outro local. O mapa do percurso é esquemático. Gravar uma tomada longa do fluxo e selecionar os trechos para os tempos acima. A comparação usa somente condições informadas; não estima custos, beneficiários ou segurança real. Não apresentar o cálculo determinístico como execução quântica nem o OuviAí como sensor integrado automaticamente.
 
 A pendência de enquadramento no caso relacionado à rampa é uma abstenção do catálogo: a revisão permite o planejamento local, mas a confirmação no ZelaBairro segue bloqueada. A calçada permite demonstrar a persistência original. Na cena final, manter visível “hipótese” e explicar que a contestação muda a validade da decisão, não a condição física da calçada. A coleta, revisão, evidências e confirmação dos módulos continuam distribuídas nas cenas por disciplina.

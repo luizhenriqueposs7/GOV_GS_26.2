@@ -12,3 +12,8 @@
 *.sqlite-wal
 *.sqlite-shm
 chave-gestao.txt
+
+.vercel
+.env*
+/modelos_online/genai/.runtime/
+/supabase/.temp/

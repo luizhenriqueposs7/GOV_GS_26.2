@@ -1,0 +1,15 @@
+{
+  "data": "2026-11-16T17:35:56.308184+00:00",
+  "implantacao": "dpl_DGbgjcVPiybGnaLstDKoz6tv3M3g",
+  "disciplinas": 9,
+  "consulta_pln_real": true,
+  "rpa_aceito": 1,
+  "rpa_rejeitado": 1,
+  "um_reparo": "interrompido",
+  "dois_reparos": "sem_barreiras_informadas",
+  "plano_persistido": "de9bbef9-8476-49d3-984f-a518fbea0fc3",
+  "contestacao_desatualiza_plano": true,
+  "novo_plano_sem_revisao_bloqueado": true,
+  "preparacao_video": "Dois pedidos fictícios; um aguarda nova revisão após o teste.",
+  "nao_mede": "Acessibilidade ou reparos reais, qualidade geral dos modelos, benefício social"
+}

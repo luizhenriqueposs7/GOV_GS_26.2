@@ -99,7 +99,7 @@ Figura 1 - Fluxo de preparação, revisão e registro local
 
 Fonte: elaboração do grupo, a partir da aplicação construída em 2026.
 
-O desenvolvimento reúne nove disciplinas. RPA, persistência do Frontend, corpus de PLN e inferência de Visão são reutilizados em código. Generative AI possui um adaptador para o serviço local. IoT, Cluster e Quântica conservam contribuições externas, simuladas ou conceituais. Essa distinção orienta a leitura do relatório.
+O desenvolvimento reúne nove disciplinas. RPA, Frontend, PLN e Visão são reutilizados em código. Generative AI mantém execução local e adaptação online identificada. IoT, Cluster e Quântica conservam contribuições externas, simuladas ou conceituais. Essa distinção orienta a leitura do relatório.
 
 <!-- pagina -->
 # 2 DESENVOLVIMENTO
@@ -140,11 +140,11 @@ Uma avaliação futura dependeria de dados operacionais e de uma comparação co
 
 ## 2.4 Frontend
 
-A central tem interface própria e reutiliza a validação e a persistência do ZelaBairro. Os bancos de relatos e de histórico ficam separados.
+A central reutiliza a validação e a persistência do ZelaBairro. Localmente, os bancos ficam separados. Na adaptação online, Postgres mantém relatos e histórico na mesma transação, com fotos privadas no Supabase.
 
 O formulário móvel reúne foto opcional, coordenadas confirmadas e associação declarada a um trecho do Passagem Livre. O rascunho conserva esses dados. A imagem recebe normalização e remoção de metadados. O catálogo distingue via comum e corredor de ônibus (SÃO PAULO, 2026c). O modelo de fissuras não identifica buracos.
 
-A confirmação exige revisão justificada e dados completos. Repetir a confirmação da mesma revisão mantém o registro. Alterar o pedido ou contestar retira a decisão e o vínculo atuais, preservando o histórico. O identificador é local; protocolos externos anotados permanecem sem verificação no órgão.
+A confirmação exige revisão justificada e dados completos. Repetir a confirmação da mesma revisão mantém o registro. Alterar o pedido ou contestar retira a decisão e o vínculo atuais, preservando o histórico. O identificador é da central; protocolos externos anotados permanecem sem verificação no órgão.
 
 Cadastro, edição, revisão, confirmação e contestação foram executados no navegador. O rascunho salvo foi recuperado sem servidor. Reenviar após perder a resposta conservou o pedido, inclusive no contrato anterior ao Passagem Livre. O acesso HTTPS protegido está preparado; câmera, GPS e instalação ainda dependem do teste físico no smartphone.
 
@@ -153,9 +153,9 @@ Cadastro, edição, revisão, confirmação e contestação foram executados no 
 
 ## 2.5 Generative AI
 
-O projeto atual de Generative AI utiliza recuperação híbrida e Qwen3-4B-Instruct-2507, quantizado em Q4_K_M. O modelo seleciona uma evidência recuperada. Quando a orientação é respondida, o texto devolvido corresponde ao trecho da fonte selecionada, com endereço oficial para consulta.
+A execução local de Generative AI utiliza recuperação híbrida e Qwen3-4B-Instruct-2507, em Q4_K_M. O modelo seleciona uma evidência recuperada. A resposta corresponde ao trecho escolhido, com endereço oficial para consulta.
 
-A central implementa uma chamada HTTP para esse serviço no próprio computador. O adaptador valida os estados esperados, o conteúdo da resposta e a correspondência entre orientação e fonte. Uma falha de serviço deve retornar indisponibilidade, sem trocar a execução por uma resposta histórica.
+Na versão online, Qwen3.8-27B no Groq Free seleciona evidências do corpus original. A consulta HTTPS retornou a fonte ILU.1 e os controles de privacidade e escopo passaram. Falhas retornam indisponibilidade. As avaliações abaixo pertencem ao modelo local.
 
 O serviço pode pedir esclarecimento, indicar falta de evidência, reconhecer uma pergunta fora do escopo e bloquear pedidos incompatíveis com suas regras. A orientação não cria protocolo e não confirma que o serviço foi solicitado.
 
@@ -189,7 +189,7 @@ A planilha de revisão contém 39 registros ainda sem decisão humana preenchida
 
 ## 2.8 Visão Computacional
 
-O módulo utiliza ResNet18 e o checkpoint entregue para imagens de 160 × 160 pixels. A central normaliza a imagem enviada e executa a rotina original em processo separado. A saída contém classe, escore, limiar e sinalização. O arquivo temporário da imagem é descartado após a execução.
+O módulo utiliza o checkpoint ResNet18 de 160 × 160 pixels. A rotina local foi preservada. A conversão ONNX para a nuvem manteve as decisões em 378 imagens e três controles. Essa comparação verifica a conversão, sem constituir nova avaliação de acurácia.
 
 Figura 2 - Recorte usado na execução técnica de Visão Computacional
 
@@ -216,7 +216,7 @@ Os resultados pertencem ao acervo avaliado. O desempenho em fissuras sutis é um
 
 ## 2.9 Governança em IA e Business Analytics
 
-A Governança preserva a sugestão original, exige revisão, registra justificativa e permite contestação. As pendências impedem a confirmação no ZelaBairro. A chave local protege decisões e importação; não equivale a contas individuais para uso público.
+A Governança preserva sugestão, revisão justificada e contestação. Pendências impedem a confirmação. Na nuvem, o acesso privado do grupo é separado da chave de revisão. Ainda não há contas individuais.
 
 O Passagem Livre compara reparos em quatro trechos de um percurso didático. Só a calçada reparada mantém a barreira da rampa; ambas tratadas permitem continuidade na hipótese. Condições desconhecidas permanecem pendentes. O plano exige revisão, conserva cenário e justificativa e fica desatualizado após mudança ou contestação. O cálculo é determinístico, sem execução quântica ou certificação de acessibilidade.
 
@@ -228,7 +228,7 @@ Quadro 1 - Participação dos materiais na central
 | Cluster | Modelos e relatório iSPD | Cluster de produção |
 | Quântica | Relatório conceitual | Algoritmo quântico executável |
 | Frontend | Validação e persistência do ZelaBairro | Protocolo municipal automático |
-| Generative AI | Consulta atual pelo serviço local | Abertura automática de chamado |
+| Generative AI | Serviço local e adaptador Groq | Qwen3-4B na nuvem |
 | IoT | Documento e vídeos do OuviAí | Eventos automáticos do celular |
 | PLN | Consulta ao corpus e origem do trecho | Revisão humana concluída |
 | Visão | Inferência com checkpoint original | Laudo ou diagnóstico estrutural |
@@ -236,7 +236,7 @@ Quadro 1 - Participação dos materiais na central
 
 Fonte: implementação e materiais reunidos pelo grupo em 2026.
 
-Os indicadores contam registros locais; prioridades alteradas são divididas pelas revisões atuais. Não medem benefício social ou reparos. As evidências em docs/evidencias registram foto do acervo, ponto manual, vínculo, revisão, persistência, plano e contestação no navegador. O teste físico permanece pendente.
+Os indicadores contam os pedidos; prioridades alteradas são divididas pelas revisões atuais. Não medem benefício social ou reparos. As evidências em docs/evidencias registram foto do acervo, ponto manual, vínculo, revisão, persistência, plano e contestação no navegador. O teste físico permanece pendente.
 
 <!-- pagina -->
 # 3 CONCLUSÃO
