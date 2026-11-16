@@ -1,0 +1,3157 @@
+{
+  "onnx_sha256": "1e5b4acda6e11ff3d83f029c69dc2a60bf5bd6e870ea6010647520de327a2007",
+  "tolerancia_absoluta": 1e-05,
+  "imagens_reais": 378,
+  "controles": 3,
+  "divergencias_decisao": 0,
+  "erro_absoluto_maximo": 2.562999725341797e-06,
+  "limiar": 0.48999999999999977,
+  "proximas_limiar": [
+    {
+      "arquivo": "materiais/visao/data/recortes/116_3405_454.jpg",
+      "pytorch_escore": 0.43650808930397034,
+      "onnx_escore": 0.4365083873271942,
+      "erro_absoluto": 2.980232238769531e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/291_2270_1816.jpg",
+      "pytorch_escore": 0.36110424995422363,
+      "onnx_escore": 0.361104279756546,
+      "erro_absoluto": 2.9802322387695312e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/060_454_0.jpg",
+      "pytorch_escore": 0.6600476503372192,
+      "onnx_escore": 0.6600485444068909,
+      "erro_absoluto": 8.940696716308594e-07,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_2497_3632.jpg",
+      "pytorch_escore": 0.6651769280433655,
+      "onnx_escore": 0.6651769280433655,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_1362_2951.jpg",
+      "pytorch_escore": 0.3093768060207367,
+      "onnx_escore": 0.3093773126602173,
+      "erro_absoluto": 5.066394805908203e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_3405_227.jpg",
+      "pytorch_escore": 0.6845382452011108,
+      "onnx_escore": 0.6845408082008362,
+      "erro_absoluto": 2.562999725341797e-06,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/544_1135_3178.jpg",
+      "pytorch_escore": 0.7061014771461487,
+      "onnx_escore": 0.7061010599136353,
+      "erro_absoluto": 4.172325134277344e-07,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_454_3405.jpg",
+      "pytorch_escore": 0.2715094983577728,
+      "onnx_escore": 0.27151045203208923,
+      "erro_absoluto": 9.5367431640625e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_2724_1135.jpg",
+      "pytorch_escore": 0.2232639044523239,
+      "onnx_escore": 0.22326473891735077,
+      "erro_absoluto": 8.344650268554688e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_1135_0.jpg",
+      "pytorch_escore": 0.22106073796749115,
+      "onnx_escore": 0.22106030583381653,
+      "erro_absoluto": 4.3213367462158203e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/291_2951_908.jpg",
+      "pytorch_escore": 0.18302346765995026,
+      "onnx_escore": 0.18302325904369354,
+      "erro_absoluto": 2.086162567138672e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_2270_2270.jpg",
+      "pytorch_escore": 0.17743608355522156,
+      "onnx_escore": 0.17743724584579468,
+      "erro_absoluto": 1.1622905731201172e-06,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    }
+  ],
+  "resultados": [
+    {
+      "arquivo": "materiais/visao/data/recortes/184_3405_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_0_1135.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_2270_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_3178_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_681_908.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_2043_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_3178_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_1362_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_454_1362.jpg",
+      "pytorch_escore": 0.043497562408447266,
+      "onnx_escore": 0.04349758103489876,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_908_454.jpg",
+      "pytorch_escore": 0.04341724142432213,
+      "onnx_escore": 0.04341721534729004,
+      "erro_absoluto": 2.60770320892334e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_681_1362.jpg",
+      "pytorch_escore": 0.059743378311395645,
+      "onnx_escore": 0.05974332243204117,
+      "erro_absoluto": 5.587935447692871e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_1816_1589.jpg",
+      "pytorch_escore": 0.0558144748210907,
+      "onnx_escore": 0.0558144748210907,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_454_454.jpg",
+      "pytorch_escore": 0.0474269725382328,
+      "onnx_escore": 0.04742695763707161,
+      "erro_absoluto": 1.4901161193847656e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_2951_454.jpg",
+      "pytorch_escore": 0.04725559428334236,
+      "onnx_escore": 0.047255564481019974,
+      "erro_absoluto": 2.9802322387695312e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_1589_454.jpg",
+      "pytorch_escore": 0.0364094153046608,
+      "onnx_escore": 0.03640945628285408,
+      "erro_absoluto": 4.0978193283081055e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/184_1816_2043.jpg",
+      "pytorch_escore": 0.0391298308968544,
+      "onnx_escore": 0.03912980481982231,
+      "erro_absoluto": 2.60770320892334e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_2951_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_2270_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_681_454.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_1589_681.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_227_681.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_2043_1135.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_3632_2270.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_2043_908.jpg",
+      "pytorch_escore": 0.998936116695404,
+      "onnx_escore": 0.998936116695404,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_3632_0.jpg",
+      "pytorch_escore": 0.021536825224757195,
+      "onnx_escore": 0.021536821499466896,
+      "erro_absoluto": 3.725290298461914e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_2043_2270.jpg",
+      "pytorch_escore": 0.027640635147690773,
+      "onnx_escore": 0.027640564367175102,
+      "erro_absoluto": 7.078051567077637e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_3405_2724.jpg",
+      "pytorch_escore": 0.12774348258972168,
+      "onnx_escore": 0.12774290144443512,
+      "erro_absoluto": 5.811452865600586e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_2270_454.jpg",
+      "pytorch_escore": 0.055328983813524246,
+      "onnx_escore": 0.05532889813184738,
+      "erro_absoluto": 8.568167686462402e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_908_2043.jpg",
+      "pytorch_escore": 0.022798502817749977,
+      "onnx_escore": 0.022798502817749977,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_454_2270.jpg",
+      "pytorch_escore": 0.02632283605635166,
+      "onnx_escore": 0.026322830468416214,
+      "erro_absoluto": 5.587935447692871e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_3178_1135.jpg",
+      "pytorch_escore": 0.04081527888774872,
+      "onnx_escore": 0.04081522300839424,
+      "erro_absoluto": 5.587935447692871e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/504_1362_2497.jpg",
+      "pytorch_escore": 0.03689591586589813,
+      "onnx_escore": 0.03689587861299515,
+      "erro_absoluto": 3.725290298461914e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_1589_681.jpg",
+      "pytorch_escore": 0.9999715089797974,
+      "onnx_escore": 0.9999715089797974,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_1589_0.jpg",
+      "pytorch_escore": 0.9996830224990845,
+      "onnx_escore": 0.9996830224990845,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_454_3178.jpg",
+      "pytorch_escore": 0.9999912977218628,
+      "onnx_escore": 0.9999912977218628,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_1135_0.jpg",
+      "pytorch_escore": 0.22106073796749115,
+      "onnx_escore": 0.22106030583381653,
+      "erro_absoluto": 4.3213367462158203e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_908_3632.jpg",
+      "pytorch_escore": 0.9996765851974487,
+      "onnx_escore": 0.9996765851974487,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_1816_227.jpg",
+      "pytorch_escore": 0.9999070167541504,
+      "onnx_escore": 0.9999070167541504,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_908_2497.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_1135_2270.jpg",
+      "pytorch_escore": 0.9999773502349854,
+      "onnx_escore": 0.9999773502349854,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_227_3178.jpg",
+      "pytorch_escore": 0.12999969720840454,
+      "onnx_escore": 0.12999959290027618,
+      "erro_absoluto": 1.043081283569336e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_2724_2497.jpg",
+      "pytorch_escore": 0.01826726831495762,
+      "onnx_escore": 0.01826724037528038,
+      "erro_absoluto": 2.7939677238464355e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_1362_681.jpg",
+      "pytorch_escore": 0.03962215781211853,
+      "onnx_escore": 0.0396222360432148,
+      "erro_absoluto": 7.82310962677002e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_2497_3632.jpg",
+      "pytorch_escore": 0.6651769280433655,
+      "onnx_escore": 0.6651769280433655,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_2497_1362.jpg",
+      "pytorch_escore": 0.05490630120038986,
+      "onnx_escore": 0.05490630120038986,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_908_1816.jpg",
+      "pytorch_escore": 0.05535082519054413,
+      "onnx_escore": 0.05535081773996353,
+      "erro_absoluto": 7.450580596923828e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_454_2497.jpg",
+      "pytorch_escore": 0.0349167101085186,
+      "onnx_escore": 0.03491675481200218,
+      "erro_absoluto": 4.470348358154297e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/475_1362_2951.jpg",
+      "pytorch_escore": 0.3093768060207367,
+      "onnx_escore": 0.3093773126602173,
+      "erro_absoluto": 5.066394805908203e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_2951_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_2497_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_908_681.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_3178_2270.jpg",
+      "pytorch_escore": 0.9999983310699463,
+      "onnx_escore": 0.9999983310699463,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_3632_2497.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_3405_2270.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_2497_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_1589_1135.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_2724_1589.jpg",
+      "pytorch_escore": 0.023705249652266502,
+      "onnx_escore": 0.023705225437879562,
+      "erro_absoluto": 2.421438694000244e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_2951_681.jpg",
+      "pytorch_escore": 0.05938428267836571,
+      "onnx_escore": 0.05938447266817093,
+      "erro_absoluto": 1.8998980522155762e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_227_1362.jpg",
+      "pytorch_escore": 0.024711187928915024,
+      "onnx_escore": 0.024711234495043755,
+      "erro_absoluto": 4.6566128730773926e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_681_681.jpg",
+      "pytorch_escore": 0.01838988997042179,
+      "onnx_escore": 0.018389884382486343,
+      "erro_absoluto": 5.587935447692871e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_227_2043.jpg",
+      "pytorch_escore": 0.02525414153933525,
+      "onnx_escore": 0.025254160165786743,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_454_1362.jpg",
+      "pytorch_escore": 0.028940536081790924,
+      "onnx_escore": 0.02894054725766182,
+      "erro_absoluto": 1.1175870895385742e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_3632_1816.jpg",
+      "pytorch_escore": 0.020420439541339874,
+      "onnx_escore": 0.020420420914888382,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/195_2270_0.jpg",
+      "pytorch_escore": 0.013727746903896332,
+      "onnx_escore": 0.013727747835218906,
+      "erro_absoluto": 9.313225746154785e-10,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_1816_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_1135_2724.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_2724_681.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_1362_2497.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_908_3632.jpg",
+      "pytorch_escore": 0.9224299788475037,
+      "onnx_escore": 0.9224299788475037,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_1816_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_454_3405.jpg",
+      "pytorch_escore": 0.2715094983577728,
+      "onnx_escore": 0.27151045203208923,
+      "erro_absoluto": 9.5367431640625e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_2497_908.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_227_2270.jpg",
+      "pytorch_escore": 0.01408637035638094,
+      "onnx_escore": 0.014086369425058365,
+      "erro_absoluto": 9.313225746154785e-10,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_227_3178.jpg",
+      "pytorch_escore": 0.024993615224957466,
+      "onnx_escore": 0.02499360218644142,
+      "erro_absoluto": 1.30385160446167e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_0_454.jpg",
+      "pytorch_escore": 0.058159735053777695,
+      "onnx_escore": 0.058159928768873215,
+      "erro_absoluto": 1.9371509552001953e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_1816_2951.jpg",
+      "pytorch_escore": 0.04332048073410988,
+      "onnx_escore": 0.04332048073410988,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_2043_2043.jpg",
+      "pytorch_escore": 0.057434264570474625,
+      "onnx_escore": 0.057434242218732834,
+      "erro_absoluto": 2.2351741790771484e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_1816_454.jpg",
+      "pytorch_escore": 0.016945818439126015,
+      "onnx_escore": 0.016945810988545418,
+      "erro_absoluto": 7.450580596923828e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_1589_1362.jpg",
+      "pytorch_escore": 0.031176162883639336,
+      "onnx_escore": 0.03117620386183262,
+      "erro_absoluto": 4.0978193283081055e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/544_2724_227.jpg",
+      "pytorch_escore": 0.027583414688706398,
+      "onnx_escore": 0.02758334018290043,
+      "erro_absoluto": 7.450580596923828e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_908_2270.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_1816_1362.jpg",
+      "pytorch_escore": 0.990513801574707,
+      "onnx_escore": 0.9905136823654175,
+      "erro_absoluto": 1.1920928955078125e-07,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_1362_3178.jpg",
+      "pytorch_escore": 0.03185594454407692,
+      "onnx_escore": 0.031855855137109756,
+      "erro_absoluto": 8.940696716308594e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_681_2724.jpg",
+      "pytorch_escore": 0.9998754262924194,
+      "onnx_escore": 0.9998754262924194,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_1816_1135.jpg",
+      "pytorch_escore": 0.17301985621452332,
+      "onnx_escore": 0.17301978170871735,
+      "erro_absoluto": 7.450580596923828e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_2043_2043.jpg",
+      "pytorch_escore": 0.9997851252555847,
+      "onnx_escore": 0.9997851252555847,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_1589_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_2270_454.jpg",
+      "pytorch_escore": 0.8123645782470703,
+      "onnx_escore": 0.8123643398284912,
+      "erro_absoluto": 2.384185791015625e-07,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_454_908.jpg",
+      "pytorch_escore": 0.022506054490804672,
+      "onnx_escore": 0.02250606380403042,
+      "erro_absoluto": 9.313225746154785e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_0_0.jpg",
+      "pytorch_escore": 0.025208773091435432,
+      "onnx_escore": 0.025208845734596252,
+      "erro_absoluto": 7.264316082000732e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_0_2497.jpg",
+      "pytorch_escore": 0.00890796072781086,
+      "onnx_escore": 0.008907965384423733,
+      "erro_absoluto": 4.6566128730773926e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_227_681.jpg",
+      "pytorch_escore": 0.015916911885142326,
+      "onnx_escore": 0.015916896983981133,
+      "erro_absoluto": 1.4901161193847656e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_2270_2270.jpg",
+      "pytorch_escore": 0.00867859460413456,
+      "onnx_escore": 0.00867859460413456,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_1135_2724.jpg",
+      "pytorch_escore": 0.009173222817480564,
+      "onnx_escore": 0.009173236787319183,
+      "erro_absoluto": 1.3969838619232178e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_681_1362.jpg",
+      "pytorch_escore": 0.015188762918114662,
+      "onnx_escore": 0.015188743360340595,
+      "erro_absoluto": 1.955777406692505e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/464_1816_2951.jpg",
+      "pytorch_escore": 0.010106951929628849,
+      "onnx_escore": 0.010106961242854595,
+      "erro_absoluto": 9.313225746154785e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_2724_2724.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_1816_1589.jpg",
+      "pytorch_escore": 0.9999992847442627,
+      "onnx_escore": 0.9999992847442627,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_2497_2043.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_1589_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_2270_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_1135_681.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_2951_2724.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_1816_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_2043_1816.jpg",
+      "pytorch_escore": 0.026695234701037407,
+      "onnx_escore": 0.026695264503359795,
+      "erro_absoluto": 2.9802322387695312e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_2724_1816.jpg",
+      "pytorch_escore": 0.03030962310731411,
+      "onnx_escore": 0.030309682711958885,
+      "erro_absoluto": 5.960464477539063e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_681_2270.jpg",
+      "pytorch_escore": 0.0216156467795372,
+      "onnx_escore": 0.02161566913127899,
+      "erro_absoluto": 2.2351741790771484e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_1816_681.jpg",
+      "pytorch_escore": 0.13547086715698242,
+      "onnx_escore": 0.13547112047672272,
+      "erro_absoluto": 2.5331974029541016e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_681_681.jpg",
+      "pytorch_escore": 0.04657258838415146,
+      "onnx_escore": 0.04657257720828056,
+      "erro_absoluto": 1.1175870895385742e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_1589_1589.jpg",
+      "pytorch_escore": 0.031127477064728737,
+      "onnx_escore": 0.031127430498600006,
+      "erro_absoluto": 4.6566128730773926e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_3405_681.jpg",
+      "pytorch_escore": 0.04534413665533066,
+      "onnx_escore": 0.04534416273236275,
+      "erro_absoluto": 2.60770320892334e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/060_681_1135.jpg",
+      "pytorch_escore": 0.028975026682019234,
+      "onnx_escore": 0.028975019231438637,
+      "erro_absoluto": 7.450580596923828e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_1589_2724.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_1135_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_1135_227.jpg",
+      "pytorch_escore": 0.9998700618743896,
+      "onnx_escore": 0.9998700618743896,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_1589_3632.jpg",
+      "pytorch_escore": 0.9999954700469971,
+      "onnx_escore": 0.9999954700469971,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_1589_2951.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_1135_0.jpg",
+      "pytorch_escore": 0.9999998807907104,
+      "onnx_escore": 0.9999998807907104,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_1589_2497.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_1362_681.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_454_2497.jpg",
+      "pytorch_escore": 0.046951718628406525,
+      "onnx_escore": 0.04695175960659981,
+      "erro_absoluto": 4.0978193283081055e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_1816_2497.jpg",
+      "pytorch_escore": 0.1531982421875,
+      "onnx_escore": 0.15319792926311493,
+      "erro_absoluto": 3.129243850708008e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_1135_2724.jpg",
+      "pytorch_escore": 0.05866965278983116,
+      "onnx_escore": 0.05866970121860504,
+      "erro_absoluto": 4.842877388000488e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_0_2497.jpg",
+      "pytorch_escore": 0.09616585820913315,
+      "onnx_escore": 0.09616576880216599,
+      "erro_absoluto": 8.940696716308594e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_2270_908.jpg",
+      "pytorch_escore": 0.018287179991602898,
+      "onnx_escore": 0.018287166953086853,
+      "erro_absoluto": 1.30385160446167e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_227_454.jpg",
+      "pytorch_escore": 0.03887883201241493,
+      "onnx_escore": 0.03887881338596344,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_227_227.jpg",
+      "pytorch_escore": 0.018911462277173996,
+      "onnx_escore": 0.018911471590399742,
+      "erro_absoluto": 9.313225746154785e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/595_2724_454.jpg",
+      "pytorch_escore": 0.023868275806307793,
+      "onnx_escore": 0.02386825904250145,
+      "erro_absoluto": 1.6763806343078613e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_1816_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_2270_1135.jpg",
+      "pytorch_escore": 0.9984855055809021,
+      "onnx_escore": 0.9984855055809021,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_1362_2270.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_2270_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_2043_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_1362_2043.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_681_2270.jpg",
+      "pytorch_escore": 0.06153112277388573,
+      "onnx_escore": 0.061531007289886475,
+      "erro_absoluto": 1.1548399925231934e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_454_2497.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_1362_3405.jpg",
+      "pytorch_escore": 0.05068051069974899,
+      "onnx_escore": 0.05068051069974899,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_681_1589.jpg",
+      "pytorch_escore": 0.02352115698158741,
+      "onnx_escore": 0.02352115884423256,
+      "erro_absoluto": 1.862645149230957e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_1135_3178.jpg",
+      "pytorch_escore": 0.03543585166335106,
+      "onnx_escore": 0.03543585166335106,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_0_0.jpg",
+      "pytorch_escore": 0.004043063148856163,
+      "onnx_escore": 0.004043074790388346,
+      "erro_absoluto": 1.1641532182693481e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_1589_1362.jpg",
+      "pytorch_escore": 0.02125876396894455,
+      "onnx_escore": 0.021258758381009102,
+      "erro_absoluto": 5.587935447692871e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_454_3405.jpg",
+      "pytorch_escore": 0.024259839206933975,
+      "onnx_escore": 0.02425982430577278,
+      "erro_absoluto": 1.4901161193847656e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_908_1589.jpg",
+      "pytorch_escore": 0.02904263511300087,
+      "onnx_escore": 0.02904255874454975,
+      "erro_absoluto": 7.636845111846924e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/370_1135_2043.jpg",
+      "pytorch_escore": 0.04200335964560509,
+      "onnx_escore": 0.04200339317321777,
+      "erro_absoluto": 3.3527612686157227e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_0_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_2724_908.jpg",
+      "pytorch_escore": 0.9999946355819702,
+      "onnx_escore": 0.9999946355819702,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_3405_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_3632_1589.jpg",
+      "pytorch_escore": 0.9970831274986267,
+      "onnx_escore": 0.9970830082893372,
+      "erro_absoluto": 1.1920928955078125e-07,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_2951_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_2497_908.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_3178_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_1816_681.jpg",
+      "pytorch_escore": 0.04337279871106148,
+      "onnx_escore": 0.04337276145815849,
+      "erro_absoluto": 3.725290298461914e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_908_1589.jpg",
+      "pytorch_escore": 0.020336918532848358,
+      "onnx_escore": 0.020336929708719254,
+      "erro_absoluto": 1.1175870895385742e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_1362_454.jpg",
+      "pytorch_escore": 0.01240464486181736,
+      "onnx_escore": 0.01240465696901083,
+      "erro_absoluto": 1.210719347000122e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_908_227.jpg",
+      "pytorch_escore": 0.017753878608345985,
+      "onnx_escore": 0.01775388792157173,
+      "erro_absoluto": 9.313225746154785e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_2043_2043.jpg",
+      "pytorch_escore": 0.9996046423912048,
+      "onnx_escore": 0.9996046423912048,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_227_227.jpg",
+      "pytorch_escore": 0.005935305263847113,
+      "onnx_escore": 0.005935307126492262,
+      "erro_absoluto": 1.862645149230957e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_3178_681.jpg",
+      "pytorch_escore": 0.03753995895385742,
+      "onnx_escore": 0.03753993660211563,
+      "erro_absoluto": 2.2351741790771484e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_1362_2497.jpg",
+      "pytorch_escore": 0.07772396504878998,
+      "onnx_escore": 0.07772370427846909,
+      "erro_absoluto": 2.60770320892334e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/497_3178_1816.jpg",
+      "pytorch_escore": 0.03212631121277809,
+      "onnx_escore": 0.03212631121277809,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_908_908.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_227_1362.jpg",
+      "pytorch_escore": 0.9668911099433899,
+      "onnx_escore": 0.9668915271759033,
+      "erro_absoluto": 4.172325134277344e-07,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_2951_1816.jpg",
+      "pytorch_escore": 0.9986849427223206,
+      "onnx_escore": 0.9986849427223206,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_2724_1135.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_1816_908.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_2497_1135.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_3632_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_0_1362.jpg",
+      "pytorch_escore": 0.9999688863754272,
+      "onnx_escore": 0.9999688863754272,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_3405_454.jpg",
+      "pytorch_escore": 0.03733237087726593,
+      "onnx_escore": 0.03733230382204056,
+      "erro_absoluto": 6.705522537231445e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_681_681.jpg",
+      "pytorch_escore": 0.0441480316221714,
+      "onnx_escore": 0.04414822533726692,
+      "erro_absoluto": 1.9371509552001953e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_3405_681.jpg",
+      "pytorch_escore": 0.031830865889787674,
+      "onnx_escore": 0.03183090686798096,
+      "erro_absoluto": 4.0978193283081055e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_2043_1362.jpg",
+      "pytorch_escore": 0.042529087513685226,
+      "onnx_escore": 0.04252910241484642,
+      "erro_absoluto": 1.4901161193847656e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_0_227.jpg",
+      "pytorch_escore": 0.06748664379119873,
+      "onnx_escore": 0.06748610734939575,
+      "erro_absoluto": 5.364418029785156e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_3178_1135.jpg",
+      "pytorch_escore": 0.06142586097121239,
+      "onnx_escore": 0.06142585352063179,
+      "erro_absoluto": 7.450580596923828e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_3405_227.jpg",
+      "pytorch_escore": 0.6845382452011108,
+      "onnx_escore": 0.6845408082008362,
+      "erro_absoluto": 2.562999725341797e-06,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/117_1362_1362.jpg",
+      "pytorch_escore": 0.04081921651959419,
+      "onnx_escore": 0.04081916809082031,
+      "erro_absoluto": 4.842877388000488e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_227_2951.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_681_2497.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_1816_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_1589_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_1816_1135.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_1362_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_2270_227.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_2724_0.jpg",
+      "pytorch_escore": 0.9999997615814209,
+      "onnx_escore": 0.9999997615814209,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_1816_3632.jpg",
+      "pytorch_escore": 0.012650344520807266,
+      "onnx_escore": 0.012650360353291035,
+      "erro_absoluto": 1.5832483768463135e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_2270_3178.jpg",
+      "pytorch_escore": 0.031409356743097305,
+      "onnx_escore": 0.031409408897161484,
+      "erro_absoluto": 5.21540641784668e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_1816_1816.jpg",
+      "pytorch_escore": 0.02001514472067356,
+      "onnx_escore": 0.020015180110931396,
+      "erro_absoluto": 3.5390257835388184e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_2724_1135.jpg",
+      "pytorch_escore": 0.031181303784251213,
+      "onnx_escore": 0.031181203201413155,
+      "erro_absoluto": 1.0058283805847168e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_0_454.jpg",
+      "pytorch_escore": 0.007343510631471872,
+      "onnx_escore": 0.007343514822423458,
+      "erro_absoluto": 4.190951585769653e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_1589_227.jpg",
+      "pytorch_escore": 0.010059749707579613,
+      "onnx_escore": 0.010059721767902374,
+      "erro_absoluto": 2.7939677238464355e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_2043_2724.jpg",
+      "pytorch_escore": 0.033972881734371185,
+      "onnx_escore": 0.033972881734371185,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/486_2724_3405.jpg",
+      "pytorch_escore": 0.01919008605182171,
+      "onnx_escore": 0.01919006183743477,
+      "erro_absoluto": 2.421438694000244e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_2043_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_1816_1589.jpg",
+      "pytorch_escore": 0.9999998807907104,
+      "onnx_escore": 0.9999998807907104,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_1135_2043.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_2724_1135.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_454_2724.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_227_2724.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_1362_2043.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_908_2270.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_2951_1589.jpg",
+      "pytorch_escore": 0.05163810774683952,
+      "onnx_escore": 0.051638148725032806,
+      "erro_absoluto": 4.0978193283081055e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_227_0.jpg",
+      "pytorch_escore": 0.01662413589656353,
+      "onnx_escore": 0.016624074429273605,
+      "erro_absoluto": 6.146728992462158e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_2951_1362.jpg",
+      "pytorch_escore": 0.05156176909804344,
+      "onnx_escore": 0.051561806350946426,
+      "erro_absoluto": 3.725290298461914e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_681_1816.jpg",
+      "pytorch_escore": 0.07826685160398483,
+      "onnx_escore": 0.07826687395572662,
+      "erro_absoluto": 2.2351741790771484e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_2043_908.jpg",
+      "pytorch_escore": 0.08275820314884186,
+      "onnx_escore": 0.08275751769542694,
+      "erro_absoluto": 6.854534149169922e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_3632_0.jpg",
+      "pytorch_escore": 0.03519212454557419,
+      "onnx_escore": 0.0351920910179615,
+      "erro_absoluto": 3.3527612686157227e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_2497_2724.jpg",
+      "pytorch_escore": 0.07690946757793427,
+      "onnx_escore": 0.07690950483083725,
+      "erro_absoluto": 3.725290298461914e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/261_2043_2724.jpg",
+      "pytorch_escore": 0.11852781474590302,
+      "onnx_escore": 0.11852779984474182,
+      "erro_absoluto": 1.4901161193847656e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_1135_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_454_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_2270_908.jpg",
+      "pytorch_escore": 0.9973161816596985,
+      "onnx_escore": 0.9973161816596985,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_0_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_1589_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_3405_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_3632_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_2724_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_2951_681.jpg",
+      "pytorch_escore": 0.02364405244588852,
+      "onnx_escore": 0.023644065484404564,
+      "erro_absoluto": 1.30385160446167e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_681_2724.jpg",
+      "pytorch_escore": 0.006095319986343384,
+      "onnx_escore": 0.006095331162214279,
+      "erro_absoluto": 1.1175870895385742e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_0_1816.jpg",
+      "pytorch_escore": 0.005139079876244068,
+      "onnx_escore": 0.005139093846082687,
+      "erro_absoluto": 1.3969838619232178e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_0_227.jpg",
+      "pytorch_escore": 0.004183864686638117,
+      "onnx_escore": 0.004183868877589703,
+      "erro_absoluto": 4.190951585769653e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_227_0.jpg",
+      "pytorch_escore": 0.006318907719105482,
+      "onnx_escore": 0.006318919826298952,
+      "erro_absoluto": 1.210719347000122e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_2043_0.jpg",
+      "pytorch_escore": 0.00822669267654419,
+      "onnx_escore": 0.008226701058447361,
+      "erro_absoluto": 8.381903171539307e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_3405_227.jpg",
+      "pytorch_escore": 0.041872844099998474,
+      "onnx_escore": 0.041872937232255936,
+      "erro_absoluto": 9.313225746154785e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/130_1362_1816.jpg",
+      "pytorch_escore": 0.013727102428674698,
+      "onnx_escore": 0.013727108016610146,
+      "erro_absoluto": 5.587935447692871e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_2043_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_2497_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_1362_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_908_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_3632_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_0_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_3632_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_681_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_681_1135.jpg",
+      "pytorch_escore": 0.03225024789571762,
+      "onnx_escore": 0.03225024789571762,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_454_2497.jpg",
+      "pytorch_escore": 0.013900804333388805,
+      "onnx_escore": 0.013900757767260075,
+      "erro_absoluto": 4.6566128730773926e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_908_1135.jpg",
+      "pytorch_escore": 0.02638542279601097,
+      "onnx_escore": 0.026385441422462463,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_2724_1135.jpg",
+      "pytorch_escore": 0.05018560588359833,
+      "onnx_escore": 0.05018557608127594,
+      "erro_absoluto": 2.9802322387695312e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_3632_2043.jpg",
+      "pytorch_escore": 0.017344558611512184,
+      "onnx_escore": 0.01734459213912487,
+      "erro_absoluto": 3.3527612686157227e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_1816_681.jpg",
+      "pytorch_escore": 0.029123501852154732,
+      "onnx_escore": 0.02912346087396145,
+      "erro_absoluto": 4.0978193283081055e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_3178_1816.jpg",
+      "pytorch_escore": 0.0848909243941307,
+      "onnx_escore": 0.08489099889993668,
+      "erro_absoluto": 7.450580596923828e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/113_1589_2497.jpg",
+      "pytorch_escore": 0.03124859184026718,
+      "onnx_escore": 0.03124854527413845,
+      "erro_absoluto": 4.6566128730773926e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_2724_1816.jpg",
+      "pytorch_escore": 0.9924174547195435,
+      "onnx_escore": 0.992417573928833,
+      "erro_absoluto": 1.1920928955078125e-07,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_908_908.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_2270_1362.jpg",
+      "pytorch_escore": 0.9993733763694763,
+      "onnx_escore": 0.9993733763694763,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_681_908.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_1362_908.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_454_681.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_1816_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_3405_1135.jpg",
+      "pytorch_escore": 0.9993916749954224,
+      "onnx_escore": 0.9993916749954224,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_1589_1816.jpg",
+      "pytorch_escore": 0.013106570579111576,
+      "onnx_escore": 0.013106596656143665,
+      "erro_absoluto": 2.60770320892334e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_3405_2497.jpg",
+      "pytorch_escore": 0.011796005070209503,
+      "onnx_escore": 0.011796028353273869,
+      "erro_absoluto": 2.3283064365386963e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_2270_1816.jpg",
+      "pytorch_escore": 0.017739972099661827,
+      "onnx_escore": 0.01773996278643608,
+      "erro_absoluto": 9.313225746154785e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_2951_454.jpg",
+      "pytorch_escore": 0.0401248075067997,
+      "onnx_escore": 0.0401248037815094,
+      "erro_absoluto": 3.725290298461914e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_2951_0.jpg",
+      "pytorch_escore": 0.02876204065978527,
+      "onnx_escore": 0.02876199595630169,
+      "erro_absoluto": 4.470348358154297e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_1816_0.jpg",
+      "pytorch_escore": 0.0475468672811985,
+      "onnx_escore": 0.0475468672811985,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_454_1589.jpg",
+      "pytorch_escore": 0.009099437855184078,
+      "onnx_escore": 0.009099425747990608,
+      "erro_absoluto": 1.210719347000122e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/223_2724_227.jpg",
+      "pytorch_escore": 0.030720079317688942,
+      "onnx_escore": 0.030720114707946777,
+      "erro_absoluto": 3.5390257835388184e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_1362_2043.jpg",
+      "pytorch_escore": 0.9999984502792358,
+      "onnx_escore": 0.9999984502792358,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_1135_1135.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_3632_1135.jpg",
+      "pytorch_escore": 0.9999877214431763,
+      "onnx_escore": 0.9999877214431763,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_2497_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_1362_1135.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_3405_1135.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_1362_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_2270_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_3405_681.jpg",
+      "pytorch_escore": 0.9629482626914978,
+      "onnx_escore": 0.9629481434822083,
+      "erro_absoluto": 1.1920928955078125e-07,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_2497_908.jpg",
+      "pytorch_escore": 0.06223065406084061,
+      "onnx_escore": 0.062230680137872696,
+      "erro_absoluto": 2.60770320892334e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_2951_454.jpg",
+      "pytorch_escore": 0.04456499591469765,
+      "onnx_escore": 0.04456503689289093,
+      "erro_absoluto": 4.0978193283081055e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_1135_2270.jpg",
+      "pytorch_escore": 0.04049958288669586,
+      "onnx_escore": 0.040499601513147354,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_2043_908.jpg",
+      "pytorch_escore": 0.04348220303654671,
+      "onnx_escore": 0.04348223656415939,
+      "erro_absoluto": 3.3527612686157227e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_3405_454.jpg",
+      "pytorch_escore": 0.43650808930397034,
+      "onnx_escore": 0.4365083873271942,
+      "erro_absoluto": 2.980232238769531e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_3405_0.jpg",
+      "pytorch_escore": 0.05197902396321297,
+      "onnx_escore": 0.05197875574231148,
+      "erro_absoluto": 2.682209014892578e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/116_2043_681.jpg",
+      "pytorch_escore": 0.05849379673600197,
+      "onnx_escore": 0.05849379301071167,
+      "erro_absoluto": 3.725290298461914e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_2270_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_2724_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_1816_1135.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_2497_1135.jpg",
+      "pytorch_escore": 0.9997912049293518,
+      "onnx_escore": 0.9997912049293518,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_3405_2270.jpg",
+      "pytorch_escore": 0.9999381303787231,
+      "onnx_escore": 0.9999381303787231,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_681_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_0_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_2724_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_3178_2043.jpg",
+      "pytorch_escore": 0.03089720569550991,
+      "onnx_escore": 0.03089723363518715,
+      "erro_absoluto": 2.7939677238464355e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_3405_1589.jpg",
+      "pytorch_escore": 0.09284723550081253,
+      "onnx_escore": 0.09284719824790955,
+      "erro_absoluto": 3.725290298461914e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_3405_908.jpg",
+      "pytorch_escore": 0.03252550959587097,
+      "onnx_escore": 0.032525476068258286,
+      "erro_absoluto": 3.3527612686157227e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_1135_2270.jpg",
+      "pytorch_escore": 0.009600548073649406,
+      "onnx_escore": 0.009600570425391197,
+      "erro_absoluto": 2.2351741790771484e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_2724_908.jpg",
+      "pytorch_escore": 0.05277510732412338,
+      "onnx_escore": 0.05277511104941368,
+      "erro_absoluto": 3.725290298461914e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_2270_681.jpg",
+      "pytorch_escore": 0.03385065495967865,
+      "onnx_escore": 0.03385061398148537,
+      "erro_absoluto": 4.0978193283081055e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_454_1362.jpg",
+      "pytorch_escore": 0.020396288484334946,
+      "onnx_escore": 0.020396282896399498,
+      "erro_absoluto": 5.587935447692871e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/258_1362_2043.jpg",
+      "pytorch_escore": 0.02681642957031727,
+      "onnx_escore": 0.026816410943865776,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_0_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_227_1589.jpg",
+      "pytorch_escore": 0.9999977350234985,
+      "onnx_escore": 0.9999977350234985,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_908_1589.jpg",
+      "pytorch_escore": 0.9999833106994629,
+      "onnx_escore": 0.9999833106994629,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_2724_2724.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_1816_2043.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_1362_2043.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_2043_2497.jpg",
+      "pytorch_escore": 0.9999983310699463,
+      "onnx_escore": 0.9999983310699463,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_2270_2270.jpg",
+      "pytorch_escore": 0.17743608355522156,
+      "onnx_escore": 0.17743724584579468,
+      "erro_absoluto": 1.1622905731201172e-06,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_2724_0.jpg",
+      "pytorch_escore": 0.03982323408126831,
+      "onnx_escore": 0.039823148399591446,
+      "erro_absoluto": 8.568167686462402e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_0_1135.jpg",
+      "pytorch_escore": 0.07346053421497345,
+      "onnx_escore": 0.07346043735742569,
+      "erro_absoluto": 9.685754776000977e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_1816_2951.jpg",
+      "pytorch_escore": 0.05756468325853348,
+      "onnx_escore": 0.05756467580795288,
+      "erro_absoluto": 7.450580596923828e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_2724_1135.jpg",
+      "pytorch_escore": 0.2232639044523239,
+      "onnx_escore": 0.22326473891735077,
+      "erro_absoluto": 8.344650268554688e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_2497_908.jpg",
+      "pytorch_escore": 0.0549614280462265,
+      "onnx_escore": 0.05496145412325859,
+      "erro_absoluto": 2.60770320892334e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_1589_1135.jpg",
+      "pytorch_escore": 0.05627649649977684,
+      "onnx_escore": 0.05627652630209923,
+      "erro_absoluto": 2.9802322387695312e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_2724_227.jpg",
+      "pytorch_escore": 0.048203885555267334,
+      "onnx_escore": 0.04820390045642853,
+      "erro_absoluto": 1.4901161193847656e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/553_2497_681.jpg",
+      "pytorch_escore": 0.05038527026772499,
+      "onnx_escore": 0.05038527399301529,
+      "erro_absoluto": 3.725290298461914e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_3178_2270.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_2270_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_681_908.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_227_908.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_2724_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_2043_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_2043_1362.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_2951_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_681_454.jpg",
+      "pytorch_escore": 0.03947320953011513,
+      "onnx_escore": 0.039473261684179306,
+      "erro_absoluto": 5.21540641784668e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_0_227.jpg",
+      "pytorch_escore": 0.004656581208109856,
+      "onnx_escore": 0.00465658213943243,
+      "erro_absoluto": 9.313225746154785e-10,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_1135_0.jpg",
+      "pytorch_escore": 0.023013867437839508,
+      "onnx_escore": 0.02301388420164585,
+      "erro_absoluto": 1.6763806343078613e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_0_2270.jpg",
+      "pytorch_escore": 0.009179900400340557,
+      "onnx_escore": 0.009179881773889065,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_1816_1589.jpg",
+      "pytorch_escore": 0.03194938227534294,
+      "onnx_escore": 0.03194939345121384,
+      "erro_absoluto": 1.1175870895385742e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_3405_1589.jpg",
+      "pytorch_escore": 0.014532055705785751,
+      "onnx_escore": 0.014532055705785751,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_454_227.jpg",
+      "pytorch_escore": 0.02307968959212303,
+      "onnx_escore": 0.023079736158251762,
+      "erro_absoluto": 4.6566128730773926e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/056_2043_681.jpg",
+      "pytorch_escore": 0.03312687203288078,
+      "onnx_escore": 0.033126890659332275,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_1816_227.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_1816_0.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_3178_2497.jpg",
+      "pytorch_escore": 0.9999953508377075,
+      "onnx_escore": 0.9999953508377075,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_2043_454.jpg",
+      "pytorch_escore": 0.9999996423721313,
+      "onnx_escore": 0.9999996423721313,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_2043_227.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_2724_1816.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_2497_1589.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_2951_2724.jpg",
+      "pytorch_escore": 0.05695129930973053,
+      "onnx_escore": 0.05695132166147232,
+      "erro_absoluto": 2.2351741790771484e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_3632_2270.jpg",
+      "pytorch_escore": 0.02016708254814148,
+      "onnx_escore": 0.020167116075754166,
+      "erro_absoluto": 3.3527612686157227e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_2724_1362.jpg",
+      "pytorch_escore": 0.033317700028419495,
+      "onnx_escore": 0.03331773355603218,
+      "erro_absoluto": 3.3527612686157227e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_908_0.jpg",
+      "pytorch_escore": 0.032759275287389755,
+      "onnx_escore": 0.03275922313332558,
+      "erro_absoluto": 5.21540641784668e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_1816_454.jpg",
+      "pytorch_escore": 0.05247079208493233,
+      "onnx_escore": 0.052470773458480835,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_3178_1135.jpg",
+      "pytorch_escore": 0.013780031353235245,
+      "onnx_escore": 0.013780049979686737,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_681_454.jpg",
+      "pytorch_escore": 0.02714589424431324,
+      "onnx_escore": 0.027145912870764732,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_1135_227.jpg",
+      "pytorch_escore": 0.03565847501158714,
+      "onnx_escore": 0.03565852716565132,
+      "erro_absoluto": 5.21540641784668e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/021_1589_2497.jpg",
+      "pytorch_escore": 0.06514128297567368,
+      "onnx_escore": 0.06514104455709457,
+      "erro_absoluto": 2.384185791015625e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_2270_2270.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_1589_908.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_1362_681.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_227_2497.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_2497_2724.jpg",
+      "pytorch_escore": 0.9999998807907104,
+      "onnx_escore": 0.9999998807907104,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_2043_2270.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_681_2497.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_2270_1135.jpg",
+      "pytorch_escore": 1.0,
+      "onnx_escore": 1.0,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_2951_1816.jpg",
+      "pytorch_escore": 0.07076899707317352,
+      "onnx_escore": 0.07076893001794815,
+      "erro_absoluto": 6.705522537231445e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_1135_908.jpg",
+      "pytorch_escore": 0.03292030468583107,
+      "onnx_escore": 0.03292037546634674,
+      "erro_absoluto": 7.078051567077637e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_2497_227.jpg",
+      "pytorch_escore": 0.02244805172085762,
+      "onnx_escore": 0.022447993978857994,
+      "erro_absoluto": 5.774199962615967e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_1135_1135.jpg",
+      "pytorch_escore": 0.06851041316986084,
+      "onnx_escore": 0.06851055473089218,
+      "erro_absoluto": 1.4156103134155273e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_2497_681.jpg",
+      "pytorch_escore": 0.056370072066783905,
+      "onnx_escore": 0.05636999383568764,
+      "erro_absoluto": 7.82310962677002e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_2043_1135.jpg",
+      "pytorch_escore": 0.999981164932251,
+      "onnx_escore": 0.999981164932251,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_3178_1589.jpg",
+      "pytorch_escore": 0.10619886964559555,
+      "onnx_escore": 0.1061992272734642,
+      "erro_absoluto": 3.5762786865234375e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/recortes/291_2497_2270.jpg",
+      "pytorch_escore": 0.03301912918686867,
+      "onnx_escore": 0.03301916643977165,
+      "erro_absoluto": 3.725290298461914e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/021_2724_1589.jpg",
+      "pytorch_escore": 0.09878817200660706,
+      "onnx_escore": 0.09878820925951004,
+      "erro_absoluto": 3.725290298461914e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/056_1589_1135.jpg",
+      "pytorch_escore": 0.026826336979866028,
+      "onnx_escore": 0.026826336979866028,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/056_227_1135.jpg",
+      "pytorch_escore": 0.012219833210110664,
+      "onnx_escore": 0.012219812721014023,
+      "erro_absoluto": 2.0489096641540527e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/056_2724_2043.jpg",
+      "pytorch_escore": 0.026374882087111473,
+      "onnx_escore": 0.02637489326298237,
+      "erro_absoluto": 1.1175870895385742e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/056_3405_2043.jpg",
+      "pytorch_escore": 0.03881247341632843,
+      "onnx_escore": 0.038812488317489624,
+      "erro_absoluto": 1.4901161193847656e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/060_1362_1135.jpg",
+      "pytorch_escore": 0.03320863097906113,
+      "onnx_escore": 0.03320867568254471,
+      "erro_absoluto": 4.470348358154297e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/060_3632_2270.jpg",
+      "pytorch_escore": 0.07683945447206497,
+      "onnx_escore": 0.0768394023180008,
+      "erro_absoluto": 5.21540641784668e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/060_454_0.jpg",
+      "pytorch_escore": 0.6600476503372192,
+      "onnx_escore": 0.6600485444068909,
+      "erro_absoluto": 8.940696716308594e-07,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/117_2270_1135.jpg",
+      "pytorch_escore": 0.03983386978507042,
+      "onnx_escore": 0.03983388841152191,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/130_2043_1589.jpg",
+      "pytorch_escore": 0.009591004811227322,
+      "onnx_escore": 0.009591009467840195,
+      "erro_absoluto": 4.6566128730773926e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/184_2724_1362.jpg",
+      "pytorch_escore": 0.04121928662061691,
+      "onnx_escore": 0.04121930152177811,
+      "erro_absoluto": 1.4901161193847656e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/184_908_908.jpg",
+      "pytorch_escore": 0.07582326978445053,
+      "onnx_escore": 0.07582329213619232,
+      "erro_absoluto": 2.2351741790771484e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/258_3632_2043.jpg",
+      "pytorch_escore": 0.021353209391236305,
+      "onnx_escore": 0.021353207528591156,
+      "erro_absoluto": 1.862645149230957e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/261_2497_1135.jpg",
+      "pytorch_escore": 0.046950481832027435,
+      "onnx_escore": 0.04695039615035057,
+      "erro_absoluto": 8.568167686462402e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/291_1589_681.jpg",
+      "pytorch_escore": 0.04258104786276817,
+      "onnx_escore": 0.0425809808075428,
+      "erro_absoluto": 6.705522537231445e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/291_2270_1816.jpg",
+      "pytorch_escore": 0.36110424995422363,
+      "onnx_escore": 0.361104279756546,
+      "erro_absoluto": 2.9802322387695312e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/291_2951_908.jpg",
+      "pytorch_escore": 0.18302346765995026,
+      "onnx_escore": 0.18302325904369354,
+      "erro_absoluto": 2.086162567138672e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/464_1135_3178.jpg",
+      "pytorch_escore": 0.00971184577792883,
+      "onnx_escore": 0.009711869060993195,
+      "erro_absoluto": 2.3283064365386963e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/464_1589_2270.jpg",
+      "pytorch_escore": 0.04070092365145683,
+      "onnx_escore": 0.04070090502500534,
+      "erro_absoluto": 1.862645149230957e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/464_1589_3632.jpg",
+      "pytorch_escore": 0.007582783233374357,
+      "onnx_escore": 0.007582786958664656,
+      "erro_absoluto": 3.725290298461914e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/464_1816_3405.jpg",
+      "pytorch_escore": 0.005356485955417156,
+      "onnx_escore": 0.005356491077691317,
+      "erro_absoluto": 5.122274160385132e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/464_908_2951.jpg",
+      "pytorch_escore": 0.011266998015344143,
+      "onnx_escore": 0.011266998015344143,
+      "erro_absoluto": 0.0,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/544_1135_3178.jpg",
+      "pytorch_escore": 0.7061014771461487,
+      "onnx_escore": 0.7061010599136353,
+      "erro_absoluto": 4.172325134277344e-07,
+      "alerta_pytorch": true,
+      "alerta_onnx": true
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/544_1816_1362.jpg",
+      "pytorch_escore": 0.019637076184153557,
+      "onnx_escore": 0.01963709108531475,
+      "erro_absoluto": 1.4901161193847656e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/553_2724_3405.jpg",
+      "pytorch_escore": 0.0478164404630661,
+      "onnx_escore": 0.04781642556190491,
+      "erro_absoluto": 1.4901161193847656e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "materiais/visao/data/sutis/recortes/595_1362_3405.jpg",
+      "pytorch_escore": 0.047108426690101624,
+      "onnx_escore": 0.04710853844881058,
+      "erro_absoluto": 1.1175870895385742e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "controle:black",
+      "pytorch_escore": 0.18539804220199585,
+      "onnx_escore": 0.18539726734161377,
+      "erro_absoluto": 7.748603820800781e-07,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "controle:white",
+      "pytorch_escore": 0.005209022201597691,
+      "onnx_escore": 0.005209024995565414,
+      "erro_absoluto": 2.7939677238464355e-09,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    },
+    {
+      "arquivo": "controle:gray",
+      "pytorch_escore": 0.004681920167058706,
+      "onnx_escore": 0.004681951366364956,
+      "erro_absoluto": 3.119930624961853e-08,
+      "alerta_pytorch": false,
+      "alerta_onnx": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "modelo": "ResNet18",
+  "checkpoint_sha256": "67d0b015527c8f487aaa4f84354328cd4cf6f305cb0f038187f0261c18c316e8",
+  "onnx_sha256": "1e5b4acda6e11ff3d83f029c69dc2a60bf5bd6e870ea6010647520de327a2007",
+  "image_size": 160,
+  "positive_idx": 0,
+  "threshold": 0.48999999999999977,
+  "opset": 17,
+  "versoes_exportacao": {
+    "torch": "2.8.0+cpu",
+    "torchvision": "0.23.0+cpu",
+    "onnx": "1.19.1",
+    "onnxruntime": "1.31.1",
+    "numpy": "2.5.4",
+    "Pillow": "12.3.0"
+  }
+}
