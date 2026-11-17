@@ -18,7 +18,9 @@ Abra **https://gov262.vercel.app/#pedido** no Chrome do Android ou Safari do iPh
 
 Em **Como o relato foi preparado**, confira modelo, data, sugestão original e alterações humanas. O rascunho guarda a sugestão e os campos, mas pede nova confirmação após recuperar. Campos preenchidos automaticamente acompanham o novo GPS; correções manuais são preservadas.
 
-O navegador automatizado verificou o fluxo em 412 × 839, com controles sintéticos claramente identificados. Câmera e GPS físicos ainda devem ser testados pelo integrante. Registre aparelho, navegador, resultado, precisão GPS e identificador do pedido, sem divulgar senha/chave. A análise é preliminar e não comprova gravidade ou acessibilidade.
+Chrome e WebKit verificaram o fluxo com controles sintéticos claramente identificados, incluindo recuperação de rascunho com foto e abertura sem rede. Foram conferidas 32 combinações de tela e largura, de 320 a 844 px. Refazer o GPS, recuperar um rascunho ou trocar o método do planejamento exige confirmar novamente. [Resultados e limites da auditoria móvel](evidencias/qa-mobile-2026-11-17.md).
+
+Câmera e GPS físicos ainda devem ser testados pelo integrante. Registre aparelho, navegador, resultado, precisão GPS e identificador do pedido, sem divulgar senha/chave. A análise é preliminar e não comprova gravidade ou acessibilidade.
 
 ## Lotes e planejamento da revisão
 

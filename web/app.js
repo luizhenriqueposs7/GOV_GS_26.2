@@ -67,6 +67,7 @@ function formulario(id, acao) {
   });
 }
 async function navegar(view, foco = true) {
+  state.consultaDetalhe=(state.consultaDetalhe||0)+1;state.detalheId=null;
   if (!titulos[view]) view = "pedido";
   if(view!=='pedido'){fecharCamera();cancelarGeo();cancelarAutomatico();}
   if(view==='pedido') {$('pedido-form').hidden=false;$('request-progress').hidden=false;$('preparacao-resultado').hidden=true;mostrarEtapa(state.etapa,false);}
@@ -161,9 +162,9 @@ formulario("pedido-form", async form => {
 });
 function cancelarEdicao() {cancelarAutomatico();state.edicao = null; $("pedido-form").reset(); limparFoto(); limparGeo(); state.envioId=null; state.assinatura=null; state.rascunhoId=null; state.regiaoAuto=null; $('salvar-rascunho').disabled=false; $("cancelar-edicao").hidden = true; $("pedido-form").querySelector("button[type=submit]").textContent = "Enviar pedido";mostrarEtapa(0,false);}
 $("cancelar-edicao").addEventListener("click", cancelarEdicao);
-async function editar(caso) {
+function editar(caso) {
   mostrarEtapa(0,false);
-  await navegar("pedido"); state.edicao = caso.id;
+  void navegar("pedido"); state.edicao = caso.id;
   ["descricao", "bairro", "local", "contexto"].forEach(k => $(k).value = caso[k] || "");
   $('passagem-trecho').value=caso.passagem?.trecho_id||'';
   $('passagem-condicao').value=caso.passagem?.condicao||'nao_verificado';
@@ -178,10 +179,22 @@ async function editar(caso) {
   mostrarEtapa(1,false);aviso("Editando o pedido " + caso.id.slice(0,8) + ". Alterações exigem nova revisão antes de confirmar no ZelaBairro."); $("descricao").focus();
 }
 async function detalhe(id, rolar = true) {
-  const caso = await api("/api/atendimentos/" + encodeURIComponent(id));
-  if (!rolar && state.selecionado?.id === id && state.selecionado.atualizado_em === caso.atualizado_em) return;
+  if(!rolar&&state.detalheId&&state.detalheId!==id)return;
+  if(rolar)state.detalheId=id;
+  const consulta=(state.consultaDetalhe||0)+1;state.consultaDetalhe=consulta;
+  if(rolar&&state.selecionado?.id!==id)$('detalhe-caso').replaceChildren(el('p','Carregando o pedido…','fine'));
+  let caso;
+  try {caso=await api('/api/atendimentos/'+encodeURIComponent(id));}
+  catch(erro){
+    if(consulta!==state.consultaDetalhe)return;
+    if(rolar&&state.selecionado?.id!==id)$('detalhe-caso').replaceChildren(el('p','Não foi possível carregar este pedido. Tente abri-lo novamente.','inset warning'));
+    throw erro;
+  }
+  if(consulta!==state.consultaDetalhe)return;
+  if (!rolar && $('detalhe-caso').firstElementChild?.dataset.pedido === id && state.selecionado?.id === id && state.selecionado.atualizado_em === caso.atualizado_em) return;
   state.selecionado = caso;
   const box = el("article", null, "panel detail");
+  box.dataset.pedido=id;
   box.append(badge(caso.situacao), el('h2', 'Pedido ' + caso.id.slice(0,8).toUpperCase()), el('p',caso.descricao,'occurrence-body'), el("p", "Registro local " + caso.id, "fine"));
   const grid = el("div", null, "details-grid"), principal = el("div"), decisao = el("div");
   const dl = el("dl"); for(const [nome,valor] of [["Bairro",caso.bairro],["Local",caso.local || "Não informado"],["Serviço",caso.preparacao.servico?.nome || "Ainda não definido"],["Pendências",caso.preparacao.faltantes.join(", ") || "Informações disponíveis para conferência"]]) dl.append(el("dt",nome),el("dd",valor));
@@ -341,9 +354,9 @@ function aplicarLocalizacao(resultado){
   state.regiaoAuto={bairro:resultado.bairro,local:resultado.local};$('confirmar-localizacao').checked=false;sincronizarPonto();
   $('localizacao-status').textContent='Posição do aparelho'+(g.precisao_m!==null?' · precisão aproximada de '+Math.round(g.precisao_m)+' m':'')+'. Confira o ponto. Região aproximada: BigDataCloud.'+(resultado.aviso?' '+resultado.aviso:'');
 }
-$('obter-localizacao').addEventListener('click',e=>bloquearDurante([e.currentTarget],async()=>{
+$('obter-localizacao').addEventListener('click',e=>bloquearDurante([e.currentTarget,$('confirmar-localizacao'),$('pedido-form').querySelector('button[type=submit]')],async()=>{
   if(!window.isSecureContext || !navigator.geolocation)throw new Error('O GPS precisa de HTTPS e permissão no navegador. Digite a referência ou coordenadas manualmente.');
-  cancelarGeo();const leitura=new AbortController();state.leituraGeo=leitura;
+  cancelarGeo();$('confirmar-localizacao').checked=false;const leitura=new AbortController();state.leituraGeo=leitura;
   $('localizacao-status').textContent='Aguardando sua permissão e a posição do aparelho…';
   try {
     const resultado=await localizarAtual(navigator.geolocation,leitura.signal);

@@ -67,7 +67,7 @@ export function iniciarPlanejamento({api,enviar,el,botao,aviso,durante,revisar,a
   }
   $('planejamento-candidatos').addEventListener('input',invalidar);
   $('planejamento-capacidade').addEventListener('input',invalidar);
-  $('planejamento-metodo').addEventListener('change',listaResultado);
+  $('planejamento-metodo').addEventListener('change',()=>{$('planejamento-confirmado').checked=false;listaResultado();});
   $('planejamento-atualizar').addEventListener('click',e=>durante(e.currentTarget,atualizar));
   $('planejamento-form').addEventListener('submit',e=>{e.preventDefault();durante(e.submitter,async()=>{
     const itens=[...$('planejamento-candidatos').querySelectorAll('fieldset')].filter(row=>row.querySelector('[data-selecionar]').checked).map(row=>({

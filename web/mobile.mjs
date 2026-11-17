@@ -93,7 +93,11 @@ export async function reduzirFoto(arquivo) {
   } finally { imagem?.close(); }
 }
 
-export function rascunho(acao, valor) {
+export async function rascunho(acao, valor) {
+  // Bytes evitam falhas de persistência de Blob em algumas versões do WebKit.
+  if((acao==='put'||acao==='atualizar')&&valor?.foto instanceof Blob) {
+    valor={...valor,foto:{dados:await valor.foto.arrayBuffer(),tipo:valor.foto.type}};
+  }
   return new Promise((resolve, reject) => {
     const abrir = indexedDB.open('citizentech-rascunho', 1);
     abrir.onupgradeneeded = () => abrir.result.createObjectStore('dados');
@@ -112,7 +116,11 @@ export function rascunho(acao, valor) {
           }
         }
       };
-      tx.oncomplete = () => {db.close(); resolve(resultado);};
+      tx.oncomplete = () => {
+        db.close();
+        if(acao==='get'&&resultado?.foto?.dados instanceof ArrayBuffer)resultado.foto=new Blob([resultado.foto.dados],{type:resultado.foto.tipo});
+        resolve(resultado);
+      };
       tx.onerror = tx.onabort = () => {db.close(); reject(new Error('Não foi possível acessar o rascunho. Confira o armazenamento do navegador.'));};
     };
   });
