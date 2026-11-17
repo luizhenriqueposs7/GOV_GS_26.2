@@ -16,8 +16,8 @@ Inclua a passagem no tempo reservado, sem longa apresentação de código.
 
 ## 04:25–04:50 · IoT
 
-**Tela:** Projeto → OuviAí. Toque em Simular campainha e mostre o aviso visual.
+**Tela:** Projeto → OuviAí. Ative o microfone, produza uma batida na porta e mostre o aviso gerado. Pare a escuta. Prepare a permissão e o download antes da tomada. Não use os botões de simulação nessa cena.
 
-**Fala base:** “O OuviAí propõe transformar sons, como uma campainha, em aviso visual. O trabalho original usa reconhecimento de áudio no celular. Aqui mostramos o comportamento de uma possível estação. Esses eventos são simulados: ainda não há dispositivo nem previsões reais chegando à central.”
+**Fala base:** “No OuviAí, o microfone capta uma batida e o navegador mostra um possível aviso visual. O áudio fica no aparelho. Esta ampliação usa YAMNet; a CNN original do trabalho continua externa. Ainda não construímos a estação física nem validamos o uso em outros ambientes.”
 
-Não diga que o botão identificou um som. Se usar vídeo original, identifique como gravação anterior do módulo. A interface não substitui inferência atual do modelo de áudio.
+Mostre o resultado que realmente aparecer. Se não reconhecer, registre a falha e repita sem usar o botão de simulação para encobri-la. A pontuação não é acurácia. Se usar arquivo de som no microfone virtual, identifique como teste controlado. A captura antiga 08_iot_ouviai_simulacao.webm permanece simulação e não serve como evidência de reconhecimento.

@@ -17,3 +17,4 @@ chave-gestao.txt
 .env*
 /modelos_online/genai/.runtime/
 /supabase/.temp/
+/.playwright-cli/

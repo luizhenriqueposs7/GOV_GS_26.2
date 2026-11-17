@@ -1,0 +1,727 @@
+{
+  "verificado_em_utc": "2026-11-17T22:45:48.008222+00:00",
+  "ambiente": "QA isolado http://127.0.0.1:8851",
+  "modelo": "YAMNet float32 v1 / MediaPipe Tasks Audio 1.2.3",
+  "modelo_original_do_grupo": false,
+  "origem_entrada": "arquivos de referência e microfone virtual Chrome; sem teste físico",
+  "inferencias_mockadas": false,
+  "classificacao_arquivos": [
+    {
+      "nome": "porta",
+      "janelas": [
+        {
+          "top": [
+            {
+              "index": 348,
+              "score": 0.73828125,
+              "categoryName": "Door",
+              "displayName": ""
+            },
+            {
+              "index": 353,
+              "score": 0.73828125,
+              "categoryName": "Knock",
+              "displayName": ""
+            },
+            {
+              "index": 354,
+              "score": 0.1484375,
+              "categoryName": "Tap",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "batida_porta",
+            "alerta": true,
+            "pontuacao": 0.73828125,
+            "rotulo": "Knock"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 0,
+              "score": 0.08203125,
+              "categoryName": "Speech",
+              "displayName": ""
+            },
+            {
+              "index": 353,
+              "score": 0.08203125,
+              "categoryName": "Knock",
+              "displayName": ""
+            },
+            {
+              "index": 500,
+              "score": 0.05859375,
+              "categoryName": "Inside, small room",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "inconclusivo",
+            "alerta": false,
+            "pontuacao": 0.08203125,
+            "rotulo": "Speech"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 353,
+              "score": 0.96875,
+              "categoryName": "Knock",
+              "displayName": ""
+            },
+            {
+              "index": 348,
+              "score": 0.8515625,
+              "categoryName": "Door",
+              "displayName": ""
+            },
+            {
+              "index": 354,
+              "score": 0.109375,
+              "categoryName": "Tap",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "batida_porta",
+            "alerta": true,
+            "pontuacao": 0.96875,
+            "rotulo": "Knock"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 494,
+              "score": 0.5,
+              "categoryName": "Silence",
+              "displayName": ""
+            },
+            {
+              "index": 498,
+              "score": 0.015625,
+              "categoryName": "Sound effect",
+              "displayName": ""
+            },
+            {
+              "index": 488,
+              "score": 0.01171875,
+              "categoryName": "Plop",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "inconclusivo",
+            "alerta": false,
+            "pontuacao": 0.5,
+            "rotulo": "Silence"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 494,
+              "score": 0.80078125,
+              "categoryName": "Silence",
+              "displayName": ""
+            },
+            {
+              "index": 498,
+              "score": 0.0078125,
+              "categoryName": "Sound effect",
+              "displayName": ""
+            },
+            {
+              "index": 132,
+              "score": 0.00390625,
+              "categoryName": "Music",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_ambiente",
+            "alerta": false,
+            "pontuacao": 0.80078125,
+            "rotulo": "Silence"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 494,
+              "score": 0.80078125,
+              "categoryName": "Silence",
+              "displayName": ""
+            },
+            {
+              "index": 498,
+              "score": 0.0078125,
+              "categoryName": "Sound effect",
+              "displayName": ""
+            },
+            {
+              "index": 132,
+              "score": 0.00390625,
+              "categoryName": "Music",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_ambiente",
+            "alerta": false,
+            "pontuacao": 0.80078125,
+            "rotulo": "Silence"
+          }
+        }
+      ]
+    },
+    {
+      "nome": "cachorro",
+      "janelas": [
+        {
+          "top": [
+            {
+              "index": 494,
+              "score": 0.80078125,
+              "categoryName": "Silence",
+              "displayName": ""
+            },
+            {
+              "index": 498,
+              "score": 0.0078125,
+              "categoryName": "Sound effect",
+              "displayName": ""
+            },
+            {
+              "index": 132,
+              "score": 0.00390625,
+              "categoryName": "Music",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_ambiente",
+            "alerta": false,
+            "pontuacao": 0.80078125,
+            "rotulo": "Silence"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 494,
+              "score": 0.80078125,
+              "categoryName": "Silence",
+              "displayName": ""
+            },
+            {
+              "index": 498,
+              "score": 0.0078125,
+              "categoryName": "Sound effect",
+              "displayName": ""
+            },
+            {
+              "index": 132,
+              "score": 0.00390625,
+              "categoryName": "Music",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_ambiente",
+            "alerta": false,
+            "pontuacao": 0.80078125,
+            "rotulo": "Silence"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 67,
+              "score": 0.8515625,
+              "categoryName": "Animal",
+              "displayName": ""
+            },
+            {
+              "index": 69,
+              "score": 0.8515625,
+              "categoryName": "Dog",
+              "displayName": ""
+            },
+            {
+              "index": 68,
+              "score": 0.8515625,
+              "categoryName": "Domestic animals, pets",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "outro_som",
+            "alerta": false,
+            "pontuacao": 0.8515625,
+            "rotulo": "Animal"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 494,
+              "score": 0.80078125,
+              "categoryName": "Silence",
+              "displayName": ""
+            },
+            {
+              "index": 498,
+              "score": 0.0078125,
+              "categoryName": "Sound effect",
+              "displayName": ""
+            },
+            {
+              "index": 132,
+              "score": 0.00390625,
+              "categoryName": "Music",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_ambiente",
+            "alerta": false,
+            "pontuacao": 0.80078125,
+            "rotulo": "Silence"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 494,
+              "score": 0.80078125,
+              "categoryName": "Silence",
+              "displayName": ""
+            },
+            {
+              "index": 498,
+              "score": 0.0078125,
+              "categoryName": "Sound effect",
+              "displayName": ""
+            },
+            {
+              "index": 132,
+              "score": 0.00390625,
+              "categoryName": "Music",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_ambiente",
+            "alerta": false,
+            "pontuacao": 0.80078125,
+            "rotulo": "Silence"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 494,
+              "score": 0.80078125,
+              "categoryName": "Silence",
+              "displayName": ""
+            },
+            {
+              "index": 498,
+              "score": 0.0078125,
+              "categoryName": "Sound effect",
+              "displayName": ""
+            },
+            {
+              "index": 132,
+              "score": 0.00390625,
+              "categoryName": "Music",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_ambiente",
+            "alerta": false,
+            "pontuacao": 0.80078125,
+            "rotulo": "Silence"
+          }
+        }
+      ]
+    },
+    {
+      "nome": "campainha",
+      "janelas": [
+        {
+          "top": [
+            {
+              "index": 87,
+              "score": 0.66796875,
+              "categoryName": "Cowbell",
+              "displayName": ""
+            },
+            {
+              "index": 349,
+              "score": 0.66796875,
+              "categoryName": "Doorbell",
+              "displayName": ""
+            },
+            {
+              "index": 350,
+              "score": 0.5,
+              "categoryName": "Ding-dong",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_campainha",
+            "alerta": true,
+            "pontuacao": 0.66796875,
+            "rotulo": "Doorbell"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 349,
+              "score": 0.98046875,
+              "categoryName": "Doorbell",
+              "displayName": ""
+            },
+            {
+              "index": 350,
+              "score": 0.8515625,
+              "categoryName": "Ding-dong",
+              "displayName": ""
+            },
+            {
+              "index": 477,
+              "score": 0.05859375,
+              "categoryName": "Ding",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_campainha",
+            "alerta": true,
+            "pontuacao": 0.98046875,
+            "rotulo": "Doorbell"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 349,
+              "score": 0.890625,
+              "categoryName": "Doorbell",
+              "displayName": ""
+            },
+            {
+              "index": 350,
+              "score": 0.5,
+              "categoryName": "Ding-dong",
+              "displayName": ""
+            },
+            {
+              "index": 195,
+              "score": 0.19921875,
+              "categoryName": "Bell",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_campainha",
+            "alerta": true,
+            "pontuacao": 0.890625,
+            "rotulo": "Doorbell"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 199,
+              "score": 0.66796875,
+              "categoryName": "Tuning fork",
+              "displayName": ""
+            },
+            {
+              "index": 495,
+              "score": 0.19921875,
+              "categoryName": "Sine wave",
+              "displayName": ""
+            },
+            {
+              "index": 195,
+              "score": 0.19921875,
+              "categoryName": "Bell",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "outro_som",
+            "alerta": false,
+            "pontuacao": 0.66796875,
+            "rotulo": "Tuning fork"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 199,
+              "score": 0.66796875,
+              "categoryName": "Tuning fork",
+              "displayName": ""
+            },
+            {
+              "index": 195,
+              "score": 0.19921875,
+              "categoryName": "Bell",
+              "displayName": ""
+            },
+            {
+              "index": 132,
+              "score": 0.1484375,
+              "categoryName": "Music",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "outro_som",
+            "alerta": false,
+            "pontuacao": 0.66796875,
+            "rotulo": "Tuning fork"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 199,
+              "score": 0.73828125,
+              "categoryName": "Tuning fork",
+              "displayName": ""
+            },
+            {
+              "index": 195,
+              "score": 0.4140625,
+              "categoryName": "Bell",
+              "displayName": ""
+            },
+            {
+              "index": 174,
+              "score": 0.1484375,
+              "categoryName": "Mallet percussion",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "outro_som",
+            "alerta": false,
+            "pontuacao": 0.73828125,
+            "rotulo": "Tuning fork"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 199,
+              "score": 0.5859375,
+              "categoryName": "Tuning fork",
+              "displayName": ""
+            },
+            {
+              "index": 195,
+              "score": 0.26171875,
+              "categoryName": "Bell",
+              "displayName": ""
+            },
+            {
+              "index": 174,
+              "score": 0.109375,
+              "categoryName": "Mallet percussion",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "inconclusivo",
+            "alerta": false,
+            "pontuacao": 0.5859375,
+            "rotulo": "Tuning fork"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 494,
+              "score": 0.4140625,
+              "categoryName": "Silence",
+              "displayName": ""
+            },
+            {
+              "index": 132,
+              "score": 0.05859375,
+              "categoryName": "Music",
+              "displayName": ""
+            },
+            {
+              "index": 477,
+              "score": 0.05859375,
+              "categoryName": "Ding",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "inconclusivo",
+            "alerta": false,
+            "pontuacao": 0.4140625,
+            "rotulo": "Silence"
+          }
+        }
+      ]
+    },
+    {
+      "nome": "silencio_sintetico",
+      "janelas": [
+        {
+          "top": [
+            {
+              "index": 494,
+              "score": 0.80078125,
+              "categoryName": "Silence",
+              "displayName": ""
+            },
+            {
+              "index": 498,
+              "score": 0.0078125,
+              "categoryName": "Sound effect",
+              "displayName": ""
+            },
+            {
+              "index": 132,
+              "score": 0.00390625,
+              "categoryName": "Music",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_ambiente",
+            "alerta": false,
+            "pontuacao": 0.80078125,
+            "rotulo": "Silence"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 494,
+              "score": 0.80078125,
+              "categoryName": "Silence",
+              "displayName": ""
+            },
+            {
+              "index": 498,
+              "score": 0.0078125,
+              "categoryName": "Sound effect",
+              "displayName": ""
+            },
+            {
+              "index": 132,
+              "score": 0.00390625,
+              "categoryName": "Music",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_ambiente",
+            "alerta": false,
+            "pontuacao": 0.80078125,
+            "rotulo": "Silence"
+          }
+        },
+        {
+          "top": [
+            {
+              "index": 494,
+              "score": 0.80078125,
+              "categoryName": "Silence",
+              "displayName": ""
+            },
+            {
+              "index": 498,
+              "score": 0.0078125,
+              "categoryName": "Sound effect",
+              "displayName": ""
+            },
+            {
+              "index": 132,
+              "score": 0.00390625,
+              "categoryName": "Music",
+              "displayName": ""
+            }
+          ],
+          "interpretacao": {
+            "classe": "som_ambiente",
+            "alerta": false,
+            "pontuacao": 0.80078125,
+            "rotulo": "Silence"
+          }
+        }
+      ]
+    }
+  ],
+  "microfone_virtual_batida": {
+    "status": "Possível batida na porta",
+    "nota": "Saída do modelo: Knock · pontuação 74%. Pontuação não é acurácia.",
+    "origem": "Classificação local · YAMNet",
+    "luz": "true"
+  },
+  "lifecycle_e_layout": {
+    "reconhecimento": "Sem identificaçãoSem aviso de campainha ou batidaMicrofone · YAMNet · 19:42:23 · Knock · 59%",
+    "recursosEncerrados": {
+      "tracks": [
+        "ended",
+        "ended"
+      ],
+      "contextos": [
+        "closed",
+        "closed"
+      ]
+    },
+    "envios": [],
+    "layouts": [
+      {
+        "width": 360,
+        "overflow": false,
+        "ativar": 156
+      },
+      {
+        "width": 390,
+        "overflow": false,
+        "ativar": 171
+      },
+      {
+        "width": 768,
+        "overflow": false,
+        "ativar": 154.578125
+      },
+      {
+        "width": 1440,
+        "overflow": false,
+        "ativar": 154.578125
+      }
+    ]
+  },
+  "arquivos_teste": {
+    "iot-porta.wav": "e738266e395e378102f74e0920b05ff5937543788420d5b2a6b8d3df8bdb3910",
+    "iot-cachorro.wav": "f40a849a2375c8c63312a73dd2dd6c74007301fcc21b4be2ece29a642831e3d8",
+    "iot-campainha.mp3": "03d604b4e6e6353fcbdc92c50fdcbb83cb35dbdb85553a994c1d1dab0684da86"
+  },
+  "limites": [
+    "quatro entradas controladas; não estimam acurácia",
+    "CNN original não incorporada",
+    "sem estação física",
+    "sem validação de microfone em iPhone físico"
+  ]
+}

@@ -107,6 +107,7 @@ CENAS=[
  }'''),
  ('08_iot_ouviai_simulacao','ouviai','Luis Filipe',r'''async page=>{
    let posts=0;page.on('request',r=>{if(r.method()==='POST')posts++;});
+   await page.getByText('Demonstração manual, sem reconhecer áudio',{exact:true}).click();
    await page.evaluate(()=>scrollTo(0,200));await page.waitForTimeout(4000);
    await page.getByRole('button',{name:'Simular campainha',exact:true}).click();
    await page.waitForFunction(()=>document.querySelector('#ouviai-display').textContent==='Campainha');
@@ -155,7 +156,7 @@ def main():
                 if nome.startswith('03_'):
                     executar("async page=>{await page.locator('#chave').fill('chave-qa-mobile-sintetica');await page.locator('#lote-detalhes > summary').click();await page.locator('#lote-detalhes').scrollIntoViewIfNeeded();return {ambiente_qa_preparado:true};}")
                 if vista=='ouviai':
-                    executar("async page=>{await page.getByRole('button',{name:'Limpar demonstração',exact:true}).click();await page.evaluate(()=>scrollTo(0,200));return {simulacao_limpa:true};}")
+                    executar("async page=>{await page.locator('#ouviai-limpar').click();await page.evaluate(()=>scrollTo(0,200));return {simulacao_limpa:true};}")
                 existente=SAIDA/item['arquivo']
                 if existente.exists():existente.rename(existente.with_name(existente.stem+'.tentativa-'+datetime.now(timezone.utc).strftime('%H%M%S')+'.webm'))
                 cli('video-start',SAIDA/item['arquivo'],'--size=1920x1080','--fps=25','--cursor');gravando=True

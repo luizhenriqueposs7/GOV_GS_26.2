@@ -2,10 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "fastapi",
   "regions": ["gru1"],
+  "headers": [{"source":"/ouviai/:path*","headers":[{"key":"Cache-Control","value":"public, max-age=86400"},{"key":"X-Content-Type-Options","value":"nosniff"}]}],
   "functions": {
     "central/app.py": {
       "maxDuration": 180,
-      "excludeFiles": "{.{git,tmp,venv}/**,**/{__pycache__,.venv}/**,{data,docs,output,tests,supabase}/**,materiais/{visao/{data,video},frontend/frontend,pln/tokenizador}/**,{materiais,modelos_online}/**/.runtime/**,**/*.{pth,onnx,pdf,ipynb,mp4,webm,zip,docx,exe,ps1},.env*}"
+      "excludeFiles": "{.{git,tmp}/**,**/{__pycache__,.venv}/**,{data,docs,output,tests,supabase,public}/**,materiais/{visao/{data,video},frontend/frontend,pln/tokenizador}/**,{materiais,modelos_online}/**/.runtime/**,**/*.{pth,onnx,pdf,ipynb,mp4,webm,zip,docx,exe,ps1},.env*}"
     }
   }
 }

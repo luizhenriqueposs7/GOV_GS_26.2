@@ -9,7 +9,7 @@ import {iniciarPlanejamento} from './planejamento.mjs';
 const $ = (id) => document.getElementById(id);
 const state = {casos: [], selecionado: null, edicao: null, ativos: false, etapa:0, mapa:null, mapaLocal:null, mapaId:null, camera:null};
 Object.assign(state, {foto: null, fotoAtual: null, fotoUrl: null, removerFoto: false, origemGeo: 'manual', precisaoGeo: null, envioId: null, assinatura: null, rascunhoId:null, previaFoto:null, regiaoAuto:null});
-const titulos = {mapa:'Mapa do bairro', passagem:'Passagem Livre', pedido: "Registrar pedido", acompanhar: "Pedidos", revisao: "Gestão · revisar pedido", evidencias: "Projeto e ferramentas", ouviai: 'OuviAí · dispositivo proposto', planejamento:'Gestão · planejar revisões'};
+const titulos = {mapa:'Mapa do bairro', passagem:'Passagem Livre', pedido: "Registrar pedido", acompanhar: "Pedidos", revisao: "Gestão · revisar pedido", evidencias: "Projeto e ferramentas", ouviai: 'OuviAí · acessibilidade sonora', planejamento:'Gestão · planejar revisões'};
 const data = (valor) => valor ? new Date(valor).toLocaleString("pt-BR") : "—";
 function el(tag, texto, classe) {
   const node = document.createElement(tag);
@@ -69,6 +69,7 @@ function formulario(id, acao) {
 async function navegar(view, foco = true) {
   state.consultaDetalhe=(state.consultaDetalhe||0)+1;state.detalheId=null;
   if (!titulos[view]) view = "pedido";
+  if(view!=='ouviai')ouviai.parar();
   if(view!=='pedido'){fecharCamera();cancelarGeo();cancelarAutomatico();}
   if(view==='pedido') {$('pedido-form').hidden=false;$('request-progress').hidden=false;$('preparacao-resultado').hidden=true;mostrarEtapa(state.etapa,false);}
   $("aviso").hidden = true;
@@ -297,7 +298,7 @@ async function ativos() {
     const links = el("div", null, "material-links");
     m.materiais.forEach(id => links.append(link(nomes[id] || "Abrir arquivo", "/api/materiais/" + encodeURIComponent(id))));
     (m.videos || []).forEach(v => links.append(link(v.nome, v.url)));
-    if(m.id==='iot')links.append(botao('Explorar o dispositivo proposto',()=>navegar('ouviai'),'secondary'));
+    if(m.id==='iot')links.append(botao('Testar o OuviAí com microfone',()=>navegar('ouviai'),'secondary'));
     if(m.id==='quantica')links.append(botao('Comparar planos de revisão',()=>navegar('planejamento'),'secondary'));
     if(m.id==='cluster')links.append(botao('Processar lote com workers',abrirLote,'secondary'));
     row.append(identidade, conteudo, links); box.append(row);
@@ -507,7 +508,7 @@ const passagem=iniciarPassagem({api,enviar,el,botao,badge,data,aviso,durante,
   evidencias:async id=>{await navegar('evidencias');$('evidencia-caso').value=id;aviso('As próximas consultas serão vinculadas ao pedido '+id.slice(0,8)+'. Use evidências pertinentes.');},
   novo:async trecho=>{if(state.edicao){aviso('Conclua ou cancele a edição atual antes de registrar outra observação.',true);return;}await navegar('pedido');$('passagem-trecho').value=trecho;$('passagem-condicao').value='nao_verificado';mostrarEtapa(0);}
 });
-iniciarOuviAi();
+const ouviai=iniciarOuviAi();
 const planejamento=iniciarPlanejamento({api,enviar,el,botao,aviso,durante,atualizarCentral:atualizar,
   revisar:async id=>{await navegar('revisao');$('revisao-caso').value=id;await resumoRevisao();}
 });

@@ -28,7 +28,7 @@ O vídeo deve mostrar a continuidade entre foto, sugestão, correção humana, f
 | 02:45–03:20 | Luiz | Projeto → Consultar um serviço municipal: resposta atual e fonte. |
 | 03:20–03:50 | Luiz | Pesquisar prevenção de desastres: trecho, origem e página/seção. |
 | 03:50–04:25 | Felipe | Verificar sinal de fissura: inferência atual sobre recorte de concreto. |
-| 04:25–04:50 | Luis Filipe | Projeto → OuviAí: campainha e aviso, identificados como simulação. |
+| 04:25–04:50 | Luis Filipe | Projeto → OuviAí: microfone, batida/campainha e possível aviso visual; identificar YAMNet como modelo alternativo e parar a escuta. |
 | 04:50–06:15 | Luiz | Revisão, confirmação local, destino/ficha, protocolo SIM, retorno, contestação e histórico. Passagem Livre em captura breve do cenário. |
 | 06:15–06:30 | Luiz | Histórico do mesmo pedido e GitHub: resultado demonstrado e limites. |
 
@@ -69,7 +69,7 @@ Gravar primeiro a criação, depois lote/plano, consultas e, por último, revis�
 
 - Todas as nove disciplinas aparecem com função e limite.
 - Há execução atual de envio, revisão e contestação, além de destino/canal visível.
-- IoT simulado, QAOA em CPU, dados fictícios e protocolo SIM estão identificados.
+- IoT com YAMNet alternativo e estação física conceitual, QAOA em CPU, dados fictícios e protocolo SIM estão identificados.
 - Nenhuma chave ou informação pessoal aparece.
 - O arquivo final tem entre 5 e 7 minutos, tela legível e áudio compreensível, sem leitura massiva.
 - Publicar como Não Listado, testar o link sem login e inserir o mesmo endereço no relatório e no README.

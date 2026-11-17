@@ -64,7 +64,7 @@ class Fluxo(Flowable):
         c.drawString(0, 72, "Apoio ao registro: fontes municipais, corpus de PLN, Visão e serviço de GenAI.")
         c.setStrokeColor(colors.HexColor("#C1CABB"));c.line(0, 60, self.width, 60)
         c.setFont("Helvetica", 8.5)
-        c.drawString(0, 41, "IoT: proposta  |  Cluster: workers lógicos  |  Quântica: QAOA simulado")
+        c.drawString(0, 41, "IoT: áudio com modelo alternativo  |  Cluster: workers lógicos  |  Quântica: QAOA simulado")
         c.setFont("Helvetica", 8)
         c.drawString(0, 22, "Passagem Livre compara reparos e conserva a decisão. Chamado municipal: canal oficial.")
 

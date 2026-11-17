@@ -12,4 +12,4 @@ O pedido continua aguardando revisão. Agora vamos mostrar as ferramentas que aj
 04:25–04:50 · IoT
 Arquivo: 08_iot_luis_filipe.m4a
 
-O OuviAí propõe transformar sons, como uma campainha, em aviso visual. O trabalho original usa reconhecimento de áudio no celular. Aqui mostramos o comportamento de uma possível estação. Esses eventos são simulados: ainda não há dispositivo nem previsões reais chegando à central.
+No OuviAí, o microfone capta uma batida e o navegador mostra um possível aviso visual. O áudio fica no aparelho. Esta ampliação usa YAMNet; a CNN original do trabalho continua externa. Ainda não construímos a estação física nem validamos o uso em outros ambientes.

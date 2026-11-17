@@ -2,6 +2,8 @@
 
 Foram gravadas seis fontes brutas em 17/11/2026: abertura, Cluster, Generative AI, PLN, Visão e OuviAí. São arquivos WebM nativos em 1920 × 1080, a 25 fps, sem narração e sem retimar a gravação. As fontes somam 182,80 segundos; não constituem o vídeo final.
 
+**Atualização de IoT:** a central passou a reconhecer áudio local com YAMNet alternativo. O clipe `08_iot_ouviai_simulacao.webm` abaixo registra a versão anterior e continua sendo simulação. Não o apresentar como inferência real. O roteiro de Luis foi atualizado para microfone, aviso visual e identificação do modelo usado.
+
 | Arquivo em output/video/fontes_independentes | Duração | Ambiente e alcance |
 | --- | --- | --- |
 | 00_abertura.webm | 15,88 s | Entrada da central oficial, sem criar pedido. |

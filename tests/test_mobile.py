@@ -127,6 +127,13 @@ class MobileTest(unittest.TestCase):
         self.assertEqual(sw.status_code, 200)
         self.assertIn('application/javascript', sw.headers['content-type'])
 
+    def test_modelo_audio_publico_tem_cache_e_mime_wasm_sem_cachear_pedidos(self):
+        wasm = self.client.head('/ouviai/wasm/audio_wasm_internal.wasm')
+        self.assertEqual(wasm.status_code, 200)
+        self.assertIn('application/wasm', wasm.headers['content-type'])
+        self.assertIn('max-age=', wasm.headers['cache-control'])
+        self.assertEqual(self.client.get('/api/atendimentos').headers['cache-control'], 'no-store')
+
     def test_mapa_e_fontes_sao_locais_e_politica_so_libera_tiles_em_imagem(self):
         for caminho in ('mapa.mjs', 'brand.svg', 'vendor/leaflet.js', 'vendor/leaflet.css', 'vendor/archivo-bold.ttf'):
             self.assertEqual(self.client.get('/web/' + caminho).status_code, 200)

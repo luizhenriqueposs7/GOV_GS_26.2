@@ -12,7 +12,7 @@ A jornada móvel tem duas etapas: **tirar foto → conferir e enviar**. A observ
 
 Depois da revisão, **Encaminhar e acompanhar** reúne responsável, canal oficial, ficha copiável/baixável e foto. O solicitante conclui o envio no canal próprio e anota o protocolo. O modo de demonstração usa protocolo fictício separado. Retorno, foto posterior e conferência humana completam o acompanhamento local; contestação ou alteração reabre a análise e atualiza o percurso didático. Não há envio nem sincronização automática com a prefeitura. Uma foto diferente não comprova execução do reparo.
 
-A [interface OuviAí](https://gov262.vercel.app/#ouviai), acessível por Materiais e fontes ou Passagem Livre, apresenta uma possível estação fixa. O desenho explica microfone, aviso visual e conexão prevista. Botões simulam as três classes originais e a interrupção/reconexão da comunicação. São oito eventos recentes na memória da aba, sem áudio, inferência ou persistência; o trabalho original continua externo. Os controles possuem testes de eventos; desktop e mobile foram conferidos no navegador.
+A [interface OuviAí](https://gov262.vercel.app/#ouviai), em Projeto → OuviAí, capta áudio autorizado do aparelho e mostra possíveis avisos de campainha ou batida. A ampliação usa YAMNet float32 v1/MediaPipe 1.2.3, diferente da CNN original, cuja exportação não foi disponibilizada. Áudio e inferência ficam no navegador; o microfone para ao sair, ocultar a aba ou tocar em Parar escuta. Oito eventos ficam na memória da aba. A estação física continua conceitual; a simulação manual está separada. [Funcionamento, origem do modelo e testes](docs/evidencias/ouviai-audio-2026-11-17.md).
 
 **Cluster operacional:** na Revisão, importar CSV com 2 ou 4 workers lógicos. O Round Robin mantém todas as ocorrências do mesmo ID no mesmo worker; cada worker executa o pipeline original. O coordenador valida, agrega e grava o lote atomicamente. Na nuvem são invocações HTTP autenticadas; localmente, threads. Não há garantia de máquinas distintas ou aceleração. Medem-se coordenação/RPA, gravação e total, separados dos tempos históricos iSPD. Até 50 registros aceitos por minilote na central, sem alterar os originais. [CSV de demonstração](docs/exemplos/cluster-revisoes.csv).
 
@@ -112,12 +112,12 @@ Não existem registros inseridos automaticamente nem contagens de impacto invent
 | Computação Quântica | Piloto QAOA em NumPy para selecionar revisões e comparar com referências clássicas | Até 8 pedidos; sem QPU, vantagem demonstrada ou agenda completa |
 | Frontend | Validação e persistência originais do ZelaBairro, acionadas pela central | Interface nova; protocolo local de POC |
 | Generative AI | Qwen3-4B local; seleção Groq online com corpus original | Modelo online identificado; métricas históricas do original |
-| IoT | Documento e quatro vídeos do OuviAí no celular | Execução externa; sem fluxo automático de eventos para a central |
+| IoT | Microfone e aviso visual local com YAMNet alternativo; documento e vídeos originais | CNN original externa; sem estação física ou eventos entre aparelhos |
 | PLN | Busca FTS5 no corpus original e vinculação de trecho com origem | Material de desastres; revisão humana do corpus pendente |
 | Visão Computacional | Inferência atual do ResNet18, checkpoint e rotina originais | Sinalização de fissura; não constitui laudo |
 | Governança e Business Analytics | Revisão, justificativa, contestação, histórico, indicadores e comparação conjunta de reparos no Passagem Livre | Percurso didático e cálculo determinístico, sem validação em campo |
 
-O corpus de PLN pertence ao tema de prevenção de desastres e complementa casos pertinentes. Ele não fundamenta todas as orientações de calçadas e iluminação. As cartas municipais do fluxo principal foram curadas separadamente. O OuviAí atende acessibilidade sonora em outro contexto e permanece como módulo externo do conjunto de trabalhos.
+O corpus de PLN pertence ao tema de prevenção de desastres e complementa casos pertinentes. Ele não fundamenta todas as orientações de calçadas e iluminação. As cartas municipais do fluxo principal foram curadas separadamente. O OuviAí atende acessibilidade sonora em outro contexto: o modelo original permanece externo e a ampliação local usa um modelo alternativo explicitamente identificado.
 
 ## Fontes e materiais
 

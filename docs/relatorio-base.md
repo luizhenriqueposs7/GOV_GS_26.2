@@ -99,7 +99,7 @@ Figura 1 - Fluxo de preparação, revisão e registro local
 
 Fonte: elaboração do grupo, a partir da aplicação construída em 2026.
 
-As nove disciplinas participam com alcances distintos. RPA, Frontend, PLN e Visão reutilizam código. Generative AI tem adaptação online. Cluster processa lotes; Quântica apoia a seleção de revisões em simulador. IoT mantém execução externa e interface conceitual.
+As nove disciplinas participam com alcances distintos. RPA, Frontend, PLN e Visão reutilizam código. Generative AI tem adaptação online. Cluster processa lotes; Quântica apoia a seleção de revisões em simulador. IoT tem áudio local com modelo alternativo; a CNN original continua externa.
 
 <!-- pagina -->
 # 2 DESENVOLVIMENTO
@@ -174,7 +174,7 @@ O OuviAí reconhece sons e apresenta uma resposta visual no navegador do celular
 
 O relatório do módulo registra 78 acertos em 100 janelas de teste, 14 em 15 arquivos e 14 em 15 exemplos ao vivo. Em 12 dos 15 exemplos ao vivo, o reconhecimento foi imediato. São unidades de avaliação diferentes. Os dados de teste participaram de ajustes e compartilham fontes sonoras, o que limita sua interpretação como amostra independente.
 
-A central apresenta evidências e uma estação conceitual com eventos simulados, sem microfone ou inferência. Hardware e recepção de previsões reais permanecem pendentes. O fluxo municipal não utiliza os sons.
+A ampliação na central capta áudio do aparelho e gera avisos visuais com YAMNet, modelo alternativo à CNN original, cuja exportação não foi disponibilizada. O áudio fica no navegador. Hardware e transmissão entre dispositivos seguem pendentes. O fluxo municipal não utiliza os sons. Os testes controlados não validam uso em campo.
 
 ## 2.7 Processamento de Linguagem Natural
 
@@ -229,7 +229,7 @@ Quadro 1 - Participação dos materiais na central
 | Quântica | QAOA simulado e comparação | QPU e agenda completa |
 | Frontend | Validação e persistência do ZelaBairro | Protocolo municipal automático |
 | Generative AI | Serviço local e adaptador Groq | Qwen3-4B na nuvem |
-| IoT | Tela conceitual e vídeos | Modelo e eventos reais |
+| IoT | YAMNet alternativo; vídeos | CNN original; hardware |
 | PLN | Consulta ao corpus e origem do trecho | Revisão humana concluída |
 | Visão | Inferência com checkpoint original | Laudo ou diagnóstico estrutural |
 | Governança | Revisão, plano, histórico e indicadores | Validação com usuários ou em campo |
@@ -257,6 +257,8 @@ Os quatro vídeos do OuviAí e os vídeos das outras disciplinas são evidência
 
 <!-- pagina -->
 # REFERÊNCIAS
+
+GOOGLE. MediaPipe Audio Classifier e YAMNet. 2026. Disponível em: [developers.google.com/edge/mediapipe/solutions/audio/audio_classifier](https://developers.google.com/edge/mediapipe/solutions/audio/audio_classifier?tab=Web). Acesso em: 17 nov. 2026.
 
 FIAP. CitizenTech: Global Solution. 2026. Disponível em: [experience.fiap.com.br/global-solution-citizen-tech](https://experience.fiap.com.br/global-solution-citizen-tech#new-d1-global-solution). Acesso em: 14 nov. 2026.
 

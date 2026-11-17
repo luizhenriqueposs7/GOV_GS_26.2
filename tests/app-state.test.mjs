@@ -32,7 +32,7 @@ function contexto() {
     badge:texto=>el('span',texto),botao:texto=>el('button',texto),link:texto=>el('a',texto),
     evidenciaVisual:()=>el('div'),atendimento:()=>el('div'),historico:()=>el('div'),
     enviar(){},durante(){},aviso(){},reduzirFoto(){},data(){},editar(){},
-    fecharCamera(){},cancelarGeo(){},cancelarAutomatico(){},mostrarEtapa(){},
+    fecharCamera(){},cancelarGeo(){},cancelarAutomatico(){},mostrarEtapa(){},ouviai:{parar(){}},
     atualizar:async()=>{},ativos:async()=>{},planejamento:{atualizar:async()=>{}},
     titulos:{pedido:'Novo pedido',acompanhar:'Meus pedidos',mapa:'Mapa',evidencias:'Materiais'},
     location,history:{replaceState(_estado,_titulo,hash){location.hash=hash;}},window:{scrollTo(){}},

@@ -73,3 +73,5 @@
  #camera-vazia h2{font-size:1.8rem;line-height:1.15}.capture-story>.fine{display:none}.project-tool>summary{font-size:1rem}.project-tool>summary>span{font-size:.8rem}.detail>.actions{display:grid;grid-template-columns:1fr;gap:4px}
  .case-analysis>summary,.case-contest>summary,.case-history>summary,.followup-tools>summary,.followup-action>summary{font-size:.9rem}
 }
+
+.ouviai-audio-actions{margin:24px 0 12px}#ouviai-microfone-status{min-height:3em;padding-left:14px;border-left:3px solid #9daea3}#ouviai-microfone-status[data-ativo=true]{border-color:var(--orange)}.ouviai-result+.fine{margin-top:16px}@media(max-width:680px){.ouviai-scenario{order:-1}.ouviai-audio-actions button{flex:1;font-size:.85rem}}

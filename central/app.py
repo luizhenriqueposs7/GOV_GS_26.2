@@ -156,7 +156,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             arquivo_chave.write_text(secrets.token_urlsafe(32), encoding="utf-8")
         chave = arquivo_chave.read_text(encoding="utf-8").strip()
 
-    app = FastAPI(title="ZelaBairro", version="0.6.3", docs_url="/contrato")
+    app = FastAPI(title="ZelaBairro", version="0.6.4", docs_url="/contrato")
     app.state.repo = repo
 
     def guardar_foto(conteudo, previa=''):
@@ -205,9 +205,9 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             resposta = await call_next(request)
         resposta.headers["X-Content-Type-Options"] = "nosniff"
         resposta.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
-        resposta.headers["Cache-Control"] = "no-store"
+        resposta.headers["Cache-Control"] = 'public, max-age=86400' if request.url.path.startswith('/ouviai/') and resposta.status_code == 200 else 'no-store'
         resposta.headers["Content-Security-Policy"] = (
-            "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://tile.openstreetmap.org; "
+            "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self'; img-src 'self' data: blob: https://tile.openstreetmap.org; "
             "connect-src 'self' https://api.bigdatacloud.net; media-src 'self' blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
         )
         return resposta
@@ -551,6 +551,8 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     web = RAIZ / "web"
     if web.is_dir():
         app.mount("/web", StaticFiles(directory=web), name="web")
+    if not nuvem and (RAIZ / 'public/ouviai').is_dir():
+        app.mount('/ouviai', StaticFiles(directory=RAIZ / 'public/ouviai'), name='audio-local')
     return app
 
 
