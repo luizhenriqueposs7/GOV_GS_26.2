@@ -5,10 +5,11 @@ import {iniciarPassagem} from './passagem.mjs';
 import {localizarAtual, prepararAutomatico} from './automatico.mjs';
 import {atendimento} from './atendimento.mjs';
 import {iniciarOuviAi} from './ouviai.mjs';
+import {iniciarPlanejamento} from './planejamento.mjs';
 const $ = (id) => document.getElementById(id);
 const state = {casos: [], selecionado: null, edicao: null, ativos: false, etapa:0, mapa:null, mapaLocal:null, mapaId:null, camera:null};
 Object.assign(state, {foto: null, fotoAtual: null, fotoUrl: null, removerFoto: false, origemGeo: 'manual', precisaoGeo: null, envioId: null, assinatura: null, rascunhoId:null, previaFoto:null, regiaoAuto:null});
-const titulos = {mapa:'Mapa do bairro', passagem:'Passagem Livre', pedido: "Novo pedido", acompanhar: "Meus pedidos", revisao: "Revisão", evidencias: "Materiais e fontes", ouviai: 'OuviAí · dispositivo proposto'};
+const titulos = {mapa:'Mapa do bairro', passagem:'Passagem Livre', pedido: "Novo pedido", acompanhar: "Meus pedidos", revisao: "Revisão", evidencias: "Materiais e fontes", ouviai: 'OuviAí · dispositivo proposto', planejamento:'Planejar revisões'};
 const data = (valor) => valor ? new Date(valor).toLocaleString("pt-BR") : "—";
 function el(tag, texto, classe) {
   const node = document.createElement(tag);
@@ -71,12 +72,12 @@ async function navegar(view, foco = true) {
   if(view==='pedido') {$('pedido-form').hidden=false;$('request-progress').hidden=false;$('preparacao-resultado').hidden=true;mostrarEtapa(state.etapa,false);}
   $("aviso").hidden = true;
   document.querySelectorAll("[data-panel]").forEach(n => n.hidden = n.dataset.panel !== view);
-  document.querySelectorAll('.main-nav [data-view]').forEach(n => {const atual=n.dataset.view===view||(view==='ouviai'&&n.dataset.view==='evidencias');n.classList.toggle('active',atual);if(atual)n.setAttribute('aria-current','page');else n.removeAttribute('aria-current');});
+  document.querySelectorAll('.main-nav [data-view]').forEach(n => {const atual=n.dataset.view===view||(view==='ouviai'&&n.dataset.view==='evidencias')||(view==='planejamento'&&n.dataset.view==='revisao');n.classList.toggle('active',atual);if(atual)n.setAttribute('aria-current','page');else n.removeAttribute('aria-current');});
   $("breadcrumb").textContent = titulos[view];
   if (location.hash !== "#" + view) history.replaceState(null, "", "#" + view);
   if (foco) { $("principal").focus(); window.scrollTo(0, 0); }
   if(view==='acompanhar')$('detalhe-caso').hidden=true;
-  try { await atualizar(); if (view === "evidencias" && !state.ativos) await ativos(); }
+  try { await atualizar(); if (view === "evidencias" && !state.ativos) await ativos(); if(view==='planejamento')await planejamento.atualizar(); }
   catch (erro) { aviso(erro.message, true); }
   finally {if(view==='acompanhar')$('detalhe-caso').hidden=false;}
 }
@@ -233,7 +234,21 @@ async function resumoRevisao() {
 $("revisao-caso").addEventListener("change",resumoRevisao);
 formulario("revisao-form",async form=>{const id=$("revisao-caso").value;if(!id)throw new Error("Selecione um pedido.");await enviar("/api/atendimentos/"+id+"/revisao",Object.fromEntries(form),$("chave").value);await atualizar();aviso("Decisão registrada com justificativa. A análise original permanece no histórico.");});
 $("confirmar-frontend").addEventListener("click",e=>durante(e.currentTarget,async()=>{if(!$("chave").value)throw new Error("Preencha a chave local de revisão.");const id=$("revisao-caso").value;const caso=await enviar("/api/atendimentos/"+id+"/zelabairro",{},$("chave").value);await atualizar();$("frontend-resultado").textContent="Registro local confirmado: "+caso.frontend.id+". Não é um protocolo municipal.";aviso("Registro confirmado na persistência do ZelaBairro.");}));
-formulario("lote-form",async()=>{if(!$("chave").value)throw new Error("Preencha a chave local de revisão.");const arquivo=$("lote-arquivo").files[0];if(arquivo.size>1024*1024)throw new Error("O CSV deve ter até 1 MB.");const form=new FormData();form.append("arquivo",arquivo);const resultado=await api("/api/lotes",{method:"POST",headers:{"X-Manager-Key":$("chave").value},body:form});$("lote-resultado").textContent=JSON.stringify(resultado.resumo,null,2);$("lote-resultado").hidden=false;await atualizar();aviso("Lote processado. Registros aceitos: "+resultado.atendimentos.length+"; rejeitados pelo RPA: "+resultado.rejeitados.length+".");});
+formulario("lote-form",async()=>{
+  if(!$("chave").value)throw new Error("Preencha a chave local de revisão.");
+  const arquivo=$("lote-arquivo").files[0];if(arquivo.size>1024*1024)throw new Error("O CSV deve ter até 1 MB.");
+  const form=new FormData(),workers=$('cluster-workers').value;form.append("arquivo",arquivo);if(workers)form.append('workers',workers);
+  const f=$('lote-form');f.inert=true;let resultado;
+  try{resultado=await api(workers?'/api/cluster/lotes':'/api/lotes',{method:'POST',headers:{'X-Manager-Key':$('chave').value},body:form});}finally{f.inert=false;}
+  const box=$('lote-resultado');box.replaceChildren(el('h3','Lote concluído'),el('p',resultado.atendimentos.length+' aceito(s), '+resultado.rejeitados.length+' rejeitado(s), '+resultado.resumo.duplicates+' duplicado(s).'));
+  if(workers){box.append(el('p',resultado.workers_executados+' de '+resultado.workers_solicitados+' workers executaram grupos não vazios. Coordenação e RPA: '+resultado.tempo_ms.toFixed(1)+' ms.'),el('p',resultado.modo,'fine'));
+    box.append(el('p','Gravação: '+resultado.tempo_persistencia_ms.toFixed(1)+' ms; total desta importação: '+resultado.tempo_total_ms.toFixed(1)+' ms.','fine'));
+    resultado.execucoes.forEach(w=>{const row=el('div',null,'planning-worker');row.append(el('span','Worker '+w.worker+' · '+w.contagens.valid+' aceito(s)'),el('span',w.tempo_ms.toFixed(1)+' ms'));box.append(row);});
+    box.append(el('p','Tempos medidos nesta execução. Os tempos do iSPD pertencem a outro ensaio; rede, inicialização e banco podem superar o ganho de concorrência.','fine'));
+  }
+  if(resultado.rejeitados.length){const d=el('details');d.append(el('summary','Conferir linhas rejeitadas'),json(resultado.rejeitados));box.append(d);}
+  box.hidden=false;await atualizar();aviso('Lote processado. As análises originais e o histórico foram preservados.');
+});
 formulario("assistente-form",async()=>{const box=$("assistente-resultado");box.replaceChildren(el("p","Consultando o modelo local. A operação pode levar até um minuto…","fine"));try{const r=await enviar("/api/assistente",{pergunta:$("pergunta").value,atendimento_id:$("evidencia-caso").value||null});box.replaceChildren(el("p",r.resposta,"inset"),el("p","Status: "+r.status+" · "+r.modo,"fine"));if(r.fonte)box.append(link("Consultar a fonte da orientação",r.fonte.url));if($("evidencia-caso").value)box.append(el("p","Saída vinculada ao histórico do pedido.","fine"));}catch(erro){box.replaceChildren(el("p",erro.message,"inset warning"));throw erro;}});
 formulario("visao-form",async()=>{const arquivo=$("imagem").files[0];if(arquivo.size>8*1024*1024)throw new Error("A imagem deve ter até 8 MB.");const form=new FormData();form.append("arquivo",arquivo);form.append("atendimento_id",$("evidencia-caso").value);const box=$("visao-resultado");box.replaceChildren(el("p","Executando o modelo de Visão…","fine"));try{const r=await api("/api/visao",{method:"POST",body:form});box.replaceChildren(el("p",r.rotulo||r.classe||r.resultado||"Inferência concluída","inset"),el("p",r.limite,"fine"));const details=el("details");details.append(el("summary","Ver saída e parâmetros"),json(r));box.append(details);}catch(erro){box.replaceChildren(el("p",erro.message,"inset warning"));throw erro;}});
 formulario("fontes-form",async()=>{const fontes=await api("/api/fontes?q="+encodeURIComponent($("busca").value));const box=$("fontes-resultado");box.replaceChildren();if(!fontes.length)box.append(el("p","Nenhum trecho localizado. Tente outro termo do assunto.","inset"));fontes.forEach(f=>{const card=el("article",null,"source-card");card.append(badge("LINHA "+f.linha_corpus),el("p",f.text),link(f.fonte||"Consultar fonte",f.url),el("p",(f.paginas?"Páginas: "+f.paginas.join(", "):"Seção: "+f.secao)+" · "+(f.data_coleta||f.data_acesso||"Data registrada no corpus"),"fine"));card.append(botao("Vincular este trecho ao pedido",e=>durante(e.currentTarget,async()=>{const id=$("evidencia-caso").value;if(!id)throw new Error("Selecione um pedido para vincular o trecho.");await enviar("/api/atendimentos/"+id+"/evidencia-pln",{linha_corpus:f.linha_corpus});aviso("Trecho e origem vinculados ao histórico do pedido.");})));box.append(card);});});
@@ -254,7 +269,7 @@ async function ativos() {
   box.replaceChildren();
   materiais.forEach(m => {
     const row = el("article", null, "asset"), identidade = el("div", null, "asset-identity"), conteudo = el("div", null, "asset-main");
-    identidade.append(el("h3", m.nome), badge(m.modo, ["cluster", "quantica", "iot"].includes(m.id) ? "orange" : ""));
+    identidade.append(el("h3", m.nome), badge(m.modo, ["quantica", "iot"].includes(m.id) ? "orange" : ""));
     conteudo.append(el("p", m.resumo), el("p", m.limite, "limit"));
     if (m.metricas) {
       const ul = el("ul", null, "mini-metrics");
@@ -265,6 +280,8 @@ async function ativos() {
     m.materiais.forEach(id => links.append(link(nomes[id] || "Abrir arquivo", "/api/materiais/" + encodeURIComponent(id))));
     (m.videos || []).forEach(v => links.append(link(v.nome, v.url)));
     if(m.id==='iot')links.append(botao('Explorar o dispositivo proposto',()=>navegar('ouviai'),'secondary'));
+    if(m.id==='quantica')links.append(botao('Comparar planos de revisão',()=>navegar('planejamento'),'secondary'));
+    if(m.id==='cluster')links.append(botao('Processar lote com workers',async()=>{await navegar('revisao');$('lote-form').scrollIntoView({block:'start'});},'secondary'));
     row.append(identidade, conteudo, links); box.append(row);
   });
   state.ativos = true;
@@ -473,6 +490,9 @@ const passagem=iniciarPassagem({api,enviar,el,botao,badge,data,aviso,durante,
   novo:async trecho=>{if(state.edicao){aviso('Conclua ou cancele a edição atual antes de registrar outra observação.',true);return;}await navegar('pedido');$('passagem-trecho').value=trecho;$('passagem-condicao').value='nao_verificado';mostrarEtapa(0);}
 });
 iniciarOuviAi();
+const planejamento=iniciarPlanejamento({api,enviar,el,botao,aviso,durante,atualizarCentral:atualizar,
+  revisar:async id=>{await navegar('revisao');$('revisao-caso').value=id;await resumoRevisao();}
+});
 api('/api/status').then(status=>{
   document.querySelector('.demo-pill').textContent=status.modo;
   document.querySelector('.demo-pill').title='Assistente: '+status.modelo_genai+(status.genai_configurada?'':' · chave ainda não configurada');

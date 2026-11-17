@@ -78,9 +78,10 @@ class ModulosTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 self.modulos.perguntar("Como pedir manutenção da iluminação?", None)
 
-    def test_material_conceitual_nao_e_identificado_como_execucao_quantica(self):
+    def test_piloto_quantico_identifica_simulador_sem_alegar_qpu(self):
         quantica = next(x for x in self.modulos.ativos() if x["id"] == "quantica")
-        self.assertEqual(quantica["modo"], "Estudo conceitual")
+        self.assertEqual(quantica["modo"], "QAOA em simulador")
+        self.assertIn('Não usa QPU', quantica['limite'])
         self.assertTrue(quantica["materiais"])
 
     def test_ia_rejeita_status_inventado_e_resposta_vazia(self):

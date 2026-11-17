@@ -20,6 +20,12 @@ Em **Como o relato foi preparado**, confira modelo, data, sugestão original e a
 
 O navegador automatizado verificou o fluxo em 412 × 839, com controles sintéticos claramente identificados. Câmera e GPS físicos ainda devem ser testados pelo integrante. Registre aparelho, navegador, resultado, precisão GPS e identificador do pedido, sem divulgar senha/chave. A análise é preliminar e não comprova gravidade ou acessibilidade.
 
+## Lotes e planejamento da revisão
+
+Em Revisão, informe a chave de gestão e use Processar lote do RPA. Selecione o CSV de demonstração em docs/exemplos/cluster-revisoes.csv e execute com 2 ou 4 workers. Confira aceitos, rejeitados, IDs e tempos de coordenação/RPA, gravação e total. Os tempos iSPD pertencem ao estudo original, sem comparação direta com a latência desta execução.
+
+Abra Planejar as próximas revisões ou https://gov262.vercel.app/#planejamento. Escolha até oito pendentes, defina conscientemente a prioridade, estime minutos e marque os obrigatórios. Informe capacidade e chave; compare os métodos. Escolha um, confira selecionados/adiados e registre responsável/justificativa. O plano fica no histórico, sem aprovar os pedidos. Os botões da seleção abrem a revisão existente. Alterar ou contestar um caso exige nova comparação. O QAOA é executado em simulador CPU, sem hardware ou vantagem quântica demonstrada.
+
 ## Estação OuviAí proposta
 
 Abra https://gov262.vercel.app/#ouviai, também disponível em Materiais e fontes e no Passagem Livre. Explore os componentes e use Simular campainha, Simular batida na porta e Simular som ambiente. Interrompa a conexão simulada, gere um evento e restabeleça a conexão para observar sua exibição no painel demonstrativo. Limpar demonstração apaga os eventos da aba. Nenhum controle usa microfone, executa o modelo ou cria ocorrências. O desenho e os eventos representam uma proposta de dispositivo, sem hardware conectado.

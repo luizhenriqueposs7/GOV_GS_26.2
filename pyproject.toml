@@ -1,6 +1,6 @@
 [project]
 name = "zelabairro-gov"
-version = "0.5.1"
+version = "0.6.0"
 requires-python = ">=3.13,<3.14"
 dependencies = [
     "fastapi==0.121.3",

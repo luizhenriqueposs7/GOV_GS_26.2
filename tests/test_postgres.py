@@ -119,6 +119,29 @@ class PostgresRealTest(unittest.TestCase):
         self.assertTrue(reaberto['historico'][-1]['dados']['atendimento_anterior']['conferencia'])
         self.assertEqual(self.repo.indicadores()['protocolos_demonstracao'], 1)
 
+    def test_lote_com_falha_desfaz_todas_as_gravacoes(self):
+        criar=self.repo.criar; chamadas=[]
+        def falhar(dados):
+            chamadas.append(dados)
+            if len(chamadas)==2:raise RuntimeError('Falha de lote controlada')
+            return criar(dados)
+        with patch.object(self.repo,'criar',side_effect=falhar),self.assertRaises(RuntimeError):
+            self.repo.criar_em_lote([self.dados(),self.dados(descricao='Outro atendimento do lote.')])
+        self.assertEqual(self.repo.listar(),[])
+
+    def test_planejamento_registra_evidencias_sem_concluir_revisao(self):
+        from central.quantica import simular
+        casos=[self.repo.criar(self.dados(descricao='Pedido de planejamento '+str(i))) for i in range(2)]
+        itens=[dict(id=c['id'],minutos=10,prioridade='Alta',obrigatorio=False) for c in casos]
+        sim=simular(self.repo.listar(),itens,10)
+        plano=self.repo.registrar_planejamento(itens,10,sim['base'],'classico','Gestor','Capacidade conferida no cenário.')
+        for c in casos:
+            salvo=self.repo.obter(c['id'])
+            self.assertIsNone(salvo['revisao'])
+            self.assertEqual(salvo['evidencias'][-1]['resultado']['id'],plano['id'])
+        with self.assertRaises(ValueError):
+            self.repo.registrar_planejamento(itens,10,sim['base'],'classico','Gestor','Nova tentativa de mesma base.')
+
     def test_rollback_desfaz_caso_evento_e_chave_de_reenvio(self):
         with self.assertRaisesRegex(RuntimeError, 'Falha proposital'):
             with self.repo.conexao():

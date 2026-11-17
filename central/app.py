@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 from typing import Literal
 from uuid import UUID
+from time import perf_counter
 from urllib.parse import quote
 
 from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile, Request
@@ -96,6 +97,40 @@ class PlanoPassagem(SimulacaoPassagem):
     justificativa: str = Field(min_length=10, max_length=500)
 
 
+class Worker(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    csv: str = Field(min_length=1, max_length=1048576)
+    worker: int = Field(ge=1, le=4, strict=True)
+    lote_id: UUID
+
+
+class AnaliseWorker(Entrada):
+    category: Literal['Iluminação pública', 'Buraco ou pavimento', 'Resíduos e limpeza', 'Acessibilidade', 'Outros']
+    priority: Literal['Baixa', 'Média', 'Alta']
+    confidence: float = Field(ge=0, le=1, allow_inf_nan=False)
+    review_required: bool = Field(strict=True)
+
+
+class ItemPlanejado(Entrada):
+    id: str = Field(min_length=1, max_length=40)
+    minutos: int = Field(ge=1, le=240, strict=True)
+    prioridade: Literal['Baixa', 'Média', 'Alta']
+    obrigatorio: bool = Field(default=False, strict=True)
+
+
+class SimulacaoRevisoes(Entrada):
+    itens: list[ItemPlanejado] = Field(min_length=1, max_length=8)
+    capacidade: int = Field(ge=1, le=480, strict=True)
+
+
+class PlanoRevisoes(SimulacaoRevisoes):
+    base: str = Field(pattern='^[a-f0-9]{64}$')
+    metodo: Literal['fila', 'classico', 'qaoa']
+    revisor: str = Field(min_length=2, max_length=80)
+    justificativa: str = Field(min_length=10, max_length=500)
+    confirmado: Literal[True]
+
+
 def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     pasta = pasta_dados or Path(os.getenv("GOV_DATA_DIR", str(RAIZ / "data")))
     nuvem = os.getenv('GOV_RUNTIME') == 'vercel' or os.getenv('VERCEL') == '1'
@@ -121,7 +156,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             arquivo_chave.write_text(secrets.token_urlsafe(32), encoding="utf-8")
         chave = arquivo_chave.read_text(encoding="utf-8").strip()
 
-    app = FastAPI(title="ZelaBairro", version="0.5.1", docs_url="/contrato")
+    app = FastAPI(title="ZelaBairro", version="0.6.0", docs_url="/contrato")
     app.state.repo = repo
 
     def guardar_foto(conteudo, previa=''):
@@ -194,6 +229,51 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
     @app.post('/api/passagem/simular')
     def simular_passagem(entrada: SimulacaoPassagem):
         return passagem.avaliar(repo.listar(), entrada.reparos)
+
+    @app.get('/api/planejamento')
+    def fila_planejamento():
+        casos = repo.listar()
+        planos = {}
+        for caso in casos:
+            for e in caso.get('evidencias', []):
+                if e['modulo'] == 'planejamento_revisao':
+                    plano = e['resultado']; planos[plano['id']] = plano
+        campos = ('id', 'descricao', 'bairro', 'criado_em', 'triagem_original', 'exige_revisao')
+        return {'pendentes': [{k: c.get(k) for k in campos} for c in casos if not c.get('revisao')],
+                'planos': sorted(planos.values(), key=lambda p: p['data'], reverse=True)[:5]}
+
+    @app.post('/api/planejamento/simular')
+    async def simular_revisoes(entrada: SimulacaoRevisoes, x_manager_key: str | None = Header(default=None)):
+        gestor(x_manager_key)
+        from .quantica import simular
+        casos = await run_in_threadpool(repo.listar)
+        return await run_in_threadpool(simular, casos, [i.model_dump() for i in entrada.itens], entrada.capacidade)
+
+    @app.post('/api/planejamento/planos', status_code=201)
+    async def plano_revisoes(entrada: PlanoRevisoes, x_manager_key: str | None = Header(default=None)):
+        gestor(x_manager_key)
+        return await run_in_threadpool(repo.registrar_planejamento, [i.model_dump() for i in entrada.itens],
+            entrada.capacidade, entrada.base, entrada.metodo, entrada.revisor, entrada.justificativa)
+
+    @app.post('/api/cluster/worker')
+    def worker_lote(entrada: Worker, x_manager_key: str | None = Header(default=None)):
+        gestor(x_manager_key)
+        from .cluster import processar_worker
+        return processar_worker(entrada.csv.encode('utf-8'), entrada.worker, str(entrada.lote_id))
+
+    @app.post('/api/cluster/lotes')
+    async def cluster_lote(arquivo: UploadFile = File(...), workers: int = Form(ge=2, le=4),
+                          x_manager_key: str | None = Header(default=None)):
+        gestor(x_manager_key)
+        inicio = perf_counter()
+        from .cluster import executar, chamar_http
+        conteudo = await arquivo.read(1024 * 1024 + 1)
+        callback = (lambda dados, worker, lote: chamar_http(dados, worker, lote, chave)) if nuvem else None
+        resultado = await run_in_threadpool(executar, conteudo, workers, callback)
+        if resultado['resumo']['read'] > 100:
+            raise ValueError('A central aceita até 100 registros por lote. Divida arquivos maiores em minilotes.')
+        persistido = await run_in_threadpool(persistir_lote, resultado, True)
+        return {**persistido, 'tempo_total_ms': (perf_counter() - inicio) * 1000}
 
     @app.post('/api/passagem/planos', status_code=201)
     def plano_passagem(entrada: PlanoPassagem, x_manager_key: str | None = Header(default=None)):
@@ -409,11 +489,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
         trecho = json.loads(linhas[entrada.linha_corpus - 1])
         return repo.adicionar_evidencia(identificador, "pln", {**trecho, "linha_corpus": entrada.linha_corpus})
 
-    @app.post("/api/lotes")
-    async def lote(arquivo: UploadFile = File(...), x_manager_key: str | None = Header(default=None)):
-        gestor(x_manager_key)
-        conteudo = await arquivo.read(1024 * 1024 + 1)
-        resultado = await run_in_threadpool(modulos.importar_lote, conteudo)
+    def persistir_lote(resultado, distribuido=False):
         entradas = []
         for registro in resultado["registros"]:
             try:
@@ -421,13 +497,26 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
                                        origem_id="rpa:" + registro["case_id"], confirmado=True))
             except ValueError as erro:
                 raise ValueError("O lote contém um registro fora dos limites: descrição de 10 a 1500 caracteres, bairro de 2 a 100 e ID de até 60.") from erro
-        ids = []
-        for entrada in entradas:
+        dados_lote = []
+        for entrada, registro in zip(entradas, resultado['registros']):
             dados = entrada.model_dump(exclude={"confirmado"})
-            dados.update(triagem_original=modulos.triagem(entrada.descricao),
+            analise = (AnaliseWorker.model_validate(registro['triagem_original']).model_dump()
+                       if distribuido else modulos.triagem(entrada.descricao))
+            dados.update(triagem_original=analise,
                          preparacao=preparar(entrada.descricao, entrada.contexto, entrada.local))
-            ids.append((await run_in_threadpool(repo.criar, dados))["id"])
-        return {**resultado, "atendimentos": ids}
+            dados_lote.append(dados)
+        evidencia = ({k: resultado[k] for k in ('lote_id', 'workers_solicitados', 'workers_executados', 'execucoes', 'tempo_ms', 'modo')}
+                     if distribuido else None)
+        inicio_persistencia = perf_counter()
+        ids = repo.criar_em_lote(dados_lote, evidencia)
+        return {**resultado, "atendimentos": ids, 'tempo_persistencia_ms': (perf_counter() - inicio_persistencia) * 1000}
+
+    @app.post("/api/lotes")
+    async def lote(arquivo: UploadFile = File(...), x_manager_key: str | None = Header(default=None)):
+        gestor(x_manager_key)
+        conteudo = await arquivo.read(1024 * 1024 + 1)
+        resultado = await run_in_threadpool(modulos.importar_lote, conteudo)
+        return await run_in_threadpool(persistir_lote, resultado)
 
     @app.post("/api/assistente")
     def assistente(entrada: Pergunta):

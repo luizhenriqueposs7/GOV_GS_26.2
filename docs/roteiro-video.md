@@ -4,23 +4,22 @@ Alvo de 6min30s, dentro do intervalo obrigatório de 5 a 7 minutos. Planejamento
 
 | Início | Fim | Tempo | Cena | O que demonstrar |
 | --- | --- | --- | --- | --- |
-| 00:00 | 00:20 | 20 s | Problema e beneficiário | Mostrar o percurso didático ponto → unidade de saúde: um reparo isolado pode manter outra barreira. Apresentar o Passagem Livre e o limite do cenário. |
-| 00:20 | 01:05 | 45 s | Frontend e atendimento móvel | Foto, GPS e conferência do relato: ocorrência, impactos possíveis e pedido de vistoria. Mostrar envio e identificador. Identificar demonstração ou localização manual quando usadas. Não atribuir medidas à foto. |
-| 01:05 | 01:45 | 40 s | RPA | Processar lote; exibir uma rejeição e a saída original do caso de acessibilidade. |
-| 01:45 | 02:25 | 40 s | Generative AI | Perguntar sobre um serviço, abrir a fonte e mostrar a abstenção quando falta evidência. |
-| 02:25 | 03:00 | 35 s | PLN | Consultar um trecho real da Fábrica e apontar página, fonte, data e limite da revisão do corpus. |
-| 03:00 | 03:40 | 40 s | Visão Computacional | Enviar imagem de demonstração e mostrar resultado, modelo e necessidade de inspeção humana. |
-| 03:40 | 04:15 | 35 s | IoT | Mostrar a evidência original de execução no celular; abrir a estação conceitual OuviAí, explicar microfone/aviso e simular campainha ou batida. Identificar claramente os eventos simulados e a ausência de hardware conectado. Não apresentar a interface como inferência do modelo. |
-| 04:15 | 04:40 | 25 s | Cluster | Comparar os dois cenários iSPD e explicar que os números são de simulação. |
-| 04:40 | 05:00 | 20 s | Quântica | Relacionar o estudo ao planejamento da revisão; deixar explícita a contribuição conceitual. |
-| 05:00 | 06:10 | 70 s | Governança e Business Analytics | Mostrar revisão e confirmação; responsável e ficha; iniciar protocolo SIM, registrar retorno/foto posterior e conferir correção no protótipo. No Passagem Livre, mostrar outra barreira ou condição desconhecida que permaneceu. Contestar e conferir reabertura/plano desatualizado. Exibir indicadores separados de demonstração e matriz das nove disciplinas. Usar cortes de uma execução contínua. |
-| 06:10 | 06:30 | 20 s | Encerramento | Dizer o resultado efetivamente demonstrado e a principal limitação; mostrar o acesso ao repositório. |
+| 00:00 | 00:20 | 20 s | Problema | Percurso didático e barreiras; explicar o objetivo da central. |
+| 00:20 | 01:05 | 45 s | Frontend e mobile | Foto, localização, relato acionável, conferência e envio. Identificar dados de teste e eventuais coordenadas manuais. |
+| 01:05 | 01:35 | 30 s | RPA e Cluster | Mesmo CSV em 2/4 workers; mostrar triagem original, rejeitados, IDs preservados e tempos reais. Identificar invocações lógicas e separar iSPD. Usar cortes de uma execução contínua. |
+| 01:35 | 02:10 | 35 s | Generative AI | Orientação atual, fonte e abstenção quando faltar evidência. |
+| 02:10 | 02:40 | 30 s | PLN | Trecho pertinente, origem, página/seção e vínculo ao pedido. |
+| 02:40 | 03:10 | 30 s | Visão | Inferência original para fissuras, com limite e revisão humana. |
+| 03:10 | 03:40 | 30 s | IoT | Evidência original no celular e estação conceitual; simular evento identificando a ausência de hardware conectado. |
+| 03:40 | 04:25 | 45 s | Quântica | Recorte com prioridades/minutos conferidos; comparar fila, exato e QAOA simulado. Mostrar capacidade, adiados, decisão justificada e abertura da revisão. Não afirmar QPU ou ganho. |
+| 04:25 | 06:10 | 105 s | Governança e BA | Revisão, confirmação, ficha/destino, protocolo SIM, retorno/foto posterior e conferência. No Passagem Livre, mostrar outra barreira/condição desconhecida. Contestar, conferir reabertura e histórico. |
+| 06:10 | 06:30 | 20 s | Encerramento | Resultado demonstrado, limites e repositório. |
 
 ## Preparação
 
 Na versão Vercel, identificar o modelo Qwen3.8-27B via Groq, diferente do Qwen3-4B local. Abrir uma consulta e testar Visão antes de gravar para preparar o cache dos pesos. Confirmar uma resposta atual, com fonte, sem usar os resultados históricos como demonstração da inferência online. O carregamento inicial pode levar alguns segundos.
 
-Preparar os dois pedidos fictícios pelo controle do Passagem Livre antes de gravar; usar o formulário móvel para uma observação explicitamente didática ou registrar o teste real sem vínculo se ocorrer em outro local. O mapa do percurso é esquemático. Gravar uma tomada longa do fluxo e selecionar os trechos para os tempos acima. A comparação usa somente condições informadas; não estima custos, beneficiários ou segurança real. Não apresentar o cálculo determinístico como execução quântica nem o OuviAí como sensor integrado automaticamente.
+Preparar os dois pedidos fictícios pelo controle do Passagem Livre antes de gravar; usar o formulário móvel para uma observação explicitamente didática ou registrar o teste real sem vínculo se ocorrer em outro local. O mapa do percurso é esquemático. Gravar uma tomada longa do fluxo e selecionar os trechos para os tempos acima. A comparação usa somente condições informadas; não estima custos, beneficiários ou segurança real. Distinguir o cálculo determinístico de passagem do QAOA executado em simulador nem o OuviAí como sensor integrado automaticamente.
 
 A pendência de enquadramento no caso relacionado à rampa é uma abstenção do catálogo: a revisão permite o planejamento local, mas a confirmação no ZelaBairro segue bloqueada. A calçada permite demonstrar a persistência original. Na cena final, manter visível “hipótese” e explicar que a contestação muda a validade da decisão, não a condição física da calçada. A coleta, revisão, evidências e confirmação dos módulos continuam distribuídas nas cenas por disciplina.
 

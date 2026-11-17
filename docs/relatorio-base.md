@@ -99,7 +99,7 @@ Figura 1 - Fluxo de preparação, revisão e registro local
 
 Fonte: elaboração do grupo, a partir da aplicação construída em 2026.
 
-O desenvolvimento reúne nove disciplinas. RPA, Frontend, PLN e Visão são reutilizados em código. Generative AI mantém execução local e adaptação online identificada. IoT, Cluster e Quântica conservam contribuições externas, simuladas ou conceituais. Essa distinção orienta a leitura do relatório.
+As nove disciplinas participam com alcances distintos. RPA, Frontend, PLN e Visão reutilizam código. Generative AI tem adaptação online. Cluster processa lotes; Quântica apoia a seleção de revisões em simulador. IoT mantém execução externa e interface conceitual.
 
 <!-- pagina -->
 # 2 DESENVOLVIMENTO
@@ -114,7 +114,7 @@ A reaplicação de um lote com os mesmos dados de origem conserva os complemento
 
 ## 2.2 Cluster Computing
 
-O trabalho de Cluster compara dois cenários no simulador iSPD. Os arquivos de modelo e o relatório foram incorporados como evidências do estudo de distribuição de trabalho. Não há cluster executando a aplicação da central.
+A central adapta o Round Robin e os 2/4 workers do estudo iSPD para processar CSV pelo RPA original. IDs repetidos ficam juntos. Os resultados são validados e gravados em uma transação; falhas impedem gravação parcial.
 
 Tabela 1 - Tempos dos cenários simulados no iSPD
 
@@ -125,18 +125,18 @@ Tabela 1 - Tempos dos cenários simulados no iSPD
 
 Fonte: relatório e modelos de Cluster Computing entregues pelo grupo.
 
-A diferença equivale a aproximadamente 49,72% de redução no tempo simulado entre esses dois cenários. O resultado não mede a latência de uma solicitação completa, o modelo de linguagem ou a operação de um serviço público. Na central, o módulo participa da documentação de capacidade, sem ser apresentado como infraestrutura implantada.
+Os 49,72% pertencem ao iSPD. Na central, cada minilote mede seus tempos: threads locais ou invocações HTTP na Vercel, sem garantia de máquinas distintas. Rede, inicialização e banco podem superar ganhos. O modo com workers limita a gravação a 100 registros por lote.
 
 <!-- pagina -->
 # DESENVOLVIMENTO
 
 ## 2.3 Computação Quântica
 
-O relatório de Computação Quântica discute a alocação de recursos para tarefas de revisão. Esse problema se relaciona ao planejamento de uma fila quando há prioridades, restrições de disponibilidade e capacidade limitada de atendimento.
+O estudo de alocação foi ampliado com um piloto de seleção de até oito revisões. O gestor informa prioridades, durações estimadas e capacidade. Obrigatórios sem capacidade geram aviso; casos adiados ficam explícitos.
 
-O material foi incluído como estudo conceitual. Não foi executado algoritmo quântico nem demonstrado ganho em relação a métodos clássicos. A central não modifica a prioridade de pedidos com uma rotina quântica.
+O QAOA p=1 é calculado em vetor de estado NumPy: fase de custo e rotações Rx, com busca clássica de parâmetros. Compara-se o estado factível mais provável com fila e enumeração exata. Não há QPU ou ganho quântico demonstrado.
 
-Uma avaliação futura dependeria de dados operacionais e de uma comparação com alternativas clássicas adequadas ao problema. Como não existe piloto, esses dados e essa comparação não estão disponíveis. O relatório conserva essa limitação em vez de atribuir um resultado à aplicação.
+O plano justificado fica no histórico e abre os pedidos para revisão humana. Mudanças exigem recalcular. É um recorte do estudo: não modela turnos, competências, prazos ou equidade, nem altera prioridades automaticamente.
 
 ## 2.4 Frontend
 
@@ -225,8 +225,8 @@ Quadro 1 - Participação dos materiais na central
 | Disciplina | Material utilizado | O que não foi integrado |
 | --- | --- | --- |
 | RPA | Triagem e pipeline CSV originais | Automação do envio ao órgão |
-| Cluster | Modelos e relatório iSPD | Cluster de produção |
-| Quântica | Relatório conceitual | Algoritmo quântico executável |
+| Cluster | RPA em workers lógicos | Cluster físico dedicado |
+| Quântica | QAOA simulado e comparação | QPU e agenda completa |
 | Frontend | Validação e persistência do ZelaBairro | Protocolo municipal automático |
 | Generative AI | Serviço local e adaptador Groq | Qwen3-4B na nuvem |
 | IoT | Tela conceitual e vídeos | Modelo e eventos reais |

@@ -3,6 +3,7 @@ import hashlib
 import sqlite3
 from collections import Counter
 from contextlib import closing, contextmanager
+from contextvars import ContextVar
 from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
@@ -13,6 +14,11 @@ from .passagem import avaliar, validar_vinculo
 
 def agora():
     return datetime.now(timezone.utc).isoformat()
+
+
+def iniciar_transacao(con):
+    if not isinstance(con, sqlite3.Connection) or not con.in_transaction:
+        con.execute('BEGIN IMMEDIATE')
 
 
 def reabrir_atendimento(caso, evidencia):
@@ -28,6 +34,7 @@ class EnvioConflitante(ValueError):
 
 class Repositorio:
     def __init__(self, caminho: Path):
+        self._ativa = ContextVar('transacao_sqlite_citizentech', default=None)
         self.caminho = Path(caminho)
         self.caminho.parent.mkdir(parents=True, exist_ok=True)
         with self.conexao() as con:
@@ -52,11 +59,52 @@ class Repositorio:
 
     @contextmanager
     def conexao(self):
+        ativa = self._ativa.get()
+        if ativa is not None:
+            yield ativa
+            return
         with closing(sqlite3.connect(self.caminho, timeout=10)) as con:
             con.row_factory = sqlite3.Row
             con.execute("PRAGMA foreign_keys = ON")
             with con:
-                yield con
+                token = self._ativa.set(con)
+                try:
+                    yield con
+                finally:
+                    self._ativa.reset(token)
+
+    def criar_em_lote(self, entradas, evidencia_cluster=None):
+        with self.conexao() as con:
+            iniciar_transacao(con)
+            ids = []
+            for entrada in entradas:
+                caso = self.criar(entrada)
+                if evidencia_cluster:
+                    self.adicionar_evidencia(caso['id'], 'cluster', evidencia_cluster)
+                ids.append(caso['id'])
+            return ids
+
+    def registrar_planejamento(self, itens, capacidade, base, metodo, revisor, justificativa):
+        from .quantica import simular
+        with self.conexao() as con:
+            iniciar_transacao(con)
+            casos = [json.loads(row['conteudo']) for row in con.execute('SELECT conteudo FROM atendimentos')]
+            try:
+                resultado = simular(casos, itens, capacidade)
+            except ValueError as erro:
+                raise EnvioConflitante('Os dados ou a fila mudaram. Confira os pedidos e simule novamente.') from erro
+            if resultado['base'] != base:
+                raise EnvioConflitante('Os pedidos mudaram. Simule novamente antes de registrar o planejamento.')
+            if not resultado['metodos'][metodo]['selecionados']:
+                raise ValueError('Este método não escolheu revisões. Confira a referência clássica ou ajuste o ensaio.')
+            plano = dict(id=str(uuid4()), data=agora(), metodo=metodo, revisor=revisor,
+                         justificativa=justificativa, resultado=resultado)
+            for item in itens:
+                caso = self._obter(con, item['id'])
+                evidencia = dict(modulo='planejamento_revisao', data=plano['data'], resultado=plano)
+                caso.setdefault('evidencias', []).append(evidencia)
+                self._salvar(con, caso, 'Planejamento de revisão registrado', plano, revisor)
+            return plano
 
     def _salvar(self, con, caso, acao, dados, autor="Sistema da demonstração"):
         caso["atualizado_em"] = agora()
@@ -87,7 +135,7 @@ class Repositorio:
         if not entrada["descricao"] or not entrada["bairro"]:
             raise ValueError("Informe a descrição e o bairro.")
         with self.conexao() as con:
-            con.execute("BEGIN IMMEDIATE")
+            iniciar_transacao(con)
             envio_id = dados.get('envio_id')
             # Ausência de vínculo mantém a assinatura usada pelos envios anteriores ao Passagem Livre.
             dados_assinatura = {k: v for k, v in entrada.items() if k not in {'passagem', 'sugestao_foto'} or v is not None}
@@ -158,7 +206,7 @@ class Repositorio:
     def atualizar(self, identificador, dados):
         campos = ("descricao", "bairro", "local", "contexto", "triagem_original", "preparacao", "foto", "localizacao", "passagem", "sugestao_foto")
         with self.conexao() as con:
-            con.execute("BEGIN IMMEDIATE")
+            iniciar_transacao(con)
             caso = self._obter(con, identificador)
             dados = {**{k: caso.get(k) for k in campos}, **dados}
             dados['passagem'] = validar_vinculo(dados.get('passagem'))
@@ -180,7 +228,7 @@ class Repositorio:
         if len(justificativa.strip()) < 10 or len(revisor.strip()) < 2:
             raise ValueError("Informe o responsável e uma justificativa de pelo menos 10 caracteres.")
         with self.conexao() as con:
-            con.execute("BEGIN IMMEDIATE")
+            iniciar_transacao(con)
             caso = self._obter(con, identificador)
             revisao = {"prioridade": prioridade, "justificativa": justificativa.strip(),
                        "revisor": revisor.strip(), "data": agora()}
@@ -196,7 +244,7 @@ class Repositorio:
         if len(motivo.strip()) < 10:
             raise ValueError("Explique o motivo em pelo menos 10 caracteres.")
         with self.conexao() as con:
-            con.execute("BEGIN IMMEDIATE")
+            iniciar_transacao(con)
             caso = self._obter(con, identificador)
             evidencia = {"motivo": motivo.strip(), "revisao_anterior": caso.get("revisao"),
                          "frontend_anterior": caso.pop("frontend", None)}
@@ -209,7 +257,7 @@ class Repositorio:
         if not 1 <= len(protocolo.strip()) <= 80:
             raise ValueError("Informe um protocolo de até 80 caracteres.")
         with self.conexao() as con:
-            con.execute("BEGIN IMMEDIATE")
+            iniciar_transacao(con)
             caso = self._obter(con, identificador)
             atendimento = caso.get('atendimento') or {}
             anterior = atendimento.get('protocolo') or caso.get('protocolo_oficial')
@@ -234,7 +282,7 @@ class Repositorio:
         if etapa not in {'em_atendimento', 'sem_solucao', 'correcao_informada'} or not 10 <= len(relato.strip()) <= 1000:
             raise ValueError('Informe a situação e um relato de 10 a 1000 caracteres.')
         with self.conexao() as con:
-            con.execute('BEGIN IMMEDIATE')
+            iniciar_transacao(con)
             caso = self._obter(con, identificador)
             atendimento = caso.get('atendimento')
             if not atendimento:
@@ -256,7 +304,7 @@ class Repositorio:
         if not 2 <= len(revisor.strip()) <= 80 or not 10 <= len(justificativa.strip()) <= 500:
             raise ValueError('Informe responsável e justificativa da conferência.')
         with self.conexao() as con:
-            con.execute('BEGIN IMMEDIATE')
+            iniciar_transacao(con)
             caso = self._obter(con, identificador)
             if caso['atualizado_em'] != base:
                 raise EnvioConflitante('O pedido ou a foto posterior mudou. Atualize e confira a evidência atual antes de confirmar.')
@@ -272,7 +320,7 @@ class Repositorio:
 
     def vincular_frontend(self, identificador, registro, revisao):
         with self.conexao() as con:
-            con.execute("BEGIN IMMEDIATE")
+            iniciar_transacao(con)
             caso = self._obter(con, identificador)
             if not revisao or caso.get("revisao") != revisao:
                 raise ValueError("A decisão mudou durante a confirmação. Confira a revisão atual e tente novamente.")
@@ -284,7 +332,7 @@ class Repositorio:
 
     def adicionar_evidencia(self, identificador, modulo, resultado):
         with self.conexao() as con:
-            con.execute("BEGIN IMMEDIATE")
+            iniciar_transacao(con)
             caso = self._obter(con, identificador)
             evidencia = {"modulo": modulo, "data": agora(), "resultado": resultado}
             caso.setdefault("evidencias", []).append(evidencia)
@@ -298,7 +346,7 @@ class Repositorio:
 
     def planejar_passagem(self, base, reparos, revisor, justificativa):
         with self.conexao() as con:
-            con.execute('BEGIN IMMEDIATE')
+            iniciar_transacao(con)
             casos = [json.loads(row['conteudo']) for row in con.execute('SELECT conteudo FROM atendimentos')]
             resultado = avaliar(casos, reparos)
             if resultado['base'] != base:

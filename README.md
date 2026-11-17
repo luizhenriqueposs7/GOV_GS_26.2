@@ -10,6 +10,10 @@ Depois da revisão, **Encaminhar e acompanhar** reúne responsável, canal ofici
 
 A [interface OuviAí](https://gov262.vercel.app/#ouviai), acessível por Materiais e fontes ou Passagem Livre, apresenta uma possível estação fixa. O desenho explica microfone, aviso visual e conexão prevista. Botões simulam as três classes originais e a interrupção/reconexão da comunicação. São oito eventos recentes na memória da aba, sem áudio, inferência ou persistência; o trabalho original continua externo. Quatro testes novos elevam a verificação JavaScript a 29 casos; desktop e mobile foram conferidos no navegador.
 
+**Cluster operacional:** na Revisão, importar CSV com 2 ou 4 workers lógicos. O Round Robin mantém todas as ocorrências do mesmo ID no mesmo worker; cada worker executa o pipeline original. O coordenador valida, agrega e grava o lote atomicamente. Na nuvem são invocações HTTP autenticadas; localmente, threads. Não há garantia de máquinas distintas ou aceleração. Medem-se coordenação/RPA, gravação e total, separados dos tempos históricos iSPD. Até 100 registros por minilote na central, sem alterar os originais. [CSV de demonstração](docs/exemplos/cluster-revisoes.csv).
+
+**Quântica operacional:** em [Planejar revisões](https://gov262.vercel.app/#planejamento), selecionar de 1 a 8 pendentes, conferir prioridades, estimar minutos e indicar obrigatórios. Comparar fila, enumeração exata e QAOA p=1 em simulador NumPy. O gestor escolhe e justifica; o plano fica nas evidências dos casos e abre a revisão humana. O piloto reduz o modelo do trabalho original à seleção por capacidade; não modela turnos, prazos, competências ou equidade. Sem QPU ou ganho quântico demonstrado. [Protocolo técnico](docs/evidencias/cluster-quantica-2026-11-17.md).
+
 
 Preparação e acompanhamento local de pedidos sobre calçadas, buracos no asfalto e iluminação em São Paulo. A central recebe foto opcional e localização confirmada, pede contexto, mostra a fonte do encaminhamento, conserva a triagem original, registra uma revisão justificada e permite contestar a decisão. Depois da conferência, reutiliza a persistência do ZelaBairro.
 
@@ -100,8 +104,8 @@ Não existem registros inseridos automaticamente nem contagens de impacto invent
 | Disciplina | Participação na central | Limite |
 |---|---|---|
 | RPA | Funções exportadas do notebook por AST, triagem e importação CSV | Regras de palavras e confiança heurística |
-| Cluster Computing | Relatório e modelos iSPD de 2 e 4 workers | Simulação histórica; não é infraestrutura de produção |
-| Computação Quântica | Relatório de alternativas para alocação da revisão | Estudo conceitual; nenhum ganho quântico demonstrado |
+| Cluster Computing | Pipeline RPA em 2/4 workers lógicos, medições por lote e gravação atômica | Invocações podem compartilhar instância; tempos iSPD são históricos |
+| Computação Quântica | Piloto QAOA em NumPy para selecionar revisões e comparar com referências clássicas | Até 8 pedidos; sem QPU, vantagem demonstrada ou agenda completa |
 | Frontend | Validação e persistência originais do ZelaBairro, acionadas pela central | Interface nova; protocolo local de POC |
 | Generative AI | Qwen3-4B local; seleção Groq online com corpus original | Modelo online identificado; métricas históricas do original |
 | IoT | Documento e quatro vídeos do OuviAí no celular | Execução externa; sem fluxo automático de eventos para a central |
