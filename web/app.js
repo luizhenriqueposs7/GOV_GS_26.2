@@ -4,10 +4,11 @@ import {criarMapa, pontoValido, proximos, filtrarCasos} from './mapa.mjs';
 import {iniciarPassagem} from './passagem.mjs';
 import {localizarAtual, prepararAutomatico} from './automatico.mjs';
 import {atendimento} from './atendimento.mjs';
+import {iniciarOuviAi} from './ouviai.mjs';
 const $ = (id) => document.getElementById(id);
 const state = {casos: [], selecionado: null, edicao: null, ativos: false, etapa:0, mapa:null, mapaLocal:null, mapaId:null, camera:null};
 Object.assign(state, {foto: null, fotoAtual: null, fotoUrl: null, removerFoto: false, origemGeo: 'manual', precisaoGeo: null, envioId: null, assinatura: null, rascunhoId:null, previaFoto:null, regiaoAuto:null});
-const titulos = {mapa:'Mapa do bairro', passagem:'Passagem Livre', pedido: "Novo pedido", acompanhar: "Meus pedidos", revisao: "Revisão", evidencias: "Materiais e fontes"};
+const titulos = {mapa:'Mapa do bairro', passagem:'Passagem Livre', pedido: "Novo pedido", acompanhar: "Meus pedidos", revisao: "Revisão", evidencias: "Materiais e fontes", ouviai: 'OuviAí · dispositivo proposto'};
 const data = (valor) => valor ? new Date(valor).toLocaleString("pt-BR") : "—";
 function el(tag, texto, classe) {
   const node = document.createElement(tag);
@@ -70,7 +71,7 @@ async function navegar(view, foco = true) {
   if(view==='pedido') {$('pedido-form').hidden=false;$('request-progress').hidden=false;$('preparacao-resultado').hidden=true;mostrarEtapa(state.etapa,false);}
   $("aviso").hidden = true;
   document.querySelectorAll("[data-panel]").forEach(n => n.hidden = n.dataset.panel !== view);
-  document.querySelectorAll("[data-view]").forEach(n => {n.classList.toggle("active", n.dataset.view === view); if(n.dataset.view === view) n.setAttribute("aria-current", "page"); else n.removeAttribute("aria-current");});
+  document.querySelectorAll('.main-nav [data-view]').forEach(n => {const atual=n.dataset.view===view||(view==='ouviai'&&n.dataset.view==='evidencias');n.classList.toggle('active',atual);if(atual)n.setAttribute('aria-current','page');else n.removeAttribute('aria-current');});
   $("breadcrumb").textContent = titulos[view];
   if (location.hash !== "#" + view) history.replaceState(null, "", "#" + view);
   if (foco) { $("principal").focus(); window.scrollTo(0, 0); }
@@ -263,6 +264,7 @@ async function ativos() {
     const links = el("div", null, "material-links");
     m.materiais.forEach(id => links.append(link(nomes[id] || "Abrir arquivo", "/api/materiais/" + encodeURIComponent(id))));
     (m.videos || []).forEach(v => links.append(link(v.nome, v.url)));
+    if(m.id==='iot')links.append(botao('Explorar o dispositivo proposto',()=>navegar('ouviai'),'secondary'));
     row.append(identidade, conteudo, links); box.append(row);
   });
   state.ativos = true;
@@ -470,6 +472,7 @@ const passagem=iniciarPassagem({api,enviar,el,botao,badge,data,aviso,durante,
   evidencias:async id=>{await navegar('evidencias');$('evidencia-caso').value=id;aviso('As próximas consultas serão vinculadas ao pedido '+id.slice(0,8)+'. Use evidências pertinentes.');},
   novo:async trecho=>{if(state.edicao){aviso('Conclua ou cancele a edição atual antes de registrar outra observação.',true);return;}await navegar('pedido');$('passagem-trecho').value=trecho;$('passagem-condicao').value='nao_verificado';mostrarEtapa(0);}
 });
+iniciarOuviAi();
 api('/api/status').then(status=>{
   document.querySelector('.demo-pill').textContent=status.modo;
   document.querySelector('.demo-pill').title='Assistente: '+status.modelo_genai+(status.genai_configurada?'':' · chave ainda não configurada');

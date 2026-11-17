@@ -8,6 +8,8 @@ A jornada móvel tem duas etapas: **tirar foto → conferir e enviar**. A observ
 
 Depois da revisão, **Encaminhar e acompanhar** reúne responsável, canal oficial, ficha copiável/baixável e foto. O solicitante conclui o envio no canal próprio e anota o protocolo. O modo de demonstração usa protocolo fictício separado. Retorno, foto posterior e conferência humana completam o acompanhamento local; contestação ou alteração reabre a análise e atualiza o percurso didático. Não há envio nem sincronização automática com a prefeitura. Uma foto diferente não comprova execução do reparo.
 
+A [interface OuviAí](https://gov262.vercel.app/#ouviai), acessível por Materiais e fontes ou Passagem Livre, apresenta uma possível estação fixa. O desenho explica microfone, aviso visual e conexão prevista. Botões simulam as três classes originais e a interrupção/reconexão da comunicação. São oito eventos recentes na memória da aba, sem áudio, inferência ou persistência; o trabalho original continua externo. Quatro testes novos elevam a verificação JavaScript a 29 casos; desktop e mobile foram conferidos no navegador.
+
 
 Preparação e acompanhamento local de pedidos sobre calçadas, buracos no asfalto e iluminação em São Paulo. A central recebe foto opcional e localização confirmada, pede contexto, mostra a fonte do encaminhamento, conserva a triagem original, registra uma revisão justificada e permite contestar a decisão. Depois da conferência, reutiliza a persistência do ZelaBairro.
 

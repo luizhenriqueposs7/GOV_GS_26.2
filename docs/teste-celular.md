@@ -20,6 +20,10 @@ Em **Como o relato foi preparado**, confira modelo, data, sugestão original e a
 
 O navegador automatizado verificou o fluxo em 412 × 839, com controles sintéticos claramente identificados. Câmera e GPS físicos ainda devem ser testados pelo integrante. Registre aparelho, navegador, resultado, precisão GPS e identificador do pedido, sem divulgar senha/chave. A análise é preliminar e não comprova gravidade ou acessibilidade.
 
+## Estação OuviAí proposta
+
+Abra https://gov262.vercel.app/#ouviai, também disponível em Materiais e fontes e no Passagem Livre. Explore os componentes e use Simular campainha, Simular batida na porta e Simular som ambiente. Interrompa a conexão simulada, gere um evento e restabeleça a conexão para observar sua exibição no painel demonstrativo. Limpar demonstração apaga os eventos da aba. Nenhum controle usa microfone, executa o modelo ou cria ocorrências. O desenho e os eventos representam uma proposta de dispositivo, sem hardware conectado.
+
 ## Histórico da execução local por túnel
 
 As instruções abaixo documentam o modo local anterior. Para a publicação atual, use o acesso online acima.

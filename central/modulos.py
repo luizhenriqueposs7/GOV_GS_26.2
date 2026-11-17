@@ -183,7 +183,7 @@ def ativos() -> list[dict]:
          "limite": "As métricas abaixo são avaliações históricas, incluindo casos reaplicados.", "materiais": ["genai_relatorio", "genai_resultados", "genai_corpus"],
          "metricas": [{"nome": p["rotulo"], "valor": p["valor"]} for p in resultado_gen["placar"]]},
         {"id": "iot", "nome": "IoT e OuviAí", "modo": "Execução externa no celular", "resumo": "Reconhecimento de sons e resposta visual no navegador do smartphone.",
-         "limite": "A central reúne evidências e não recebe previsões automaticamente.", "materiais": ["iot_relatorio", "iot_videos", "iot_enunciado"],
+         "limite": "A central apresenta uma estação conceitual com eventos simulados; não recebe previsões reais automaticamente.", "materiais": ["iot_relatorio", "iot_videos", "iot_enunciado"],
          "videos": [{"nome": "Abertura do modelo", "url": "https://www.youtube.com/watch?v=sc7K3uruowY"}, {"nome": "Porta", "url": "https://www.youtube.com/watch?v=DbAzry9Ixf0"}, {"nome": "Ambiente", "url": "https://www.youtube.com/watch?v=UEolGS6UU3s"}, {"nome": "Campainha", "url": "https://www.youtube.com/watch?v=LqlBq3hvnYA"}],
          "metricas": [{"nome": "Teste por janela", "valor": "78/100"}, {"nome": "Teste ao vivo documentado", "valor": "14/15"}, {"nome": "Reconhecimento imediato", "valor": "12/15"}]},
         {"id": "pln", "nome": "Processamento de Linguagem Natural", "modo": "Consulta ao corpus", "resumo": "Trechos sobre desastres com fonte, página, data e seção.",

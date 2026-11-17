@@ -174,7 +174,7 @@ O OuviAí reconhece sons e apresenta uma resposta visual no navegador do celular
 
 O relatório do módulo registra 78 acertos em 100 janelas de teste, 14 em 15 arquivos e 14 em 15 exemplos ao vivo. Em 12 dos 15 exemplos ao vivo, o reconhecimento foi imediato. São unidades de avaliação diferentes. Os dados de teste participaram de ajustes e compartilham fontes sonoras, o que limita sua interpretação como amostra independente.
 
-A central disponibiliza essas evidências. Não recebe previsões automaticamente do celular e não fabrica ocorrências sonoras. O benefício de acessibilidade sonora pertence ao contexto do OuviAí, distinto do fluxo municipal de calçadas e iluminação.
+A central apresenta evidências e uma estação conceitual com eventos simulados, sem microfone ou inferência. Hardware e recepção de previsões reais permanecem pendentes. O fluxo municipal não utiliza os sons.
 
 ## 2.7 Processamento de Linguagem Natural
 
@@ -229,7 +229,7 @@ Quadro 1 - Participação dos materiais na central
 | Quântica | Relatório conceitual | Algoritmo quântico executável |
 | Frontend | Validação e persistência do ZelaBairro | Protocolo municipal automático |
 | Generative AI | Serviço local e adaptador Groq | Qwen3-4B na nuvem |
-| IoT | Documento e vídeos do OuviAí | Eventos automáticos do celular |
+| IoT | Tela conceitual e vídeos | Modelo e eventos reais |
 | PLN | Consulta ao corpus e origem do trecho | Revisão humana concluída |
 | Visão | Inferência com checkpoint original | Laudo ou diagnóstico estrutural |
 | Governança | Revisão, plano, histórico e indicadores | Validação com usuários ou em campo |

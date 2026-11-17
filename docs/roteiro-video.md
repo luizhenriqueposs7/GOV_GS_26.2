@@ -10,7 +10,7 @@ Alvo de 6min30s, dentro do intervalo obrigatório de 5 a 7 minutos. Planejamento
 | 01:45 | 02:25 | 40 s | Generative AI | Perguntar sobre um serviço, abrir a fonte e mostrar a abstenção quando falta evidência. |
 | 02:25 | 03:00 | 35 s | PLN | Consultar um trecho real da Fábrica e apontar página, fonte, data e limite da revisão do corpus. |
 | 03:00 | 03:40 | 40 s | Visão Computacional | Enviar imagem de demonstração e mostrar resultado, modelo e necessidade de inspeção humana. |
-| 03:40 | 04:15 | 35 s | IoT | Mostrar o OuviAí no celular ou sua evidência, identificando qual das duas situações foi usada. |
+| 03:40 | 04:15 | 35 s | IoT | Mostrar a evidência original de execução no celular; abrir a estação conceitual OuviAí, explicar microfone/aviso e simular campainha ou batida. Identificar claramente os eventos simulados e a ausência de hardware conectado. Não apresentar a interface como inferência do modelo. |
 | 04:15 | 04:40 | 25 s | Cluster | Comparar os dois cenários iSPD e explicar que os números são de simulação. |
 | 04:40 | 05:00 | 20 s | Quântica | Relacionar o estudo ao planejamento da revisão; deixar explícita a contribuição conceitual. |
 | 05:00 | 06:10 | 70 s | Governança e Business Analytics | Mostrar revisão e confirmação; responsável e ficha; iniciar protocolo SIM, registrar retorno/foto posterior e conferir correção no protótipo. No Passagem Livre, mostrar outra barreira ou condição desconhecida que permaneceu. Contestar e conferir reabertura/plano desatualizado. Exibir indicadores separados de demonstração e matriz das nove disciplinas. Usar cortes de uma execução contínua. |
