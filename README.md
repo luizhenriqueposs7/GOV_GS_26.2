@@ -2,7 +2,9 @@
 
 Repositório da entrega: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_GS_26.2). O código, os materiais das nove disciplinas e as instruções de execução estão reunidos neste projeto.
 
-O [relatório de trabalho em PDF](output/pdf/Central_CitizenTech_Governanca_Versao_de_Trabalho.pdf) tem 14 páginas. A conclusão será elaborada com os integrantes. O [roteiro do vídeo integrado](docs/roteiro-video.md) prevê 6min30s; o vídeo deve ser publicado como Não Listado e seu link ainda será acrescentado. A central está em [gov262.vercel.app](https://gov262.vercel.app), com acesso público sem login. A execução local continua disponível.
+O [relatório de trabalho em PDF](output/pdf/Central_CitizenTech_Governanca_Versao_de_Trabalho.pdf) tem 14 páginas. A conclusão será elaborada com os integrantes. O [roteiro do vídeo integrado](docs/roteiro-video.md) prevê 6min30s e tem falas/ações individuais para Luiz Henrique, Luis Filipe e Felipe; o vídeo deve ser publicado como Não Listado e seu link ainda será acrescentado. A central está em [gov262.vercel.app](https://gov262.vercel.app), com acesso público sem login. A execução local continua disponível.
+
+A central abre em Registrar. **Pedidos** reúne acompanhamento; **Mapa** oferece visão territorial e Passagem Livre; **Gestão** reúne revisão, planejamento e importação; **Projeto** abre consultas e trabalhos originais. Detalhes técnicos, ficha, contestação e histórico permanecem acessíveis, recolhidos até a pessoa solicitá-los. [Avaliação da entrega e pendências](docs/revisao-entrega-2026-11-17.md).
 
 A jornada móvel tem duas etapas: **tirar foto → conferir e enviar**. A observação do Groq compõe uma ocorrência com impactos possíveis e providência solicitada, sem medir dimensões ou diagnosticar a causa. Com permissão, o aparelho obtém GPS e sugere a região. Texto e ponto são conferidos antes de gravar; a sugestão original fica assinada e ligada à foto. [Teste no celular](docs/teste-celular.md).
 
@@ -73,7 +75,7 @@ Manifesto, ícones e service worker permitem instalar como PWA nos navegadores c
 
 ## Mapa e revisão
 
-A central abre com mapa, busca por rua/bairro/registro e filtros de situação. Pedidos sem coordenadas continuam na lista acessível. Os marcadores abrem o pedido, o histórico e a revisão. Outros registros a até 100 m aparecem com distância em linha reta; isso não confirma duplicidade e não funde pedidos.
+A central abre no registro. A área Mapa permite buscar rua/bairro/registro e filtrar situação. Pedidos sem coordenadas continuam na lista acessível. Os marcadores abrem o acompanhamento e a revisão; o histórico pode ser expandido no detalhe. Outros registros a até 100 m aparecem com distância em linha reta; isso não confirma duplicidade e não funde pedidos.
 
 Leaflet 1.9.4 e a fonte Archivo estão em `web/vendor`, com licenças. Os tiles visíveis vêm de [OpenStreetMap](https://operations.osmfoundation.org/policies/tiles/), com atribuição no mapa e cache normal do navegador. Não há download em lote ou mapa offline. O uso da biblioteca segue a [documentação do Leaflet](https://leafletjs.com/reference-1.9.4.html).
 

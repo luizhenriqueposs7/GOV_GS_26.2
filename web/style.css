@@ -53,4 +53,23 @@
 .passage-integration{border-top:1px solid var(--line);padding:18px 0}.passage-integration dl{display:grid;grid-template-columns:190px 1fr;gap:14px 24px}.passage-integration dt{font-weight:bold}.passage-integration dd{margin:0;font-size:.9rem;line-height:1.5}.passagem-associacao{border:1px solid var(--line);padding:20px;margin-top:24px}.passagem-associacao legend{font-weight:bold;padding:0 7px}
 @media(min-width:1201px){.main-nav button{padding-left:13px;padding-right:13px}}
 @media(max-width:900px){.passage-layout{gap:22px;grid-template-columns:minmax(0,1fr) minmax(280px,.9fr)}.passage-heading{display:block}.passage-heading>.secondary{margin-top:18px}.passage-comparison{padding:23px}}
-@media(max-width:680px){.main-nav>div{grid-template-columns:repeat(6,minmax(0,1fr))}.main-nav button{font-size:clamp(.7rem,3vw,.78rem);line-height:1.25;min-height:56px;padding:9px 2px}.passage-layout{grid-template-columns:1fr;gap:22px}.passage-heading h1{font-size:1.9rem}.passage-disclosure{padding:16px}.passage-map{height:300px}.passage-segment-title{gap:10px}.passage-comparison{padding:24px 20px}.passage-integration dl{grid-template-columns:1fr;gap:7px}.passage-integration dd{margin-bottom:12px}.passage-plan{padding:20px 17px}.passage-plan h3{overflow-wrap:anywhere}.passagem-associacao{padding:17px}.passage-geography>h2{margin-top:22px}}
+@media(max-width:680px){.main-nav>div{grid-template-columns:repeat(5,minmax(0,1fr))}.main-nav button{font-size:.8rem;line-height:1.25;min-height:56px;padding:9px 2px}.passage-layout{grid-template-columns:1fr;gap:22px}.passage-heading h1{font-size:1.9rem}.passage-disclosure{padding:16px}.passage-map{height:300px}.passage-segment-title{gap:10px}.passage-comparison{padding:24px 20px}.passage-integration dl{grid-template-columns:1fr;gap:7px}.passage-integration dd{margin-bottom:12px}.passage-plan{padding:20px 17px}.passage-plan h3{overflow-wrap:anywhere}.passagem-associacao{padding:17px}.passage-geography>h2{margin-top:22px}}
+
+/* A navegação agrupa tarefas; detalhes técnicos abrem só quando solicitados. */
+.section-nav{display:flex;flex-wrap:wrap;gap:4px 18px;border-bottom:1px solid var(--line);margin-bottom:28px}
+.section-nav button{background:transparent;color:var(--muted);border:0;border-bottom:3px solid transparent;border-radius:0;padding:12px 0;min-height:48px;font-size:.9rem}
+.section-nav button[aria-current=page]{color:var(--ink);border-bottom-color:var(--orange);font-weight:700}
+.map-heading{margin-bottom:20px}.map-heading h1{font-size:2.2rem;margin-bottom:8px}.map-heading p{font-size:.95rem;max-width:70ch;margin:0}
+.map-title{padding:10px 16px;border-left-width:4px;max-width:300px}
+.project-tools{display:block}.project-tool,.project-association,.management-lote,.case-analysis,.case-contest,.case-history,.followup-tools,.followup-action{border-top:1px solid var(--line);margin:18px 0;padding:4px 0}
+.project-tool>summary,.project-association>summary,.management-lote>summary,.case-analysis>summary,.case-contest>summary,.case-history>summary,.followup-tools>summary,.followup-action>summary{font-weight:700;cursor:pointer;padding:14px 0;min-height:48px;line-height:1.5}
+.project-tool>summary{font-size:1.1rem}.project-tool>summary>span{display:block;margin:4px 0 0 17px;font-weight:400;font-size:.85rem;color:var(--muted)}
+.project-tool>article{border:0;background:transparent;padding:14px 0 24px;margin:0}.project-tool .tool-kind{display:none}.project-association .association{margin:10px 0 20px}
+.review-workspace{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}.review-journal{grid-column:1/-1;border-left:0;border-top:1px solid var(--line);padding:16px 0}.review-journal>summary{cursor:pointer;font-weight:700;padding:12px 0;min-height:48px}.case-analysis .details-grid{margin-top:16px}.case-contest .details-grid{display:block;max-width:680px}.case-history .timeline{margin-top:20px}.detail>.actions{margin:18px 0}
+.followup-tools .actions{margin:15px 0}.followup-action form{margin:10px 0 20px}.service-followup>h2{margin-bottom:12px}
+@media(max-width:680px){
+ .review-workspace{grid-template-columns:1fr}.entry-heading>div>p{display:block;font-size:.9rem;line-height:1.5;margin:10px 0 0}.entry-heading .demo-note{font-size:.75rem}
+ .section-nav{gap:0 18px;margin-bottom:20px}.section-nav button{font-size:.83rem;padding:10px 0}.map-heading h1{font-size:1.8rem}.map-heading p{font-size:.87rem}
+ #camera-vazia h2{font-size:1.8rem;line-height:1.15}.capture-story>.fine{display:none}.project-tool>summary{font-size:1rem}.project-tool>summary>span{font-size:.8rem}.detail>.actions{display:grid;grid-template-columns:1fr;gap:4px}
+ .case-analysis>summary,.case-contest>summary,.case-history>summary,.followup-tools>summary,.followup-action>summary{font-size:.9rem}
+}

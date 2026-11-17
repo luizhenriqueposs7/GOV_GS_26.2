@@ -1,45 +1,75 @@
-# Roteiro de demonstração da Governança
+# Vídeo integrado: um pedido do registro à nova análise
 
-Alvo de 6min30s, dentro do intervalo obrigatório de 5 a 7 minutos. Planejamento de cenas para a central separada. As ações abaixo ainda não constituem uma execução gravada. O fluxo principal pelo navegador e a chamada ao serviço de Generative AI foram conferidos tecnicamente em 14/11/2026. Antes de gravar, iniciar os serviços e preparar os arquivos de demonstração. Não haverá teste com pessoas ou piloto externo.
+Alvo: **6min30s**, contando abertura e encerramento. Entrega: entre 5 e 7 minutos, no YouTube como **Não Listado**. Este roteiro é planejamento, não uma gravação concluída.
 
-| Início | Fim | Tempo | Cena | O que demonstrar |
-| --- | --- | --- | --- | --- |
-| 00:00 | 00:20 | 20 s | Problema | Percurso didático e barreiras; explicar o objetivo da central. |
-| 00:20 | 01:05 | 45 s | Frontend e mobile | Foto, localização, relato acionável, conferência e envio. Identificar dados de teste e eventuais coordenadas manuais. |
-| 01:05 | 01:35 | 30 s | RPA e Cluster | Mesmo CSV em 2/4 workers; mostrar triagem original, rejeitados, IDs preservados e tempos reais. Identificar invocações lógicas e separar iSPD. Usar cortes de uma execução contínua. |
-| 01:35 | 02:10 | 35 s | Generative AI | Orientação atual, fonte e abstenção quando faltar evidência. |
-| 02:10 | 02:40 | 30 s | PLN | Trecho pertinente, origem, página/seção e vínculo ao pedido. |
-| 02:40 | 03:10 | 30 s | Visão | Inferência original para fissuras, com limite e revisão humana. |
-| 03:10 | 03:40 | 30 s | IoT | Evidência original no celular e estação conceitual; simular evento identificando a ausência de hardware conectado. |
-| 03:40 | 04:25 | 45 s | Quântica | Recorte com prioridades/minutos conferidos; comparar fila, exato e QAOA simulado. Mostrar capacidade, adiados, decisão justificada e abertura da revisão. Não afirmar QPU ou ganho. |
-| 04:25 | 06:10 | 105 s | Governança e BA | Revisão, confirmação, ficha/destino, protocolo SIM, retorno/foto posterior e conferência. No Passagem Livre, mostrar outra barreira/condição desconhecida. Contestar, conferir reabertura e histórico. |
-| 06:10 | 06:30 | 20 s | Encerramento | Resultado demonstrado, limites e repositório. |
+| Integrante | Responsabilidade | Roteiro |
+| --- | --- | --- |
+| Luiz Henrique Poss, RM562177 | Problema, Frontend/mobile, IoT, Governança e Business Analytics, encerramento | [Luiz](video/01-luiz-henrique.md) |
+| Luis Filipe Chaves Amorim, RM564706 | RPA, Cluster e Computação Quântica | [Luis Filipe](video/02-luis-filipe.md) |
+| Felipe Stefani Honorato, RM563380 | Generative AI, PLN e Visão | [Felipe](video/03-felipe-stefani.md) |
 
-## Preparação
+As nove disciplinas são distribuídas entre os três. Governança recebe mais tempo porque fecha o fluxo e é a disciplina desta entrega. Luiz aparece na abertura e retorna depois dos colegas. Não é necessário gravar os três juntos nem mostrar rosto e tela simultaneamente.
 
-Na versão Vercel, identificar o modelo Qwen3.8-27B via Groq, diferente do Qwen3-4B local. Abrir uma consulta e testar Visão antes de gravar para preparar o cache dos pesos. Confirmar uma resposta atual, com fonte, sem usar os resultados históricos como demonstração da inferência online. O carregamento inicial pode levar alguns segundos.
+## O que demonstrar
 
-Preparar os dois pedidos fictícios pelo controle do Passagem Livre antes de gravar; usar o formulário móvel para uma observação explicitamente didática ou registrar o teste real sem vínculo se ocorrer em outro local. O mapa do percurso é esquemático. Gravar uma tomada longa do fluxo e selecionar os trechos para os tempos acima. A comparação usa somente condições informadas; não estima custos, beneficiários ou segurança real. Distinguir o cálculo determinístico de passagem do QAOA executado em simulador nem o OuviAí como sensor integrado automaticamente.
+Uma pessoa fotografa um problema, confere relato/local e registra o pedido. O mesmo identificador chega ao planejamento e à revisão. Consultas são vinculadas quando pertinentes. A ficha mostra quem recebe e por qual canal; o acompanhamento usa protocolo de demonstração e permite contestar. O protótipo não envia solicitações à prefeitura nem executa reparos.
 
-A pendência de enquadramento no caso relacionado à rampa é uma abstenção do catálogo: a revisão permite o planejamento local, mas a confirmação no ZelaBairro segue bloqueada. A calçada permite demonstrar a persistência original. Na cena final, manter visível “hipótese” e explicar que a contestação muda a validade da decisão, não a condição física da calçada. A coleta, revisão, evidências e confirmação dos módulos continuam distribuídas nas cenas por disciplina.
+O vídeo deve mostrar a continuidade entre foto, sugestão, correção humana, fonte, prioridade, justificativa e contestação. No Passagem Livre, resolver um ponto não garante que todo o percurso esteja acessível. Esse percurso é didático.
 
-Conferir os serviços e preparar os arquivos antes de gravar, mantendo na gravação a execução que sustenta o resultado apresentado. Nunca trocar uma falha do serviço por um resultado histórico sem identificar a mudança.
+## Linha do tempo
 
-O caso de acessibilidade deverá mostrar a saída real do RPA. A revisão e a contestação só entram como funções executadas depois de implementadas e verificadas. Não usar as imagens de uma fissura e de um concreto sem fissura como prova de reparo do mesmo local.
+| Tempo | Quem | Tela e resultado |
+| --- | --- | --- |
+| 00:00–00:15 | Luiz | Registrar: explicar problema e propósito. |
+| 00:15–01:00 | Luiz | Foto no celular, GPS, conferência, envio e recibo. Guardar ID. |
+| 01:00–01:55 | Luis Filipe | Gestão → Importar lote: CSV com 2/4 workers, triagem, IDs e tempos atuais. |
+| 01:55–02:45 | Luis Filipe | Planejar revisões: pedido móvel e dois pendentes, capacidade, comparação e plano justificado. |
+| 02:45–03:20 | Felipe | Projeto → Consultar um serviço municipal: resposta atual e fonte. |
+| 03:20–03:50 | Felipe | Pesquisar prevenção de desastres: trecho, origem e página/seção. |
+| 03:50–04:25 | Felipe | Verificar sinal de fissura: inferência atual sobre recorte de concreto. |
+| 04:25–04:50 | Luiz | Projeto → OuviAí: campainha e aviso, identificados como simulação. |
+| 04:50–06:15 | Luiz | Revisão, confirmação local, destino/ficha, protocolo SIM, retorno, contestação e histórico. Passagem Livre em captura breve do cenário. |
+| 06:15–06:30 | Luiz | Histórico do mesmo pedido e GitHub: resultado demonstrado e limites. |
 
-A coleta móvel foi conferida em navegador com tela estreita. Abrir https://gov262.vercel.app/#pedido diretamente no Safari/Chrome, sem usuário e senha. O computador pode estar desligado. Fechar abas antigas para atualizar o aplicativo. O teste físico de câmera/GPS permanece pendente até ser executado pelo integrante. A chave de gestão é usada apenas na revisão e conferência da correção e não deve aparecer no vídeo.
+O alvo deixa 30 segundos até o teto. Grave cada operação até aparecer o resultado e corte apenas espera/digitação repetitiva, sem alterar a ordem ou esconder uma falha. Os arquivos individuais podem ser maiores; a montagem final precisa ter de 5 a 7 minutos.
 
-Não encaminhar exemplos fictícios à prefeitura. Usar protocolo SIM e fotos identificadas como cenário, sem sugerir reparo real. Uma foto posterior não comprova data ou lugar: a conferência é uma decisão humana do protótipo. O responsável municipal está indicado no catálogo, sem parceria ou integração automática de recebimento.
+## Preparar
 
-Gravar o percurso completo e reservar um trecho de aproximadamente 45 segundos para a cena móvel da versão final. Os cortes não devem alterar a ordem das ações nem sugerir que uma etapa sem resultado funcionou. Reutilizar o identificador gerado na cena de Governança. Se não houver execução em aparelho, descrever essa condição e identificar a imagem e as coordenadas de demonstração. Não dizer que a foto detectou um buraco ou que o GPS confirmou o endereço. Salvar/recuperar rascunho e abertura sem rede podem entrar como captura breve, sem ultrapassar 6min30s.
+1. Abrir [a central oficial](https://gov262.vercel.app/#pedido) no Safari/Chrome. Fechar abas antigas para atualizar. A entrada não pede login; a gestão exige chave.
+2. Ensaiar câmera, GPS, som e legibilidade no aparelho. Anotar aparelho/navegador/resultado. O teste físico permanece pendente até ser executado pelo integrante.
+3. Usar imagem sem pessoas, placas ou documentos. Não entrar na via nem se aproximar do risco para fotografar. Uma foto real não comprova dimensão, causa ou gravidade.
+4. Identificar encenação como demonstração. GPS real deve ser descrito como posição conferida pelo integrante, não como coordenada sintética. Não associar foto de outro local ao percurso didático.
+5. Digitar a chave em campo de senha, sem filmar seu arquivo, configurações ou cabeçalhos de rede.
+6. Separar `docs/exemplos/cluster-revisoes.csv` e `materiais/visao/data/recortes/017_1135_2497.jpg`. O CSV é fictício; o recorte não é uma foto da ocorrência móvel.
+7. Testar uma consulta GenAI e uma inferência para conferir disponibilidade. Esse aquecimento não deve aparecer como resultado da tomada atual. Online usa Groq, diferente do modelo local original.
+8. Luiz passa o ID aos colegas. Luis Filipe inclui o pedido no planejamento; Felipe vincula somente consultas pertinentes. Um recorte independente de Visão fica sem vínculo. Evitar alterações simultâneas no mesmo pedido.
+9. Ensaiar o Passagem Livre com os pedidos fictícios preparados pelo controle disponível. Outros registros podem manter barreiras; não prometer que marcar dois sempre libera o caminho.
+10. Se encenar correção, separar uma segunda imagem e declarar cenário sem obra real. Não apresentar foto de outro lugar como prova de reparo.
 
-Usar dados sintéticos e ocultar credenciais. A fala deve acompanhar a operação e explicar o significado de uma decisão, sem ler blocos do relatório. Evitar longas apresentações de código; mostrar apenas o trecho necessário para sustentar a integração.
+## Falar enquanto faz
 
-## Conferência antes de publicar
+Cada pessoa abre apenas suas telas e usa o roteiro individual como lembrete. Explicar uma ideia por resultado; não ler o relatório. Nome, RM, disciplina, abertura e transições também contam no tempo.
 
-- Medir o arquivo final, incluindo abertura, transições e encerramento.
-- Ouvir a narração e conferir legibilidade das evidências.
-- Conferir se a execução atual, os resultados anteriores, a simulação e o estudo conceitual estão identificados.
-- Confirmar que os nove tópicos aparecem e que a Governança explica a contribuição e o limite de cada um.
-- Publicar a versão final como Não Listado e testar o acesso ao link.
-- Preencher o mesmo endereço no relatório e no README da versão entregue.
+Gravar primeiro a criação, depois lote/plano, consultas e, por último, revisão/contestação. Conservar o ID nas cenas. A fala deve acompanhar cliques e resultados reais. Não afirmar que uma simulação ou evidência antiga é execução atual.
+
+## Contingências
+
+| Se acontecer | Como demonstrar honestamente |
+| --- | --- |
+| GPS negado/sem sinal | Preencher referência ou ponto manual e identificar a escolha. |
+| Foto inconclusiva | Mostrar que a pessoa precisou escrever o relato. |
+| Groq indisponível/sem cota | Mostrar falha e alternativa manual, ou gravar outra tomada atual quando voltar. |
+| Visão com resultado inesperado | Explicar o resultado e seu limite, sem trocar o rótulo na edição. |
+| Pedido alterado durante planejamento | Atualizar, conferir e comparar novamente. |
+| Confirmação local bloqueada | Mostrar pendência de contexto/enquadramento; usar caso elegível para demonstrar confirmação. |
+| Percurso ainda interrompido | Mostrar outra barreira ou condição desconhecida. |
+
+## Conferir antes de enviar
+
+- Todas as nove disciplinas aparecem com função e limite.
+- Há execução atual de envio, revisão e contestação, além de destino/canal visível.
+- IoT simulado, QAOA em CPU, dados fictícios e protocolo SIM estão identificados.
+- Nenhuma chave ou informação pessoal aparece.
+- O arquivo final tem entre 5 e 7 minutos, tela legível e áudio compreensível, sem leitura massiva.
+- Publicar como Não Listado, testar o link sem login e inserir o mesmo endereço no relatório e no README.
+- Concluir o relatório com os integrantes e preservar o commit correspondente à submissão.

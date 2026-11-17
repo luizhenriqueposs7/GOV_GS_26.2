@@ -1,0 +1,38 @@
+async page=>{
+  const origem=new URL(page.url()).origin;
+  if(new URL(origem).hostname!=='127.0.0.1')throw new Error('Use uma origem local de QA.');
+  await page.evaluate(async()=>{for(const r of await navigator.serviceWorker.getRegistrations())await r.unregister();for(const k of await caches.keys())await caches.delete(k);});
+  await page.goto('about:blank');await page.goto(origem+'/');
+  const conferir=(ok,texto)=>{if(!ok)throw new Error(texto);};
+  await page.locator('.main-nav').waitFor();
+  conferir(page.url().endsWith('#pedido'),'Entrada deve abrir Registrar em qualquer largura.');
+  const nomes=await page.locator('.main-nav [data-view]').allTextContents();
+  conferir(JSON.stringify(nomes)===JSON.stringify(['Registrar','Pedidos','Mapa','Gestão','Projeto']),'Menu deve separar as cinco tarefas.');
+  await page.locator('.main-nav [data-view=evidencias]').click();
+  conferir(!await page.locator('#assistente-form').isVisible(),'Consultas devem começar recolhidas.');
+  await page.locator('#apoio-orientacao > summary').click();
+  conferir(await page.locator('#assistente-form').isVisible(),'Orientação deve abrir sem outra tela.');
+  await page.locator('#apoio-fontes > summary').click();
+  conferir(!await page.locator('#assistente-form').isVisible()&&await page.locator('#fontes-form').isVisible(),'Abrir outra consulta deve recolher a anterior.');
+  await page.locator('#trabalhos-originais > summary').click();
+  await page.waitForFunction(()=>document.querySelector('#ativos').children.length===9);
+  await page.getByRole('button',{name:'Processar lote com workers',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelector('#lote-detalhes').open);
+  await page.locator('#lote-detalhes > summary').click();
+  await page.locator('.main-nav [data-view=revisao]').click();
+  await page.locator('#abrir-lote').click();
+  await page.waitForFunction(()=>document.querySelector('#lote-detalhes').open);
+  conferir(await page.locator('#lote-detalhes').evaluate(n=>n.open),'Lote deve abrir dentro da gestão.');
+  await page.locator('.section-nav [data-view=planejamento]').click();
+  conferir(await page.locator('.main-nav [data-view=revisao]').getAttribute('aria-current')==='page','Planejamento pertence à Gestão.');
+  await page.goto(origem+'/#passagem');
+  await page.locator('[data-panel=passagem]').waitFor({state:'visible'});
+  conferir(await page.locator('.main-nav [data-view=mapa]').getAttribute('aria-current')==='page','Passagem Livre pertence ao Mapa.');
+  conferir(await page.locator('.section-nav [data-view=passagem]').getAttribute('aria-current')==='page','A visão atual deve estar indicada.');
+  await page.locator('.main-nav [data-view=pedido]').click();
+  if(await page.getByRole('button',{name:'Preencher manualmente',exact:true}).isVisible())await page.getByRole('button',{name:'Preencher manualmente',exact:true}).click();
+  await page.locator('#descricao').fill('TESTE: relato mantido durante navegação pelas áreas.');
+  await page.locator('.main-nav [data-view=mapa]').click();await page.locator('.main-nav [data-view=pedido]').click();
+  conferir((await page.locator('#descricao').inputValue()).includes('relato mantido'),'Navegação não deve perder texto do pedido.');
+  return {entrada_registrar:true,cinco_destinos:true,consultas_progressivas:true,nove_disciplinas:true,lote_e_planejamento:true,passagem_no_mapa:true,pedido_preservado:true};
+}

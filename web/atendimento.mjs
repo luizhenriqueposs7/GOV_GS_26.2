@@ -8,8 +8,8 @@ export function atendimento(caso, {el, link, botao, enviar, api, durante, aviso,
   const id = caso.id, url = '/api/atendimentos/' + encodeURIComponent(id);
   const atual = caso.atendimento, servico = caso.preparacao.servico;
   const box = el('section', null, 'service-followup divider');
-  box.append(el('p', 'Do pedido à resposta', 'eyebrow'), el('h2', 'Encaminhar e acompanhar'));
-  box.append(el('p', 'O ZelaBairro prepara o pedido. O serviço responsável recebe pelo próprio canal, avalia e executa quando cabível. Você traz o protocolo e o retorno para acompanhar aqui.', 'muted'));
+  box.append(el('h2', 'Encaminhar e acompanhar'));
+  box.append(el('p', 'Use a ficha no canal indicado abaixo. Depois anote o protocolo e registre o retorno aqui. A central não envia nem executa o reparo.', 'muted'));
   const destino = el('div', null, 'inset');
   destino.append(el('h3', servico?.nome || 'Confirmar o serviço com o atendimento oficial'),
     el('p', 'Quem recebe: ' + (servico?.responsavel || 'A definir pelo atendimento oficial')),
@@ -28,11 +28,10 @@ export function atendimento(caso, {el, link, botao, enviar, api, durante, aviso,
     aviso('Ficha copiada. Confira os dados e anexe a foto no canal responsável.');
   })), baixar);
   if (caso.foto) {const foto = link('Baixar foto inicial', url + '/foto'); foto.download = 'ocorrencia.jpg'; acoes.append(foto);}
-  box.append(acoes);
   const passo = el('ol', null, 'handoff-steps');
   ['Conferir o serviço e concluir o envio no canal responsável.', 'Anotar o protocolo recebido ou iniciar uma demonstração.',
     'Registrar o retorno e, se houver correção, anexar uma foto posterior.', 'Conferir a correção ou solicitar nova análise.'].forEach(t => passo.append(el('li', t)));
-  box.append(passo);
+  const ficha=el('details',null,'followup-tools');ficha.append(el('summary','Ficha, foto e passos para encaminhar'),acoes,passo);box.append(ficha);
   if (atual) box.append(el('p', (atual.demonstracao ? 'DEMONSTRAÇÃO · ' : 'INFORMAÇÃO DO USUÁRIO · ') + etapas[atual.etapa], 'inset warning'),
     el('p', 'Protocolo: ' + atual.protocolo.numero + '. Sem confirmação ou sincronização com o órgão.', 'fine'));
   else if (caso.protocolo_oficial) box.append(el('p', 'Protocolo declarado: ' + caso.protocolo_oficial.numero + '. Salve o número abaixo para iniciar o acompanhamento.', 'fine'));
@@ -56,7 +55,7 @@ export function atendimento(caso, {el, link, botao, enviar, api, durante, aviso,
     form.addEventListener('submit', e => {e.preventDefault(); durante(salvar, async () => {
       await enviar(url + '/protocolo', {protocolo: numero.value, demonstracao: modo.value === 'demo'});
       await atualizar(); aviso('Acompanhamento local iniciado. Nenhum pedido foi enviado ao órgão pela central.');
-    });}); box.append(form);
+    });});const protocolo=el('details',null,'followup-action');protocolo.append(el('summary',atual?'Corrigir o protocolo anotado':'Anotar protocolo ou iniciar demonstração'),form);box.append(protocolo);
   }
   if (atual && atual.etapa !== 'correcao_verificada') {
     const form = el('form', null, 'spaced'), situacao = el('select');

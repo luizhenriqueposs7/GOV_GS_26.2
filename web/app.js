@@ -9,7 +9,7 @@ import {iniciarPlanejamento} from './planejamento.mjs';
 const $ = (id) => document.getElementById(id);
 const state = {casos: [], selecionado: null, edicao: null, ativos: false, etapa:0, mapa:null, mapaLocal:null, mapaId:null, camera:null};
 Object.assign(state, {foto: null, fotoAtual: null, fotoUrl: null, removerFoto: false, origemGeo: 'manual', precisaoGeo: null, envioId: null, assinatura: null, rascunhoId:null, previaFoto:null, regiaoAuto:null});
-const titulos = {mapa:'Mapa do bairro', passagem:'Passagem Livre', pedido: "Novo pedido", acompanhar: "Meus pedidos", revisao: "Revisão", evidencias: "Materiais e fontes", ouviai: 'OuviAí · dispositivo proposto', planejamento:'Planejar revisões'};
+const titulos = {mapa:'Mapa do bairro', passagem:'Passagem Livre', pedido: "Registrar pedido", acompanhar: "Pedidos", revisao: "Gestão · revisar pedido", evidencias: "Projeto e ferramentas", ouviai: 'OuviAí · dispositivo proposto', planejamento:'Gestão · planejar revisões'};
 const data = (valor) => valor ? new Date(valor).toLocaleString("pt-BR") : "—";
 function el(tag, texto, classe) {
   const node = document.createElement(tag);
@@ -73,7 +73,9 @@ async function navegar(view, foco = true) {
   if(view==='pedido') {$('pedido-form').hidden=false;$('request-progress').hidden=false;$('preparacao-resultado').hidden=true;mostrarEtapa(state.etapa,false);}
   $("aviso").hidden = true;
   document.querySelectorAll("[data-panel]").forEach(n => n.hidden = n.dataset.panel !== view);
-  document.querySelectorAll('.main-nav [data-view]').forEach(n => {const atual=n.dataset.view===view||(view==='ouviai'&&n.dataset.view==='evidencias')||(view==='planejamento'&&n.dataset.view==='revisao');n.classList.toggle('active',atual);if(atual)n.setAttribute('aria-current','page');else n.removeAttribute('aria-current');});
+  document.querySelectorAll('.main-nav [data-view]').forEach(n => {const atual=n.dataset.view===view||(view==='ouviai'&&n.dataset.view==='evidencias')||(view==='planejamento'&&n.dataset.view==='revisao')||(view==='passagem'&&n.dataset.view==='mapa');n.classList.toggle('active',atual);if(atual)n.setAttribute('aria-current','page');else n.removeAttribute('aria-current');});
+  document.querySelectorAll('[data-nav-for]').forEach(n=>{n.hidden=!n.dataset.navFor.split(' ').includes(view);});
+  document.querySelectorAll('.section-nav [data-view]').forEach(n=>{if(n.dataset.view===view)n.setAttribute('aria-current','page');else n.removeAttribute('aria-current');});
   $("breadcrumb").textContent = titulos[view];
   if (location.hash !== "#" + view) history.replaceState(null, "", "#" + view);
   if (foco) { $("principal").focus(); window.scrollTo(0, 0); }
@@ -83,9 +85,11 @@ async function navegar(view, foco = true) {
   finally {if(view==='acompanhar')$('detalhe-caso').hidden=false;}
 }
 document.querySelectorAll("[data-view]").forEach(n => n.addEventListener("click", () => navegar(n.dataset.view)));
+async function abrirLote(){await navegar('revisao',false);$('lote-detalhes').open=true;$('lote-detalhes').scrollIntoView({block:'start'});}
+$('abrir-lote').addEventListener('click',abrirLote);
 document.querySelector('.skip').addEventListener('click',e=>{e.preventDefault();$('principal').focus();});
 window.addEventListener("hashchange", () => navegar(location.hash.slice(1)));
-document.querySelector(".brand").addEventListener("click", () => navegar("mapa"));
+document.querySelector(".brand").addEventListener("click", () => navegar("pedido"));
 async function atualizar() {
   const [casos, indicadores] = await Promise.all([api("/api/atendimentos"), api("/api/indicadores")]);
   state.casos = casos;
@@ -196,26 +200,27 @@ async function detalhe(id, rolar = true) {
   const box = el("article", null, "panel detail");
   box.dataset.pedido=id;
   box.append(badge(caso.situacao), el('h2', 'Pedido ' + caso.id.slice(0,8).toUpperCase()), el('p',caso.descricao,'occurrence-body'), el("p", "Registro local " + caso.id, "fine"));
+  box.append(el('p',(caso.local||'Referência não informada')+' · '+caso.bairro,'muted'),evidenciaVisual(caso));
+  const acoes=el('div',null,'actions');
+  acoes.append(botao('Revisar este pedido',async()=>{await navegar('revisao');$('revisao-caso').value=id;await resumoRevisao();},'secondary'),botao('Completar ou corrigir informações',()=>editar(caso),'quiet'));box.append(acoes);
   const grid = el("div", null, "details-grid"), principal = el("div"), decisao = el("div");
   const dl = el("dl"); for(const [nome,valor] of [["Bairro",caso.bairro],["Local",caso.local || "Não informado"],["Serviço",caso.preparacao.servico?.nome || "Ainda não definido"],["Pendências",caso.preparacao.faltantes.join(", ") || "Informações disponíveis para conferência"]]) dl.append(el("dt",nome),el("dd",valor));
   principal.append(dl);
-  principal.append(evidenciaVisual(caso));
   if(caso.preparacao.fonte) principal.append(link("Ver fonte do encaminhamento",caso.preparacao.fonte));
   if(caso.preparacao.pergunta) principal.append(el("p",caso.preparacao.pergunta,"inset warning"));
-  principal.append(botao("Completar ou corrigir informações",()=>editar(caso),"quiet"));
   decisao.append(el("h3","Análise original do RPA"),el("p",caso.triagem_original.category+" · prioridade "+caso.triagem_original.priority,"inset"),el("p","Confiança heurística: "+caso.triagem_original.confidence+". Revisão indicada pelo RPA: "+(caso.triagem_original.review_required?"sim":"não")+".","fine"));
   decisao.append(el("p",caso.exige_revisao?"A central exige revisão deste caso.":"A confirmação no ZelaBairro também passa por conferência.","fine"));
   if(caso.revisao) {decisao.append(el("h3","Decisão revisada"),el("p",caso.revisao.prioridade+" · "+caso.revisao.justificativa,"inset"),el("p",caso.revisao.revisor+" · "+data(caso.revisao.data),"fine"));}
   if(caso.frontend) decisao.append(el("p","ZelaBairro: "+caso.frontend.id+" · protocolo local.","fine"));
   if(caso.protocolo_oficial) decisao.append(el("p","Protocolo externo informado: "+caso.protocolo_oficial.numero+". Não verificado no órgão.","inset warning"));
-  grid.append(principal,decisao); box.append(grid);
+  grid.append(principal,decisao);const analise=el('details',null,'case-analysis');analise.append(el('summary','Dados do local, triagem e decisão'),grid);box.append(analise);
   box.append(atendimento(caso,{el,link,botao,enviar,api,durante,aviso,atualizar,reduzirFoto,data}));
   const forms = el("div",null,"details-grid divider"), contestar = el("form");
   contestar.append(el("h3","Pedir uma nova análise"));const motivo=el("textarea"); motivo.id="motivo-contestacao";motivo.minLength=10;motivo.maxLength=500;motivo.required=true;motivo.rows=3;const lm=el("label","Explique o que precisa ser reconsiderado");lm.htmlFor=motivo.id;
   const bc=el("button","Solicitar nova revisão","secondary");bc.type="submit";contestar.append(lm,motivo,bc);
   contestar.addEventListener("submit",e=>{e.preventDefault();durante(bc,async()=>{await enviar("/api/atendimentos/"+id+"/contestacao",{motivo:motivo.value});await atualizar();aviso("Nova análise solicitada. A revisão anterior ficou preservada no histórico.");});});
-  forms.append(contestar);box.append(forms,el("h3","Histórico do pedido","spaced"));
-  box.append(historico(caso));
+  forms.append(contestar);const contestacao=el('details',null,'case-contest');contestacao.append(el('summary','Discorda da decisão? Peça uma nova análise.'),forms);
+  const memoria=el('details',null,'case-history');memoria.append(el('summary','Ver histórico completo do pedido'),historico(caso));box.append(contestacao,memoria);
   $("detalhe-caso").replaceChildren(box);
   if (rolar) box.scrollIntoView({block:"start"});
 }
@@ -294,7 +299,7 @@ async function ativos() {
     (m.videos || []).forEach(v => links.append(link(v.nome, v.url)));
     if(m.id==='iot')links.append(botao('Explorar o dispositivo proposto',()=>navegar('ouviai'),'secondary'));
     if(m.id==='quantica')links.append(botao('Comparar planos de revisão',()=>navegar('planejamento'),'secondary'));
-    if(m.id==='cluster')links.append(botao('Processar lote com workers',async()=>{await navegar('revisao');$('lote-form').scrollIntoView({block:'start'});},'secondary'));
+    if(m.id==='cluster')links.append(botao('Processar lote com workers',abrirLote,'secondary'));
     row.append(identidade, conteudo, links); box.append(row);
   });
   state.ativos = true;
@@ -419,7 +424,7 @@ function renderMapa() {
       area.append(el('h3','Outros relatos próximos'),el('p','Até 100 m em linha reta. Proximidade não confirma que seja o mesmo problema.'));
       perto.slice(0,3).forEach(v=>area.append(botao(Math.round(v.metros)+' m · '+v.caso.descricao,()=>{state.mapaId=v.caso.id;$('mapa-busca').value='';$('mapa-filtro').value='todos';abrir(v.caso.id);},'nearby-case')));box.append(area);
     }
-    const actions=el('div',null,'actions');actions.append(botao('Abrir histórico',async()=>{await navegar('acompanhar');await detalhe(caso.id);},'secondary'),botao('Revisar pedido',async()=>{await navegar('revisao');$('revisao-caso').value=caso.id;await resumoRevisao();},'primary'));box.append(actions);
+    const actions=el('div',null,'actions');actions.append(botao('Acompanhar pedido',async()=>{await navegar('acompanhar');await detalhe(caso.id);},'secondary'),botao('Revisar pedido',async()=>{await navegar('revisao');$('revisao-caso').value=caso.id;await resumoRevisao();},'primary'));box.append(actions);
   }else box.append(el('h2','O primeiro ponto começa com você.'),el('p',state.casos.length?'Nenhum pedido corresponde à busca. Ajuste os filtros.':'Registre uma ocorrência com dados fictícios para acompanhar o processo.','muted'));
   $('mapa-contagem').textContent=casos.length+' pedido'+(casos.length===1?'':'s');
   const lista=$('mapa-lista');lista.replaceChildren();
@@ -510,4 +515,4 @@ api('/api/status').then(status=>{
   document.querySelector('.demo-pill').textContent=status.modo;
   document.querySelector('.demo-pill').title='Assistente: '+status.modelo_genai+(status.genai_configurada?'':' · chave ainda não configurada');
 }).catch(()=>{});
-navegar(location.hash.slice(1)||(matchMedia('(max-width:680px)').matches?'pedido':'mapa'),false);
+navegar(location.hash.slice(1)||'pedido',false);

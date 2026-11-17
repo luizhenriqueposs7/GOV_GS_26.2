@@ -11,5 +11,6 @@ data/
 .DS_Store
 .test-tmp/
 *.mp4
+!docs/video/ZelaBairro_Final_5min.mp4
 *.wav
 *.mp3
