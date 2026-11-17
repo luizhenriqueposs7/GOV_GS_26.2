@@ -125,7 +125,7 @@ Tabela 1 - Tempos dos cenários simulados no iSPD
 
 Fonte: relatório e modelos de Cluster Computing entregues pelo grupo.
 
-Os 49,72% pertencem ao iSPD. Na central, cada minilote mede seus tempos: threads locais ou invocações HTTP na Vercel, sem garantia de máquinas distintas. Rede, inicialização e banco podem superar ganhos. O modo com workers limita a gravação a 100 registros por lote.
+Os 49,72% pertencem ao iSPD. Na central, cada minilote mede seus tempos: threads locais ou invocações HTTP na Vercel, sem garantia de máquinas distintas. Rede, inicialização e banco podem superar ganhos. O modo com workers limita a gravação a 50 registros aceitos por lote.
 
 <!-- pagina -->
 # DESENVOLVIMENTO

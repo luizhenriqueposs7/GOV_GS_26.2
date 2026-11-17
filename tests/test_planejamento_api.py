@@ -98,3 +98,11 @@ class PlanejamentoAPITest(unittest.TestCase):
             r=self.client.post('/api/cluster/lotes',headers=self.chave,files={'arquivo':('lote.csv',csv,'text/csv')},data={'workers':'2'})
         self.assertEqual(r.status_code,503,r.text)
         self.assertEqual(len(self.app.state.repo.listar()),antes)
+
+    def test_lote_grande_exige_divisao_antes_de_gravar(self):
+        antes=len(self.app.state.repo.listar())
+        csv=('case_id,description,neighborhood\n'+''.join(f'{i},Calcada danificada no teste,Bairro ficticio\n' for i in range(51))).encode()
+        r=self.client.post('/api/cluster/lotes',headers=self.chave,files={'arquivo':('lote.csv',csv,'text/csv')},data={'workers':'4'})
+        self.assertEqual(r.status_code,422,r.text)
+        self.assertIn('50 registros',r.text)
+        self.assertEqual(len(self.app.state.repo.listar()),antes)
