@@ -1,6 +1,6 @@
 # Luiz Henrique Poss · RM562177
 
-Suas cenas somam cerca de 3min05s e são intercaladas com os colegas. Use as falas como base e explique com suas palavras, acompanhando os cliques.
+Você apresenta Generative AI, Governança e Business Analytics, PLN e Cluster. Frontend/mobile, abertura e encerramento permanecem com você para conduzir o mesmo pedido. Suas cenas somam **4min20s**, intercaladas com os colegas. Use as falas como base, acompanhando os cliques.
 
 ## 00:00–00:15 · O problema
 
@@ -16,13 +16,33 @@ Suas cenas somam cerca de 3min05s e são intercaladas com os colegas. Use as fal
 
 Se a foto/GPS falhar, mostre a alternativa manual e diga isso. A cena precisa do envio atual e do recibo, não apenas da prévia. Envie o ID aos colegas e evite editar em paralelo.
 
-## 04:25–04:50 · IoT
+## 01:20–01:55 · Cluster Computing
 
-**Tela:** Projeto → OuviAí. Toque em Simular campainha e mostre o aviso visual.
+**Preparação:** separar `docs/exemplos/cluster-revisoes.csv`. Digitar a chave na Gestão sem mostrar seu arquivo. Felipe já terá explicado a triagem original do pedido.
 
-**Fala base:** “O OuviAí propõe transformar sons, como uma campainha, em aviso visual. O trabalho original usa reconhecimento de áudio no celular. Aqui mostramos o comportamento de uma possível estação. Esses eventos são simulados: ainda não há dispositivo nem previsões reais chegando à central.”
+**Ações:** Gestão → Importar lote. Selecionar o CSV, executar com 2 workers e mostrar aceitos/rejeitados, IDs e tempos. Repetir com 4 e conferir IDs. Registrar as duas execuções atuais; cortar apenas a espera, identificando o corte.
 
-Não diga que o botão identificou um som. Se usar vídeo original, identifique como gravação anterior do módulo. A interface não substitui inferência atual do modelo de áudio.
+**Fala base:** “O Cluster distribui o pipeline do RPA entre dois ou quatro workers lógicos, mantendo o mesmo ID no mesmo worker. Depois, a central valida e grava o conjunto. Aqui estão os IDs e os tempos desta execução. Isso não comprova máquinas físicas distintas nem que quatro workers sempre sejam mais rápidos.”
+
+Não comparar a latência da Vercel diretamente com os 49,72% históricos do iSPD. Reimportar o mesmo CSV preserva IDs; mudar descrição/bairro invalida revisões anteriores. Gravar as operações completas e selecionar os resultados para os 35 segundos, sem sugerir resposta instantânea.
+
+**Passagem:** “O lote foi processado. O Luis vai mostrar como organizar a capacidade de revisão.”
+
+## 02:45–03:20 · Generative AI
+
+**Ações:** em Projeto → Vincular uma consulta a um pedido, selecionar o caso se a pergunta tratar dele. Abrir Consultar um serviço municipal e perguntar, por exemplo, “Como solicitar manutenção de uma calçada danificada em praça pública de São Paulo?”. Executar e mostrar resposta/fonte atuais.
+
+**Fala base:** “O assistente consulta as fontes dos serviços municipais e apresenta a orientação com sua origem. Esta é uma resposta da execução atual. A versão online usa o adaptador Groq; o modelo original local permanece nos materiais. Essa orientação ajuda a conferir o encaminhamento, mas não abre uma solicitação na prefeitura.”
+
+Não apresentar os 16/16 casos conhecidos do modelo local como acurácia do adaptador online. Na falha, mostrar indisponibilidade ou gravar outra tomada atual quando o serviço voltar.
+
+## 03:20–03:50 · PLN
+
+**Ações:** abrir Pesquisar prevenção de desastres e pesquisar “enchentes”. Mostrar trecho e origem com página/seção. Vincular ao pedido somente se houver relação com o problema; para calçada sem contexto de desastre, consultar sem vínculo.
+
+**Fala base:** “O PLN permite consultar o corpus de prevenção de desastres e recuperar a origem de cada trecho. Não é um alerta sobre a situação atual do bairro. Se o conteúdo ajudar a analisar um pedido, ele pode ser vinculado ao histórico. Neste caso, não vamos forçar uma relação que o relato não sustenta.”
+
+O corpus ainda tem 39 registros sem decisão humana na planilha de revisão. Não apresentá-lo como integralmente validado.
 
 ## 04:50–06:15 · Governança e Business Analytics
 

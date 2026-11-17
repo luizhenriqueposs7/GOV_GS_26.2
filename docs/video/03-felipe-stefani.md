@@ -1,22 +1,14 @@
 # Felipe Stefani Honorato · RM563380
 
-Seu trecho vai de 02:45 a 04:25. As ferramentas ficam em Projeto e abrem uma por vez. Receba o ID do pedido do Luiz; vincule somente o que for pertinente.
+Você apresenta **RPA e Visão Computacional**, em duas entradas: 01:00–01:20 e 03:50–04:25, somando **55 segundos**. Receba o ID do pedido do Luiz. A inferência de um recorte independente deve ficar sem vínculo ao pedido.
 
-## 02:45–03:20 · Generative AI
+## 01:00–01:20 · RPA
 
-**Ações:** em Projeto → Vincular uma consulta a um pedido, selecionar o caso se a pergunta tratar dele. Abrir Consultar um serviço municipal e perguntar, por exemplo, “Como solicitar manutenção de uma calçada danificada em praça pública de São Paulo?”. Executar e mostrar resposta/fonte atuais.
+**Ações:** Pedidos → abrir o ID criado pelo Luiz → Dados do local, triagem e decisão. Mostrar categoria, prioridade e indicação de revisão da triagem original. Manter esse pedido sem revisão humana nesta etapa. A execução do CSV em workers será apresentada pelo Luiz na cena seguinte.
 
-**Fala base:** “O assistente consulta as fontes dos serviços municipais e apresenta a orientação com sua origem. Esta é uma resposta da execução atual. A versão online usa o adaptador Groq; o modelo original local permanece nos materiais. Essa orientação ajuda a conferir o encaminhamento, mas não abre uma solicitação na prefeitura.”
+**Fala base:** “O RPA reaproveita as regras do trabalho original para classificar o relato. Aqui aparecem a categoria, a prioridade e a indicação de revisão. Essa confiança é heurística, não uma probabilidade de acerto. A sugestão fica registrada separadamente da decisão humana.”
 
-Não apresentar os 16/16 casos conhecidos do modelo local como acurácia do adaptador online. Na falha, mostrar indisponibilidade ou gravar outra tomada atual quando o serviço voltar.
-
-## 03:20–03:50 · PLN
-
-**Ações:** abrir Pesquisar prevenção de desastres e pesquisar “enchentes”. Mostrar trecho e origem com página/seção. Vincular ao pedido somente se houver relação com o problema; para calçada sem contexto de desastre, consultar sem vínculo.
-
-**Fala base:** “O PLN permite consultar o corpus de prevenção de desastres e recuperar a origem de cada trecho. Não é um alerta sobre a situação atual do bairro. Se o conteúdo ajudar a analisar um pedido, ele pode ser vinculado ao histórico. Neste caso, não vamos forçar uma relação que o relato não sustenta.”
-
-O corpus ainda tem 39 registros sem decisão humana na planilha de revisão. Não apresentá-lo como integralmente validado.
+Se a regra dispensar revisão de um caso de acessibilidade, apontar que a central ainda exige conferência. Explicar somente a saída que realmente apareceu, sem prometer uma classificação específica antes de executar.
 
 ## 03:50–04:25 · Visão Computacional
 

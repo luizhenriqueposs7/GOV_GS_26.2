@@ -1,16 +1,6 @@
 # Luis Filipe Chaves Amorim · RM564706
 
-Seu trecho vai de 01:00 a 02:45. Aguarde o ID criado pelo Luiz e use pedidos pendentes antes de ele revisar. Use os tópicos como lembrete, sem ler blocos na gravação.
-
-## 01:00–01:55 · RPA e Cluster
-
-**Preparação:** separar `docs/exemplos/cluster-revisoes.csv`. A chave é digitada na Gestão, sem mostrar seu arquivo.
-
-**Ações:** Gestão → Importar lote. Selecionar CSV, escolher 2 workers, executar e mostrar aceitos/rejeitados, IDs e tempos. Repetir com 4 e conferir IDs. Usar a triagem de um caso para explicar categoria/prioridade quando necessário. As duas execuções devem ser atuais, com cortes identificados nas esperas.
-
-**Fala base:** “O RPA reaproveita o pipeline do trabalho original para validar o CSV e fazer a triagem. O Cluster distribui o lote entre dois ou quatro workers lógicos, mantendo o mesmo ID no mesmo worker. Depois, a central valida e grava o conjunto. Aqui estão os resultados e os tempos desta execução. Isso não comprova máquinas físicas distintas nem que quatro workers sempre sejam mais rápidos.”
-
-Não comparar a latência da Vercel diretamente com os 49,72% históricos do iSPD. A confiança heurística do RPA não é probabilidade de acerto. Reimportar o mesmo CSV preserva IDs; mudar descrição/bairro invalida revisões anteriores.
+Você apresenta **Computação Quântica e IoT**, em duas entradas: 01:55–02:45 e 04:25–04:50, somando **1min15s**. Receba o ID criado pelo Luiz e use pedidos pendentes antes da revisão. Use os tópicos como lembrete, sem ler blocos na gravação.
 
 ## 01:55–02:45 · Computação Quântica
 
@@ -23,3 +13,11 @@ Não prometer empate com a referência nem benefício 5 sem conferir o resultado
 **Passagem:** “O pedido continua aguardando revisão. Agora vamos mostrar as ferramentas que ajudam a conferir o contexto.”
 
 Inclua a passagem no tempo reservado, sem longa apresentação de código.
+
+## 04:25–04:50 · IoT
+
+**Tela:** Projeto → OuviAí. Toque em Simular campainha e mostre o aviso visual.
+
+**Fala base:** “O OuviAí propõe transformar sons, como uma campainha, em aviso visual. O trabalho original usa reconhecimento de áudio no celular. Aqui mostramos o comportamento de uma possível estação. Esses eventos são simulados: ainda não há dispositivo nem previsões reais chegando à central.”
+
+Não diga que o botão identificou um som. Se usar vídeo original, identifique como gravação anterior do módulo. A interface não substitui inferência atual do modelo de áudio.
