@@ -22,4 +22,4 @@ Sem áudio transmitido/armazenado. Sem custos. Sem chamar o modelo alternativo d
 - [x] Permitir compilação WASM na CSP; manter script-src sem unsafe-eval; atualizar SW e versão.
 - [x] Testar modelo real com áudio identificado e microfone virtual no Chrome, negativa de permissão e parada/navegação. Conferir layout móvel. WebKit Windows sem APIs de áudio: conferida orientação de indisponibilidade, sem alegar inferência ou teste físico no iPhone.
 - [x] Atualizar catálogo e materiais que descrevem simulação, roteiro de Luis e empacotamento. Não substituir o clipe antigo com legenda de execução real.
-- [ ] Rodar suites adequadas, revisão focada, publicar e verificar modelo/fluxo no HTTPS oficial.
+- [x] Rodar suites adequadas (193 Python e 41 JS), revisão focada, publicar e verificar modelo/fluxo no HTTPS oficial. Commit de implementação d234230, versão 0.6.4: CDN, reconhecimento de batida e parada conferidos com microfone virtual.
