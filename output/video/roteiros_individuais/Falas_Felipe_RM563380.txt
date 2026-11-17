@@ -1,0 +1,15 @@
+Felipe Stefani Honorato / RM563380
+FALAS PARA GRAVAR
+Grave um arquivo por cena. Não leia títulos, horários ou nomes de arquivo.
+
+01:00–01:20 · RPA
+Arquivo: 02_rpa_felipe.m4a
+
+O RPA reaproveita as regras do trabalho original para classificar o relato. Aqui aparecem a categoria, a prioridade e a indicação de revisão. Essa confiança é heurística, não uma probabilidade de acerto. A sugestão fica registrada separadamente da decisão humana.
+
+03:50–04:25 · Visão Computacional
+Arquivo: 07_visao_felipe.m4a
+
+Este é o modelo de Visão entregue na disciplina, aplicado a um recorte de concreto do acervo original. A central executa a inferência e mostra o resultado. Ele sinaliza fissuras dentro desse escopo; não mede buracos, não determina risco estrutural e não certifica acessibilidade. Essa imagem também não representa um reparo do pedido fotografado pelo Luiz.
+
+Essas ferramentas fornecem apoio e evidências. A decisão e o acompanhamento continuam sob conferência humana.

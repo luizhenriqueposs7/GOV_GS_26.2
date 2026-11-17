@@ -1,0 +1,26 @@
+[
+  {
+    "nome": "Luiz Henrique Poss",
+    "rm": "RM562177",
+    "pdf": "Roteiro_Luiz_Henrique_RM562177.pdf",
+    "paginas": 5,
+    "falas": "Falas_Luiz_Henrique_RM562177.txt",
+    "blocos_de_fala": 8
+  },
+  {
+    "nome": "Luis Filipe Chaves Amorim",
+    "rm": "RM564706",
+    "pdf": "Roteiro_Luis_Filipe_RM564706.pdf",
+    "paginas": 3,
+    "falas": "Falas_Luis_Filipe_RM564706.txt",
+    "blocos_de_fala": 3
+  },
+  {
+    "nome": "Felipe Stefani Honorato",
+    "rm": "RM563380",
+    "pdf": "Roteiro_Felipe_RM563380.pdf",
+    "paginas": 3,
+    "falas": "Falas_Felipe_RM563380.txt",
+    "blocos_de_fala": 3
+  }
+]

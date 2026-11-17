@@ -23,7 +23,7 @@ O vídeo deve mostrar a continuidade entre foto, sugestão, correção humana, f
 | 00:00–00:15 | Luiz | Registrar: explicar problema e propósito. |
 | 00:15–01:00 | Luiz | Foto no celular, GPS, conferência, envio e recibo. Guardar ID. |
 | 01:00–01:20 | Felipe | Pedidos → triagem original do pedido: categoria, prioridade e indicação de revisão. |
-| 01:20–01:55 | Luiz | Gestão → Importar lote: CSV com 2/4 workers, IDs e tempos atuais. |
+| 01:20–01:55 | Luiz | Gestão → Importar lote, em base isolada: CSV com 2/4 workers, IDs e tempos atuais. |
 | 01:55–02:45 | Luis Filipe | Planejar revisões: pedido móvel e dois pendentes, capacidade, comparação e plano justificado. |
 | 02:45–03:20 | Luiz | Projeto → Consultar um serviço municipal: resposta atual e fonte. |
 | 03:20–03:50 | Luiz | Pesquisar prevenção de desastres: trecho, origem e página/seção. |

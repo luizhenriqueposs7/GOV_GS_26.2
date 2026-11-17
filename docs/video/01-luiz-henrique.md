@@ -18,11 +18,11 @@ Se a foto/GPS falhar, mostre a alternativa manual e diga isso. A cena precisa do
 
 ## 01:20–01:55 · Cluster Computing
 
-**Preparação:** separar `docs/exemplos/cluster-revisoes.csv`. Digitar a chave na Gestão sem mostrar seu arquivo. Felipe já terá explicado a triagem original do pedido.
+**Preparação:** a captura do Cluster será feita em base local de teste isolada, com o mesmo pipeline e `docs/exemplos/cluster-revisoes.csv`. Não é execução HTTP na Vercel. A chave sintética não é a chave da central oficial. Felipe já terá explicado a triagem original do pedido.
 
-**Ações:** Gestão → Importar lote. Selecionar o CSV, executar com 2 workers e mostrar aceitos/rejeitados, IDs e tempos. Repetir com 4 e conferir IDs. Registrar as duas execuções atuais; cortar apenas a espera, identificando o corte.
+**Ações:** Gestão → Importar lote. Selecionar o CSV, executar com 2 workers e mostrar aceitos/rejeitados, workers e tempos. Repetir com 4 e conferir as contagens. Os IDs preservados estão no manifesto da captura. Registrar as duas execuções atuais; cortar apenas a espera, identificando o corte.
 
-**Fala base:** “O Cluster distribui o pipeline do RPA entre dois ou quatro workers lógicos, mantendo o mesmo ID no mesmo worker. Depois, a central valida e grava o conjunto. Aqui estão os IDs e os tempos desta execução. Isso não comprova máquinas físicas distintas nem que quatro workers sempre sejam mais rápidos.”
+**Fala base:** “Neste ensaio local, o Cluster distribui o pipeline do RPA entre dois ou quatro workers lógicos, mantendo o mesmo ID no mesmo worker. Depois, a central valida e grava o conjunto. Aqui estão os workers e os tempos desta execução. Isso não comprova máquinas físicas distintas nem que quatro workers sempre sejam mais rápidos.”
 
 Não comparar a latência da Vercel diretamente com os 49,72% históricos do iSPD. Reimportar o mesmo CSV preserva IDs; mudar descrição/bairro invalida revisões anteriores. Gravar as operações completas e selecionar os resultados para os 35 segundos, sem sugerir resposta instantânea.
 

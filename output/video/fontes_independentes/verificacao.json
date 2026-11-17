@@ -1,0 +1,86 @@
+[
+  {
+    "id": "00_abertura",
+    "arquivo": "00_abertura.webm",
+    "fps": 25.0,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "quadros_decodificados": 397,
+    "duracao_segundos": 15.88,
+    "bytes": 1373307,
+    "audio": false,
+    "origem": "https://gov262.vercel.app"
+  },
+  {
+    "id": "03_cluster_2_4_workers",
+    "arquivo": "03_cluster_2_4_workers.webm",
+    "fps": 25.0,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "quadros_decodificados": 688,
+    "duracao_segundos": 27.52,
+    "bytes": 2705427,
+    "audio": false,
+    "origem": "http://127.0.0.1:8851"
+  },
+  {
+    "id": "05_generative_ai",
+    "arquivo": "05_generative_ai.webm",
+    "fps": 25.0,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "quadros_decodificados": 1138,
+    "duracao_segundos": 45.52,
+    "bytes": 2995934,
+    "audio": false,
+    "origem": "https://gov262.vercel.app"
+  },
+  {
+    "id": "06_pln",
+    "arquivo": "06_pln.webm",
+    "fps": 25.0,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "quadros_decodificados": 810,
+    "duracao_segundos": 32.4,
+    "bytes": 3772623,
+    "audio": false,
+    "origem": "https://gov262.vercel.app"
+  },
+  {
+    "id": "07_visao_computacional",
+    "arquivo": "07_visao_computacional.webm",
+    "fps": 25.0,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "quadros_decodificados": 720,
+    "duracao_segundos": 28.8,
+    "bytes": 2110989,
+    "audio": false,
+    "origem": "https://gov262.vercel.app"
+  },
+  {
+    "id": "08_iot_ouviai_simulacao",
+    "arquivo": "08_iot_ouviai_simulacao.webm",
+    "fps": 25.0,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "quadros_decodificados": 817,
+    "duracao_segundos": 32.68,
+    "bytes": 2892628,
+    "audio": false,
+    "origem": "https://gov262.vercel.app"
+  }
+]

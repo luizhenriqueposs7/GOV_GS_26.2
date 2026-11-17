@@ -1,0 +1,15 @@
+Luis Filipe Chaves Amorim / RM564706
+FALAS PARA GRAVAR
+Grave um arquivo por cena. Não leia títulos, horários ou nomes de arquivo.
+
+01:55–02:45 · Computação Quântica
+Arquivo: 04_quantica_luis_filipe.m4a
+
+Com a fila disponível, escolhemos o que cabe nesta rodada. As prioridades e os minutos são conferidos pelo responsável, não estimados automaticamente pela IA. Comparamos a fila, a solução exata e QAOA em simulador. O gestor vê também os casos adiados e justifica a escolha. O plano organiza a revisão, mas não aprova os pedidos. Esta execução usa CPU; não demonstramos vantagem quântica.
+
+O pedido continua aguardando revisão. Agora vamos mostrar as ferramentas que ajudam a conferir o contexto.
+
+04:25–04:50 · IoT
+Arquivo: 08_iot_luis_filipe.m4a
+
+O OuviAí propõe transformar sons, como uma campainha, em aviso visual. O trabalho original usa reconhecimento de áudio no celular. Aqui mostramos o comportamento de uma possível estação. Esses eventos são simulados: ainda não há dispositivo nem previsões reais chegando à central.

@@ -1,0 +1,217 @@
+{
+  "capturado_em_utc": "2026-11-17T18:30:59.222735+00:00",
+  "url_oficial": "https://gov262.vercel.app",
+  "cluster_ambiente": "http://127.0.0.1:8851",
+  "resolucao": [
+    1920,
+    1080
+  ],
+  "fps": 25,
+  "audio": false,
+  "velocidade": 1.0,
+  "endpoints_filmados_sem_mock": true,
+  "clipes": [
+    {
+      "id": "00_abertura",
+      "apresentador": "Luiz Henrique",
+      "arquivo": "00_abertura.webm",
+      "origem": "https://gov262.vercel.app",
+      "status": "capturado",
+      "resultado": {
+        "tela": "Registrar",
+        "cadastro_executado": false
+      },
+      "duracao_segundos": 15.88,
+      "resolucao": [
+        1920,
+        1080
+      ],
+      "bytes": 1373307,
+      "primeiro_quadro_decodificado": true
+    },
+    {
+      "id": "03_cluster_2_4_workers",
+      "apresentador": "Luiz Henrique",
+      "arquivo": "03_cluster_2_4_workers.webm",
+      "origem": "http://127.0.0.1:8851",
+      "status": "capturado",
+      "resultado": {
+        "csv": "docs/exemplos/cluster-revisoes.csv",
+        "dados": "demonstração",
+        "ids_preservados": true,
+        "execucoes": [
+          {
+            "workers": 2,
+            "ids": [
+              "e637d82f-eba1-4b95-9718-6cfde765b3fb",
+              "ff728568-3322-4cb0-87f8-7346cb528543",
+              "d55e4586-1367-4734-93dc-1f02910b1387",
+              "b2cbb73d-72d5-4e33-af0c-d1c160f51db6",
+              "c8195052-b2b7-4791-b14b-ecbbd0d2eff5",
+              "edb1aa15-6289-4305-8ddc-290c2e40f7e0",
+              "bdc259c3-fcfd-4f2d-a0f0-cfd1bcc18901",
+              "ddd00f94-24e1-4221-9fda-9d1c8cf80d5b"
+            ],
+            "tempo_ms": 150.89180000359192,
+            "tempo_persistencia_ms": 68.73220001580194,
+            "tempo_total_ms": 681.6262999782339,
+            "modo": "Threads locais · RPA original"
+          },
+          {
+            "workers": 4,
+            "ids": [
+              "e637d82f-eba1-4b95-9718-6cfde765b3fb",
+              "ff728568-3322-4cb0-87f8-7346cb528543",
+              "d55e4586-1367-4734-93dc-1f02910b1387",
+              "b2cbb73d-72d5-4e33-af0c-d1c160f51db6",
+              "c8195052-b2b7-4791-b14b-ecbbd0d2eff5",
+              "edb1aa15-6289-4305-8ddc-290c2e40f7e0",
+              "bdc259c3-fcfd-4f2d-a0f0-cfd1bcc18901",
+              "ddd00f94-24e1-4221-9fda-9d1c8cf80d5b"
+            ],
+            "tempo_ms": 108.05989999789745,
+            "tempo_persistencia_ms": 30.690699990373105,
+            "tempo_total_ms": 140.67309998790734,
+            "modo": "Threads locais · RPA original"
+          }
+        ]
+      },
+      "duracao_segundos": 27.52,
+      "resolucao": [
+        1920,
+        1080
+      ],
+      "bytes": 2705427,
+      "primeiro_quadro_decodificado": true
+    },
+    {
+      "id": "05_generative_ai",
+      "apresentador": "Luiz Henrique",
+      "arquivo": "05_generative_ai.webm",
+      "origem": "https://gov262.vercel.app",
+      "status": "capturado",
+      "resultado": {
+        "pergunta": "Calçada danificada em praça pública",
+        "vinculo_pedido": null,
+        "status": "respondido",
+        "modelo": "qwen/qwen3.8-27b",
+        "resposta": "O Portal SP156 separa os pedidos conforme o tipo de calçada. Para passeio particular danificado ou inexistente, o catálogo orienta registrar uma denúncia. Para uma calçada pública que precisa de conserto, há um pedido de manutenção. Também existe uma opção de sugerir a construção de calçada em área pública ou praça.",
+        "fonte": {
+          "id": "CAL.2",
+          "documento": "CAL",
+          "titulo": "Serviços do Portal 156 — Secretaria Municipal das Subprefeituras",
+          "categoria": "Acessibilidade",
+          "secao": "Calçada particular danificada e manutenção de calçada pública",
+          "texto": "O Portal SP156 separa os pedidos conforme o tipo de calçada. Para passeio particular danificado ou inexistente, o catálogo orienta registrar uma denúncia. Para uma calçada pública que precisa de conserto, há um pedido de manutenção. Também existe uma opção de sugerir a construção de calçada em área pública ou praça.",
+          "url": "https://prefeitura.sp.gov.br/web/subprefeituras/w/pracas_de_atendimento/335674",
+          "consulta": "2026-11-07"
+        }
+      },
+      "duracao_segundos": 45.52,
+      "resolucao": [
+        1920,
+        1080
+      ],
+      "bytes": 2995934,
+      "primeiro_quadro_decodificado": true
+    },
+    {
+      "id": "06_pln",
+      "apresentador": "Luiz Henrique",
+      "arquivo": "06_pln.webm",
+      "origem": "https://gov262.vercel.app",
+      "status": "capturado",
+      "resultado": {
+        "consulta": "enchentes",
+        "vinculo_pedido": null,
+        "resultados": 5,
+        "origens": [
+          {
+            "linha_corpus": 17,
+            "fonte": "chuvas_intensas.pdf",
+            "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/svsa/enchentes/cartilha-de-orientacao-a-populacao-no-periodo-de-alerta-de-chuvas-intensas/@@download/file",
+            "paginas": [
+              4,
+              4
+            ],
+            "secao": "Preparação para chuvas"
+          },
+          {
+            "linha_corpus": 34,
+            "fonte": "chuvas_intensas.pdf",
+            "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/svsa/enchentes/cartilha-de-orientacao-a-populacao-no-periodo-de-alerta-de-chuvas-intensas/@@download/file",
+            "paginas": [
+              19,
+              19
+            ],
+            "secao": "Evacuação e pós-inundação"
+          }
+        ]
+      },
+      "duracao_segundos": 32.4,
+      "resolucao": [
+        1920,
+        1080
+      ],
+      "bytes": 3772623,
+      "primeiro_quadro_decodificado": true
+    },
+    {
+      "id": "07_visao_computacional",
+      "apresentador": "Felipe",
+      "arquivo": "07_visao_computacional.webm",
+      "origem": "https://gov262.vercel.app",
+      "status": "capturado",
+      "resultado": {
+        "imagem": "017_1135_2497.jpg",
+        "vinculo_pedido": null,
+        "classe": "Sem fissura sinalizada",
+        "confianca": 0.948043692857027,
+        "escore": 0.051956307142972946,
+        "alerta": false,
+        "limiar": 0.48999999999999977,
+        "resolucao": 160,
+        "modelo": "ResNet18",
+        "modo": "Inferência atual com checkpoint entregue · ONNX CPU",
+        "historico": false,
+        "limite": "Sinalização de possível fissura. Não atesta gravidade, acessibilidade ou segurança estrutural."
+      },
+      "duracao_segundos": 28.8,
+      "resolucao": [
+        1920,
+        1080
+      ],
+      "bytes": 2110989,
+      "primeiro_quadro_decodificado": true
+    },
+    {
+      "id": "08_iot_ouviai_simulacao",
+      "apresentador": "Luis Filipe",
+      "arquivo": "08_iot_ouviai_simulacao.webm",
+      "origem": "https://gov262.vercel.app",
+      "status": "capturado",
+      "resultado": {
+        "interface_real": true,
+        "eventos": "simulados",
+        "modelo_audio_executado": false,
+        "hardware_conectado": false,
+        "pedidos_criados": 0
+      },
+      "duracao_segundos": 32.68,
+      "resolucao": [
+        1920,
+        1080
+      ],
+      "bytes": 2892628,
+      "primeiro_quadro_decodificado": true
+    }
+  ],
+  "pendentes": [
+    "celular e Frontend",
+    "RPA do pedido móvel",
+    "planejamento incluindo pedido móvel",
+    "Governança, contestação e encerramento",
+    "narrações dos integrantes",
+    "montagem e duração finais"
+  ]
+}

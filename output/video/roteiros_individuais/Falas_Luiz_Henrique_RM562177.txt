@@ -1,0 +1,40 @@
+Luiz Henrique Poss / RM562177
+FALAS PARA GRAVAR
+Grave um arquivo por cena. Não leia títulos, horários ou nomes de arquivo.
+
+00:00–00:15 · O problema
+Arquivo: 00_abertura_luiz_henrique.m4a
+
+Encontrar uma calçada danificada é só o começo. Ainda é preciso explicar o problema, encontrar o canal e acompanhar a resposta. O ZelaBairro organiza esse caminho. Vamos mostrar um pedido passando pela solução.
+
+00:15–01:00 · Frontend e celular
+Arquivo: 01_frontend_celular_luiz_henrique.m4a
+
+A foto ajuda a preparar o relato e o celular informa a posição, com minha permissão. Eu confiro o ponto e ajusto o texto antes de enviar. A sugestão não mede o problema nem determina sua gravidade. Agora o pedido foi salvo com este identificador; os colegas vão continuar a partir dele.
+
+01:20–01:55 · Cluster Computing
+Arquivo: 03_cluster_luiz_henrique.m4a
+
+Neste ensaio local, o Cluster distribui o pipeline do RPA entre dois ou quatro workers lógicos, mantendo o mesmo ID no mesmo worker. Depois, a central valida e grava o conjunto. Aqui estão os workers e os tempos desta execução. Isso não comprova máquinas físicas distintas nem que quatro workers sempre sejam mais rápidos.
+
+O lote foi processado. O Luis vai mostrar como organizar a capacidade de revisão.
+
+02:45–03:20 · Generative AI
+Arquivo: 05_generative_ai_luiz_henrique.m4a
+
+O assistente consulta as fontes dos serviços municipais e apresenta a orientação com sua origem. Esta é uma resposta da execução atual. A versão online usa o adaptador Groq; o modelo original local permanece nos materiais. Essa orientação ajuda a conferir o encaminhamento, mas não abre uma solicitação na prefeitura.
+
+03:20–03:50 · PLN
+Arquivo: 06_pln_luiz_henrique.m4a
+
+O PLN permite consultar o corpus de prevenção de desastres e recuperar a origem de cada trecho. Não é um alerta sobre a situação atual do bairro. Se o conteúdo ajudar a analisar um pedido, ele pode ser vinculado ao histórico. Neste caso, não vamos forçar uma relação que o relato não sustenta.
+
+04:50–06:15 · Governança e Business Analytics
+Arquivo: 09_governanca_luiz_henrique.m4a
+
+A sugestão do sistema continua separada da decisão humana. Aqui registro a prioridade e o motivo, depois confirmo o cadastro local. A ficha mostra quem deve receber e por qual canal. O envio ao órgão ainda é feito pela pessoa; para o vídeo usamos um protocolo de demonstração. O retorno também precisa ser conferido, e uma foto não comprova uma obra. No percurso, uma barreira resolvida não libera automaticamente todo o caminho. Se a decisão for contestada, a revisão é reaberta e a anterior fica no histórico. Os indicadores contam essas situações, sem confundir teste com atendimento municipal.
+
+06:15–06:30 · Encerramento
+Arquivo: 10_encerramento_luiz_henrique.m4a
+
+Demonstramos o pedido sendo registrado, planejado, revisado e contestado, com as evidências preservadas. Não comprovamos reparos nem impacto no bairro. O dispositivo de IoT e a validação em campo continuam pendentes. Os materiais estão no GitHub.

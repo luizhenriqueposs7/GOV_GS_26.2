@@ -1,0 +1,28 @@
+CAPTURAS INDEPENDENTES - ZELABAIRRO
+Fontes brutas, sem narração, a 1,0x. Não constituem o vídeo final.
+Resolução nativa: 1920 x 1080 / 25 fps / WebM.
+
+A abertura, GenAI, PLN, Visão e OuviAí foram gravados na versão oficial https://gov262.vercel.app.
+Cluster: execução real do pipeline em base local de QA isolada, com threads e CSV fictício. Não é execução HTTP na Vercel.
+OuviAí: captura real da interface conceitual, cujos eventos são simulados. Sem hardware ou reconhecimento de áudio nessa tela.
+GenAI/PLN/Visão: consultas sem vínculo com pedido; nenhuma solicitação municipal foi criada.
+
+ARQUIVOS
+00_abertura.webm - 15.88s - https://gov262.vercel.app
+03_cluster_2_4_workers.webm - 27.52s - http://127.0.0.1:8851
+05_generative_ai.webm - 45.52s - https://gov262.vercel.app
+06_pln.webm - 32.40s - https://gov262.vercel.app
+07_visao_computacional.webm - 28.80s - https://gov262.vercel.app
+08_iot_ouviai_simulacao.webm - 32.68s - https://gov262.vercel.app
+
+PENDENTES PARA MONTAR O VÍDEO FINAL
+celular e Frontend
+RPA do pedido móvel
+planejamento incluindo pedido móvel
+Governança, contestação e encerramento
+narrações dos integrantes
+montagem e duração finais
+
+Envie o vídeo original do celular, incluindo conferência/envio e recibo/ID. Deixe o pedido aguardando revisão.
+Envie os áudios por cena, conforme os PDFs e textos individuais. Não é necessário gravar a tela novamente.
+A duração final de 5 a 7 minutos será conferida depois da montagem. A espera pode ser cortada com identificação, preservando ordem e resultados. Não acelerar falas nem inventar execução.
