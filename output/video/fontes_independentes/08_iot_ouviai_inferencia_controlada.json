@@ -1,0 +1,31 @@
+{
+  "arquivo": "08_iot_ouviai_inferencia_controlada.webm",
+  "capturado_em_utc": "2026-11-18T15:15:24.758760+00:00",
+  "fps": 25,
+  "resolucao": [
+    1920,
+    1080
+  ],
+  "audio": false,
+  "velocidade": 1.0,
+  "resultado": {
+    "origem": "https://gov262.vercel.app/#ouviai",
+    "entrada": "WAV de referência ESC-50 em microfone virtual do Chrome",
+    "modelo": "YAMNet float32 v1 / MediaPipe Tasks Audio 1.2.3",
+    "nota": "Saída do modelo: Knock · pontuação 94%. Pontuação não é acurácia.",
+    "versao": "0.6.5",
+    "estado_antes_do_resultado": "Captando áudio",
+    "inferencia_real": true,
+    "predicoes_mockadas": false,
+    "hardware_fisico": false,
+    "uploads": [],
+    "microfone_encerrado": true
+  },
+  "substitui_como_cena_atual": "08_iot_ouviai_simulacao.webm",
+  "narracao_selecionada": "luis_iot_v2.m4a",
+  "legenda_obrigatoria_montagem": "Teste controlado: áudio de referência no microfone virtual. Inferência real com YAMNet.",
+  "duracao_segundos": 38.16,
+  "quadros_decodificados": 954,
+  "bytes": 4036530,
+  "sha256": "83137acbf66657f8e123791667ab820e3fbad07b1f0a7f8e86bef555f67e0380"
+}

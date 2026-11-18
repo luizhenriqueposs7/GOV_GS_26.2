@@ -55,6 +55,7 @@ O corpus ainda tem 39 registros sem decisão humana na planilha de revisão. Nã
 5. Registre retorno de demonstração. Se mostrar correção informada, use imagem identificada como cenário e conferência humana justificada, sem alegar obra real.
 6. Mapa → Passagem Livre: captura breve do cenário ensaiado, mostrando que outra barreira/condição desconhecida pode permanecer. Não vincule a ocorrência real de outro lugar ao desenho.
 7. Pedidos → mesmo registro. Abra Discorda da decisão? Peça uma nova análise, explique o motivo e solicite revisão. Abra Ver histórico completo do pedido para mostrar decisão preservada e reabertura.
+8. Gestão → Indicadores desta instalação. Abra os cartões e mostre os números atuais de pendências e acompanhamento, distinguindo demonstração de atendimento municipal.
 
 **Fala base:** “A sugestão do sistema continua separada da decisão humana. Aqui registro a prioridade e o motivo, depois confirmo o cadastro local. A ficha mostra quem deve receber e por qual canal. O envio ao órgão ainda é feito pela pessoa; para o vídeo usamos um protocolo de demonstração. O retorno também precisa ser conferido, e uma foto não comprova uma obra. No percurso, uma barreira resolvida não libera automaticamente todo o caminho. Se a decisão for contestada, a revisão é reaberta e a anterior fica no histórico. Os indicadores contam essas situações, sem confundir teste com atendimento municipal. No OuviAí, usamos YAMNet; a CNN original permaneceu externa.”
 
@@ -64,6 +65,6 @@ Ensaie: esta é a cena mais densa. Grave a operação inteira e corte digitaçã
 
 **Tela:** histórico e endereço do GitHub.
 
-**Fala base:** “Demonstramos o pedido sendo registrado, planejado, revisado e contestado, com as evidências preservadas. Não comprovamos reparos nem impacto no bairro. O dispositivo de IoT e a validação em campo continuam pendentes. Os materiais estão no GitHub.”
+**Fala base:** “Demonstramos o pedido sendo registrado, planejado, revisado e contestado, com as evidências preservadas. Não comprovamos reparos nem impacto no bairro. A estação fixa e a validação em campo continuam pendentes. Os materiais estão no GitHub.”
 
 Esse fechamento do vídeo não substitui a conclusão do relatório, que será escrita em conjunto.

@@ -29,7 +29,7 @@ O vídeo deve mostrar a continuidade entre foto, sugestão, correção humana, f
 | 03:19–03:44 | Luiz | Pesquisar prevenção de desastres: trecho, origem e página/seção. |
 | 03:44–04:22 | Felipe | Visão e passagem: verificar sinal de fissura: inferência atual sobre recorte de concreto. |
 | 04:22–04:55 | Luis Filipe | Projeto → OuviAí: microfone, batida/campainha e possível aviso visual; identificar YAMNet como modelo alternativo e parar a escuta. |
-| 04:55–06:15 | Luiz | Revisão, confirmação local, destino/ficha, protocolo SIM, retorno, contestação e histórico. Passagem Livre em captura breve do cenário. |
+| 04:55–06:15 | Luiz | Revisão, confirmação local, destino/ficha, protocolo SIM, retorno, contestação, histórico e Indicadores desta instalação. Passagem Livre em captura breve do cenário. |
 | 06:15–06:30 | Luiz | Histórico do mesmo pedido e GitHub: resultado demonstrado e limites. |
 
 Horários aproximados, ajustados aos áudios recebidos: 149,516 segundos para Luis e Felipe, incluindo as passagens. Usar `áudio_IoT.m4a`, de 33,067 segundos, no lugar de `Fala_IoT.m4a`. A montagem deve seguir a duração natural das vozes, sem cortar palavras para encaixar nos números arredondados. A nova captura `08_iot_ouviai_inferencia_controlada.webm` substitui a simulação antiga; conservar a identificação de teste controlado com áudio de referência.

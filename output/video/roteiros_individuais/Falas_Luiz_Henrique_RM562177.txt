@@ -37,4 +37,4 @@ A sugestão do sistema continua separada da decisão humana. Aqui registro a pri
 06:15–06:30 · Encerramento
 Arquivo: 10_encerramento_luiz_henrique.m4a
 
-Demonstramos o pedido sendo registrado, planejado, revisado e contestado, com as evidências preservadas. Não comprovamos reparos nem impacto no bairro. O dispositivo de IoT e a validação em campo continuam pendentes. Os materiais estão no GitHub.
+Demonstramos o pedido sendo registrado, planejado, revisado e contestado, com as evidências preservadas. Não comprovamos reparos nem impacto no bairro. A estação fixa e a validação em campo continuam pendentes. Os materiais estão no GitHub.
