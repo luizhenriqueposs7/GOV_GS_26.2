@@ -156,7 +156,7 @@ def criar_app(pasta_dados: Path | None = None) -> FastAPI:
             arquivo_chave.write_text(secrets.token_urlsafe(32), encoding="utf-8")
         chave = arquivo_chave.read_text(encoding="utf-8").strip()
 
-    app = FastAPI(title="ZelaBairro", version="0.6.4", docs_url="/contrato")
+    app = FastAPI(title="ZelaBairro", version="0.6.5", docs_url="/contrato")
     app.state.repo = repo
 
     def guardar_foto(conteudo, previa=''):

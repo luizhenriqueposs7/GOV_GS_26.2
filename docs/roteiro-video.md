@@ -8,7 +8,7 @@ Alvo: **6min30s**, contando abertura e encerramento. Entrega: entre 5 e 7 minuto
 | Luis Filipe Chaves Amorim, RM564706 | IoT e Computação Quântica | [Luis Filipe](video/02-luis-filipe.md) |
 | Felipe Stefani Honorato, RM563380 | RPA e Visão Computacional | [Felipe](video/03-felipe-stefani.md) |
 
-As nove disciplinas são distribuídas entre os três conforme a divisão solicitada. Frontend/mobile, que não recebeu outro responsável nessa divisão, permanece com Luiz. O tempo de fala fica em 4min20s para Luiz, 1min15s para Luis Filipe e 55s para Felipe. Governança recebe mais tempo porque fecha o fluxo e é a disciplina desta entrega. Luiz aparece na abertura e retorna depois dos colegas. Não é necessário gravar os três juntos nem mostrar rosto e tela simultaneamente.
+As nove disciplinas são distribuídas entre os três conforme a divisão solicitada. Frontend/mobile, que não recebeu outro responsável nessa divisão, permanece com Luiz. O tempo de fala fica em 4min para Luiz, aproximadamente 1min28s para Luis Filipe e 1min02s para Felipe. Governança recebe mais tempo porque fecha o fluxo e é a disciplina desta entrega. Luiz aparece na abertura e retorna depois dos colegas. Não é necessário gravar os três juntos nem mostrar rosto e tela simultaneamente.
 
 ## O que demonstrar
 
@@ -22,17 +22,19 @@ O vídeo deve mostrar a continuidade entre foto, sugestão, correção humana, f
 | --- | --- | --- |
 | 00:00–00:15 | Luiz | Registrar: explicar problema e propósito. |
 | 00:15–01:00 | Luiz | Foto no celular, GPS, conferência, envio e recibo. Guardar ID. |
-| 01:00–01:20 | Felipe | Pedidos → triagem original do pedido: categoria, prioridade e indicação de revisão. |
-| 01:20–01:55 | Luiz | Gestão → Importar lote, em base isolada: CSV com 2/4 workers, IDs e tempos atuais. |
-| 01:55–02:45 | Luis Filipe | Planejar revisões: pedido móvel e dois pendentes, capacidade, comparação e plano justificado. |
-| 02:45–03:20 | Luiz | Projeto → Consultar um serviço municipal: resposta atual e fonte. |
-| 03:20–03:50 | Luiz | Pesquisar prevenção de desastres: trecho, origem e página/seção. |
-| 03:50–04:25 | Felipe | Verificar sinal de fissura: inferência atual sobre recorte de concreto. |
-| 04:25–04:50 | Luis Filipe | Projeto → OuviAí: microfone, batida/campainha e possível aviso visual; identificar YAMNet como modelo alternativo e parar a escuta. |
-| 04:50–06:15 | Luiz | Revisão, confirmação local, destino/ficha, protocolo SIM, retorno, contestação e histórico. Passagem Livre em captura breve do cenário. |
+| 01:00–01:24 | Felipe | Pedidos → triagem original do pedido: categoria, prioridade e indicação de revisão. |
+| 01:24–01:54 | Luiz | Gestão → Importar lote, em base isolada: CSV com 2/4 workers, IDs e tempos atuais. |
+| 01:54–02:49 | Luis Filipe | Quântica e passagem: planejar revisões: pedido móvel e dois pendentes, capacidade, comparação e plano justificado. |
+| 02:49–03:19 | Luiz | Projeto → Consultar um serviço municipal: resposta atual e fonte. |
+| 03:19–03:44 | Luiz | Pesquisar prevenção de desastres: trecho, origem e página/seção. |
+| 03:44–04:22 | Felipe | Visão e passagem: verificar sinal de fissura: inferência atual sobre recorte de concreto. |
+| 04:22–04:55 | Luis Filipe | Projeto → OuviAí: microfone, batida/campainha e possível aviso visual; identificar YAMNet como modelo alternativo e parar a escuta. |
+| 04:55–06:15 | Luiz | Revisão, confirmação local, destino/ficha, protocolo SIM, retorno, contestação e histórico. Passagem Livre em captura breve do cenário. |
 | 06:15–06:30 | Luiz | Histórico do mesmo pedido e GitHub: resultado demonstrado e limites. |
 
-O alvo deixa 30 segundos até o teto. Grave cada operação até aparecer o resultado e corte apenas espera/digitação repetitiva, sem alterar a ordem ou esconder uma falha. Os arquivos individuais podem ser maiores; a montagem final precisa ter de 5 a 7 minutos.
+Horários aproximados, ajustados aos áudios recebidos: 149,516 segundos para Luis e Felipe, incluindo as passagens. Usar `áudio_IoT.m4a`, de 33,067 segundos, no lugar de `Fala_IoT.m4a`. A montagem deve seguir a duração natural das vozes, sem cortar palavras para encaixar nos números arredondados. A nova captura `08_iot_ouviai_inferencia_controlada.webm` substitui a simulação antiga; conservar a identificação de teste controlado com áudio de referência.
+
+O alvo deixa aproximadamente 30 segundos até o teto. Grave cada operação até aparecer o resultado e corte apenas espera/digitação repetitiva, sem alterar a ordem ou esconder uma falha. Os arquivos individuais podem ser maiores; a montagem final precisa ter de 5 a 7 minutos.
 
 ## Preparar
 

@@ -5,6 +5,37 @@ import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
 import {criarEscuta} from '../web/ouviai-audio.mjs';
 
+test('a tela informa preparação enquanto aguarda áudio e volta a desligado quando a escuta é cancelada',()=>{
+  const chaves=['isSecureContext','navigator','AudioWorkletNode','AudioContext','document','window'];
+  const originais=new Map(chaves.map(k=>[k,Object.getOwnPropertyDescriptor(globalThis,k)]));
+  const nos=new Map();
+  const node=id=>{
+    if(!nos.has(id))nos.set(id,{textContent:'',dataset:{},eventos:{},replaceChildren(){},setAttribute(){},scrollIntoView(){},
+      addEventListener(tipo,fn){this.eventos[tipo]=fn;}});
+    return nos.get(id);
+  };
+  let escuta;
+  try {
+    const definir=(k,v)=>Object.defineProperty(globalThis,k,{configurable:true,writable:true,value:v});
+    definir('isSecureContext',true);definir('navigator',{mediaDevices:{getUserMedia:async()=>{throw new Error('Não deve chegar ao microfone nesta etapa.');}}});
+    definir('AudioWorkletNode',class {});
+    definir('AudioContext',class {resume(){return new Promise(()=>{});}async close(){}});
+    definir('document',{getElementById:node,querySelectorAll:()=>[],addEventListener(){}});
+    definir('window',{addEventListener(){}});
+    escuta=audio.iniciarOuviAi();node('ouviai-iniciar').eventos.click();
+    assert.match(node('ouviai-display').textContent,/preparando/i);
+    assert.match(node('ouviai-status').textContent,/preparando/i);
+    node('ouviai-conexao').eventos.click();
+    assert.match(node('ouviai-display').textContent,/preparando/i);
+    assert.match(node('ouviai-status').textContent,/preparando/i);
+    escuta.parar();
+    assert.match(node('ouviai-display').textContent,/desligado/i);
+  } finally {
+    escuta?.parar();
+    for(const [k,descritor] of originais){if(descritor)Object.defineProperty(globalThis,k,descritor);else delete globalThis[k];}
+  }
+});
+
 test('campainha ou batida dominante com score suficiente vira possível aviso real',()=>{
   for (const [categoryName,classe] of [['Doorbell','som_campainha'],['Ding-dong','som_campainha'],['Knock','batida_porta']]) {
     const r=audio.interpretarAudio([{categoryName,score:0.8},{categoryName:'Speech',score:0.1}]);

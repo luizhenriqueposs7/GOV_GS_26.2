@@ -30,14 +30,14 @@ ESTILOS={
  'acoes':ParagraphStyle('acoes',fontName='Archivo',fontSize=11,leading=16,spaceAfter=9,textColor=ESCURO,keepWithNext=True),
 }
 PESSOAS=[
- ('01-luiz-henrique.md','Luiz Henrique Poss','RM562177','Luiz_Henrique','4min20s','GenAI, Governança, PLN, Cluster e mobile'),
- ('02-luis-filipe.md','Luis Filipe Chaves Amorim','RM564706','Luis_Filipe','1min15s','Computação Quântica e IoT'),
- ('03-felipe-stefani.md','Felipe Stefani Honorato','RM563380','Felipe','55s','RPA e Visão Computacional'),
+ ('01-luiz-henrique.md','Luiz Henrique Poss','RM562177','Luiz_Henrique','4min','GenAI, Governança, PLN, Cluster e mobile'),
+ ('02-luis-filipe.md','Luis Filipe Chaves Amorim','RM564706','Luis_Filipe','1min28s','Computação Quântica e IoT'),
+ ('03-felipe-stefani.md','Felipe Stefani Honorato','RM563380','Felipe','1min02s','RPA e Visão Computacional'),
 ]
 ARQUIVOS_AUDIO={
- '00:00':'00_abertura','00:15':'01_frontend_celular','01:00':'02_rpa','01:20':'03_cluster',
- '01:55':'04_quantica','02:45':'05_generative_ai','03:20':'06_pln','03:50':'07_visao',
- '04:25':'08_iot','04:50':'09_governanca','06:15':'10_encerramento',
+ '00:00':'00_abertura','00:15':'01_frontend_celular','01:00':'02_rpa','01:24':'03_cluster',
+ '01:54':'04_quantica','02:49':'05_generative_ai','03:19':'06_pln','03:44':'07_visao',
+ '04:22':'08_iot','04:55':'09_governanca','06:15':'10_encerramento',
 }
 
 def marcado(texto):

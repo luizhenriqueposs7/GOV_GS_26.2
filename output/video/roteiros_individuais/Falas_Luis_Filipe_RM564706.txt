@@ -2,14 +2,14 @@ Luis Filipe Chaves Amorim / RM564706
 FALAS PARA GRAVAR
 Grave um arquivo por cena. Não leia títulos, horários ou nomes de arquivo.
 
-01:55–02:45 · Computação Quântica
+01:54–02:49 · Computação Quântica
 Arquivo: 04_quantica_luis_filipe.m4a
 
 Com a fila disponível, escolhemos o que cabe nesta rodada. As prioridades e os minutos são conferidos pelo responsável, não estimados automaticamente pela IA. Comparamos a fila, a solução exata e QAOA em simulador. O gestor vê também os casos adiados e justifica a escolha. O plano organiza a revisão, mas não aprova os pedidos. Esta execução usa CPU; não demonstramos vantagem quântica.
 
 O pedido continua aguardando revisão. Agora vamos mostrar as ferramentas que ajudam a conferir o contexto.
 
-04:25–04:50 · IoT
+04:22–04:55 · IoT
 Arquivo: 08_iot_luis_filipe.m4a
 
-No OuviAí, o microfone capta uma batida e o navegador mostra um possível aviso visual. O áudio fica no aparelho. Esta ampliação usa YAMNet; a CNN original do trabalho continua externa. Ainda não construímos a estação física nem validamos o uso em outros ambientes.
+No OuviAí, o microfone capta uma batida ou campainha, e o navegador apresenta um aviso visual. O processamento acontece no próprio aparelho, sem enviar áudio ao servidor. Nesta ampliação usamos YAMNet. Demonstramos o funcionamento no navegador, e a estação fixa fica como proposta de evolução.

@@ -38,7 +38,7 @@ export function conectar(estado, conectado) {
 
 export function iniciarOuviAi() {
   const $ = id => document.getElementById(id);
-  let estado = estadoInicial(), exibido = null, ultimoAviso = 0;
+  let estado = estadoInicial(), exibido = null, ultimoAviso = 0, estadoAudio = 'desligado';
   const escuta = criarEscuta(categorias=>{
     const resultado = interpretarAudio(categorias), agora = Date.now();
     if (exibido?.alerta && !exibido.simulacao && !resultado.alerta && agora-ultimoAviso<4000) return;
@@ -52,17 +52,18 @@ export function iniciarOuviAi() {
     $('ouviai-parar').disabled=!ativo;
     $('ouviai-microfone-status').textContent=mensagem;
     $('ouviai-microfone-status').dataset.ativo=String(ativo);
+    estadoAudio=ativo?(mensagem.startsWith('Escutando')?'captando':'preparando'):'desligado';
+    renderizar();
     if(ativo && mensagem.startsWith('Escutando'))$('ouviai-status').scrollIntoView({block:'center'});
-    if(!ativo && exibido && !exibido.simulacao)$('ouviai-display-nota').textContent='Escuta encerrada';
   });
   function renderizar() {
     const ultimo = exibido, classe = ultimo && classes[ultimo.classe];
     $('ouviai-aparelho').dataset.alerta = String(Boolean(classe?.alerta));
-    $('ouviai-display').textContent = classe?.nome || 'Microfone desligado';
-    $('ouviai-display-nota').textContent = ultimo ? (ultimo.simulacao?'Evento simulado':'Áudio deste aparelho') : 'Ative para reconhecer';
+    $('ouviai-display').textContent = classe?.nome || (estadoAudio==='captando'?'Captando áudio':estadoAudio==='preparando'?'Preparando áudio':'Microfone desligado');
+    $('ouviai-display-nota').textContent = ultimo ? (ultimo.simulacao?'Evento simulado':estadoAudio==='desligado'?'Escuta encerrada':'Áudio deste aparelho') : (estadoAudio==='desligado'?'Ative para reconhecer':'Aguardando classificação');
     $('ouviai-conexao-texto').textContent = estado.conectado ? 'Conexão simulada disponível' : 'Conexão simulada interrompida';
     $('ouviai-origem').textContent=ultimo?.simulacao?'Simulação manual': 'Classificação local · YAMNet';
-    $('ouviai-status').textContent = classe?.mensagem || 'Ative o microfone para começar.';
+    $('ouviai-status').textContent = classe?.mensagem || (estadoAudio==='captando'?'Aguardando classificação do som.':estadoAudio==='preparando'?'Preparando reconhecimento.':'Ative o microfone para começar.');
     $('ouviai-status-nota').textContent = ultimo
       ? (ultimo.simulacao ? (ultimo.exibido ? 'Evento fictício. Nenhum som foi reconhecido.' : 'Evento fictício aguardando reconexão simulada.')
         : (ultimo.rotulo ? 'Saída do modelo: '+ultimo.rotulo+' · pontuação '+Math.round(ultimo.pontuacao*100)+'%. Pontuação não é acurácia.' : 'O modelo não retornou uma identificação.'))
