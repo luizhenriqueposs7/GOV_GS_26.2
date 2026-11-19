@@ -27,7 +27,7 @@ Planejamento de acesso, pedidos e revisão
 
 Relatório de integração dos trabalhos da Global Solution, apresentado à disciplina de Governança em IA e Business Analytics da FIAP. O documento reúne os materiais das disciplinas, descreve a participação de cada módulo e registra os limites da aplicação construída.
 
-O projeto utiliza dados fictícios. Não houve testes com pessoas nem validação em campo, por decisão do grupo. As verificações mencionadas neste relatório são técnicas.
+A demonstração combina cenários fictícios com um cadastro feito a partir de foto e posição reais. O grupo fez testes técnicos, sem testar o sistema com moradores nem conferir o percurso em campo.
 
 São Paulo · 2026
 
@@ -87,7 +87,7 @@ Registrar um problema do bairro exige identificar o serviço e reunir informaç�
 
 O SP156 já oferece registro de solicitações e consulta de protocolos. A Central CitizenTech foi construída como um protótipo de preparação e revisão: organiza o relato, solicita contexto, apresenta a fonte da orientação e mantém a justificativa das decisões. A aplicação não substitui o canal municipal nem executa reparos.
 
-O público previsto são moradores que precisam preparar pedidos e responsáveis por uma eventual triagem local. Esse uso ainda é uma hipótese de aplicação. Não houve acesso a uma instituição parceira, testes com pessoas ou acompanhamento de solicitações reais. Não se afirma redução de prazo ou de erros no atendimento público.
+O protótipo foi pensado para moradores que precisam preparar pedidos e para quem faz a triagem. Os testes do grupo usaram a própria central. Sem uma equipe municipal parceira, não foi possível medir mudanças no prazo ou nos erros de atendimento.
 
 Figura 1 - Fluxo de preparação, revisão e registro local
 
@@ -95,7 +95,7 @@ Figura 1 - Fluxo de preparação, revisão e registro local
 
 Fonte: elaboração do grupo, a partir da aplicação construída em 2026.
 
-As nove disciplinas participam com alcances distintos. RPA, Frontend, PLN e Visão reutilizam código. Generative AI tem adaptação online. Cluster processa lotes; Quântica apoia a seleção de revisões em simulador. IoT tem áudio local com modelo alternativo; a CNN original continua externa.
+RPA, Frontend, PLN e Visão reutilizam código dos trabalhos originais. A versão online usa uma adaptação de Generative AI. Cluster processa os lotes, e o simulador de Quântica ajuda a escolher os pedidos da rodada de revisão. No IoT, a central usa outro modelo para reconhecer sons no navegador.
 
 <!-- pagina -->
 # 2 DESENVOLVIMENTO
@@ -121,7 +121,7 @@ Tabela 1 - Tempos dos cenários simulados no iSPD
 
 Fonte: relatório e modelos de Cluster Computing entregues pelo grupo.
 
-Os 49,72% pertencem ao iSPD. Na central, cada minilote mede seus tempos: threads locais ou invocações HTTP na Vercel, sem garantia de máquinas distintas. Rede, inicialização e banco podem superar ganhos. O modo com workers limita a gravação a 50 registros aceitos por lote.
+A redução de 49,72% foi medida na simulação do iSPD. A central mede cada lote separadamente. Em execução local, os workers são threads. Na Vercel, cada worker é acionado por HTTP e pode rodar na mesma máquina. O modo com workers aceita até 50 registros por lote.
 
 <!-- pagina -->
 # DESENVOLVIMENTO
@@ -138,11 +138,11 @@ O plano justificado fica no histórico e abre os pedidos para revisão humana. M
 
 A central reutiliza a validação e a persistência do ZelaBairro. Localmente, os bancos ficam separados. Na adaptação online, Postgres mantém relatos e histórico na mesma transação, com fotos privadas no Supabase.
 
-Na jornada móvel, a foto prepara ocorrência, impactos possíveis e pedido de vistoria, sem medir dimensões. O GPS sugere região pela BigDataCloud, sem rua ou número. A pessoa confere texto e ponto antes de enviar. O rascunho conserva os dados; a foto perde metadados. O catálogo distingue os serviços (SÃO PAULO, 2026c).
+A partir da foto, a central sugere um relato, possíveis impactos e um pedido de vistoria. A imagem não permite medir dimensões. A posição ajuda a sugerir a região pela BigDataCloud. A pessoa confere o texto e o ponto no mapa antes de enviar. O rascunho conserva os dados, e a central remove os metadados da foto.
 
 A confirmação exige revisão justificada e dados completos. Repetir a confirmação da mesma revisão mantém o registro. Alterar o pedido ou contestar retira a decisão e o vínculo atuais, preservando o histórico. O identificador é da central; protocolos externos anotados permanecem sem verificação no órgão.
 
-Cadastro, edição, revisão, confirmação e contestação foram executados no navegador. A prévia não grava pedidos; a sugestão original e as correções ficam rastreáveis. O teste móvel controlado conferiu rascunho, GPS negado e cancelamento. A abertura da câmera foi registrada no celular. Cadastro, posição e envio aparecem em outro exemplo, gravado no computador. A jornada completa em smartphone permanece sem validação.
+O grupo testou cadastro, edição, revisão, confirmação e contestação no navegador. A gravação mostra a abertura da câmera no celular. O restante do cadastro, incluindo a conferência da posição e o envio, aparece em outro exemplo gravado no computador. O teste móvel controlado cobriu rascunho, permissão de GPS negada e cancelamento.
 
 <!-- pagina -->
 # DESENVOLVIMENTO
@@ -151,13 +151,13 @@ Cadastro, edição, revisão, confirmação e contestação foram executados no 
 
 A execução local de Generative AI utiliza recuperação híbrida e Qwen3-4B-Instruct-2507, em Q4_K_M. O modelo seleciona uma evidência recuperada. A resposta corresponde ao trecho escolhido, com endereço oficial para consulta.
 
-Na versão online, Qwen3.8-27B no Groq Free seleciona evidências do corpus e gera descrições preliminares por foto. A sugestão guarda modelo, data e hash da imagem; não substitui o ResNet18 nem a revisão. Texto retornou ILU.1; a foto gerou relato. Sobrecarga exigiu tentativas limitadas. As avaliações abaixo pertencem ao modelo local.
+Na versão online, o Qwen3.8-27B, executado pelo Groq, seleciona fontes do corpus e sugere relatos a partir de fotos. O registro guarda o modelo, a data e o hash da imagem. O ResNet18 continua responsável pela análise de fissuras. A versão online foi testada na central. Os resultados de avaliação abaixo são do modelo local.
 
 O serviço pode pedir esclarecimento, indicar falta de evidência, reconhecer uma pergunta fora do escopo e bloquear pedidos incompatíveis com suas regras. A orientação não cria protocolo e não confirma que o serviço foi solicitado.
 
 As avaliações anteriores do projeto são mantidas nos materiais. A primeira aplicação ao conjunto reservado obteve 13 de 16 casos. A avaliação diagnóstica posterior obteve 16 de 16 em casos conhecidos. Esses dois resultados pertencem a momentos diferentes e não devem ser usados como uma única estimativa de generalização.
 
-O vídeo anterior da disciplina foi produzido com outra versão do modelo. Ele não demonstra automaticamente a execução do Qwen3 pela central. A chamada atual foi executada pela central e retornou a fonte ILU.1 para uma pergunta sobre manutenção de iluminação pública. Essa consulta verifica a execução, sem estimar acurácia geral.
+O vídeo original da disciplina mostra outra versão do modelo. Para verificar a integração atual, o grupo fez uma consulta pela central sobre manutenção de iluminação pública e obteve a fonte ILU.1. A resposta confirma que a consulta chegou ao serviço e retornou uma fonte.
 
 O inicializador e os códigos do projeto estão incluídos no pacote. O modelo de aproximadamente 2,5 GB e os caches são obtidos separadamente pelo inicializador, com conferência dos hashes previstos no trabalho original.
 
@@ -170,7 +170,7 @@ O OuviAí reconhece sons e apresenta uma resposta visual no navegador do celular
 
 O relatório do módulo registra 78 acertos em 100 janelas de teste, 14 em 15 arquivos e 14 em 15 exemplos ao vivo. Em 12 dos 15 exemplos ao vivo, o reconhecimento foi imediato. São unidades de avaliação diferentes. Os dados de teste participaram de ajustes e compartilham fontes sonoras, o que limita sua interpretação como amostra independente.
 
-A ampliação na central capta áudio do aparelho e gera avisos visuais com YAMNet, modelo alternativo à CNN original, cuja exportação não foi disponibilizada. O áudio fica no navegador. Hardware e transmissão entre dispositivos seguem pendentes. O fluxo municipal não utiliza os sons. Os testes controlados não validam uso em campo.
+Na central, o YAMNet reconhece o som e gera um aviso visual no navegador. O teste do vídeo usou uma batida de referência em um microfone virtual. A CNN original ficou nos materiais do trabalho. A estação física e a transmissão entre aparelhos ficaram fora do teste.
 
 ## 2.7 Processamento de Linguagem Natural
 
@@ -212,7 +212,7 @@ Os resultados pertencem ao acervo avaliado. O desempenho em fissuras sutis é um
 
 ## 2.9 Governança em IA e Business Analytics
 
-A Governança preserva sugestão, revisão e contestação. A ficha reúne relato, destino e canal; o envio cabe ao solicitante. Protocolo declarado e demonstração ficam separados. Retorno e foto posterior exigem conferência humana para encerrar. Pedidos e fotos são públicos; a chave protege decisões de gestão.
+O histórico guarda a sugestão, a decisão do revisor e a contestação. A ficha indica o canal para envio pelo solicitante. A central distingue o protocolo anotado do protocolo de demonstração. O revisor confere o retorno e a foto antes de encerrar. A consulta é pública, e a gestão exige uma chave.
 
 O Passagem Livre compara reparos em quatro trechos didáticos. Correção conferida retira só a barreira daquele pedido; outras barreiras e condições desconhecidas permanecem. Alteração ou contestação reabre o acompanhamento e desatualiza o plano. O cálculo é determinístico, sem execução quântica ou certificação de acessibilidade.
 
@@ -232,7 +232,7 @@ Quadro 1 - Participação dos materiais na central
 
 Fonte: implementação e materiais reunidos pelo grupo em 2026.
 
-Indicadores separam pedidos sem protocolo, protocolos declarados e demonstrações. Correções conferidas são decisões do protótipo, sem confirmação municipal. Não houve envio ao órgão nem reparo validado. Evidências técnicas estão em docs/evidencias. O teste físico permanece pendente.
+O painel separa pedidos sem protocolo, protocolos declarados e demonstrações. No vídeo, 21 dos 23 registros da instalação estavam sem protocolo anotado. O grupo não enviou o pedido ao órgão nem verificou um reparo no local. Os registros dos testes estão em docs/evidencias.
 
 <!-- pagina -->
 # 3 CONCLUSÃO
