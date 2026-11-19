@@ -12,8 +12,6 @@ Felipe Stefani Honorato · RM563380
 
 São Paulo · 2026
 
-VERSÃO DE TRABALHO. Conclusão conjunta e links de publicação pendentes.
-
 <!-- pagina -->
 # FOLHA DE ROSTO
 
@@ -30,8 +28,6 @@ Planejamento de acesso, pedidos e revisão
 Relatório de integração dos trabalhos da Global Solution, apresentado à disciplina de Governança em IA e Business Analytics da FIAP. O documento reúne os materiais das disciplinas, descreve a participação de cada módulo e registra os limites da aplicação construída.
 
 O projeto utiliza dados fictícios. Não houve testes com pessoas nem validação em campo, por decisão do grupo. As verificações mencionadas neste relatório são técnicas.
-
-Versão de trabalho de 16 de novembro de 2026. A conclusão será elaborada com os integrantes. O repositório está indicado no tópico Links; o endereço do vídeo integrado será acrescentado após a publicação.
 
 São Paulo · 2026
 
@@ -146,7 +142,7 @@ Na jornada móvel, a foto prepara ocorrência, impactos possíveis e pedido de v
 
 A confirmação exige revisão justificada e dados completos. Repetir a confirmação da mesma revisão mantém o registro. Alterar o pedido ou contestar retira a decisão e o vínculo atuais, preservando o histórico. O identificador é da central; protocolos externos anotados permanecem sem verificação no órgão.
 
-Cadastro, edição, revisão, confirmação e contestação foram executados no navegador. A prévia não grava pedidos; a sugestão original e as correções ficam rastreáveis. O teste móvel controlado conferiu rascunho, GPS negado e cancelamento. Câmera, GPS reais e instalação ainda dependem do teste físico no smartphone.
+Cadastro, edição, revisão, confirmação e contestação foram executados no navegador. A prévia não grava pedidos; a sugestão original e as correções ficam rastreáveis. O teste móvel controlado conferiu rascunho, GPS negado e cancelamento. A abertura da câmera foi registrada no celular. Cadastro, posição e envio aparecem em outro exemplo, gravado no computador. A jornada completa em smartphone permanece sem validação.
 
 <!-- pagina -->
 # DESENVOLVIMENTO
@@ -241,19 +237,17 @@ Indicadores separam pedidos sem protocolo, protocolos declarados e demonstraçõ
 <!-- pagina -->
 # 3 CONCLUSÃO
 
-Seção reservada à elaboração conjunta com os integrantes, conforme combinado. Esta versão não deve ser apresentada como relatório final.
+O ZelaBairro reuniu, no mesmo pedido, a foto, a localização, a triagem, a decisão justificada e a contestação. Na demonstração, foi possível pedir uma nova análise e consultar a decisão anterior no histórico. No Passagem Livre, simular o reparo de um único trecho deixou o caminho interrompido. A comparação mostrou por que vale a pena olhar para o percurso inteiro ao planejar os reparos.
 
-A redação final deverá distinguir o que a integração demonstrou tecnicamente do que permanece como hipótese de uso. Também deverá registrar os módulos externos, as limitações dos dados e a ausência de validação com pessoas.
-
-A execução técnica está registrada em docs/evidencias. A conclusão desta seção continua reservada à discussão conjunta com os integrantes.
+O envio ao município depende do solicitante, e o protocolo mostrado no vídeo foi usado apenas na demonstração. O percurso é didático. O ensaio de IoT usou YAMNet no navegador, e a estação física ficou como proposta. O próximo passo é testar o fluxo com moradores e conferir em campo as condições de passagem antes de usar o sistema para orientar decisões de reparo.
 
 # 4 LINKS
 
-Vídeo integrado de Governança: publicação pendente. A versão final deverá ter de 5 a 7 minutos e estar no YouTube como Não Listado.
+Repositório GitHub: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_GS_26.2). Código, materiais das disciplinas e instruções de execução.
 
-Repositório do GitHub: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_GS_26.2). Destino dos códigos, materiais, relatório e instruções da entrega.
+Vídeo integrado: [ZelaBairro | Global Solution CitizenTech](https://youtu.be/JLS1Hy6AXSM). Duração da edição: 5min41s.
 
-Os quatro vídeos do OuviAí e os vídeos das outras disciplinas são evidências complementares. Eles não substituem o vídeo integrado exigido para Governança.
+Aplicativo: [Abrir o ZelaBairro](https://gov262.vercel.app/). Versão online da Central CitizenTech.
 
 <!-- pagina -->
 # REFERÊNCIAS

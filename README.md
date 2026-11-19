@@ -2,11 +2,11 @@
 
 Repositório da entrega: [GOV_GS_26.2](https://github.com/luizhenriqueposs7/GOV_GS_26.2). O código, os materiais das nove disciplinas e as instruções de execução estão reunidos neste projeto.
 
-O [relatório de trabalho em PDF](output/pdf/Central_CitizenTech_Governanca_Versao_de_Trabalho.pdf) tem 14 páginas. A conclusão será elaborada com os integrantes. O [roteiro do vídeo integrado](docs/roteiro-video.md) prevê 6min30s e tem falas/ações individuais para Luiz Henrique, Luis Filipe e Felipe; o vídeo deve ser publicado como Não Listado e seu link ainda será acrescentado. A central está em [gov262.vercel.app](https://gov262.vercel.app), com acesso público sem login. A execução local continua disponível.
+O [relatório final em PDF](output/pdf/ZelaBairro_Relatorio_Governanca.pdf) tem 14 páginas. O [vídeo integrado](https://youtu.be/JLS1Hy6AXSM) dura 5min41s, com narração de Luiz Henrique e créditos dos três integrantes. A descrição e a legenda em português estão na pasta [de entrega](output/video/entrega). O relatório inclui a conclusão e os links do repositório, do vídeo e da central. A central está em [gov262.vercel.app](https://gov262.vercel.app) e também pode ser executada localmente.
 
 A central abre em Registrar. **Pedidos** reúne acompanhamento; **Mapa** oferece visão territorial e Passagem Livre; **Gestão** reúne revisão, planejamento e importação; **Projeto** abre consultas e trabalhos originais. Detalhes técnicos, ficha, contestação e histórico permanecem acessíveis, recolhidos até a pessoa solicitá-los. [Avaliação da entrega e pendências](docs/revisao-entrega-2026-11-17.md).
 
-As [capturas independentes](docs/video/capturas-independentes.md) estão gravadas, sem narração. Há [roteiros individuais em PDF e TXT](output/video/roteiros_individuais/Roteiros_para_os_tres_integrantes.zip) para compartilhar. Cluster foi gravado em QA local isolado; consultas e OuviAí, na central oficial. O vídeo integrado aguarda a coleta móvel, os áudios e as cenas ligadas ao mesmo pedido.
+As [capturas independentes](docs/video/capturas-independentes.md) documentam a origem das cenas. O vídeo integrado combina gravações de execuções, incluindo o lote local de Cluster e o teste controlado do OuviAí. A abertura da câmera foi gravada no celular. O cadastro completo usa outro exemplo, capturado no computador.
 
 A jornada móvel tem duas etapas: **tirar foto → conferir e enviar**. A observação do Groq compõe uma ocorrência com impactos possíveis e providência solicitada, sem medir dimensões ou diagnosticar a causa. Com permissão, o aparelho obtém GPS e sugere a região. Texto e ponto são conferidos antes de gravar; a sugestão original fica assinada e ligada à foto. [Teste no celular](docs/teste-celular.md).
 
@@ -29,7 +29,7 @@ Protótipo acadêmico para Governança em IA e Business Analytics, GS CitizenTec
 
 Para a adaptação à Vercel, veja [configuração e requisitos de publicação](docs/publicacao-vercel.md). O ponto de entrada e as dependências estão em `pyproject.toml`. O modo online usa Postgres e fotos privadas no Supabase, preserva a execução local e identifica a troca do modelo de Generative AI para Groq Free. As verificações e os limites estão registrados nesse documento.
 
-Em 17/11/2026, passaram 192 testes Python, incluindo PostgreSQL real temporário, e 34 testes JavaScript. Chrome e WebKit verificaram o ciclo de acompanhamento e reabertura com modelo e GPS controlados, rascunho com foto e recuperação offline. A revisão móvel cobriu 32 combinações de tela/largura e corrigiu falhas de carregamento, edição, confirmação e armazenamento da foto. Verificações por HTTPS cobriram persistência original, RPA, PLN, Visão, Groq, workers HTTP e planejamento QAOA. O relatório mantém 14 páginas. Câmera e GPS físicos, execução municipal, conclusão e vídeo final continuam pendentes. [Resultados e limites da auditoria móvel](docs/evidencias/qa-mobile-2026-11-17.md).
+Em 17/11/2026, passaram 192 testes Python, incluindo PostgreSQL real temporário, e 34 testes JavaScript. Chrome e WebKit verificaram o ciclo de acompanhamento e reabertura com modelo e GPS controlados, rascunho com foto e recuperação offline. A revisão móvel cobriu 32 combinações de tela/largura e corrigiu falhas de carregamento, edição, confirmação e armazenamento da foto. Verificações por HTTPS cobriram persistência original, RPA, PLN, Visão, Groq, workers HTTP e planejamento QAOA. O relatório mantém 14 páginas. A jornada completa em smartphone e a validação em campo continuam pendentes. O vídeo e o relatório final estão indicados no início deste README. [Resultados e limites da auditoria móvel](docs/evidencias/qa-mobile-2026-11-17.md).
 
 Requer Python 3.13 e PowerShell. Na pasta deste arquivo:
 
@@ -83,7 +83,7 @@ Leaflet 1.9.4 e a fonte Archivo estão em `web/vendor`, com licenças. Os tiles 
 
 Na revisão, a foto, o relato, a sugestão do RPA, a justificativa humana e o histórico ocupam áreas distintas. A chave continua obrigatória para decidir e confirmar no ZelaBairro. A contestação retira a decisão do estado atual e exige nova revisão, sem apagar as versões anteriores.
 
-A abertura sem servidor e a recuperação do rascunho foram verificadas no navegador desta máquina. Câmera, GPS reais e instalação em smartphone continuam sem teste em aparelho pelo assistente. O acesso temporário para o teste da pessoa responsável usa HTTPS e código enviado ao e-mail autorizado. Veja [teste no celular](docs/teste-celular.md). O link dura até uma hora por padrão e muda a cada inicialização; não é uma publicação de produção. O endereço 127.0.0.1 do computador não abre a central no telefone.
+A abertura sem servidor e a recuperação do rascunho foram verificadas no navegador desta máquina. A gravação do grupo mostra a abertura da câmera no celular. Os testes automatizados de GPS e instalação foram feitos em ambiente controlado. O acesso temporário para o teste da pessoa responsável usa HTTPS e código enviado ao e-mail autorizado. Veja [teste no celular](docs/teste-celular.md). O link dura até uma hora por padrão e muda a cada inicialização; não é uma publicação de produção. O endereço 127.0.0.1 do computador não abre a central no telefone.
 
 ## Percurso da demonstração
 

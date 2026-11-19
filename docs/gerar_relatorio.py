@@ -1,4 +1,4 @@
-"""Diagrama a versão de trabalho; requer ReportLab e pypdf no ambiente de documentos."""
+"""Diagrama o relatório de Governança; requer ReportLab e pypdf no ambiente de documentos."""
 import re
 from html import escape
 from pathlib import Path
@@ -14,7 +14,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Table, TableStyle, Flowable, Image, KeepTogether
 
 RAIZ = Path(__file__).resolve().parents[1]
-SAIDA = RAIZ / "output/pdf/Central_CitizenTech_Governanca_Versao_de_Trabalho.pdf"
+SAIDA = RAIZ / "output/pdf/ZelaBairro_Relatorio_Governanca.pdf"
 LARGURA = A4[0] - 5 * cm
 LARANJA = colors.HexColor("#F67024")
 ESCURO = colors.HexColor("#19221C")
@@ -96,7 +96,6 @@ def fundo(c, doc):
         c.setFont("Helvetica",10);c.drawString(3*cm,h-17*cm,"GOVERNANÇA EM IA E BUSINESS ANALYTICS")
         for i,nome in enumerate(("Luiz Henrique Poss | RM562177","Luis Filipe Chaves Amorim | RM564706","Felipe Stefani Honorato | RM563380")):
             c.drawString(3*cm,5.4*cm-i*18,nome)
-        c.setFillColor(colors.HexColor("#BBC8B7"));c.setFont("Helvetica",8);c.drawString(3*cm,2.8*cm,"VERSÃO DE TRABALHO | CONCLUSÃO E LINKS PENDENTES")
         c.drawString(3*cm,2.1*cm,"SÃO PAULO / 2026")
     else:
         c.setFillColor(colors.HexColor("#6B7468"));c.setFont("Helvetica",7)
@@ -105,7 +104,6 @@ def fundo(c, doc):
         if pagina >= 6:
             c.setFont("Times-Roman",10);c.drawRightString(A4[0]-2*cm,A4[1]-1.9*cm,str(pagina-1))
         c.setFillColor(colors.HexColor("#6B7468"));c.setFont("Helvetica",6.5)
-        c.drawString(3*cm,1.25*cm,"VERSÃO DE TRABALHO / CONCLUSÃO E LINKS DE PUBLICAÇÃO PENDENTES")
         if pagina == 2:
             c.setFillColor(ESCURO);c.setFont("Times-Roman",12)
             for i,nome in enumerate(("Luiz Henrique Poss · RM562177","Luis Filipe Chaves Amorim · RM564706","Felipe Stefani Honorato · RM563380")):
@@ -114,7 +112,7 @@ def fundo(c, doc):
             c.setFont("Times-Roman",12);c.drawCentredString(A4[0]/2,A4[1]-9*cm,"Planejamento de acesso, pedidos e revisão")
             natureza=Paragraph("Relatório de integração dos trabalhos da Global Solution, apresentado à disciplina de Governança em IA e Business Analytics da FIAP. O documento descreve a participação dos módulos e os limites da aplicação construída.",ParagraphStyle("natureza",fontName="Times-Roman",fontSize=12,leading=18,alignment=TA_JUSTIFY))
             _,altura=natureza.wrap(8*cm,500);natureza.drawOn(c,A4[0]-10*cm,A4[1]-11*cm-altura)
-            nota=Paragraph("Percurso didático. Sem testes com pessoas ou validação em campo. Versão de trabalho de 17 de novembro de 2026; conclusão conjunta e vídeo pendentes.",estilos["legenda"])
+            nota=Paragraph("Percurso didático. A validação do projeto foi técnica, em ambiente de demonstração.",estilos["legenda"])
             _,altura=nota.wrap(LARGURA,100);nota.drawOn(c,3*cm,6*cm-altura)
             c.setFont("Times-Roman",12);c.drawCentredString(A4[0]/2,3*cm,"São Paulo · 2026")
     c.restoreState()
@@ -144,13 +142,13 @@ def main():
             elif numero == 14:chave="referencia"
             story.append(Paragraph(marcado(bloco),estilos[chave]))
     SAIDA.parent.mkdir(parents=True,exist_ok=True)
-    doc=SimpleDocTemplate(str(SAIDA),pagesize=A4,leftMargin=3*cm,rightMargin=2*cm,topMargin=3*cm,bottomMargin=2*cm,title="Central CitizenTech - Governança - Versão de trabalho",author="Luiz Henrique Poss; Luis Filipe Chaves Amorim; Felipe Stefani Honorato")
+    doc=SimpleDocTemplate(str(SAIDA),pagesize=A4,leftMargin=3*cm,rightMargin=2*cm,topMargin=3*cm,bottomMargin=2*cm,title="Central CitizenTech - Governança",author="Luiz Henrique Poss; Luis Filipe Chaves Amorim; Felipe Stefani Honorato")
     doc.build(story,onFirstPage=fundo,onLaterPages=fundo)
     leitor=PdfReader(SAIDA)
     assert len(leitor.pages)==14, f"A paginação mudou para {len(leitor.pages)}. Ajuste o conteúdo e o sumário."
     for i,p in enumerate(leitor.pages,1):
         assert (p.extract_text() or "").strip(),f"Página {i} vazia"
-    print(f"PDF criado: {len(leitor.pages)} páginas; conclusão e links pendentes.")
+    print(f"PDF criado: {len(leitor.pages)} páginas.")
 
 
 if __name__=="__main__":main()

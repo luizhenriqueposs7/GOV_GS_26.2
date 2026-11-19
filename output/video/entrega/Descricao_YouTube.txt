@@ -1,0 +1,29 @@
+ZelaBairro | Global Solution CitizenTech | Governança em IA e Business Analytics
+
+Demonstração da central de preparação e acompanhamento de pedidos urbanos. O vídeo mostra o percurso do Passagem Livre, a revisão humana, a contestação e o papel das nove disciplinas.
+
+Luiz Henrique Poss (RM562177)
+Luis Filipe Chaves Amorim (RM564706)
+Felipe Stefani Honorato (RM563380)
+
+Repositório: https://github.com/luizhenriqueposs7/GOV_GS_26.2
+
+00:00 Do pedido ao percurso inteiro
+00:19 Chegar exige um caminho inteiro
+00:44 Foto, conferência e envio
+01:13 A triagem sugere; o responsável decide
+01:31 Conferir o destino com uma fonte
+02:01 Revisar, justificar e confirmar
+02:24 Contestar e acompanhar o próximo passo
+02:54 Processar o lote e preservar os resultados
+03:22 Escolher o que cabe na rodada de revisão
+03:53 Recuperar a orientação e sua origem
+04:16 Executar o modelo e preservar a evidência
+04:40 Reconhecer o som e apresentar o aviso
+05:14 Evidências, decisão e acompanhamento
+
+O percurso usa hipóteses didáticas. O protocolo e o retorno mostrados são de demonstração. O envio oficial depende do solicitante e do canal municipal. O teste de IoT usa YAMNet no navegador e entrada por microfone virtual.
+
+Som de referência: batida na porta, Robinhood76 (Freesound 101336), incluída no ESC-50 como 1-101336-A-30.wav. Licença CC BY-NC. Mono e nível de som ajustados para o vídeo.
+https://www.freesound.org/people/Robinhood76/sounds/101336/
+https://github.com/karolpiczak/ESC-50/blob/master/LICENSE
